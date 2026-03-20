@@ -531,4 +531,3 @@ ${indentation(6)}$className${fallbackUnion.toPascal}(json);
 String _getDartCoreImports(Set<UniversalType> parameters) {
   return '';
 }
-

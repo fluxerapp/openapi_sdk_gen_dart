@@ -444,8 +444,7 @@ class OpenApiParser {
             final dataClass = schemes[type] as Map<String, dynamic>?;
             if (dataClass != null &&
                 dataClass[_propertiesConst] is Map<String, dynamic>) {
-              properties =
-                  dataClass[_propertiesConst] as Map<String, dynamic>;
+              properties = dataClass[_propertiesConst] as Map<String, dynamic>;
               requiredParameters =
                   (dataClass[_requiredConst] as List<dynamic>?)
                       ?.map((e) => e.toString())

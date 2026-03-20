@@ -54,7 +54,7 @@ enum EnumClassDynamic {
 
   final dynamic json;
 
-  String toJson() => json?.toString() ?? 'null';
+  dynamic toJson() => json;
 
   @override
   String toString() => json?.toString() ?? super.toString();

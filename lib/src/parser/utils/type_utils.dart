@@ -205,7 +205,10 @@ Set<UniversalEnumItem> protectEnumItemsNamesAndValues(
   Iterable<String> values, {
   Iterable<String>? descriptions,
 }) {
-  final protectedNames = protectEnumItemsNames(names, descriptions: descriptions);
+  final protectedNames = protectEnumItemsNames(
+    names,
+    descriptions: descriptions,
+  );
   final valueList = values.toList();
   final items = <UniversalEnumItem>{};
 

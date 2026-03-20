@@ -205,7 +205,8 @@ String _toJson(UniversalEnumClass enumClass, String className) {
   if (isString) {
     return '\n\n  String toJson() => json ?? \'null\';';
   } else {
-    return '\n\n  String toJson() => json?.toString() ?? \'null\';';
+    final nullableSign = _nullableSign(dartType);
+    return '\n\n  $dartType$nullableSign toJson() => json;';
   }
 }
 
