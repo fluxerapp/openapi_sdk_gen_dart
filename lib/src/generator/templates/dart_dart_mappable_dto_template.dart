@@ -62,10 +62,6 @@ String dartDartMappableDtoTemplate(
       ? _generateWrapperClasses(dataClass, className, effectiveFallbackUnion)
       : '';
 
-  final needsBase64Converter = _hasBase64Fields(dataClass.parameters);
-  final base64ConverterClass = needsBase64Converter
-      ? '\n${_base64ConverterClass()}'
-      : '';
   final dartCoreImports = _getDartCoreImports(dataClass.parameters);
 
   return '''
@@ -78,7 +74,7 @@ ${_classModifier(isUnion: isUnion, isUndiscriminatedUnion: false)}class $classNa
 ${_generateClassBody(dataClass, className, isUnion, isSimpleDataClass, effectiveFallbackUnion)}
 }
 
-$additionalClasses$base64ConverterClass''';
+$additionalClasses''';
 }
 
 /// Generate undiscriminated union template with wrapper pattern
@@ -226,10 +222,6 @@ String _jsonKey(UniversalType t) {
 
   if (t.jsonKey != null && t.name != t.jsonKey) {
     params.add("key: '${protectJsonKey(t.jsonKey)}'");
-  }
-
-  if ((t.format == 'binary' || t.format == 'byte') && t.type == 'string') {
-    params.add('hook: const _Base64Hook()');
   }
 
   if (params.isEmpty) {
@@ -536,44 +528,7 @@ ${indentation(6)}$className${fallbackUnion.toPascal}(json);
   return wrappers.join('\n');
 }
 
-bool _hasBase64Fields(Set<UniversalType> parameters) {
-  return parameters.any(
-    (param) =>
-        (param.format == 'binary' || param.format == 'byte') &&
-        param.type == 'string',
-  );
-}
-
 String _getDartCoreImports(Set<UniversalType> parameters) {
-  final imports = <String>[];
-
-  if (_hasBase64Fields(parameters)) {
-    imports.add("import 'dart:convert';");
-    imports.add("import 'dart:typed_data';");
-  }
-
-  return imports.isEmpty ? '' : '${imports.join('\n')}\n';
+  return '';
 }
 
-String _base64ConverterClass() {
-  return '''
-class _Base64Hook extends MappingHook {
-  const _Base64Hook();
-
-  @override
-  Object? beforeDecode(Object? value) {
-    if (value is String) {
-      return base64Decode(value);
-    }
-    return value;
-  }
-
-  @override
-  Object? beforeEncode(Object? value) {
-    if (value is Uint8List) {
-      return base64Encode(value);
-    }
-    return value;
-  }
-}''';
-}

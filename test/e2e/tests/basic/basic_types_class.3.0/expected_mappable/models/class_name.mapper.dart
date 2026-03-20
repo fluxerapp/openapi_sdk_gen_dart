@@ -44,7 +44,6 @@ class ClassNameMapper extends ClassMapperBase<ClassName> {
   static const Field<ClassName, String> _f$string2 = Field(
     'string2',
     _$string2,
-    hook: const _Base64Hook(),
   );
   static DateTime _$string3(ClassName v) => v.string3;
   static const Field<ClassName, DateTime> _f$string3 = Field(

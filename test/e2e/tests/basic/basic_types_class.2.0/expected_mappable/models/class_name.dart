@@ -3,8 +3,6 @@
 // ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
 
 import 'package:dart_mappable/dart_mappable.dart';
-import 'dart:convert';
-import 'dart:typed_data';
 
 part 'class_name.mapper.dart';
 
@@ -31,7 +29,6 @@ class ClassName with ClassNameMappable {
   final double double1;
   final String string1;
   final num number1;
-  @MappableField(hook: const _Base64Hook())
   final String string2;
   final DateTime string3;
   final String string4;
@@ -43,24 +40,4 @@ class ClassName with ClassNameMappable {
 
   static ClassName fromJson(Map<String, dynamic> json) =>
       ClassNameMapper.fromJson(json);
-}
-
-class _Base64Hook extends MappingHook {
-  const _Base64Hook();
-
-  @override
-  Object? beforeDecode(Object? value) {
-    if (value is String) {
-      return base64Decode(value);
-    }
-    return value;
-  }
-
-  @override
-  Object? beforeEncode(Object? value) {
-    if (value is Uint8List) {
-      return base64Encode(value);
-    }
-    return value;
-  }
 }

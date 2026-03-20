@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ClassName {
 
- int get integer1; double get float1; double get double1; String get string1; num get number1;@JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) String get string2; DateTime get string3; String get string4; String get string5; bool get bool1; dynamic get object1; List<String> get array1; List<List<List<String>>> get array2; List<String> get arrayWithDefault;
+ int get integer1; double get float1; double get double1; String get string1; num get number1; String get string2; DateTime get string3; String get string4; String get string5; bool get bool1; dynamic get object1; List<String> get array1; List<List<List<String>>> get array2; List<String> get arrayWithDefault;
 /// Create a copy of ClassName
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $ClassNameCopyWith<$Res>  {
   factory $ClassNameCopyWith(ClassName value, $Res Function(ClassName) _then) = _$ClassNameCopyWithImpl;
 @useResult
 $Res call({
- int integer1, double float1, double double1, String string1, num number1,@JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) String string2, DateTime string3, String string4, String string5, bool bool1, dynamic object1, List<String> array1, List<List<List<String>>> array2, List<String> arrayWithDefault
+ int integer1, double float1, double double1, String string1, num number1, String string2, DateTime string3, String string4, String string5, bool bool1, dynamic object1, List<String> array1, List<List<List<String>>> array2, List<String> arrayWithDefault
 });
 
 
@@ -166,7 +166,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int integer1,  double float1,  double double1,  String string1,  num number1, @JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson)  String string2,  DateTime string3,  String string4,  String string5,  bool bool1,  dynamic object1,  List<String> array1,  List<List<List<String>>> array2,  List<String> arrayWithDefault)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int integer1,  double float1,  double double1,  String string1,  num number1,  String string2,  DateTime string3,  String string4,  String string5,  bool bool1,  dynamic object1,  List<String> array1,  List<List<List<String>>> array2,  List<String> arrayWithDefault)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ClassName() when $default != null:
 return $default(_that.integer1,_that.float1,_that.double1,_that.string1,_that.number1,_that.string2,_that.string3,_that.string4,_that.string5,_that.bool1,_that.object1,_that.array1,_that.array2,_that.arrayWithDefault);case _:
@@ -187,7 +187,7 @@ return $default(_that.integer1,_that.float1,_that.double1,_that.string1,_that.nu
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int integer1,  double float1,  double double1,  String string1,  num number1, @JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson)  String string2,  DateTime string3,  String string4,  String string5,  bool bool1,  dynamic object1,  List<String> array1,  List<List<List<String>>> array2,  List<String> arrayWithDefault)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int integer1,  double float1,  double double1,  String string1,  num number1,  String string2,  DateTime string3,  String string4,  String string5,  bool bool1,  dynamic object1,  List<String> array1,  List<List<List<String>>> array2,  List<String> arrayWithDefault)  $default,) {final _that = this;
 switch (_that) {
 case _ClassName():
 return $default(_that.integer1,_that.float1,_that.double1,_that.string1,_that.number1,_that.string2,_that.string3,_that.string4,_that.string5,_that.bool1,_that.object1,_that.array1,_that.array2,_that.arrayWithDefault);case _:
@@ -207,7 +207,7 @@ return $default(_that.integer1,_that.float1,_that.double1,_that.string1,_that.nu
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int integer1,  double float1,  double double1,  String string1,  num number1, @JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson)  String string2,  DateTime string3,  String string4,  String string5,  bool bool1,  dynamic object1,  List<String> array1,  List<List<List<String>>> array2,  List<String> arrayWithDefault)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int integer1,  double float1,  double double1,  String string1,  num number1,  String string2,  DateTime string3,  String string4,  String string5,  bool bool1,  dynamic object1,  List<String> array1,  List<List<List<String>>> array2,  List<String> arrayWithDefault)?  $default,) {final _that = this;
 switch (_that) {
 case _ClassName() when $default != null:
 return $default(_that.integer1,_that.float1,_that.double1,_that.string1,_that.number1,_that.string2,_that.string3,_that.string4,_that.string5,_that.bool1,_that.object1,_that.array1,_that.array2,_that.arrayWithDefault);case _:
@@ -222,7 +222,7 @@ return $default(_that.integer1,_that.float1,_that.double1,_that.string1,_that.nu
 @JsonSerializable()
 
 class _ClassName implements ClassName {
-  const _ClassName({required this.integer1, required this.float1, required this.double1, required this.string1, required this.number1, @JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) required this.string2, required this.string3, required this.string4, required this.string5, required this.bool1, required this.object1, required final  List<String> array1, required final  List<List<List<String>>> array2, final  List<String> arrayWithDefault = const []}): _array1 = array1,_array2 = array2,_arrayWithDefault = arrayWithDefault;
+  const _ClassName({required this.integer1, required this.float1, required this.double1, required this.string1, required this.number1, required this.string2, required this.string3, required this.string4, required this.string5, required this.bool1, required this.object1, required final  List<String> array1, required final  List<List<List<String>>> array2, final  List<String> arrayWithDefault = const []}): _array1 = array1,_array2 = array2,_arrayWithDefault = arrayWithDefault;
   factory _ClassName.fromJson(Map<String, dynamic> json) => _$ClassNameFromJson(json);
 
 @override final  int integer1;
@@ -230,7 +230,7 @@ class _ClassName implements ClassName {
 @override final  double double1;
 @override final  String string1;
 @override final  num number1;
-@override@JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) final  String string2;
+@override final  String string2;
 @override final  DateTime string3;
 @override final  String string4;
 @override final  String string5;
@@ -291,7 +291,7 @@ abstract mixin class _$ClassNameCopyWith<$Res> implements $ClassNameCopyWith<$Re
   factory _$ClassNameCopyWith(_ClassName value, $Res Function(_ClassName) _then) = __$ClassNameCopyWithImpl;
 @override @useResult
 $Res call({
- int integer1, double float1, double double1, String string1, num number1,@JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) String string2, DateTime string3, String string4, String string5, bool bool1, dynamic object1, List<String> array1, List<List<List<String>>> array2, List<String> arrayWithDefault
+ int integer1, double float1, double double1, String string1, num number1, String string2, DateTime string3, String string4, String string5, bool bool1, dynamic object1, List<String> array1, List<List<List<String>>> array2, List<String> arrayWithDefault
 });
 
 

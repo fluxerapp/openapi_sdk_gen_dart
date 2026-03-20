@@ -30,15 +30,6 @@ String dartJsonSerializableDtoTemplate(
     );
   }
 
-  final base64Types = _getBase64FieldTypes(dataClass.parameters);
-  final needsBase64Converter =
-      base64Types.hasScalar ||
-      base64Types.hasNullable ||
-      base64Types.hasList ||
-      base64Types.hasListNullable;
-  final base64ConverterClass = needsBase64Converter
-      ? '\n${_base64ConverterClass(hasScalar: base64Types.hasScalar, hasNullable: base64Types.hasNullable, hasList: base64Types.hasList, hasListNullable: base64Types.hasListNullable)}'
-      : '';
   final dartCoreImports = _getDartCoreImports(dataClass.parameters);
 
   return '''
@@ -54,7 +45,7 @@ class $className {
   ${_parametersInClass(dataClass.parameters, includeIfNull)}${dataClass.parameters.isNotEmpty ? '\n' : ''}
   Map<String, Object?> toJson() => _\$${className}ToJson(this);
 }
-$base64ConverterClass''';
+''';
 }
 
 String _generateUnionTemplate(
@@ -534,32 +525,6 @@ String _jsonKey(UniversalType t, bool includeIfNull) {
     jsonKeyParams['name'] = "'${protectJsonKey(t.jsonKey)}'";
   }
 
-  if ((t.format == 'binary' || t.format == 'byte') || t.type == 'Uint8List') {
-    final isNullable = !t.isRequired && t.defaultValue == null;
-    final isList =
-        t.wrappingCollections.isNotEmpty &&
-        t.wrappingCollections.first.collectionPrefix.startsWith('List<');
-
-    if (isList) {
-      if (isNullable) {
-        jsonKeyParams['fromJson'] =
-            '_Base64Converter.staticFromJsonListNullable';
-        jsonKeyParams['toJson'] = '_Base64Converter.staticToJsonListNullable';
-      } else {
-        jsonKeyParams['fromJson'] = '_Base64Converter.staticFromJsonList';
-        jsonKeyParams['toJson'] = '_Base64Converter.staticToJsonList';
-      }
-    } else {
-      if (isNullable) {
-        jsonKeyParams['fromJson'] = '_Base64Converter.staticFromJsonNullable';
-        jsonKeyParams['toJson'] = '_Base64Converter.staticToJsonNullable';
-      } else {
-        jsonKeyParams['fromJson'] = '_Base64Converter.staticFromJson';
-        jsonKeyParams['toJson'] = '_Base64Converter.staticToJson';
-      }
-    }
-  }
-
   if (jsonKeyParams.isNotEmpty) {
     buffer.write(
       "  @JsonKey(${jsonKeyParams.entries.map((e) => '${e.key}: ${e.value}').join(',')})\n",
@@ -653,127 +618,6 @@ String _deserializerExtensionName(String className) =>
     ? '${className}Deserializer'
     : '${className}UnionDeserializer';
 
-({bool hasScalar, bool hasNullable, bool hasList, bool hasListNullable})
-_getBase64FieldTypes(Set<UniversalType> parameters) {
-  bool hasScalar = false;
-  bool hasNullable = false;
-  bool hasList = false;
-  bool hasListNullable = false;
-
-  for (final param in parameters) {
-    if ((param.format == 'binary' || param.format == 'byte') ||
-        param.type == 'Uint8List') {
-      final isNullable = !param.isRequired && param.defaultValue == null;
-      final isList =
-          param.wrappingCollections.isNotEmpty &&
-          param.wrappingCollections.first.collectionPrefix.startsWith('List<');
-
-      if (isList) {
-        if (isNullable) {
-          hasListNullable = true;
-        } else {
-          hasList = true;
-        }
-      } else {
-        if (isNullable) {
-          hasNullable = true;
-        } else {
-          hasScalar = true;
-        }
-      }
-    }
-  }
-
-  return (
-    hasScalar: hasScalar,
-    hasNullable: hasNullable,
-    hasList: hasList,
-    hasListNullable: hasListNullable,
-  );
-}
-
 String _getDartCoreImports(Set<UniversalType> parameters) {
-  final imports = <String>[];
-
-  final base64Types = _getBase64FieldTypes(parameters);
-  final hasAnyBase64 =
-      base64Types.hasScalar ||
-      base64Types.hasNullable ||
-      base64Types.hasList ||
-      base64Types.hasListNullable;
-
-  if (hasAnyBase64) {
-    imports.add("import 'dart:convert';");
-    imports.add("import 'dart:typed_data';");
-  }
-
-  return imports.isEmpty ? '' : '${imports.join('\n')}\n';
-}
-
-String _base64ConverterClass({
-  required bool hasScalar,
-  required bool hasNullable,
-  required bool hasList,
-  required bool hasListNullable,
-}) {
-  final methods = <String>[];
-
-  methods.add('  const _Base64Converter();');
-  methods.add('');
-  methods.add('  static const instance = _Base64Converter();');
-
-  if (hasScalar) {
-    methods.add('');
-    methods.add(
-      '  static Uint8List staticFromJson(String json) => instance.fromJson(json);',
-    );
-    methods.add('');
-    methods.add(
-      '  static String staticToJson(Uint8List object) => instance.toJson(object);',
-    );
-  }
-
-  if (hasNullable) {
-    methods.add('');
-    methods.add(
-      '  static Uint8List? staticFromJsonNullable(String? json) => json == null ? null : instance.fromJson(json);',
-    );
-    methods.add('');
-    methods.add(
-      '  static String? staticToJsonNullable(Uint8List? object) => object == null ? null : instance.toJson(object);',
-    );
-  }
-
-  if (hasList) {
-    methods.add('');
-    methods.add(
-      '  static List<Uint8List> staticFromJsonList(List<dynamic> json) => json.map((e) => instance.fromJson(e as String)).toList();',
-    );
-    methods.add('');
-    methods.add(
-      '  static List<String> staticToJsonList(List<Uint8List> object) => object.map((e) => instance.toJson(e)).toList();',
-    );
-  }
-
-  if (hasListNullable) {
-    methods.add('');
-    methods.add(
-      '  static List<Uint8List>? staticFromJsonListNullable(List<dynamic>? json) => json?.map((e) => instance.fromJson(e as String)).toList();',
-    );
-    methods.add('');
-    methods.add(
-      '  static List<String>? staticToJsonListNullable(List<Uint8List>? object) => object?.map((e) => instance.toJson(e)).toList();',
-    );
-  }
-
-  return '''
-class _Base64Converter implements JsonConverter<Uint8List, String> {
-${methods.join('\n')}
-
-  @override
-  Uint8List fromJson(String json) => base64Decode(json);
-
-  @override
-  String toJson(Uint8List object) => base64Encode(object);
-}''';
+  return '';
 }

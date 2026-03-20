@@ -3,8 +3,6 @@
 // ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
 
 import 'package:json_annotation/json_annotation.dart';
-import 'dart:convert';
-import 'dart:typed_data';
 
 part 'class_name.g.dart';
 
@@ -34,10 +32,6 @@ class ClassName {
   final double double1;
   final String string1;
   final num number1;
-  @JsonKey(
-    fromJson: _Base64Converter.staticFromJson,
-    toJson: _Base64Converter.staticToJson,
-  )
   final String string2;
   final DateTime string3;
   final String string4;
@@ -48,20 +42,4 @@ class ClassName {
   final List<List<List<String>>> array2;
 
   Map<String, Object?> toJson() => _$ClassNameToJson(this);
-}
-
-class _Base64Converter implements JsonConverter<Uint8List, String> {
-  const _Base64Converter();
-
-  static const instance = _Base64Converter();
-
-  static Uint8List staticFromJson(String json) => instance.fromJson(json);
-
-  static String staticToJson(Uint8List object) => instance.toJson(object);
-
-  @override
-  Uint8List fromJson(String json) => base64Decode(json);
-
-  @override
-  String toJson(Uint8List object) => base64Encode(object);
 }
