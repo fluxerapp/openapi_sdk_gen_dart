@@ -38,7 +38,7 @@ class ClassName {
     fromJson: _Base64Converter.staticFromJson,
     toJson: _Base64Converter.staticToJson,
   )
-  final Uint8List string2;
+  final String string2;
   final DateTime string3;
   final String string4;
   final String string5;

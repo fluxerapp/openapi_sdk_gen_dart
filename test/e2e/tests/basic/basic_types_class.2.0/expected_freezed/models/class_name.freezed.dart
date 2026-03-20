@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ClassName {
 
- int get integer1; double get float1; double get double1; String get string1; num get number1;@JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) Uint8List get string2; DateTime get string3; String get string4; String get string5; bool get bool1; dynamic get object1; List<String> get array1; List<List<List<String>>> get array2;
+ int get integer1; double get float1; double get double1; String get string1; num get number1;@JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) String get string2; DateTime get string3; String get string4; String get string5; bool get bool1; dynamic get object1; List<String> get array1; List<List<List<String>>> get array2;
 /// Create a copy of ClassName
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,12 +28,12 @@ $ClassNameCopyWith<ClassName> get copyWith => _$ClassNameCopyWithImpl<ClassName>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClassName&&(identical(other.integer1, integer1) || other.integer1 == integer1)&&(identical(other.float1, float1) || other.float1 == float1)&&(identical(other.double1, double1) || other.double1 == double1)&&(identical(other.string1, string1) || other.string1 == string1)&&(identical(other.number1, number1) || other.number1 == number1)&&const DeepCollectionEquality().equals(other.string2, string2)&&(identical(other.string3, string3) || other.string3 == string3)&&(identical(other.string4, string4) || other.string4 == string4)&&(identical(other.string5, string5) || other.string5 == string5)&&(identical(other.bool1, bool1) || other.bool1 == bool1)&&const DeepCollectionEquality().equals(other.object1, object1)&&const DeepCollectionEquality().equals(other.array1, array1)&&const DeepCollectionEquality().equals(other.array2, array2));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClassName&&(identical(other.integer1, integer1) || other.integer1 == integer1)&&(identical(other.float1, float1) || other.float1 == float1)&&(identical(other.double1, double1) || other.double1 == double1)&&(identical(other.string1, string1) || other.string1 == string1)&&(identical(other.number1, number1) || other.number1 == number1)&&(identical(other.string2, string2) || other.string2 == string2)&&(identical(other.string3, string3) || other.string3 == string3)&&(identical(other.string4, string4) || other.string4 == string4)&&(identical(other.string5, string5) || other.string5 == string5)&&(identical(other.bool1, bool1) || other.bool1 == bool1)&&const DeepCollectionEquality().equals(other.object1, object1)&&const DeepCollectionEquality().equals(other.array1, array1)&&const DeepCollectionEquality().equals(other.array2, array2));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,integer1,float1,double1,string1,number1,const DeepCollectionEquality().hash(string2),string3,string4,string5,bool1,const DeepCollectionEquality().hash(object1),const DeepCollectionEquality().hash(array1),const DeepCollectionEquality().hash(array2));
+int get hashCode => Object.hash(runtimeType,integer1,float1,double1,string1,number1,string2,string3,string4,string5,bool1,const DeepCollectionEquality().hash(object1),const DeepCollectionEquality().hash(array1),const DeepCollectionEquality().hash(array2));
 
 @override
 String toString() {
@@ -48,7 +48,7 @@ abstract mixin class $ClassNameCopyWith<$Res>  {
   factory $ClassNameCopyWith(ClassName value, $Res Function(ClassName) _then) = _$ClassNameCopyWithImpl;
 @useResult
 $Res call({
- int integer1, double float1, double double1, String string1, num number1,@JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) Uint8List string2, DateTime string3, String string4, String string5, bool bool1, dynamic object1, List<String> array1, List<List<List<String>>> array2
+ int integer1, double float1, double double1, String string1, num number1,@JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) String string2, DateTime string3, String string4, String string5, bool bool1, dynamic object1, List<String> array1, List<List<List<String>>> array2
 });
 
 
@@ -73,7 +73,7 @@ as double,double1: null == double1 ? _self.double1 : double1 // ignore: cast_nul
 as double,string1: null == string1 ? _self.string1 : string1 // ignore: cast_nullable_to_non_nullable
 as String,number1: null == number1 ? _self.number1 : number1 // ignore: cast_nullable_to_non_nullable
 as num,string2: null == string2 ? _self.string2 : string2 // ignore: cast_nullable_to_non_nullable
-as Uint8List,string3: null == string3 ? _self.string3 : string3 // ignore: cast_nullable_to_non_nullable
+as String,string3: null == string3 ? _self.string3 : string3 // ignore: cast_nullable_to_non_nullable
 as DateTime,string4: null == string4 ? _self.string4 : string4 // ignore: cast_nullable_to_non_nullable
 as String,string5: null == string5 ? _self.string5 : string5 // ignore: cast_nullable_to_non_nullable
 as String,bool1: null == bool1 ? _self.bool1 : bool1 // ignore: cast_nullable_to_non_nullable
@@ -165,7 +165,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int integer1,  double float1,  double double1,  String string1,  num number1, @JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson)  Uint8List string2,  DateTime string3,  String string4,  String string5,  bool bool1,  dynamic object1,  List<String> array1,  List<List<List<String>>> array2)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int integer1,  double float1,  double double1,  String string1,  num number1, @JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson)  String string2,  DateTime string3,  String string4,  String string5,  bool bool1,  dynamic object1,  List<String> array1,  List<List<List<String>>> array2)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ClassName() when $default != null:
 return $default(_that.integer1,_that.float1,_that.double1,_that.string1,_that.number1,_that.string2,_that.string3,_that.string4,_that.string5,_that.bool1,_that.object1,_that.array1,_that.array2);case _:
@@ -186,7 +186,7 @@ return $default(_that.integer1,_that.float1,_that.double1,_that.string1,_that.nu
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int integer1,  double float1,  double double1,  String string1,  num number1, @JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson)  Uint8List string2,  DateTime string3,  String string4,  String string5,  bool bool1,  dynamic object1,  List<String> array1,  List<List<List<String>>> array2)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int integer1,  double float1,  double double1,  String string1,  num number1, @JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson)  String string2,  DateTime string3,  String string4,  String string5,  bool bool1,  dynamic object1,  List<String> array1,  List<List<List<String>>> array2)  $default,) {final _that = this;
 switch (_that) {
 case _ClassName():
 return $default(_that.integer1,_that.float1,_that.double1,_that.string1,_that.number1,_that.string2,_that.string3,_that.string4,_that.string5,_that.bool1,_that.object1,_that.array1,_that.array2);case _:
@@ -206,7 +206,7 @@ return $default(_that.integer1,_that.float1,_that.double1,_that.string1,_that.nu
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int integer1,  double float1,  double double1,  String string1,  num number1, @JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson)  Uint8List string2,  DateTime string3,  String string4,  String string5,  bool bool1,  dynamic object1,  List<String> array1,  List<List<List<String>>> array2)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int integer1,  double float1,  double double1,  String string1,  num number1, @JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson)  String string2,  DateTime string3,  String string4,  String string5,  bool bool1,  dynamic object1,  List<String> array1,  List<List<List<String>>> array2)?  $default,) {final _that = this;
 switch (_that) {
 case _ClassName() when $default != null:
 return $default(_that.integer1,_that.float1,_that.double1,_that.string1,_that.number1,_that.string2,_that.string3,_that.string4,_that.string5,_that.bool1,_that.object1,_that.array1,_that.array2);case _:
@@ -229,7 +229,7 @@ class _ClassName implements ClassName {
 @override final  double double1;
 @override final  String string1;
 @override final  num number1;
-@override@JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) final  Uint8List string2;
+@override@JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) final  String string2;
 @override final  DateTime string3;
 @override final  String string4;
 @override final  String string5;
@@ -263,12 +263,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ClassName&&(identical(other.integer1, integer1) || other.integer1 == integer1)&&(identical(other.float1, float1) || other.float1 == float1)&&(identical(other.double1, double1) || other.double1 == double1)&&(identical(other.string1, string1) || other.string1 == string1)&&(identical(other.number1, number1) || other.number1 == number1)&&const DeepCollectionEquality().equals(other.string2, string2)&&(identical(other.string3, string3) || other.string3 == string3)&&(identical(other.string4, string4) || other.string4 == string4)&&(identical(other.string5, string5) || other.string5 == string5)&&(identical(other.bool1, bool1) || other.bool1 == bool1)&&const DeepCollectionEquality().equals(other.object1, object1)&&const DeepCollectionEquality().equals(other._array1, _array1)&&const DeepCollectionEquality().equals(other._array2, _array2));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ClassName&&(identical(other.integer1, integer1) || other.integer1 == integer1)&&(identical(other.float1, float1) || other.float1 == float1)&&(identical(other.double1, double1) || other.double1 == double1)&&(identical(other.string1, string1) || other.string1 == string1)&&(identical(other.number1, number1) || other.number1 == number1)&&(identical(other.string2, string2) || other.string2 == string2)&&(identical(other.string3, string3) || other.string3 == string3)&&(identical(other.string4, string4) || other.string4 == string4)&&(identical(other.string5, string5) || other.string5 == string5)&&(identical(other.bool1, bool1) || other.bool1 == bool1)&&const DeepCollectionEquality().equals(other.object1, object1)&&const DeepCollectionEquality().equals(other._array1, _array1)&&const DeepCollectionEquality().equals(other._array2, _array2));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,integer1,float1,double1,string1,number1,const DeepCollectionEquality().hash(string2),string3,string4,string5,bool1,const DeepCollectionEquality().hash(object1),const DeepCollectionEquality().hash(_array1),const DeepCollectionEquality().hash(_array2));
+int get hashCode => Object.hash(runtimeType,integer1,float1,double1,string1,number1,string2,string3,string4,string5,bool1,const DeepCollectionEquality().hash(object1),const DeepCollectionEquality().hash(_array1),const DeepCollectionEquality().hash(_array2));
 
 @override
 String toString() {
@@ -283,7 +283,7 @@ abstract mixin class _$ClassNameCopyWith<$Res> implements $ClassNameCopyWith<$Re
   factory _$ClassNameCopyWith(_ClassName value, $Res Function(_ClassName) _then) = __$ClassNameCopyWithImpl;
 @override @useResult
 $Res call({
- int integer1, double float1, double double1, String string1, num number1,@JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) Uint8List string2, DateTime string3, String string4, String string5, bool bool1, dynamic object1, List<String> array1, List<List<List<String>>> array2
+ int integer1, double float1, double double1, String string1, num number1,@JsonKey(fromJson: _Base64Converter.staticFromJson, toJson: _Base64Converter.staticToJson) String string2, DateTime string3, String string4, String string5, bool bool1, dynamic object1, List<String> array1, List<List<List<String>>> array2
 });
 
 
@@ -308,7 +308,7 @@ as double,double1: null == double1 ? _self.double1 : double1 // ignore: cast_nul
 as double,string1: null == string1 ? _self.string1 : string1 // ignore: cast_nullable_to_non_nullable
 as String,number1: null == number1 ? _self.number1 : number1 // ignore: cast_nullable_to_non_nullable
 as num,string2: null == string2 ? _self.string2 : string2 // ignore: cast_nullable_to_non_nullable
-as Uint8List,string3: null == string3 ? _self.string3 : string3 // ignore: cast_nullable_to_non_nullable
+as String,string3: null == string3 ? _self.string3 : string3 // ignore: cast_nullable_to_non_nullable
 as DateTime,string4: null == string4 ? _self.string4 : string4 // ignore: cast_nullable_to_non_nullable
 as String,string5: null == string5 ? _self.string5 : string5 // ignore: cast_nullable_to_non_nullable
 as String,bool1: null == bool1 ? _self.bool1 : bool1 // ignore: cast_nullable_to_non_nullable

@@ -21,7 +21,7 @@ abstract class ClassName with _$ClassName {
       fromJson: _Base64Converter.staticFromJson,
       toJson: _Base64Converter.staticToJson,
     )
-    required Uint8List string2,
+    required String string2,
     required DateTime string3,
     required String string4,
     required String string5,

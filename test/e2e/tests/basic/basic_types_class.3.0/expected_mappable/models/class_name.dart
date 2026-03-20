@@ -33,7 +33,7 @@ class ClassName with ClassNameMappable {
   final String string1;
   final num number1;
   @MappableField(hook: const _Base64Hook())
-  final Uint8List string2;
+  final String string2;
   final DateTime string3;
   final String string4;
   final String string5;

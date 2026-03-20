@@ -40,8 +40,8 @@ class ClassNameMapper extends ClassMapperBase<ClassName> {
   );
   static num _$number1(ClassName v) => v.number1;
   static const Field<ClassName, num> _f$number1 = Field('number1', _$number1);
-  static Uint8List _$string2(ClassName v) => v.string2;
-  static const Field<ClassName, Uint8List> _f$string2 = Field(
+  static String _$string2(ClassName v) => v.string2;
+  static const Field<ClassName, String> _f$string2 = Field(
     'string2',
     _$string2,
     hook: const _Base64Hook(),
@@ -197,7 +197,7 @@ abstract class ClassNameCopyWith<$R, $In extends ClassName, $Out>
     double? double1,
     String? string1,
     num? number1,
-    Uint8List? string2,
+    String? string2,
     DateTime? string3,
     String? string4,
     String? string5,
@@ -250,7 +250,7 @@ class _ClassNameCopyWithImpl<$R, $Out>
     double? double1,
     String? string1,
     num? number1,
-    Uint8List? string2,
+    String? string2,
     DateTime? string3,
     String? string4,
     String? string5,
