@@ -14,11 +14,12 @@ extension StringTypeX on String {
       _ => 'num',
     },
     'string' => switch (format) {
-      'binary' || 'byte' => multiPart ? 'MultipartFile' : 'Uint8List',
+      'binary' => multiPart ? 'MultipartFile' : 'String',
+      'byte' => 'String',
       'date' || 'date-time' => 'DateTime',
       _ => 'String',
     },
-    'file' => multiPart ? 'MultipartFile' : 'Uint8List',
+    'file' => multiPart ? 'MultipartFile' : 'String',
     'boolean' => 'bool',
     'object' || 'null' => 'dynamic',
     _ => startsWith('[') ? _parseTypeList(this) : this,
@@ -204,21 +205,20 @@ Set<UniversalEnumItem> protectEnumItemsNamesAndValues(
   Iterable<String> values, {
   Iterable<String>? descriptions,
 }) {
-  final items = <UniversalEnumItem>{};
-  final nameList = names.toList();
+  final protectedNames = protectEnumItemsNames(names, descriptions: descriptions);
   final valueList = values.toList();
-  final descList = descriptions?.toList();
+  final items = <UniversalEnumItem>{};
 
-  for (var i = 0; i < nameList.length; i++) {
+  var i = 0;
+  for (final protectedItem in protectedNames) {
     items.add(
       UniversalEnumItem(
-        name: nameList[i],
-        jsonKey: valueList[i],
-        description: descList != null && i < descList.length
-            ? descList[i]
-            : null,
+        name: protectedItem.name,
+        jsonKey: i < valueList.length ? valueList[i] : protectedItem.jsonKey,
+        description: protectedItem.description,
       ),
     );
+    i++;
   }
 
   return items;

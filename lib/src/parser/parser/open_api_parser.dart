@@ -441,13 +441,20 @@ class OpenApiParser {
                 _definitionFileContent[_componentsConst]
                     as Map<String, dynamic>;
             final schemes = components[_schemasConst] as Map<String, dynamic>;
-            final dataClass = schemes[type] as Map<String, dynamic>;
-            final props = dataClass[_propertiesConst] as Map<String, dynamic>;
-            final required = dataClass[_requiredConst] as List<dynamic>?;
-
-            properties = props;
-            requiredParameters =
-                required?.map((e) => e.toString()).toList() ?? [];
+            final dataClass = schemes[type] as Map<String, dynamic>?;
+            if (dataClass != null &&
+                dataClass[_propertiesConst] is Map<String, dynamic>) {
+              properties =
+                  dataClass[_propertiesConst] as Map<String, dynamic>;
+              requiredParameters =
+                  (dataClass[_requiredConst] as List<dynamic>?)
+                      ?.map((e) => e.toString())
+                      .toList() ??
+                  [];
+            } else {
+              properties = {};
+              requiredParameters = [];
+            }
           } else {
             _extractSchemaRefs(schemaContent, null);
             if (schemaContent[_propertiesConst] is Map<String, dynamic>) {
