@@ -1,3 +1,8 @@
+## 2.2.0
+- Fix handle nullable multipart properties, byte-as-string type mapping, and enum keyword protection.
+- Fix remove Base64Converter from all templates, update golden files for byte-as-String.
+- Fix enum toJson returns raw type instead of String for non-string enums.
+
 ## 2.0.4
 - Add support for Rust `serde(tag = 'discriminator_key')` discriminator pattern of enums
 - Add support for `x-enum-varnames` extension (OpenAPI Generator style custom enum names)
