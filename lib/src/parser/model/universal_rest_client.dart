@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
-import 'package:openapi_retrofit_generator/src/parser/model/universal_request.dart';
+import 'package:openapi_sdk_gen/src/parser/model/universal_request.dart';
 
 /// Universal template for containing information about Rest client
 @immutable

@@ -2,9 +2,9 @@ import 'dart:convert' show JsonEncoder, jsonDecode;
 
 import 'package:args/args.dart';
 import 'package:path/path.dart' as p;
-import 'package:openapi_retrofit_generator/src/config/config_exception.dart';
-import 'package:openapi_retrofit_generator/src/config/openapi_config.dart';
-import 'package:openapi_retrofit_generator/src/utils/file/io_file.dart';
+import 'package:openapi_sdk_gen/src/config/config_exception.dart';
+import 'package:openapi_sdk_gen/src/config/openapi_config.dart';
+import 'package:openapi_sdk_gen/src/utils/file/io_file.dart';
 import 'package:yaml/yaml.dart';
 
 /// This class is used to process the config

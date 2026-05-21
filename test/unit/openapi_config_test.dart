@@ -1,5 +1,5 @@
-import 'package:openapi_retrofit_generator/openapi_retrofit_generator.dart';
-import 'package:openapi_retrofit_generator/src/config/config_processor.dart';
+import 'package:openapi_sdk_gen/openapi_sdk_gen.dart';
+import 'package:openapi_sdk_gen/src/config/config_processor.dart';
 import 'package:test/test.dart';
 import 'package:yaml/yaml.dart';
 

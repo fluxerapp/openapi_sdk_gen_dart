@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:openapi_retrofit_generator/src/generator/model/generation_statistic.dart';
-import 'package:openapi_retrofit_generator/src/parser/openapi_parser_core.dart';
-import 'package:openapi_retrofit_generator/src/utils/base_utils.dart';
+import 'package:openapi_sdk_gen/src/generator/model/generation_statistic.dart';
+import 'package:openapi_sdk_gen/src/parser/openapi_parser_core.dart';
+import 'package:openapi_sdk_gen/src/utils/base_utils.dart';
 
 const _green = '\x1B[32m';
 const _red = '\x1B[31m';
@@ -15,7 +15,7 @@ void introMessage() {
 
 void printHelpMessage(ArgParser parser) {
   stdout
-    ..writeln('Usage: dart run openapi_retrofit_generator [options]')
+    ..writeln('Usage: dart run openapi_sdk_gen [options]')
     ..writeln(' ')
     ..writeln('Options:')
     ..writeln(parser.usage);

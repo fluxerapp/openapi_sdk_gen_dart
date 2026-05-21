@@ -1,4 +1,4 @@
-import 'package:openapi_retrofit_generator/src/generator/model/json_serializer.dart';
+import 'package:openapi_sdk_gen/src/generator/model/json_serializer.dart';
 
 String dartImportDtoTemplate(JsonSerializer jsonSerializer) {
   switch (jsonSerializer) {

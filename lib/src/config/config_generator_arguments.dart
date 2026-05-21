@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:openapi_retrofit_generator/src/utils/output/output_utils.dart';
+import 'package:openapi_sdk_gen/src/utils/output/output_utils.dart';
 
 /// Returns the [ArgResults] based on the [configGeneratorArguments]
 /// for the [arguments] provided when running
-/// `dart run openapi_retrofit_generator [arguments]`
+/// `dart run openapi_sdk_gen [arguments]`
 ///
 /// will show help message if `help` flag is provided.
 ArgResults parseConfigGeneratorArguments(List<String> arguments) {

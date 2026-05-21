@@ -8,7 +8,7 @@ import 'api/api_client.dart';
 
 /// Comprehensive API Test Schema `v1.0.0`.
 ///
-/// This schema covers ALL edge cases and features of openapi_retrofit_generator:.
+/// This schema covers ALL edge cases and features of openapi_sdk_gen:.
 /// - Multiple tags for client separation.
 /// - Anonymous/inline classes.
 /// - Circular model dependencies.

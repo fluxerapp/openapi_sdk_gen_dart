@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
-import 'package:openapi_retrofit_generator/src/parser/model/universal_collections.dart';
+import 'package:openapi_sdk_gen/src/parser/model/universal_collections.dart';
 
 /// Universal template for containing information about type
 @immutable

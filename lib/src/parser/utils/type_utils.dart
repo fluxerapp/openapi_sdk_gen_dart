@@ -1,6 +1,6 @@
-import 'package:openapi_retrofit_generator/src/parser/model/normalized_identifier.dart';
-import 'package:openapi_retrofit_generator/src/parser/model/universal_data_class.dart';
-import 'package:openapi_retrofit_generator/src/parser/utils/dart_keywords.dart';
+import 'package:openapi_sdk_gen/src/parser/model/normalized_identifier.dart';
+import 'package:openapi_sdk_gen/src/parser/model/universal_data_class.dart';
+import 'package:openapi_sdk_gen/src/parser/utils/dart_keywords.dart';
 
 /// Extension for utils
 extension StringTypeX on String {

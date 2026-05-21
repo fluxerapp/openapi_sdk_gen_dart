@@ -1,9 +1,10 @@
-# OpenAPI Retrofit Generator
+# OpenAPI SDK Generator
 
-[![pub version](https://img.shields.io/pub/v/openapi_retrofit_generator?logo=dart)](https://pub.dev/packages/openapi_retrofit_generator)
-[![Tests](https://github.com/westito/openapi_retrofit_generator/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/westito/openapi_retrofit_generator/actions/workflows/tests.yml)
+[![pub version](https://img.shields.io/pub/v/openapi_sdk_gen?logo=dart)](https://pub.dev/packages/openapi_sdk_gen)
+[![Tests](https://github.com/westito/openapi_sdk_gen/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/westito/openapi_sdk_gen/actions/workflows/tests.yml)
 
-> **Note**: This package is a complete rework of [swagger_parser](https://pub.dev/packages/swagger_parser) with enhanced features, improved architecture, and better maintainability.
+> **Note**: This package is a fork of [openapi_retrofit_generator](https://github.com/westito/openapi_retrofit_generator) which is a for of [swagger_parser](https://pub.dev/packages/swagger_parser).
+> This has some extra fixes to the [openapi_retrofit_generator](https://github.com/westito/openapi_retrofit_generator) package.
 
 **Generate type-safe Dart REST clients from OpenAPI/Swagger specifications**
 
@@ -39,7 +40,7 @@ dependencies:
   json_annotation: ^4.9.0
 
 dev_dependencies:
-  openapi_retrofit_generator: ^2.0.0
+  openapi_sdk_gen: ^2.0.0
   build_runner: ^2.10.0
   json_serializable: ^6.11.0
   retrofit_generator: ^10.1.0
@@ -61,7 +62,7 @@ openapi_generator:
 Run the generator:
 
 ```bash
-dart run openapi_retrofit_generator
+dart run openapi_sdk_gen
 dart run build_runner build -d
 ```
 
@@ -293,20 +294,20 @@ Override config file options via command line:
 
 ```bash
 # Custom config file
-dart run openapi_retrofit_generator -f my_config.yaml
+dart run openapi_sdk_gen -f my_config.yaml
 
 # Override output directory
-dart run openapi_retrofit_generator --output_directory lib/generated
+dart run openapi_sdk_gen --output_directory lib/generated
 
 # Override schema source
-dart run openapi_retrofit_generator --schema_path api/openapi.yaml
-dart run openapi_retrofit_generator --schema_url https://api.example.com/openapi.json
+dart run openapi_sdk_gen --schema_path api/openapi.yaml
+dart run openapi_sdk_gen --schema_url https://api.example.com/openapi.json
 
 # Override serializer
-dart run openapi_retrofit_generator --json_serializer freezed
+dart run openapi_sdk_gen --json_serializer freezed
 
 # Help
-dart run openapi_retrofit_generator -help
+dart run openapi_sdk_gen -help
 ```
 
 ### Using Freezed
@@ -326,7 +327,7 @@ global_options:
 Then run:
 
 ```bash
-dart run openapi_retrofit_generator
+dart run openapi_sdk_gen
 dart run build_runner build -d
 ```
 
@@ -357,7 +358,7 @@ This configuration is automatically validated before generation. The generator w
 Then run:
 
 ```bash
-dart run openapi_retrofit_generator
+dart run openapi_sdk_gen
 dart run build_runner build -d
 ```
 
@@ -519,7 +520,7 @@ Check out the [example](example/) directory for a complete working example:
 
 ```bash
 cd example
-dart run openapi_retrofit_generator
+dart run openapi_sdk_gen
 dart run build_runner build -d
 dart run lib/main.dart
 ```
@@ -540,7 +541,7 @@ dart run build_runner build --delete-conflicting-outputs
 Enable verbose output to debug issues:
 
 ```bash
-dart run openapi_retrofit_generator --verbose
+dart run openapi_sdk_gen --verbose
 ```
 
 ### Type Errors
@@ -557,7 +558,7 @@ This package is a complete rework of `swagger_parser`. To migrate:
 1. Update `pubspec.yaml`:
    ```yaml
    dev_dependencies:
-     openapi_retrofit_generator: ^2.0.0  # was: swagger_parser
+     openapi_sdk_gen: ^2.0.0  # was: swagger_parser
    ```
 
 2. Update config file name and key:
@@ -577,7 +578,7 @@ This package is a complete rework of `swagger_parser`. To migrate:
 
 5. Regenerate your code:
    ```bash
-   dart run openapi_retrofit_generator
+   dart run openapi_sdk_gen
    dart run build_runner build -d
    ```
 
@@ -604,7 +605,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-This package is a complete rework of [swagger_parser](https://pub.dev/packages/swagger_parser) ([GitHub](https://github.com/Carapacik/swagger_parser)) originally created by [Carapacik](https://github.com/Carapacik). We've rebuilt the architecture from the ground up while preserving and enhancing all the features that made swagger_parser great.
+This package is a fork of *openapi_retrofit_generator* which is a complete rework of [swagger_parser](https://pub.dev/packages/swagger_parser) ([GitHub](https://github.com/Carapacik/swagger_parser)) originally created by [Carapacik](https://github.com/Carapacik). We've rebuilt the architecture from the ground up while preserving and enhancing all the features that made swagger_parser great.
 
 ## Resources
 

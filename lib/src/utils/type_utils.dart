@@ -1,4 +1,4 @@
-import 'package:openapi_retrofit_generator/src/parser/openapi_parser_core.dart';
+import 'package:openapi_sdk_gen/src/parser/openapi_parser_core.dart';
 
 /// Converts [UniversalType] to Dart type
 extension UniversalTypeX on UniversalType {

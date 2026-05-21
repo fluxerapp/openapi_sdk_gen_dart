@@ -1,5 +1,5 @@
 /// Provides generation functions that generates REST clients and data classes from OpenApi definition file
-/// [openapi_retrofit_generator](https://pub.dev/packages/openapi_retrofit_generator)
+/// [openapi_sdk_gen](https://pub.dev/packages/openapi_sdk_gen)
 library;
 
 export 'src/config/config_exception.dart';

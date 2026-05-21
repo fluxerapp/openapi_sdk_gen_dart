@@ -1,4 +1,4 @@
-import 'package:openapi_retrofit_generator/src/parser/model/normalized_identifier.dart';
+import 'package:openapi_sdk_gen/src/parser/model/normalized_identifier.dart';
 
 const _primitiveTypes = {
   'int',

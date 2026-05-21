@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as p;
 import 'package:yaml/yaml.dart';
-import 'package:openapi_retrofit_generator/src/config/config_exception.dart';
-import 'package:openapi_retrofit_generator/src/generator/model/generated_file.dart';
+import 'package:openapi_sdk_gen/src/config/config_exception.dart';
+import 'package:openapi_sdk_gen/src/generator/model/generated_file.dart';
 
 /// Dart formatter with page_width: 80 and trailing_commas: preserve
 final _formatter = DartFormatter(

@@ -1,9 +1,9 @@
-import 'package:openapi_retrofit_generator/src/config/config_processor.dart';
-import 'package:openapi_retrofit_generator/src/generator/model/generation_statistic.dart';
-import 'package:openapi_retrofit_generator/src/utils/output/output_utils.dart';
-import 'package:openapi_retrofit_generator/openapi_retrofit_generator.dart';
+import 'package:openapi_sdk_gen/src/config/config_processor.dart';
+import 'package:openapi_sdk_gen/src/generator/model/generation_statistic.dart';
+import 'package:openapi_sdk_gen/src/utils/output/output_utils.dart';
+import 'package:openapi_sdk_gen/openapi_sdk_gen.dart';
 
-/// Used for run `dart run openapi_retrofit_generator`
+/// Used for run `dart run openapi_sdk_gen`
 Future<void> main(List<String> arguments) async {
   introMessage();
   try {

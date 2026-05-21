@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
-import 'package:openapi_retrofit_generator/src/parser/model/normalized_identifier.dart';
-import 'package:openapi_retrofit_generator/src/parser/model/universal_type.dart';
-import 'package:openapi_retrofit_generator/src/parser/utils/type_utils.dart';
+import 'package:openapi_sdk_gen/src/parser/model/normalized_identifier.dart';
+import 'package:openapi_sdk_gen/src/parser/model/universal_type.dart';
+import 'package:openapi_sdk_gen/src/parser/utils/type_utils.dart';
 
 part 'universal_component_class.dart';
 part 'universal_enum_class.dart';

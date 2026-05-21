@@ -1,4 +1,4 @@
-import 'package:openapi_retrofit_generator/src/generator/model/generated_file.dart';
+import 'package:openapi_sdk_gen/src/generator/model/generated_file.dart';
 
 /// Provides template for generating dart export file
 String dartExportFileTemplate({

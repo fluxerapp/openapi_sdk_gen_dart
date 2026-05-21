@@ -1,7 +1,7 @@
 import 'dart:convert' show json;
 
-import 'package:openapi_retrofit_generator/src/parser/model/normalized_identifier.dart';
-import 'package:openapi_retrofit_generator/openapi_retrofit_generator.dart';
+import 'package:openapi_sdk_gen/src/parser/model/normalized_identifier.dart';
+import 'package:openapi_sdk_gen/openapi_sdk_gen.dart';
 import 'package:yaml/yaml.dart';
 
 /// Class used to correct data class, method and field names in OpenAPI

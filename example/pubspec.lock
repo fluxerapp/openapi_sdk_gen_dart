@@ -342,10 +342,10 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  openapi_retrofit_generator:
+  openapi_sdk_gen:
     dependency: "direct dev"
     description:
-      name: openapi_retrofit_generator
+      name: openapi_sdk_gen
       sha256: e70deef1f032e2523db4bc04e51f6ed8e8fff2a7361f09070c2a70fc98766026
       url: "https://pub.dev"
     source: hosted

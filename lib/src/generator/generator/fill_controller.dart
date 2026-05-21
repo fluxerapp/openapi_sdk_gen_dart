@@ -1,17 +1,17 @@
-import 'package:openapi_retrofit_generator/src/generator/config/generator_config.dart';
-import 'package:openapi_retrofit_generator/src/generator/model/generated_file.dart';
-import 'package:openapi_retrofit_generator/src/generator/model/json_serializer.dart';
-import 'package:openapi_retrofit_generator/src/generator/templates/dart_dart_mappable_dto_template.dart';
-import 'package:openapi_retrofit_generator/src/generator/templates/dart_enum_dto_template.dart';
-import 'package:openapi_retrofit_generator/src/generator/templates/dart_export_file_template.dart';
-import 'package:openapi_retrofit_generator/src/generator/templates/dart_freezed_dto_template.dart';
-import 'package:openapi_retrofit_generator/src/generator/templates/dart_json_serializable_dto_template.dart';
-import 'package:openapi_retrofit_generator/src/generator/templates/dart_retrofit_client_template.dart';
-import 'package:openapi_retrofit_generator/src/generator/templates/dart_root_client_template.dart';
-import 'package:openapi_retrofit_generator/src/generator/templates/dart_typedef_template.dart';
-import 'package:openapi_retrofit_generator/src/parser/model/normalized_identifier.dart';
-import 'package:openapi_retrofit_generator/src/parser/openapi_parser_core.dart';
-import 'package:openapi_retrofit_generator/src/utils/base_utils.dart';
+import 'package:openapi_sdk_gen/src/generator/config/generator_config.dart';
+import 'package:openapi_sdk_gen/src/generator/model/generated_file.dart';
+import 'package:openapi_sdk_gen/src/generator/model/json_serializer.dart';
+import 'package:openapi_sdk_gen/src/generator/templates/dart_dart_mappable_dto_template.dart';
+import 'package:openapi_sdk_gen/src/generator/templates/dart_enum_dto_template.dart';
+import 'package:openapi_sdk_gen/src/generator/templates/dart_export_file_template.dart';
+import 'package:openapi_sdk_gen/src/generator/templates/dart_freezed_dto_template.dart';
+import 'package:openapi_sdk_gen/src/generator/templates/dart_json_serializable_dto_template.dart';
+import 'package:openapi_sdk_gen/src/generator/templates/dart_retrofit_client_template.dart';
+import 'package:openapi_sdk_gen/src/generator/templates/dart_root_client_template.dart';
+import 'package:openapi_sdk_gen/src/generator/templates/dart_typedef_template.dart';
+import 'package:openapi_sdk_gen/src/parser/model/normalized_identifier.dart';
+import 'package:openapi_sdk_gen/src/parser/openapi_parser_core.dart';
+import 'package:openapi_sdk_gen/src/utils/base_utils.dart';
 
 /// Handles generating files
 final class FillController {

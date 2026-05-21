@@ -1,6 +1,6 @@
-import 'package:openapi_retrofit_generator/src/generator/config/generator_config.dart';
-import 'package:openapi_retrofit_generator/src/generator/generator/fill_controller.dart';
-import 'package:openapi_retrofit_generator/src/parser/openapi_parser_core.dart';
+import 'package:openapi_sdk_gen/src/generator/config/generator_config.dart';
+import 'package:openapi_sdk_gen/src/generator/generator/fill_controller.dart';
+import 'package:openapi_sdk_gen/src/parser/openapi_parser_core.dart';
 import 'package:test/test.dart';
 
 void main() {

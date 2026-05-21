@@ -1,6 +1,6 @@
 /// Parse Open Api definition to universal dart models
 ///
-/// Used by [openapi_retrofit_generator](https://pub.dev/packages/openapi_retrofit_generator)
+/// Used by [openapi_sdk_gen](https://pub.dev/packages/openapi_sdk_gen)
 library;
 
 export 'config/parser_config.dart';

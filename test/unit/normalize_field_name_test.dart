@@ -1,4 +1,4 @@
-import 'package:openapi_retrofit_generator/src/parser/utils/type_utils.dart';
+import 'package:openapi_sdk_gen/src/parser/utils/type_utils.dart';
 import 'package:test/test.dart';
 
 void main() {

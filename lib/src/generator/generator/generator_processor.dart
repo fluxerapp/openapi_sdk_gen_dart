@@ -1,11 +1,11 @@
-import 'package:openapi_retrofit_generator/src/config/config_processor.dart';
-import 'package:openapi_retrofit_generator/src/config/openapi_config.dart';
-import 'package:openapi_retrofit_generator/src/generator/generator/generator.dart';
-import 'package:openapi_retrofit_generator/src/generator/model/generated_file.dart';
-import 'package:openapi_retrofit_generator/src/generator/model/generation_statistic.dart';
-import 'package:openapi_retrofit_generator/src/generator/model/json_serializer.dart';
-import 'package:openapi_retrofit_generator/src/parser/openapi_parser_core.dart';
-import 'package:openapi_retrofit_generator/src/utils/file/io_file.dart';
+import 'package:openapi_sdk_gen/src/config/config_processor.dart';
+import 'package:openapi_sdk_gen/src/config/openapi_config.dart';
+import 'package:openapi_sdk_gen/src/generator/generator/generator.dart';
+import 'package:openapi_sdk_gen/src/generator/model/generated_file.dart';
+import 'package:openapi_sdk_gen/src/generator/model/generation_statistic.dart';
+import 'package:openapi_sdk_gen/src/generator/model/json_serializer.dart';
+import 'package:openapi_sdk_gen/src/parser/openapi_parser_core.dart';
+import 'package:openapi_sdk_gen/src/utils/file/io_file.dart';
 
 /// Handles whole cycle of generation.
 /// Can be provided with arguments

@@ -9,7 +9,7 @@ A working Pet Store API client example showing the complete workflow from OpenAP
 dart pub get
 
 # 2. Generate REST client from OpenAPI spec
-dart run openapi_retrofit_generator
+dart run openapi_sdk_gen
 
 # 3. Generate serialization code
 dart run build_runner build -d
@@ -94,7 +94,7 @@ See [openapi_generator.yaml](openapi_generator.yaml) for the fully documented co
 
 1. Replace `schemes/openapi.yaml` with your API spec
 2. Update `openapi_generator.yaml` configuration as needed  
-3. Run `dart run openapi_retrofit_generator`
+3. Run `dart run openapi_sdk_gen`
 4. Run `dart run build_runner build -d`
 5. Update `lib/main.dart` with your base URL
 

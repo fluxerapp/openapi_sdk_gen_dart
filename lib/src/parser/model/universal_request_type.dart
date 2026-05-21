@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:openapi_retrofit_generator/src/parser/model/universal_type.dart';
+import 'package:openapi_sdk_gen/src/parser/model/universal_type.dart';
 
 /// Universal template for containing information about Request parameter
 @immutable

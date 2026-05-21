@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
 import 'package:args/args.dart';
-import 'package:openapi_retrofit_generator/src/generator/model/generation_statistic.dart';
-import 'package:openapi_retrofit_generator/src/parser/openapi_parser_core.dart';
-import 'package:openapi_retrofit_generator/src/utils/base_utils.dart';
+import 'package:openapi_sdk_gen/src/generator/model/generation_statistic.dart';
+import 'package:openapi_sdk_gen/src/parser/openapi_parser_core.dart';
+import 'package:openapi_sdk_gen/src/utils/base_utils.dart';
 
 void introMessage() {
   print('\nOpenAPI Retrofit Generator\n');

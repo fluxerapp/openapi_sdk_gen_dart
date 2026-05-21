@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
-import 'package:openapi_retrofit_generator/src/generator/model/json_serializer.dart';
-import 'package:openapi_retrofit_generator/src/parser/model/normalized_identifier.dart';
-import 'package:openapi_retrofit_generator/src/parser/openapi_parser_core.dart';
-import 'package:openapi_retrofit_generator/src/utils/base_utils.dart';
-import 'package:openapi_retrofit_generator/src/utils/type_utils.dart';
+import 'package:openapi_sdk_gen/src/generator/model/json_serializer.dart';
+import 'package:openapi_sdk_gen/src/parser/model/normalized_identifier.dart';
+import 'package:openapi_sdk_gen/src/parser/openapi_parser_core.dart';
+import 'package:openapi_sdk_gen/src/utils/base_utils.dart';
+import 'package:openapi_sdk_gen/src/utils/type_utils.dart';
 
 /// Provides template for generating dart typedefs using JSON serializable
 String dartTypeDefTemplate(

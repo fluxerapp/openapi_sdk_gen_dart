@@ -1,8 +1,8 @@
 import 'package:args/args.dart';
-import 'package:openapi_retrofit_generator/src/config/config_exception.dart';
-import 'package:openapi_retrofit_generator/src/generator/config/generator_config.dart';
-import 'package:openapi_retrofit_generator/src/generator/model/json_serializer.dart';
-import 'package:openapi_retrofit_generator/src/parser/openapi_parser_core.dart';
+import 'package:openapi_sdk_gen/src/config/config_exception.dart';
+import 'package:openapi_sdk_gen/src/generator/config/generator_config.dart';
+import 'package:openapi_sdk_gen/src/generator/model/json_serializer.dart';
+import 'package:openapi_sdk_gen/src/parser/openapi_parser_core.dart';
 import 'package:yaml/yaml.dart';
 
 /// OpenAPI Generator Config
