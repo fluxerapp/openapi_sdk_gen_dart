@@ -1,7 +1,7 @@
 name: openapi_sdk_gen
 description: Package that generates REST clients and data classes from OpenApi definition file
 
-version: 2.2.0
+version: 2.2.1
 
 repository: https://github.com/fluxerapp/openapi_sdk_gen_dart
 
