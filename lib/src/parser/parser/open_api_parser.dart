@@ -450,6 +450,47 @@ class OpenApiParser {
                       ?.map((e) => e.toString())
                       .toList() ??
                   [];
+            } else if (dataClass != null &&
+                (dataClass[_oneOfConst] is List ||
+                    dataClass[_anyOfConst] is List)) {
+              final merged = <String, dynamic>{};
+              final variants =
+                  (dataClass[_oneOfConst] ?? dataClass[_anyOfConst])
+                      as List<dynamic>;
+              for (final variant in variants) {
+                if (variant is! Map<String, dynamic>) {
+                  continue;
+                }
+                final variantSchema = variant.containsKey(_refConst)
+                    ? _findRefSchema(_formatRef(variant))
+                    : variant;
+                final variantProps = variantSchema?[_propertiesConst];
+                if (variantProps is! Map<String, dynamic>) {
+                  continue;
+                }
+                variantProps.forEach((key, schema) {
+                  final existing = merged[key];
+                  if (existing == null) {
+                    merged[key] = schema;
+                  } else if (!const DeepCollectionEquality().equals(
+                    existing,
+                    schema,
+                  )) {
+                    final existingType = existing is Map<String, dynamic>
+                        ? existing[_typeConst]?.toString()
+                        : null;
+                    final schemaType = schema is Map<String, dynamic>
+                        ? schema[_typeConst]?.toString()
+                        : null;
+                    merged[key] =
+                        existingType != null && existingType == schemaType
+                        ? <String, dynamic>{_typeConst: existingType}
+                        : <String, dynamic>{};
+                  }
+                });
+              }
+              properties = merged;
+              requiredParameters = [];
             } else {
               properties = {};
               requiredParameters = [];
@@ -2548,12 +2589,37 @@ class OpenApiParser {
       final hasExplicitObjectType =
           item[_typeConst]?.toString() == _objectConst;
 
-      // Accept either a $ref, an inline object with explicit type: object,
-      // or an inline object with properties and no explicit type.
-      return hasRef ||
+      final hasObjectRef = hasRef && !_refResolvesToScalar(_formatRef(item));
+
+      // Accept either an object $ref, an inline object with explicit
+      // type: object, or an inline object with properties and no explicit type.
+      return hasObjectRef ||
           (hasExplicitObjectType && hasProps) ||
           (hasProps && !item.containsKey(_typeConst));
     });
+  }
+
+  bool _refResolvesToScalar(String refName) {
+    final schema = _findRefSchema(refName);
+    if (schema == null) {
+      return false;
+    }
+    final properties = schema[_propertiesConst];
+    if (properties is Map<String, dynamic> && properties.isNotEmpty) {
+      return false;
+    }
+    if (schema.containsKey(_oneOfConst) ||
+        schema.containsKey(_anyOfConst) ||
+        schema.containsKey(_allOfConst) ||
+        schema.containsKey(_additionalPropertiesConst)) {
+      return false;
+    }
+    return const {
+      'string',
+      'integer',
+      'number',
+      'boolean',
+    }.contains(schema[_typeConst]?.toString());
   }
 
   /// Check if a path is included or excluded based on its tags and
