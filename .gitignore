@@ -3,6 +3,7 @@
 build/
 .idea
 **/generated_files/**
+.DS_Store
 
 test_project/
 test/builder/.dart_tool/
