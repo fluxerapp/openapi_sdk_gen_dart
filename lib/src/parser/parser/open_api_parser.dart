@@ -1063,9 +1063,21 @@ class OpenApiParser {
           return;
         } else if (value.containsKey(_typeConst) ||
             value.containsKey(_refConst)) {
+          String? elementAdditionalName;
+          if (value[_typeConst] == _arrayConst &&
+              value[_itemsConst] is Map<String, dynamic>) {
+            final items = value[_itemsConst] as Map<String, dynamic>;
+            final hasInlineObjectItems =
+                items[_propertiesConst] is Map<String, dynamic> &&
+                (items[_propertiesConst] as Map<String, dynamic>).isNotEmpty;
+            if (hasInlineObjectItems) {
+              elementAdditionalName = '$schemaName Item';
+            }
+          }
           final typeWithImport = _findType(
             value,
             name: schemaName,
+            additionalName: elementAdditionalName,
             // typeDef is always non-nullable
             isRequired: true,
           );
