@@ -218,8 +218,6 @@ abstract class ClassName with _$ClassName {
       final filledContent = fillController.fillDtoContent(dataClass);
       const expectedContents = r'''
 import 'package:json_annotation/json_annotation.dart';
-import 'dart:convert';
-import 'dart:typed_data';
 
 part 'class_name.g.dart';
 
@@ -246,8 +244,7 @@ class ClassName {
   final double doubleNumberType;
   final double floatNumberType;
   final String stringType;
-  @JsonKey(fromJson: _Base64Converter.staticFromJson,toJson: _Base64Converter.staticToJson)
-  final Uint8List binaryStringType;
+  final String binaryStringType;
   final DateTime dateStringType;
   final DateTime dateTimeStringType;
   final bool boolType;
@@ -256,22 +253,7 @@ class ClassName {
 
   Map<String, Object?> toJson() => _$ClassNameToJson(this);
 }
-
-class _Base64Converter implements JsonConverter<Uint8List, String> {
-  const _Base64Converter();
-
-  static const instance = _Base64Converter();
-
-  static Uint8List staticFromJson(String json) => instance.fromJson(json);
-
-  static String staticToJson(Uint8List object) => instance.toJson(object);
-
-  @override
-  Uint8List fromJson(String json) => base64Decode(json);
-
-  @override
-  String toJson(Uint8List object) => base64Encode(object);
-}''';
+''';
       expect(filledContent.content, expectedContents);
     });
 
@@ -352,8 +334,6 @@ class _Base64Converter implements JsonConverter<Uint8List, String> {
       final filledContent = fillController.fillDtoContent(dataClass);
       const expectedContents = r'''
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
-import 'dart:typed_data';
 
 part 'class_name.freezed.dart';
 part 'class_name.g.dart';
@@ -366,8 +346,7 @@ abstract class ClassName with _$ClassName {
     required double doubleNumberType,
     required double floatNumberType,
     required String stringType,
-    @JsonKey(fromJson: _Base64Converter.staticFromJson,toJson: _Base64Converter.staticToJson)
-    required Uint8List binaryStringType,
+    required String binaryStringType,
     required DateTime dateStringType,
     required DateTime dateTimeStringType,
     required bool boolType,
@@ -377,22 +356,7 @@ abstract class ClassName with _$ClassName {
   
   factory ClassName.fromJson(Map<String, Object?> json) => _$ClassNameFromJson(json);
 }
-
-class _Base64Converter implements JsonConverter<Uint8List, String> {
-  const _Base64Converter();
-
-  static const instance = _Base64Converter();
-
-  static Uint8List staticFromJson(String json) => instance.fromJson(json);
-
-  static String staticToJson(Uint8List object) => instance.toJson(object);
-
-  @override
-  Uint8List fromJson(String json) => base64Decode(json);
-
-  @override
-  String toJson(Uint8List object) => base64Encode(object);
-}''';
+''';
       expect(filledContent.content, expectedContents);
     });
 
@@ -473,8 +437,6 @@ class _Base64Converter implements JsonConverter<Uint8List, String> {
       final filledContent = fillController.fillDtoContent(dataClass);
       const expectedContents = '''
 import 'package:dart_mappable/dart_mappable.dart';
-import 'dart:convert';
-import 'dart:typed_data';
 
 part 'class_name.mapper.dart';
 
@@ -500,8 +462,7 @@ class ClassName with ClassNameMappable {
   final double doubleNumberType;
   final double floatNumberType;
   final String stringType;
-  @MappableField(hook: const _Base64Hook())
-  final Uint8List binaryStringType;
+  final String binaryStringType;
   final DateTime dateStringType;
   final DateTime dateTimeStringType;
   final bool boolType;
@@ -509,26 +470,6 @@ class ClassName with ClassNameMappable {
   final Another anotherType;
 
   static ClassName fromJson(Map<String, dynamic> json) => ClassNameMapper.fromJson(json);
-}
-
-class _Base64Hook extends MappingHook {
-  const _Base64Hook();
-
-  @override
-  Object? beforeDecode(Object? value) {
-    if (value is String) {
-      return base64Decode(value);
-    }
-    return value;
-  }
-
-  @override
-  Object? beforeEncode(Object? value) {
-    if (value is Uint8List) {
-      return base64Encode(value);
-    }
-    return value;
-  }
 }
 ''';
       expect(filledContent.content, equalsIgnoringWhitespace(expectedContents));
@@ -1341,7 +1282,7 @@ enum EnumName {
 
   final int? json;
 
-  String toJson() => json?.toString() ?? 'null';
+  int? toJson() => json;
 
   @override
   String toString() => json?.toString() ?? super.toString();
@@ -1483,7 +1424,7 @@ enum EnumName {
 
   final int? json;
 
-  String toJson() => json?.toString() ?? 'null';
+  int? toJson() => json;
 
   @override
   String toString() => json?.toString() ?? super.toString();
@@ -1572,7 +1513,7 @@ enum EnumName {
 
   final int? json;
 
-  String toJson() => json?.toString() ?? 'null';
+  int? toJson() => json;
 
   @override
   String toString() => json?.toString() ?? super.toString();
@@ -1687,7 +1628,7 @@ enum EnumName {
 
   final int? json;
 
-  String toJson() => json?.toString() ?? 'null';
+  int? toJson() => json;
 
   @override
   String toString() => json?.toString() ?? super.toString();
@@ -1774,7 +1715,7 @@ enum EnumName {
 
   final int? json;
 
-  String toJson() => json?.toString() ?? 'null';
+  int? toJson() => json;
 
   @override
   String toString() => json?.toString() ?? super.toString();
@@ -1826,7 +1767,7 @@ enum EnumName {
 
   final int? json;
 
-  String toJson() => json?.toString() ?? 'null';
+  int? toJson() => json;
 
   @override
   String toString() => json?.toString() ?? super.toString();
