@@ -315,13 +315,12 @@ String _generateDiscriminatedWrapperClasses(
             discriminator.refProperties[variantName] ?? <UniversalType>{};
 
         // Generate direct properties and collect imports
-        // Include @JsonKey annotation when jsonKey differs from name
         final directProperties = properties
             .map((prop) {
               final typeStr = _jsonSerializableSuitableType(prop);
               // Extract type names for imports (handles List<Foo>, Map<String, Bar>, etc.)
               _extractAndAddTypeImports(typeStr, collectedImports);
-              return '${_jsonKeyForWrapper(prop)}  final $typeStr ${prop.name};';
+              return '${_jsonKey(prop, includeIfNull)}  final $typeStr ${prop.name};';
             })
             .join('\n');
 
@@ -392,14 +391,12 @@ String _generateUndiscriminatedWrapperClasses(
         final properties = entry.value;
         final wrapperClassName = '$className${variantName.toPascal}';
 
-        // Generate direct properties and collect imports
-        // Include @JsonKey annotation when jsonKey differs from name
         final directProperties = properties
             .map((prop) {
               final typeStr = _jsonSerializableSuitableType(prop);
               // Extract type names for imports
               _extractAndAddTypeImports(typeStr, collectedImports);
-              return '${_jsonKeyForWrapper(prop)}  final $typeStr ${prop.name};';
+              return '${_jsonKey(prop, includeIfNull)}  final $typeStr ${prop.name};';
             })
             .join('\n');
 
@@ -497,14 +494,6 @@ String _parametersInConstructor(
   return sortedByRequired
       .map((e) => '\n    ${_required(e)}this.${e.name}${_defaultValue(e)},')
       .join();
-}
-
-/// Simplified JsonKey for wrapper classes - only handles name mapping
-String _jsonKeyForWrapper(UniversalType t) {
-  if (t.jsonKey != null && t.name != t.jsonKey) {
-    return "  @JsonKey(name: '${protectJsonKey(t.jsonKey)}')\n";
-  }
-  return '';
 }
 
 /// if jsonKey is different from the name

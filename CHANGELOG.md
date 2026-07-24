@@ -1,18 +1,26 @@
+## 2.3.2
+
+- Fix discriminated and undiscriminated union wrapper classes to honor `include_if_null` annotations on nullable fields.
+
 ## 2.2.0
+
 - Fix handle nullable multipart properties, byte-as-string type mapping, and enum keyword protection.
 - Fix remove Base64Converter from all templates, update golden files for byte-as-String.
 - Fix enum toJson returns raw type instead of String for non-string enums.
 
 ## 2.0.4
+
 - Add support for Rust `serde(tag = 'discriminator_key')` discriminator pattern of enums
 - Add support for `x-enum-varnames` extension (OpenAPI Generator style custom enum names)
 - Add support for `x-enum-descriptions` extension (doc comments for enum values)
 - Fix enum default value resolution when using `x-enumNames` or `x-enum-varnames`
 
 ## 2.0.3
+
 - Fix missing `@JsonKey`/`@MappableField` annotation when field names are renamed due to Dart reserved word conflicts in discriminated/undiscriminated union wrapper classes
 
 ## 2.2.0
+
 - Support for Rust/utoipa discriminator pattern in `oneOf` schemas
   - Detects `oneOf` with `allOf` items containing `$ref` + anonymous discriminator object
   - Automatically extracts discriminator property from inline objects with single-value enums
@@ -20,30 +28,36 @@
 - Code formatting with `dart_style` (page_width: 80, trailing_commas: preserve)
 
 ## 2.1.0
+
 - SSE streaming support via `text/event-stream` content type
 - Binary streaming via `application/octet-stream` or `x-streaming: true`
 - Auto-detect discriminator for `oneOf`/`anyOf` from single-value enum properties
 - Simplified union class names (removed "Union" suffix and typedef wrapper)
 
 ## 2.0.2
+
 - Packages updated
 - Documentation improvements
 
 ## 2.0.1
+
 - Minor documentation fixes
 
 ## 2.0.0
 
 ### Complete Rework
+
 Complete rework and refactor of [swagger_parser](https://pub.dev/packages/swagger_parser) with enhanced architecture, improved code organization, better maintainability and extensibility.
 
 ### Removed Features
+
 The following features are no longer available:
 
 - **Kotlin Support** (`language` parameter): Multi-language support removed. Package now focuses exclusively on Dart code generation.
 - **Replacement Rules** (`replacement_rules` parameter): Regex-based name transformation removed in favor of improved automatic naming and conflict resolution. The generator now provides stable, predictable naming with built-in conflict detection and resolution, eliminating the need for user-defined regex transformations. Update your OpenAPI schema with proper component names instead of relying on post-generation transformations.
 
 ### Simplified Configuration
+
 The following configuration options have been removed as they are now handled automatically with better defaults:
 
 - **`use_freezed3`**: Removed. Freezed 3.x is now the standard version supported.
@@ -54,24 +68,30 @@ The following configuration options have been removed as they are now handled au
 - **`fallback_client` renamed to `default_client`**: More intuitive naming for the client handling untagged endpoints.
 
 ### Changed Defaults
+
 - **`use_x_nullable`**: Changed from `false` to `true` (now respects `x-nullable` extension by default)
 - **`export_file`**: Changed from `true` to `false`
 
 ### Migration Notes
+
 - **`replacement_rules`**: The improved automatic naming system now handles name normalization and conflict resolution consistently. If you relied on replacement rules, update your OpenAPI schema component names to match your desired output. This ensures stable, predictable code generation.
 - **`language: kotlin`**: If you need Kotlin generation, consider using a Kotlin-specific OpenAPI generator such as [openapi-generator](https://openapi-generator.tech/).
 - Most other configurations will work without changes
 
 ## 1.34.0
+
 - includeIfNull handling, turned off by default, use include_if_null=true to enable
 
 ## 1.33.0
+
 - Support correct processing of nested allOf classes
 
 ## 1.32.1
+
 - Fix CHANGELOG duplication
 
 ## 1.32.0
+
 - Add complete sealed classes(`oneOf`/`anyOf`) support for `json_serializeble` serializer
   - **WARNING**: Undiscriminated sealed classes use O(n) try-catch deserialization where n is the number of variants
   - **RECOMMENDED**: Add discriminator properties to your OpenAPI specification for O(1) performance
@@ -88,146 +108,188 @@ The following configuration options have been removed as they are now handled au
 - Fix for handle nullable discriminator unions properly
 
 ## 1.30.1
+
 - Fix resolve inline schemas nested within tagged operations
 
 ## 1.30.0
+
 - Add support for merging all generated code into single output file using the `merge_outputs` option
 
 ## 1.29.0
+
 ### Features
+
 - Add support for non-discriminated unions (`oneOf`/`anyOf` without a discriminator)
 - Filter out unused schemas when using `include_tags` or `exclude_tags`
 
 ### Fixes
+
 - Fix the client name for untagged paths to properly fall back to the configured `fallback_client` instead of `client`
 - Fix the `fallback_client` configuration to default to `fallback` instead of `default` to avoid conflicts with the Dart `default` keyword in the generated code
 - Fix OpenAPI spec parsing to correctly preserve casing for `SCREAMING_SNAKE_CASE`
 - Fix filtering so paths without tags are filtered out when `include_tags` is specified
 
 ## 1.28.0
+
 - Fix documentation
 - Fix ensure consistent file naming for tags with alphanumeric suffixes
 
 ## 1.27.0
- - Allow to filter the generation of endpoints in a client by tags
- - Allow to define a fallback client for endpoints that do not have a tag - fixes [[#271](https://github.com/Carapacik/swagger_parser/issues/271)] 
+
+- Allow to filter the generation of endpoints in a client by tags
+- Allow to define a fallback client for endpoints that do not have a tag - fixes [[#271](https://github.com/Carapacik/swagger_parser/issues/271)]
 
 ## 1.26.4
- - Allow the use of single MultipartFile arguments in multipart requests (requires retrofit_generator 10.0.1 or later)
+
+- Allow the use of single MultipartFile arguments in multipart requests (requires retrofit_generator 10.0.1 or later)
 
 ## 1.26.3
+
 - Fix for the bug when untagged endpoints and tagged as `Client` will override each other which
   results in `Client` tagged overwritten during file creation
 
 ## 1.26.2
-- align default value handling for parameters according to OpenAPi Spec https://swagger.io/docs/specification/v3_0/describing-parameters/#default-parameter-values 
+
+- align default value handling for parameters according to OpenAPi Spec <https://swagger.io/docs/specification/v3_0/describing-parameters/#default-parameter-values>
 
 ## 1.26.1
-- dart_mappable toString override 
+
+- dart_mappable toString override
 - dart_mappable toJson return string
 
 ## 1.26.0
+
 - Add support for Freezed fallbackUnion parameter
 
 ## 1.25.1
+
 - Fix broken dart_mappable enum
 
 ## 1.25.0
+
 - Allow using `MultipartFile` instead of `File` in multipart requests, to support usage on web.
 
 ## 1.24.6
-- proper handling of binary responses aka file downloads, picked up from https://github.com/trevorwang/retrofit.dart/issues/503
+
+- proper handling of binary responses aka file downloads, picked up from <https://github.com/trevorwang/retrofit.dart/issues/503>
 
 ## 1.24.5
+
 - enum `toString()` override implementation to provide a json value for third party consumers like retrofit
 
 ## 1.24.4
+
 - added generation of getter $valuesDefined to automatically filter out unknown values
-  useful when we would like to list only values that we are aware about 
+  useful when we would like to list only values that we are aware about
 
 ## 1.24.3
+
 - Fixes `allOf` case when a mix of `ref` and `properties` could unintentionally result in naming overlap
   now we are deduplicating properties by name
 
 ## 1.24.2
+
 - Fixes `typedef` transparency which results in import errors when generating `json_serializable` classes
-  read more details here https://github.com/google/json_serializable.dart/issues/1124
+  read more details here <https://github.com/google/json_serializable.dart/issues/1124>
 
 ## 1.24.1
+
 - Remove duplicate parameters in dataclass([#322](https://github.com/Carapacik/swagger_parser/issues/322))
 
 ## 1.24.0
+
 - Fix detection of nullable list with non null items vs nullable list with nullable items([#323](https://github.com/Carapacik/swagger_parser/issues/323))
 - Bump Dart SDK to 3.6
 
 ## 1.23.2
+
 - Fixed error with client parameters with `$`([#262](https://github.com/Carapacik/swagger_parser/issues/262))
 
 ## 1.23.1
+
 - Update dart_mappable template
 
 ## 1.23.0
+
 - Support for allOf composition and xOf ([#239](https://github.com/Carapacik/swagger_parser/issues/239))
 - Nullable fixes ([#251](https://github.com/Carapacik/swagger_parser/issues/251))
 - Make list with null in items nullable
 
 ## 1.22.1
+
 - Add supports for freezed 3  
 
 ## 1.22.0
+
 - Add supports oneOf polymorphic types with dart_mappable ([#290](https://github.com/Carapacik/swagger_parser/issues/290))
 
 ## 1.21.4
+
 - Add `x-enumNames`([#289](https://github.com/Carapacik/swagger_parser/pull/289))
 - Fixed errors with nullable in enums ([#216](https://github.com/Carapacik/swagger_parser/issues/216))
 - Fixed duplicate class generation when using discriminator ([#300](https://github.com/Carapacik/swagger_parser/issues/300))
 
 ## 1.21.3
+
 - Fixed errors with config([#293](https://github.com/Carapacik/swagger_parser/pull/293), [#296](https://github.com/Carapacik/swagger_parser/pull/296))
 
 ## 1.21.2
+
 - Add `use_x_nullable` parameter to config([#295](https://github.com/Carapacik/swagger_parser/pull/295))
 - Fixed error with config([#296](https://github.com/Carapacik/swagger_parser/pull/296))
 
 ## 1.21.1
+
 - Fixed config properties inheritance with multi-scheme urls([#293](https://github.com/Carapacik/swagger_parser/issues/293))
 
 ## 1.21.0
+
 - Add support for union types `oneOf`([#265](https://github.com/Carapacik/swagger_parser/issues/265), [#286](https://github.com/Carapacik/swagger_parser/issues/265))
 - Fixed config property inheritance
 
 ## 1.20.1
+
 - Fixed errors with config parsing
 
 ## 1.20.0
+
 - Add validation params to generated `freezed` classes
 - Fixed errors with empty schema properties([#280](https://github.com/Carapacik/swagger_parser/issues/280))
 
 ## 1.19.2
+
 - Fix replacement rules for OpenAPI v2([#266](https://github.com/Carapacik/swagger_parser/issues/266))
 - Add `x-nullable` field for null definition in OpenAPI v2([#268](https://github.com/Carapacik/swagger_parser/issues/268))
 
 ## 1.19.1
+
 - Fix generation with `anyOf`, `oneOf` and `allOf` properties([#260](https://github.com/Carapacik/swagger_parser/issues/260))
 
 ## 1.19.0
+
 - Add version getter to root client:
+
 ```dart
 final version = RestClient.version;
 ```
+
 - Add `dio_options_parameter_by_default`
 
 ## 1.18.3
+
 - Remove support of BigInt in Dart for `int64` types
 
 ## 1.18.2
+
 - Added support for `int64` types
 
 ## 1.18.1
+
 - Fix errors with `nullable: false`
 - Fix same property name conflict([#235](https://github.com/Carapacik/swagger_parser/issues/235))
 
 ## 1.18.0
+
 - Handle empty enum value case ([#238](https://github.com/Carapacik/swagger_parser/pull/238))
 - Some fixes for the replacement rules
 - Support for nullable lists and maps
@@ -272,16 +334,16 @@ final version = RestClient.version;
 
 ## 1.16.1
 
-- Fix swagger_parser_pages (https://carapacik.github.io/swagger_parser)
+- Fix swagger_parser_pages (<https://carapacik.github.io/swagger_parser>)
 
 ## 1.16.0
 
 - Wrapping collections variable introduced replacing arrayDepth and mapType: this variable presents a list of all collections wrapping a type and will resolve them in order of appearance ([#128](https://github.com/Carapacik/swagger_parser/issues/128))
 - Fixed error with `required_by_default` ([#168](https://github.com/Carapacik/swagger_parser/issues/168))
 - Refactor config and rename parameters:
-    - `squash_clients` to `merge_clients`
-    - `enums_prefix` to `enums_parent_prefix`
-    - `skipp_parameters` to `skipped_parameters`
+  - `squash_clients` to `merge_clients`
+  - `enums_prefix` to `enums_parent_prefix`
+  - `skipp_parameters` to `skipped_parameters`
 - Remove config parameter `put_in_folder`
 
 ## 1.15.5
@@ -694,7 +756,7 @@ final version = RestClient.version;
 
 - Fixed errors with generation of data classes containing ` allOf `
 - Fixed errors with templates
-- Add web interface for package https://carapacik.github.io/swagger_parser
+- Add web interface for package <https://carapacik.github.io/swagger_parser>
 - Add generator tests
 
 ## 0.1.0
