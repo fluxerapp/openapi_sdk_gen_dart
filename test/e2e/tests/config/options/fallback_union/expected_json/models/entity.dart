@@ -31,9 +31,15 @@ extension EntityUnionDeserializer on Entity {
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[EntityPerson] => EntityPerson.fromJson(json),
-      _ when value == effective[EntityOrganization] =>
+      _
+          when value == effective[EntityPerson] ||
+              valueAsString == effective[EntityPerson]?.toString() =>
+        EntityPerson.fromJson(json),
+      _
+          when value == effective[EntityOrganization] ||
+              valueAsString == effective[EntityOrganization]?.toString() =>
         EntityOrganization.fromJson(json),
       _ => EntityUnknown.fromJson(json),
     };

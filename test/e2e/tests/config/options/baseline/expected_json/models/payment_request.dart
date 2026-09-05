@@ -34,12 +34,21 @@ extension PaymentRequestUnionDeserializer on PaymentRequest {
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[PaymentRequestCreditCard] =>
+      _
+          when value == effective[PaymentRequestCreditCard] ||
+              valueAsString ==
+                  effective[PaymentRequestCreditCard]?.toString() =>
         PaymentRequestCreditCard.fromJson(json),
-      _ when value == effective[PaymentRequestBankTransfer] =>
+      _
+          when value == effective[PaymentRequestBankTransfer] ||
+              valueAsString ==
+                  effective[PaymentRequestBankTransfer]?.toString() =>
         PaymentRequestBankTransfer.fromJson(json),
-      _ when value == effective[PaymentRequestCrypto] =>
+      _
+          when value == effective[PaymentRequestCrypto] ||
+              valueAsString == effective[PaymentRequestCrypto]?.toString() =>
         PaymentRequestCrypto.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for PaymentRequest',
