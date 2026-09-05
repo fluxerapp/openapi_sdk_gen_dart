@@ -270,7 +270,10 @@ String _generateDiscriminatorExtension(
       .map((entry) {
         final discriminatorKey = entry.key;
         final wrapperClassName = '$className${discriminatorKey.toPascal}';
-        return '''      _ when value == effective[$wrapperClassName] => $wrapperClassName.fromJson(json),''';
+        return '''      _
+          when value == effective[$wrapperClassName] ||
+              valueAsString == effective[$wrapperClassName]?.toString() =>
+        $wrapperClassName.fromJson(json),''';
       })
       .join('\n');
 
@@ -290,6 +293,7 @@ $mappingEntries
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
 $switchCases
 $fallbackCase

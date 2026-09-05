@@ -36,14 +36,19 @@ extension SearchResultUnionDeserializer on SearchResult {
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[SearchResultUser] => SearchResultUser.fromJson(
-        json,
-      ),
-      _ when value == effective[SearchResultPost] => SearchResultPost.fromJson(
-        json,
-      ),
-      _ when value == effective[SearchResultComment] =>
+      _
+          when value == effective[SearchResultUser] ||
+              valueAsString == effective[SearchResultUser]?.toString() =>
+        SearchResultUser.fromJson(json),
+      _
+          when value == effective[SearchResultPost] ||
+              valueAsString == effective[SearchResultPost]?.toString() =>
+        SearchResultPost.fromJson(json),
+      _
+          when value == effective[SearchResultComment] ||
+              valueAsString == effective[SearchResultComment]?.toString() =>
         SearchResultComment.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for SearchResult',

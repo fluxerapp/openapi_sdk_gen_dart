@@ -30,12 +30,19 @@ extension MessagePartDtoUnionDeserializer on MessagePartDto {
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[MessagePartDtoText] =>
+      _
+          when value == effective[MessagePartDtoText] ||
+              valueAsString == effective[MessagePartDtoText]?.toString() =>
         MessagePartDtoText.fromJson(json),
-      _ when value == effective[MessagePartDtoReasoning] =>
+      _
+          when value == effective[MessagePartDtoReasoning] ||
+              valueAsString == effective[MessagePartDtoReasoning]?.toString() =>
         MessagePartDtoReasoning.fromJson(json),
-      _ when value == effective[MessagePartDtoTool] =>
+      _
+          when value == effective[MessagePartDtoTool] ||
+              valueAsString == effective[MessagePartDtoTool]?.toString() =>
         MessagePartDtoTool.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for MessagePartDto',

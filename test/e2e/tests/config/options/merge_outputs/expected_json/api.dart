@@ -709,12 +709,21 @@ extension PaymentRequestUnionDeserializer on PaymentRequest {
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[PaymentRequestCreditCard] =>
+      _
+          when value == effective[PaymentRequestCreditCard] ||
+              valueAsString ==
+                  effective[PaymentRequestCreditCard]?.toString() =>
         PaymentRequestCreditCard.fromJson(json),
-      _ when value == effective[PaymentRequestBankTransfer] =>
+      _
+          when value == effective[PaymentRequestBankTransfer] ||
+              valueAsString ==
+                  effective[PaymentRequestBankTransfer]?.toString() =>
         PaymentRequestBankTransfer.fromJson(json),
-      _ when value == effective[PaymentRequestCrypto] =>
+      _
+          when value == effective[PaymentRequestCrypto] ||
+              valueAsString == effective[PaymentRequestCrypto]?.toString() =>
         PaymentRequestCrypto.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for PaymentRequest',
@@ -917,14 +926,19 @@ extension SearchResultUnionDeserializer on SearchResult {
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[SearchResultUser] => SearchResultUser.fromJson(
-        json,
-      ),
-      _ when value == effective[SearchResultPost] => SearchResultPost.fromJson(
-        json,
-      ),
-      _ when value == effective[SearchResultComment] =>
+      _
+          when value == effective[SearchResultUser] ||
+              valueAsString == effective[SearchResultUser]?.toString() =>
+        SearchResultUser.fromJson(json),
+      _
+          when value == effective[SearchResultPost] ||
+              valueAsString == effective[SearchResultPost]?.toString() =>
+        SearchResultPost.fromJson(json),
+      _
+          when value == effective[SearchResultComment] ||
+              valueAsString == effective[SearchResultComment]?.toString() =>
         SearchResultComment.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for SearchResult',
@@ -1066,9 +1080,15 @@ extension EntityUnionDeserializer on Entity {
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[EntityPerson] => EntityPerson.fromJson(json),
-      _ when value == effective[EntityOrganization] =>
+      _
+          when value == effective[EntityPerson] ||
+              valueAsString == effective[EntityPerson]?.toString() =>
+        EntityPerson.fromJson(json),
+      _
+          when value == effective[EntityOrganization] ||
+              valueAsString == effective[EntityOrganization]?.toString() =>
         EntityOrganization.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for Entity',
@@ -1575,12 +1595,24 @@ extension PaymentResponseDetailsDetailsUnionDeserializer
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[PaymentResponseDetailsDetailsCreditCard] =>
+      _
+          when value == effective[PaymentResponseDetailsDetailsCreditCard] ||
+              valueAsString ==
+                  effective[PaymentResponseDetailsDetailsCreditCard]
+                      ?.toString() =>
         PaymentResponseDetailsDetailsCreditCard.fromJson(json),
-      _ when value == effective[PaymentResponseDetailsDetailsBankTransfer] =>
+      _
+          when value == effective[PaymentResponseDetailsDetailsBankTransfer] ||
+              valueAsString ==
+                  effective[PaymentResponseDetailsDetailsBankTransfer]
+                      ?.toString() =>
         PaymentResponseDetailsDetailsBankTransfer.fromJson(json),
-      _ when value == effective[PaymentResponseDetailsDetailsCrypto] =>
+      _
+          when value == effective[PaymentResponseDetailsDetailsCrypto] ||
+              valueAsString ==
+                  effective[PaymentResponseDetailsDetailsCrypto]?.toString() =>
         PaymentResponseDetailsDetailsCrypto.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for PaymentResponseDetailsDetails',

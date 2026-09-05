@@ -35,12 +35,24 @@ extension PaymentResponseDetailsDetailsUnionDeserializer
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[PaymentResponseDetailsDetailsCreditCard] =>
+      _
+          when value == effective[PaymentResponseDetailsDetailsCreditCard] ||
+              valueAsString ==
+                  effective[PaymentResponseDetailsDetailsCreditCard]
+                      ?.toString() =>
         PaymentResponseDetailsDetailsCreditCard.fromJson(json),
-      _ when value == effective[PaymentResponseDetailsDetailsBankTransfer] =>
+      _
+          when value == effective[PaymentResponseDetailsDetailsBankTransfer] ||
+              valueAsString ==
+                  effective[PaymentResponseDetailsDetailsBankTransfer]
+                      ?.toString() =>
         PaymentResponseDetailsDetailsBankTransfer.fromJson(json),
-      _ when value == effective[PaymentResponseDetailsDetailsCrypto] =>
+      _
+          when value == effective[PaymentResponseDetailsDetailsCrypto] ||
+              valueAsString ==
+                  effective[PaymentResponseDetailsDetailsCrypto]?.toString() =>
         PaymentResponseDetailsDetailsCrypto.fromJson(json),
       _ => PaymentResponseDetailsDetailsUnknown.fromJson(json),
     };

@@ -33,12 +33,20 @@ extension FamilyMembersMembersUnionDeserializer on FamilyMembersMembers {
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[FamilyMembersMembersCat] =>
+      _
+          when value == effective[FamilyMembersMembersCat] ||
+              valueAsString == effective[FamilyMembersMembersCat]?.toString() =>
         FamilyMembersMembersCat.fromJson(json),
-      _ when value == effective[FamilyMembersMembersDog] =>
+      _
+          when value == effective[FamilyMembersMembersDog] ||
+              valueAsString == effective[FamilyMembersMembersDog]?.toString() =>
         FamilyMembersMembersDog.fromJson(json),
-      _ when value == effective[FamilyMembersMembersHuman] =>
+      _
+          when value == effective[FamilyMembersMembersHuman] ||
+              valueAsString ==
+                  effective[FamilyMembersMembersHuman]?.toString() =>
         FamilyMembersMembersHuman.fromJson(json),
       _ => FamilyMembersMembersUnknown.fromJson(json),
     };
