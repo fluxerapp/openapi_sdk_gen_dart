@@ -20,7 +20,7 @@ Map<String, dynamic> _$SearchResultUserToJson(SearchResultUser instance) =>
     <String, dynamic>{
       'type': instance.type,
       'user': instance.user,
-      'score': instance.score,
+      'score': ?instance.score,
     };
 
 SearchResultPost _$SearchResultPostFromJson(Map<String, dynamic> json) =>
@@ -37,8 +37,8 @@ Map<String, dynamic> _$SearchResultPostToJson(SearchResultPost instance) =>
     <String, dynamic>{
       'type': instance.type,
       'post': instance.post,
-      'score': instance.score,
-      'highlights': instance.highlights,
+      'score': ?instance.score,
+      'highlights': ?instance.highlights,
     };
 
 SearchResultComment _$SearchResultCommentFromJson(Map<String, dynamic> json) =>
@@ -53,5 +53,5 @@ Map<String, dynamic> _$SearchResultCommentToJson(
 ) => <String, dynamic>{
   'type': instance.type,
   'comment': instance.comment,
-  'score': instance.score,
+  'score': ?instance.score,
 };

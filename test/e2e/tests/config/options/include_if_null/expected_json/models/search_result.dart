@@ -61,6 +61,7 @@ extension SearchResultUnionDeserializer on SearchResult {
 class SearchResultUser extends SearchResult {
   final UserSearchResultTypeType type;
   final User user;
+  @JsonKey(includeIfNull: false)
   final double? score;
 
   const SearchResultUser({
@@ -80,7 +81,9 @@ class SearchResultUser extends SearchResult {
 class SearchResultPost extends SearchResult {
   final PostSearchResultTypeType type;
   final PostModel post;
+  @JsonKey(includeIfNull: false)
   final double? score;
+  @JsonKey(includeIfNull: false)
   final List<String>? highlights;
 
   const SearchResultPost({
@@ -101,6 +104,7 @@ class SearchResultPost extends SearchResult {
 class SearchResultComment extends SearchResult {
   final CommentSearchResultTypeType type;
   final Comment comment;
+  @JsonKey(includeIfNull: false)
   final double? score;
 
   const SearchResultComment({

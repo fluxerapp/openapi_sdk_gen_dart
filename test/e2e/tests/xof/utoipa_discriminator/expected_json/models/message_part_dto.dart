@@ -80,6 +80,7 @@ class MessagePartDtoReasoning extends MessagePartDto {
 @JsonSerializable()
 class MessagePartDtoTool extends MessagePartDto {
   final String toolName;
+  @JsonKey(includeIfNull: false)
   final dynamic toolArgs;
 
   const MessagePartDtoTool({required this.toolName, required this.toolArgs});

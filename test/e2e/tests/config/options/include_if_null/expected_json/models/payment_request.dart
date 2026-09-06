@@ -64,6 +64,7 @@ class PaymentRequestCreditCard extends PaymentRequest {
   final int expiryMonth;
   final int expiryYear;
   final String cvv;
+  @JsonKey(includeIfNull: false)
   final String? cardholderName;
   final double amount;
 
@@ -89,8 +90,10 @@ class PaymentRequestBankTransfer extends PaymentRequest {
   final BankTransferPaymentPaymentTypePaymentType paymentType;
   final String accountNumber;
   final String routingNumber;
+  @JsonKey(includeIfNull: false)
   final String? accountHolder;
   final double amount;
+  @JsonKey(includeIfNull: false)
   final String? reference;
 
   const PaymentRequestBankTransfer({
@@ -115,6 +118,7 @@ class PaymentRequestCrypto extends PaymentRequest {
   final String walletAddress;
   final CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency;
   final double amount;
+  @JsonKey(includeIfNull: false)
   final String? transactionHash;
 
   const PaymentRequestCrypto({

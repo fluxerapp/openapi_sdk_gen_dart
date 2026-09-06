@@ -30,15 +30,15 @@ EntityPerson _$EntityPersonFromJson(Map<String, dynamic> json) => EntityPerson(
 Map<String, dynamic> _$EntityPersonToJson(EntityPerson instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'entityType': instance.entityType,
-      'name': instance.name,
-      'description': instance.description,
+      'entityType': ?instance.entityType,
+      'name': ?instance.name,
+      'description': ?instance.description,
       'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'updatedAt': ?instance.updatedAt?.toIso8601String(),
       'dateOfBirth': instance.dateOfBirth.toIso8601String(),
-      'nationality': instance.nationality,
-      'occupation': instance.occupation,
-      'socialProfiles': instance.socialProfiles,
+      'nationality': ?instance.nationality,
+      'occupation': ?instance.occupation,
+      'socialProfiles': ?instance.socialProfiles,
     };
 
 EntityOrganization _$EntityOrganizationFromJson(Map<String, dynamic> json) =>
@@ -67,14 +67,14 @@ EntityOrganization _$EntityOrganizationFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$EntityOrganizationToJson(EntityOrganization instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'entityType': instance.entityType,
-      'name': instance.name,
-      'description': instance.description,
+      'entityType': ?instance.entityType,
+      'name': ?instance.name,
+      'description': ?instance.description,
       'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'updatedAt': ?instance.updatedAt?.toIso8601String(),
       'registrationNumber': instance.registrationNumber,
-      'foundedDate': instance.foundedDate?.toIso8601String(),
-      'industry': instance.industry,
-      'employeeCount': instance.employeeCount,
-      'revenue': instance.revenue,
+      'foundedDate': ?instance.foundedDate?.toIso8601String(),
+      'industry': ?instance.industry,
+      'employeeCount': ?instance.employeeCount,
+      'revenue': ?instance.revenue,
     };

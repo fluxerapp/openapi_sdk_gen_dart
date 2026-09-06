@@ -31,7 +31,7 @@ Map<String, dynamic> _$PaymentRequestCreditCardToJson(
   'expiryMonth': instance.expiryMonth,
   'expiryYear': instance.expiryYear,
   'cvv': instance.cvv,
-  'cardholderName': instance.cardholderName,
+  'cardholderName': ?instance.cardholderName,
   'amount': instance.amount,
 };
 
@@ -54,9 +54,9 @@ Map<String, dynamic> _$PaymentRequestBankTransferToJson(
   'paymentType': instance.paymentType,
   'accountNumber': instance.accountNumber,
   'routingNumber': instance.routingNumber,
-  'accountHolder': instance.accountHolder,
+  'accountHolder': ?instance.accountHolder,
   'amount': instance.amount,
-  'reference': instance.reference,
+  'reference': ?instance.reference,
 };
 
 PaymentRequestCrypto _$PaymentRequestCryptoFromJson(
@@ -80,5 +80,5 @@ Map<String, dynamic> _$PaymentRequestCryptoToJson(
   'walletAddress': instance.walletAddress,
   'cryptocurrency': instance.cryptocurrency,
   'amount': instance.amount,
-  'transactionHash': instance.transactionHash,
+  'transactionHash': ?instance.transactionHash,
 };

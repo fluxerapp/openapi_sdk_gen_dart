@@ -32,5 +32,5 @@ MessagePartDtoTool _$MessagePartDtoToolFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$MessagePartDtoToolToJson(MessagePartDtoTool instance) =>
     <String, dynamic>{
       'toolName': instance.toolName,
-      'toolArgs': instance.toolArgs,
+      'toolArgs': ?instance.toolArgs,
     };

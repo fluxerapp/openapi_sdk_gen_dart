@@ -69,6 +69,7 @@ class PaymentResponseDetailsDetailsCreditCard
   final int expiryMonth;
   final int expiryYear;
   final String cvv;
+  @JsonKey(includeIfNull: false)
   final String? cardholderName;
   final double amount;
 
@@ -97,8 +98,10 @@ class PaymentResponseDetailsDetailsBankTransfer
   final BankTransferPaymentPaymentTypePaymentType paymentType;
   final String accountNumber;
   final String routingNumber;
+  @JsonKey(includeIfNull: false)
   final String? accountHolder;
   final double amount;
+  @JsonKey(includeIfNull: false)
   final String? reference;
 
   const PaymentResponseDetailsDetailsBankTransfer({
@@ -126,6 +129,7 @@ class PaymentResponseDetailsDetailsCrypto
   final String walletAddress;
   final CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency;
   final double amount;
+  @JsonKey(includeIfNull: false)
   final String? transactionHash;
 
   const PaymentResponseDetailsDetailsCrypto({

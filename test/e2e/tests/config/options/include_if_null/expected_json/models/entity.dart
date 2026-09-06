@@ -51,14 +51,21 @@ extension EntityUnionDeserializer on Entity {
 @JsonSerializable()
 class EntityPerson extends Entity {
   final String id;
+  @JsonKey(includeIfNull: false)
   final PersonEntityEntityTypeEntityType? entityType;
+  @JsonKey(includeIfNull: false)
   final String? name;
+  @JsonKey(includeIfNull: false)
   final String? description;
   final DateTime createdAt;
+  @JsonKey(includeIfNull: false)
   final DateTime? updatedAt;
   final DateTime dateOfBirth;
+  @JsonKey(includeIfNull: false)
   final String? nationality;
+  @JsonKey(includeIfNull: false)
   final String? occupation;
+  @JsonKey(includeIfNull: false)
   final Map<String, String>? socialProfiles;
 
   const EntityPerson({
@@ -84,15 +91,23 @@ class EntityPerson extends Entity {
 @JsonSerializable()
 class EntityOrganization extends Entity {
   final String id;
+  @JsonKey(includeIfNull: false)
   final OrganizationEntityEntityTypeEntityType? entityType;
+  @JsonKey(includeIfNull: false)
   final String? name;
+  @JsonKey(includeIfNull: false)
   final String? description;
   final DateTime createdAt;
+  @JsonKey(includeIfNull: false)
   final DateTime? updatedAt;
   final String registrationNumber;
+  @JsonKey(includeIfNull: false)
   final DateTime? foundedDate;
+  @JsonKey(includeIfNull: false)
   final String? industry;
+  @JsonKey(includeIfNull: false)
   final int? employeeCount;
+  @JsonKey(includeIfNull: false)
   final double? revenue;
 
   const EntityOrganization({
