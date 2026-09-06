@@ -1,3 +1,7 @@
+## 2.4.0
+
+- Fix json_serializable union deserializers to match non-string discriminator value.
+
 ## 2.3.2
 
 - Fix discriminated and undiscriminated union wrapper classes to honor `include_if_null` annotations on nullable fields.
