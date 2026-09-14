@@ -1,3 +1,7 @@
+## 2.5.0
+
+- Add `explicit_nulls` so optional fields keep PATCH omit-vs-null semantics in json_serializable `toJson()`.
+
 ## 2.4.0
 
 - Fix json_serializable union deserializers to match non-string discriminator value.

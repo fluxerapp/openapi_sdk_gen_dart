@@ -59,6 +59,11 @@ openapi_generator:
   # Default: false
   include_if_null: false
 
+  # Track which optional fields were passed so toJson() can emit explicit nulls
+  # on PATCH bodies without sending every unset field.
+  # Default: false
+  explicit_nulls: false
+
   # ============================================================================
   # HTTP CLIENT CONFIGURATION (Retrofit/Dio - Optional)
   # ============================================================================

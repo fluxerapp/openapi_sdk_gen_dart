@@ -22,6 +22,7 @@ class GeneratorConfig {
     this.fallbackUnion,
     this.mergeOutputs = false,
     this.includeIfNull = false,
+    this.explicitNulls = false,
   });
 
   /// API identifier used for naming folders and export files.
@@ -187,4 +188,10 @@ class GeneratorConfig {
   ///
   /// Default: false
   final bool includeIfNull;
+
+  /// Track which optional fields were passed so `toJson()` can emit explicit
+  /// nulls for PATCH bodies without sending every unset field.
+  ///
+  /// Default: false
+  final bool explicitNulls;
 }

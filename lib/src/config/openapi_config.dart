@@ -36,6 +36,7 @@ class OpenApiConfig {
     this.defaultClient = 'api',
     this.mergeOutputs = false,
     this.includeIfNull = false,
+    this.explicitNulls = false,
   });
 
   /// Internal constructor of [OpenApiConfig]
@@ -66,6 +67,7 @@ class OpenApiConfig {
     required this.defaultClient,
     required this.mergeOutputs,
     required this.includeIfNull,
+    required this.explicitNulls,
     this.fallbackUnion,
   });
 
@@ -226,6 +228,9 @@ class OpenApiConfig {
     final includeIfNull =
         yamlMap['include_if_null'] as bool? ?? rootConfig?.includeIfNull;
 
+    final explicitNulls =
+        yamlMap['explicit_nulls'] as bool? ?? rootConfig?.explicitNulls;
+
     // Default config
     final dc = OpenApiConfig(name: name, outputDirectory: outputDirectory);
 
@@ -259,6 +264,7 @@ class OpenApiConfig {
       includeTags: includedTags ?? dc.includeTags,
       defaultClient: defaultClient ?? dc.defaultClient,
       includeIfNull: includeIfNull ?? dc.includeIfNull,
+      explicitNulls: explicitNulls ?? dc.explicitNulls,
     );
   }
 
@@ -575,6 +581,12 @@ class OpenApiConfig {
   /// Default: false
   final bool includeIfNull;
 
+  /// Track which optional fields were passed so `toJson()` can emit explicit
+  /// nulls for PATCH bodies without sending every unset field.
+  ///
+  /// Default: false
+  final bool explicitNulls;
+
   /// Convert [OpenApiConfig] to [GeneratorConfig]
   GeneratorConfig toGeneratorConfig() {
     return GeneratorConfig(
@@ -596,6 +608,7 @@ class OpenApiConfig {
       fallbackUnion: fallbackUnion,
       mergeOutputs: mergeOutputs,
       includeIfNull: includeIfNull,
+      explicitNulls: explicitNulls,
     );
   }
 

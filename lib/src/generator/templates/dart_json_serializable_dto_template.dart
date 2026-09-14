@@ -9,6 +9,7 @@ String dartJsonSerializableDtoTemplate(
   UniversalComponentClass dataClass, {
   required bool markFileAsGenerated,
   required bool includeIfNull,
+  bool explicitNulls = false,
   String? fallbackUnion,
 }) {
   final originalClassName = dataClass.name.toPascal;
@@ -31,19 +32,41 @@ String dartJsonSerializableDtoTemplate(
   }
 
   final dartCoreImports = _getDartCoreImports(dataClass.parameters);
+  final tracked = explicitNulls
+      ? dataClass.parameters.where(_tracksExplicitNull).toList()
+      : const <UniversalType>[];
 
-  return '''
+  if (tracked.isEmpty) {
+    return '''
 import 'package:json_annotation/json_annotation.dart';
 $dartCoreImports${dartImports(imports: _filterUnionImportsForNonUnion(dataClass))}
 part '$classNameSnake.g.dart';
 
 ${descriptionComment(dataClass.description)}@JsonSerializable()
 class $className {
-  const $className(${dataClass.parameters.isNotEmpty ? '{' : ''}${_parametersInConstructor(dataClass.parameters, includeIfNull)}${dataClass.parameters.isNotEmpty ? '\n  }' : ''});
+  const $className(${dataClass.parameters.isNotEmpty ? '{' : ''}${_parametersInConstructor(dataClass.parameters)}${dataClass.parameters.isNotEmpty ? '\n  }' : ''});
   
   factory $className.fromJson(Map<String, Object?> json) => _\$${className}FromJson(json);
   ${_parametersInClass(dataClass.parameters, includeIfNull)}${dataClass.parameters.isNotEmpty ? '\n' : ''}
   Map<String, Object?> toJson() => _\$${className}ToJson(this);
+}
+''';
+  }
+
+  return '''
+import 'package:json_annotation/json_annotation.dart';
+$dartCoreImports${dartImports(imports: _filterUnionImportsForNonUnion(dataClass))}
+const Object _omit = Object();
+
+part '$classNameSnake.g.dart';
+
+${descriptionComment(dataClass.description)}@JsonSerializable()
+class $className {
+  ${_constructor(className, dataClass.parameters, tracked)}
+  ${_fromJson(className, dataClass.parameters, tracked)}
+  ${_parametersInClass(dataClass.parameters, includeIfNull, tracked)}${_presentFields(tracked)}
+
+  ${_toJson(className, tracked)}
 }
 ''';
 }
@@ -459,8 +482,9 @@ class $fallbackClassName extends $className {
 
 String _parametersInClass(
   Set<UniversalType> parameters,
-  bool includeIfNull,
-) => parameters.mapIndexed((i, e) {
+  bool includeIfNull, [
+  List<UniversalType> tracked = const [],
+]) => parameters.mapIndexed((i, e) {
   // Filter out auto-generated descriptions (normalization messages, conflict resolutions, etc.)
   final shouldShowDescription =
       e.description != null &&
@@ -470,9 +494,10 @@ String _parametersInClass(
       !e.description!.contains('Incorrect name has been replaced');
 
   final description = shouldShowDescription ? e.description : null;
+  final trackedNames = {for (final t in tracked) t.name};
 
   return '\n${descriptionComment(description, tab: '  ')}'
-      '${_jsonKey(e, includeIfNull)}  final ${_jsonSerializableSuitableType(e)} ${e.name};';
+      '${_jsonKey(e, includeIfNull, trackExplicitNull: trackedNames.contains(e.name))}  final ${_jsonSerializableSuitableType(e)} ${e.name};';
 }).join();
 
 String _jsonSerializableSuitableType(UniversalType type) {
@@ -489,27 +514,110 @@ String _jsonSerializableSuitableType(UniversalType type) {
 }
 
 String _parametersInConstructor(
-  Set<UniversalType> parameters,
-  bool includeIfNull,
-) {
+  Set<UniversalType> parameters, [
+  List<UniversalType> tracked = const [],
+]) {
+  final trackedNames = {for (final t in tracked) t.name};
   final sortedByRequired = Set<UniversalType>.from(
     parameters.sorted((a, b) => a.compareTo(b)),
   );
-  return sortedByRequired
-      .map((e) => '\n    ${_required(e)}this.${e.name}${_defaultValue(e)},')
-      .join();
+  return sortedByRequired.map((e) {
+    if (trackedNames.contains(e.name)) {
+      return '\n    Object? ${e.name} = _omit,';
+    }
+    return '\n    ${_required(e)}this.${e.name}${_defaultValue(e)},';
+  }).join();
+}
+
+bool _tracksExplicitNull(UniversalType t) =>
+    !t.isRequired && t.defaultValue == null;
+
+String _jsonName(UniversalType t) =>
+    t.jsonKey != null && t.jsonKey!.isNotEmpty ? t.jsonKey! : t.name!;
+
+String _presentFieldName(UniversalType t) => '_${t.name}Present';
+
+String _valueFromOmit(UniversalType t) {
+  final type = _jsonSerializableSuitableType(t);
+  final name = t.name!;
+  if (type == 'dynamic') {
+    return 'identical($name, _omit) ? null : $name';
+  }
+  return 'identical($name, _omit) ? null : $name as $type';
+}
+
+String _constructor(
+  String className,
+  Set<UniversalType> parameters,
+  List<UniversalType> tracked,
+) {
+  final params = _parametersInConstructor(parameters, tracked);
+  final initializers = tracked
+      .map(
+        (t) =>
+            '\n    ${t.name} = ${_valueFromOmit(t)},'
+            '\n    ${_presentFieldName(t)} = !identical(${t.name}, _omit)',
+      )
+      .join(',');
+  return 'const $className({$params\n  }) :$initializers;';
+}
+
+String _fromJson(
+  String className,
+  Set<UniversalType> parameters,
+  List<UniversalType> tracked,
+) {
+  final trackedNames = {for (final t in tracked) t.name};
+  final sorted = Set<UniversalType>.from(
+    parameters.sorted((a, b) => a.compareTo(b)),
+  );
+  final args = sorted.map((e) {
+    if (trackedNames.contains(e.name)) {
+      final jsonName = _jsonName(e);
+      return '\n      ${e.name}: json.containsKey(\'$jsonName\') ? value.${e.name} : _omit,';
+    }
+    return '\n      ${e.name}: value.${e.name},';
+  }).join();
+  return '''factory $className.fromJson(Map<String, Object?> json) {
+    final value = _\$${className}FromJson(json);
+    return $className($args
+    );
+  }''';
+}
+
+String _presentFields(List<UniversalType> tracked) {
+  return tracked.map((t) => '\n  final bool ${_presentFieldName(t)};').join();
+}
+
+String _toJson(String className, List<UniversalType> tracked) {
+  final restores = tracked
+      .map((t) {
+        final jsonName = _jsonName(t);
+        return "    if (${_presentFieldName(t)}) {\n      json.putIfAbsent('$jsonName', () => ${t.name});\n    }";
+      })
+      .join('\n');
+  return '''Map<String, Object?> toJson() {
+    final json = _\$${className}ToJson(this);
+$restores
+    return json;
+  }''';
 }
 
 /// if jsonKey is different from the name
-String _jsonKey(UniversalType t, bool includeIfNull) {
+String _jsonKey(
+  UniversalType t,
+  bool includeIfNull, {
+  bool trackExplicitNull = false,
+}) {
   final buffer = StringBuffer();
 
   final jsonKeyParams = <String, String?>{};
 
-  if (includeIfNull) {
+  if (includeIfNull || trackExplicitNull) {
     if (t.isRequired && (t.nullable || t.referencedNullable)) {
       jsonKeyParams['includeIfNull'] = 'true';
-    } else if (!t.isRequired && (t.nullable || t.referencedNullable)) {
+    } else if (!t.isRequired &&
+        (t.nullable || t.referencedNullable || trackExplicitNull)) {
       jsonKeyParams['includeIfNull'] = 'false';
     }
   }

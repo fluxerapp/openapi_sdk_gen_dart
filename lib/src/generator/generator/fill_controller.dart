@@ -37,6 +37,7 @@ final class FillController {
       markFilesAsGenerated: config.markFilesAsGenerated,
       generateValidator: config.generateValidator,
       includeIfNull: config.includeIfNull,
+      explicitNulls: config.explicitNulls,
       fallbackUnion: config.fallbackUnion,
     ),
   );
@@ -48,6 +49,7 @@ final class FillController {
     required bool markFilesAsGenerated,
     required bool generateValidator,
     required bool includeIfNull,
+    required bool explicitNulls,
     String? fallbackUnion,
   }) {
     if (dataClass is UniversalEnumClass) {
@@ -72,6 +74,7 @@ final class FillController {
           dataClass,
           markFileAsGenerated: markFilesAsGenerated,
           includeIfNull: includeIfNull,
+          explicitNulls: explicitNulls,
           fallbackUnion: fallbackUnion,
         ),
         JsonSerializer.dartMappable => dartDartMappableDtoTemplate(

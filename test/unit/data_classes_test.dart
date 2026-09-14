@@ -1012,6 +1012,111 @@ class ClassName {
       expect(filledContent.content, expectedContents);
     });
 
+    test('dart + json_serializable explicit nulls', () async {
+      final dataClass = UniversalComponentClass(
+        name: 'ClassName',
+        imports: const {'Another'},
+        parameters: {
+          const UniversalType(
+            type: 'integer',
+            name: 'intType',
+            isRequired: false,
+            nullable: true,
+          ),
+          const UniversalType(
+            type: 'string',
+            wrappingCollections: [UniversalCollections.nullableList],
+            name: 'list',
+            isRequired: false,
+          ),
+          const UniversalType(
+            type: 'Another',
+            name: 'another',
+            isRequired: false,
+            nullable: true,
+          ),
+          const UniversalType(
+            type: 'Another',
+            wrappingCollections: [
+              UniversalCollections.list,
+              UniversalCollections.list,
+            ],
+            name: 'anotherList',
+            isRequired: true,
+          ),
+        },
+      );
+      const fillController = FillController(
+        config: GeneratorConfig(
+          name: '',
+          outputDirectory: '.',
+          includeIfNull: true,
+          explicitNulls: true,
+        ),
+      );
+      final filledContent = fillController.fillDtoContent(dataClass);
+      const expectedContents = r'''
+import 'package:json_annotation/json_annotation.dart';
+
+import 'another.dart';
+
+const Object _omit = Object();
+
+part 'class_name.g.dart';
+
+@JsonSerializable()
+class ClassName {
+  const ClassName({
+    required this.anotherList,
+    Object? intType = _omit,
+    Object? list = _omit,
+    Object? another = _omit,
+  }) :
+    intType = identical(intType, _omit) ? null : intType as int?,
+    _intTypePresent = !identical(intType, _omit),
+    list = identical(list, _omit) ? null : list as List<String>?,
+    _listPresent = !identical(list, _omit),
+    another = identical(another, _omit) ? null : another as Another?,
+    _anotherPresent = !identical(another, _omit);
+  factory ClassName.fromJson(Map<String, Object?> json) {
+    final value = _$ClassNameFromJson(json);
+    return ClassName(
+      anotherList: value.anotherList,
+      intType: json.containsKey('intType') ? value.intType : _omit,
+      list: json.containsKey('list') ? value.list : _omit,
+      another: json.containsKey('another') ? value.another : _omit,
+    );
+  }
+  
+  @JsonKey(includeIfNull: false)
+  final int? intType;
+  @JsonKey(includeIfNull: false)
+  final List<String>? list;
+  @JsonKey(includeIfNull: false)
+  final Another? another;
+  final List<List<Another>> anotherList;
+  final bool _intTypePresent;
+  final bool _listPresent;
+  final bool _anotherPresent;
+
+  Map<String, Object?> toJson() {
+    final json = _$ClassNameToJson(this);
+    if (_intTypePresent) {
+      json.putIfAbsent('intType', () => intType);
+    }
+    if (_listPresent) {
+      json.putIfAbsent('list', () => list);
+    }
+    if (_anotherPresent) {
+      json.putIfAbsent('another', () => another);
+    }
+    return json;
+  }
+}
+''';
+      expect(filledContent.content, expectedContents);
+    });
+
     test('dart + freezed', () async {
       final dataClass = UniversalComponentClass(
         name: 'ClassName',

@@ -653,6 +653,34 @@ void main() {
     });
   });
 
+  group('Explicit Nulls Configuration', () {
+    test('should default explicitNulls to false', () {
+      const config = OpenApiConfig(outputDirectory: 'lib/api');
+      expect(config.explicitNulls, isFalse);
+    });
+
+    test('should parse explicitNulls from YAML when set to true', () {
+      final yamlMap = YamlMap.wrap({
+        'schema_path': 'api/openapi.yaml',
+        'output_directory': 'lib/api',
+        'explicit_nulls': true,
+      });
+
+      final config = OpenApiConfig.fromYaml(yamlMap);
+      expect(config.explicitNulls, isTrue);
+    });
+
+    test('should pass explicitNulls to GeneratorConfig', () {
+      const swpConfig = OpenApiConfig(
+        outputDirectory: 'lib/api',
+        explicitNulls: true,
+      );
+
+      final generatorConfig = swpConfig.toGeneratorConfig();
+      expect(generatorConfig.explicitNulls, isTrue);
+    });
+  });
+
   group('ConfigProcessor', () {
     group('parseConfig with schemes', () {
       const processor = ConfigProcessor();
