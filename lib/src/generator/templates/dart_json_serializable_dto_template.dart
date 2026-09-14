@@ -56,9 +56,9 @@ class $className {
   return '''
 import 'package:json_annotation/json_annotation.dart';
 $dartCoreImports${dartImports(imports: _filterUnionImportsForNonUnion(dataClass))}
-const Object _omit = Object();
-
 part '$classNameSnake.g.dart';
+
+const Object _omit = Object();
 
 ${descriptionComment(dataClass.description)}@JsonSerializable()
 class $className {

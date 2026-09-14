@@ -1060,9 +1060,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'another.dart';
 
-const Object _omit = Object();
-
 part 'class_name.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class ClassName {
