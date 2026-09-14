@@ -16,7 +16,15 @@ void main() {
         "properties": {
           "flags": { "$ref": "#/components/schemas/MessageFlags", "default": 0 },
           "locale": { "$ref": "#/components/schemas/Locale", "default": "en" },
-          "unit": { "$ref": "#/components/schemas/Unit", "default": "CELSIUS" }
+          "unit": { "$ref": "#/components/schemas/Unit", "default": "CELSIUS" },
+          "color": {
+            "anyOf": [{ "$ref": "#/components/schemas/MessageFlags" }, { "type": "null" }],
+            "default": 0
+          },
+          "fallbackUnit": {
+            "anyOf": [{ "$ref": "#/components/schemas/Unit" }, { "type": "null" }],
+            "default": "CELSIUS"
+          }
         }
       }
     }
@@ -48,5 +56,17 @@ void main() {
     final unit = param('unit');
     expect(unit.enumType, 'Unit');
     expect(unit.defaultValue, 'CELSIUS');
+  });
+
+  test('default on a nullable \$ref to a scalar alias is a literal', () {
+    final color = param('color');
+    expect(color.enumType, isNull);
+    expect(color.defaultValue, '0');
+  });
+
+  test('default on a nullable \$ref to an enum stays an enum default', () {
+    final fallbackUnit = param('fallbackUnit');
+    expect(fallbackUnit.enumType, 'Unit');
+    expect(fallbackUnit.defaultValue, 'CELSIUS');
   });
 }
