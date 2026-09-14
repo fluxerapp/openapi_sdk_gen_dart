@@ -2384,7 +2384,10 @@ class OpenApiParser {
             description:
                 ofType.description ?? map[_descriptionConst]?.toString(),
           );
-          final enumType = map.containsKey(_defaultConst) && ofImport != null
+          final enumType =
+              map.containsKey(_defaultConst) &&
+                  ofImport != null &&
+                  ofList.any(_isEnumRef)
               ? ofType.type
               : null;
 
@@ -2986,6 +2989,14 @@ class OpenApiParser {
     }
 
     return null;
+  }
+
+  bool _isEnumRef(Object? schema) {
+    if (schema is! Map<String, dynamic> || !schema.containsKey(_refConst)) {
+      return false;
+    }
+    final target = _findRefSchema(p.basename(schema[_refConst].toString()));
+    return target?.containsKey(_enumConst) ?? false;
   }
 
   (
