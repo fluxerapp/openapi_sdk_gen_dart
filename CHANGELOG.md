@@ -1,3 +1,8 @@
+## 2.5.1
+
+- Fix literal default values on `$ref` properties that point at non-enum schemas.
+- Fix `_omit` sentinel placement so it is emitted after the `part` directive in `explicit_nulls` json_serializable DTOs.
+
 ## 2.5.0
 
 - Add `explicit_nulls` so optional fields keep PATCH omit-vs-null semantics in json_serializable `toJson()`.
