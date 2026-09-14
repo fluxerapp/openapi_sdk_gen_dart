@@ -2492,7 +2492,22 @@ class OpenApiParser {
         description: map[_descriptionConst]?.toString(),
       );
 
-      final enumType = defaultValue != null && import != null ? type : null;
+      Map<String, dynamic>? referencedSchema;
+      if (map.containsKey(_refConst)) {
+        final refName = _formatRef(map);
+        final originalRefName =
+            _renamedSchemas.entries
+                .firstWhereOrNull((entry) => entry.value == refName)
+                ?.key ??
+            refName;
+        referencedSchema = _findRefSchema(originalRefName);
+      }
+      final referencedIsEnum =
+          referencedSchema?.containsKey(_enumConst) ?? false;
+      final enumType =
+          defaultValue != null && import != null && referencedIsEnum
+          ? type
+          : null;
 
       // For $ref types, check the referenced schema for nullable property
       var referencedNullable = false;
@@ -2550,6 +2565,7 @@ class OpenApiParser {
         } else {
           refDefaultValue = protectDefaultValue(
             defaultValue,
+            type: referencedSchema?[_typeConst]?.toString(),
             isEnum: enumType != null,
           );
         }
