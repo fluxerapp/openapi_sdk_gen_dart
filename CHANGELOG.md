@@ -1,3 +1,7 @@
+## 2.5.3
+
+- Generate string typedefs for scalar unions (`anyOf` string|integer and `type: ["string", "number"]`) instead of empty classes or `dynamic`.
+
 ## 2.5.2
 
 - Fix literal default values on nullable `$ref` properties that point at non-enum schemas.

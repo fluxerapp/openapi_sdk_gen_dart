@@ -1143,6 +1143,28 @@ class OpenApiParser {
         // inline objects, synthesize a union component using the schema name directly.
         if (_getUndiscriminatedUnionValues(value)
             case final List<dynamic> unionValues) {
+          final scalarType = _scalarUnionOpenApiType(unionValues);
+          if (scalarType != null) {
+            dataClasses.add(
+              UniversalComponentClass(
+                name: schemaName,
+                imports: SplayTreeSet<String>(),
+                parameters: {
+                  UniversalType(
+                    type: scalarType,
+                    name: schemaName.toCamel,
+                    isRequired: true,
+                    nullable: _unionAllowsNull(unionValues),
+                  ),
+                },
+                typeDef: true,
+                description: value[_descriptionConst]?.toString(),
+              ),
+            );
+            _typeRegistry.registerTypedef(schemaName);
+            return;
+          }
+
           final description = value[_descriptionConst]?.toString();
           final union = _createUnionComponentClass(
             unionValues,
@@ -2329,18 +2351,21 @@ class OpenApiParser {
                       ofImport = unionName;
                     }
                   } else {
-                    // Fallback if we cannot synthesize a proper union
-                    ofType = UniversalType(
-                      type: _objectConst,
+                    ofType = _scalarOrObjectType(
+                      otherItems,
+                      map: map,
                       isRequired: isRequired,
+                      root: root,
                     );
                   }
                 }
               } else {
-                // Fallback for non-union types
-                ofType = UniversalType(
-                  type: _objectConst,
+                // type: ["string", "number"] and similar scalar lists
+                ofType = _scalarOrObjectType(
+                  otherItems,
+                  map: map,
                   isRequired: isRequired,
+                  root: root,
                 );
               }
             }
@@ -3062,6 +3087,94 @@ class OpenApiParser {
     }
 
     return (imports, variantRefToProps);
+  }
+
+  /// Scalar union collapsed to one OpenAPI type, or object when it is not one.
+  UniversalType _scalarOrObjectType(
+    List<dynamic> items, {
+    required Map<String, dynamic> map,
+    required bool isRequired,
+    required bool root,
+  }) {
+    final scalarType = _scalarUnionOpenApiType(items);
+    return UniversalType(
+      type: scalarType ?? _objectConst,
+      isRequired: isRequired,
+      // object becomes dynamic, which has no nullability to preserve
+      nullable: scalarType == null
+          ? false
+          : map[_nullableConst].toString().toBool() ?? (root && !isRequired),
+    );
+  }
+
+  /// OpenAPI type for a union of only scalars, or null when it is not one.
+  ///
+  /// string combined with integer/number maps to string so snowflake and int64
+  /// values are not stored in a JSON number.
+  String? _scalarUnionOpenApiType(List<dynamic> values) {
+    const scalars = {'string', 'integer', 'number', 'boolean'};
+    final types = <String>{};
+
+    for (final item in values) {
+      if (item is! Map) {
+        return null;
+      }
+      if (item.containsKey(_refConst) ||
+          item.containsKey(_propertiesConst) ||
+          item.containsKey(_enumConst) ||
+          item.containsKey(_oneOfConst) ||
+          item.containsKey(_anyOfConst) ||
+          item.containsKey(_allOfConst)) {
+        return null;
+      }
+
+      final rawType = item[_typeConst];
+      if (rawType is List) {
+        var sawType = false;
+        for (final entry in rawType) {
+          final name = entry.toString();
+          if (name == 'null') {
+            sawType = true;
+            continue;
+          }
+          if (!scalars.contains(name)) return null;
+          types.add(name);
+          sawType = true;
+        }
+        if (!sawType) return null;
+        continue;
+      }
+
+      final name = rawType?.toString();
+      if (name == 'null') {
+        continue;
+      }
+      // No type matches any JSON value.
+      if (name == null || !scalars.contains(name)) return null;
+      types.add(name);
+    }
+
+    if (types.isEmpty) return null;
+    if (types.contains('boolean') && types.length > 1) return null;
+    if (types.contains('string')) return 'string';
+    if (types.contains('number')) return 'number';
+    if (types.contains('integer')) return 'integer';
+    if (types.contains('boolean')) return 'boolean';
+    return null;
+  }
+
+  bool _unionAllowsNull(List<dynamic> values) {
+    for (final item in values) {
+      if (item is! Map) continue;
+      if (item[_nullableConst].toString().toBool() ?? false) return true;
+      final rawType = item[_typeConst];
+      if (rawType is List) {
+        if (rawType.any((entry) => entry.toString() == 'null')) return true;
+      } else if (rawType?.toString() == 'null') {
+        return true;
+      }
+    }
+    return false;
   }
 
   /// Returns the union values if the schema is an undiscriminated union, otherwise null.
