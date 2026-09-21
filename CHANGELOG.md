@@ -1,3 +1,7 @@
+## 2.5.2
+
+- Fix literal default values on nullable `$ref` properties that point at non-enum schemas.
+
 ## 2.5.1
 
 - Fix literal default values on `$ref` properties that point at non-enum schemas.
