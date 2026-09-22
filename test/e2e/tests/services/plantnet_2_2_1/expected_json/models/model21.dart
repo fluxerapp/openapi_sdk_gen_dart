@@ -5,7 +5,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'gbif.dart';
-import 'images.dart';
+import 'images2.dart';
 import 'model20.dart';
 
 part 'model21.g.dart';
@@ -20,7 +20,7 @@ class Model21 {
   final num? score;
   final Model20? family;
   final Gbif? gbif;
-  final Images? images;
+  final Images2? images;
 
   Map<String, Object?> toJson() => _$Model21ToJson(this);
 }

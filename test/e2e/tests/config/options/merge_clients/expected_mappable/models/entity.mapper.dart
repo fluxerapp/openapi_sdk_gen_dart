@@ -79,13 +79,18 @@ class EntityPersonMapper extends SubClassMapperBase<EntityPerson> {
   static PersonEntityEntityTypeEntityType? _$entityType(EntityPerson v) =>
       v.entityType;
   static const Field<EntityPerson, PersonEntityEntityTypeEntityType>
-  _f$entityType = Field('entityType', _$entityType);
+  _f$entityType = Field('entityType', _$entityType, opt: true);
   static String? _$name(EntityPerson v) => v.name;
-  static const Field<EntityPerson, String> _f$name = Field('name', _$name);
+  static const Field<EntityPerson, String> _f$name = Field(
+    'name',
+    _$name,
+    opt: true,
+  );
   static String? _$description(EntityPerson v) => v.description;
   static const Field<EntityPerson, String> _f$description = Field(
     'description',
     _$description,
+    opt: true,
   );
   static DateTime _$createdAt(EntityPerson v) => v.createdAt;
   static const Field<EntityPerson, DateTime> _f$createdAt = Field(
@@ -96,6 +101,7 @@ class EntityPersonMapper extends SubClassMapperBase<EntityPerson> {
   static const Field<EntityPerson, DateTime> _f$updatedAt = Field(
     'updatedAt',
     _$updatedAt,
+    opt: true,
   );
   static DateTime _$dateOfBirth(EntityPerson v) => v.dateOfBirth;
   static const Field<EntityPerson, DateTime> _f$dateOfBirth = Field(
@@ -106,16 +112,18 @@ class EntityPersonMapper extends SubClassMapperBase<EntityPerson> {
   static const Field<EntityPerson, String> _f$nationality = Field(
     'nationality',
     _$nationality,
+    opt: true,
   );
   static String? _$occupation(EntityPerson v) => v.occupation;
   static const Field<EntityPerson, String> _f$occupation = Field(
     'occupation',
     _$occupation,
+    opt: true,
   );
   static Map<String, String>? _$socialProfiles(EntityPerson v) =>
       v.socialProfiles;
   static const Field<EntityPerson, Map<String, String>> _f$socialProfiles =
-      Field('socialProfiles', _$socialProfiles);
+      Field('socialProfiles', _$socialProfiles, opt: true);
 
   @override
   final MappableFields<EntityPerson> fields = const {
@@ -318,16 +326,18 @@ class EntityOrganizationMapper extends SubClassMapperBase<EntityOrganization> {
     EntityOrganization v,
   ) => v.entityType;
   static const Field<EntityOrganization, OrganizationEntityEntityTypeEntityType>
-  _f$entityType = Field('entityType', _$entityType);
+  _f$entityType = Field('entityType', _$entityType, opt: true);
   static String? _$name(EntityOrganization v) => v.name;
   static const Field<EntityOrganization, String> _f$name = Field(
     'name',
     _$name,
+    opt: true,
   );
   static String? _$description(EntityOrganization v) => v.description;
   static const Field<EntityOrganization, String> _f$description = Field(
     'description',
     _$description,
+    opt: true,
   );
   static DateTime _$createdAt(EntityOrganization v) => v.createdAt;
   static const Field<EntityOrganization, DateTime> _f$createdAt = Field(
@@ -338,6 +348,7 @@ class EntityOrganizationMapper extends SubClassMapperBase<EntityOrganization> {
   static const Field<EntityOrganization, DateTime> _f$updatedAt = Field(
     'updatedAt',
     _$updatedAt,
+    opt: true,
   );
   static String _$registrationNumber(EntityOrganization v) =>
       v.registrationNumber;
@@ -349,21 +360,25 @@ class EntityOrganizationMapper extends SubClassMapperBase<EntityOrganization> {
   static const Field<EntityOrganization, DateTime> _f$foundedDate = Field(
     'foundedDate',
     _$foundedDate,
+    opt: true,
   );
   static String? _$industry(EntityOrganization v) => v.industry;
   static const Field<EntityOrganization, String> _f$industry = Field(
     'industry',
     _$industry,
+    opt: true,
   );
   static int? _$employeeCount(EntityOrganization v) => v.employeeCount;
   static const Field<EntityOrganization, int> _f$employeeCount = Field(
     'employeeCount',
     _$employeeCount,
+    opt: true,
   );
   static double? _$revenue(EntityOrganization v) => v.revenue;
   static const Field<EntityOrganization, double> _f$revenue = Field(
     'revenue',
     _$revenue,
+    opt: true,
   );
 
   @override

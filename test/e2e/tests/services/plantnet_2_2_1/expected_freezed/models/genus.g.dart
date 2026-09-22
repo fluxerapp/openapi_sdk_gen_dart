@@ -7,15 +7,13 @@ part of 'genus.dart';
 // **************************************************************************
 
 _Genus _$GenusFromJson(Map<String, dynamic> json) => _Genus(
+  scientificNameWithoutAuthor: json['scientificNameWithoutAuthor'] as String?,
+  scientificNameAuthorship: json['scientificNameAuthorship'] as String?,
   scientificName: json['scientificName'] as String?,
-  family: json['family'] == null
-      ? null
-      : Family.fromJson(json['family'] as Map<String, dynamic>),
-  commonNames: json['commonNames'],
 );
 
 Map<String, dynamic> _$GenusToJson(_Genus instance) => <String, dynamic>{
+  'scientificNameWithoutAuthor': instance.scientificNameWithoutAuthor,
+  'scientificNameAuthorship': instance.scientificNameAuthorship,
   'scientificName': instance.scientificName,
-  'family': instance.family,
-  'commonNames': instance.commonNames,
 };

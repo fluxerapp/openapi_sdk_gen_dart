@@ -4,7 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'species.dart';
+import 'species2.dart';
 
 part 'model13.g.dart';
 
@@ -15,7 +15,7 @@ class Model13 {
   factory Model13.fromJson(Map<String, Object?> json) =>
       _$Model13FromJson(json);
 
-  final Species? species;
+  final Species2? species;
   final num? total;
 
   Map<String, Object?> toJson() => _$Model13ToJson(this);

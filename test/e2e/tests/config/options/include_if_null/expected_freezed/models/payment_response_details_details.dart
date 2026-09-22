@@ -19,32 +19,32 @@ part 'payment_response_details_details.g.dart';
 @Freezed(unionKey: 'paymentType')
 sealed class PaymentResponseDetailsDetails
     with _$PaymentResponseDetailsDetails {
-  @FreezedUnionValue('credit_card')
-  const factory PaymentResponseDetailsDetails.creditCard({
+  @FreezedUnionValue('CreditCardPayment')
+  const factory PaymentResponseDetailsDetails.creditCardPayment({
     required String cardNumber,
     required int expiryMonth,
     required int expiryYear,
     required String cvv,
     required double amount,
     @JsonKey(includeIfNull: false) String? cardholderName,
-  }) = PaymentResponseDetailsDetailsCreditCard;
+  }) = PaymentResponseDetailsDetailsCreditCardPayment;
 
-  @FreezedUnionValue('bank_transfer')
-  const factory PaymentResponseDetailsDetails.bankTransfer({
+  @FreezedUnionValue('BankTransferPayment')
+  const factory PaymentResponseDetailsDetails.bankTransferPayment({
     required String accountNumber,
     required String routingNumber,
     required double amount,
     @JsonKey(includeIfNull: false) String? accountHolder,
     @JsonKey(includeIfNull: false) String? reference,
-  }) = PaymentResponseDetailsDetailsBankTransfer;
+  }) = PaymentResponseDetailsDetailsBankTransferPayment;
 
-  @FreezedUnionValue('crypto')
-  const factory PaymentResponseDetailsDetails.crypto({
+  @FreezedUnionValue('CryptoPayment')
+  const factory PaymentResponseDetailsDetails.cryptoPayment({
     required String walletAddress,
     required CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,
     required double amount,
     @JsonKey(includeIfNull: false) String? transactionHash,
-  }) = PaymentResponseDetailsDetailsCrypto;
+  }) = PaymentResponseDetailsDetailsCryptoPayment;
 
   factory PaymentResponseDetailsDetails.fromJson(Map<String, Object?> json) =>
       _$PaymentResponseDetailsDetailsFromJson(json);

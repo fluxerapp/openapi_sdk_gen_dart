@@ -6,7 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'model39.dart';
 import 'position.dart';
-import 'species_list.dart';
+import 'species_list2.dart';
 
 part 'model40.freezed.dart';
 part 'model40.g.dart';
@@ -17,7 +17,7 @@ abstract class Model40 with _$Model40 {
     String? id,
     String? title,
     String? description,
-    @JsonKey(name: 'species_list') SpeciesList? speciesList,
+    @JsonKey(name: 'species_list') SpeciesList2? speciesList,
     Model39? images,
     Position? position,
   }) = _Model40;

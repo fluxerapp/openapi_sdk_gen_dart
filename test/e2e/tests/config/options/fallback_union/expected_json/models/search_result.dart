@@ -61,11 +61,7 @@ class SearchResultUser extends SearchResult {
   final User user;
   final double? score;
 
-  const SearchResultUser({
-    required this.type,
-    required this.user,
-    required this.score,
-  });
+  const SearchResultUser({required this.type, required this.user, this.score});
 
   factory SearchResultUser.fromJson(Map<String, dynamic> json) =>
       _$SearchResultUserFromJson(json);
@@ -84,8 +80,8 @@ class SearchResultPost extends SearchResult {
   const SearchResultPost({
     required this.type,
     required this.post,
-    required this.score,
-    required this.highlights,
+    this.score,
+    this.highlights,
   });
 
   factory SearchResultPost.fromJson(Map<String, dynamic> json) =>
@@ -104,7 +100,7 @@ class SearchResultComment extends SearchResult {
   const SearchResultComment({
     required this.type,
     required this.comment,
-    required this.score,
+    this.score,
   });
 
   factory SearchResultComment.fromJson(Map<String, dynamic> json) =>

@@ -9,7 +9,6 @@ String dartRootClientTemplate({
   required Set<String> clientsNames,
   required String postfix,
   required bool putClientsInFolder,
-  required bool markFileAsGenerated,
   Map<String, String>? clientsNameMap,
 }) {
   if (clientsNames.isEmpty) {

@@ -5,7 +5,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
 import 'gbif.dart';
-import 'images.dart';
+import 'images2.dart';
 import 'model20.dart';
 
 part 'model21.mapper.dart';
@@ -17,7 +17,7 @@ class Model21 with Model21Mappable {
   final num? score;
   final Model20? family;
   final Gbif? gbif;
-  final Images? images;
+  final Images2? images;
 
   static Model21 fromJson(Map<String, dynamic> json) =>
       Model21Mapper.fromJson(json);

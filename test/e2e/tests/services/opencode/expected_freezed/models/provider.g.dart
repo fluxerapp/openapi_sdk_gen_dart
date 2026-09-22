@@ -15,7 +15,9 @@ _Provider _$ProviderFromJson(Map<String, dynamic> json) => _Provider(
   models: (json['models'] as Map<String, dynamic>?)?.map(
     (k, e) => MapEntry(k, Models.fromJson(e as Map<String, dynamic>)),
   ),
-  options: json['options'] as Map<String, dynamic>?,
+  options: json['options'] == null
+      ? null
+      : ProviderOptions.fromJson(json['options'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$ProviderToJson(_Provider instance) => <String, dynamic>{

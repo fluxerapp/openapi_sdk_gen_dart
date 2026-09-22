@@ -4,7 +4,7 @@
 
 import 'package:dart_mappable/dart_mappable.dart';
 
-import 'author.dart';
+import 'author2.dart';
 
 part 'partner.mapper.dart';
 
@@ -20,7 +20,7 @@ class Partner with PartnerMappable {
   final String id;
   @MappableField(key: 'observation_id')
   final String observationId;
-  final Author? author;
+  final Author2? author;
   final String? avatar;
 
   static Partner fromJson(Map<String, dynamic> json) =>

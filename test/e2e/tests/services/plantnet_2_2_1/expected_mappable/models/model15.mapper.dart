@@ -55,8 +55,8 @@ class Model15Mapper extends ClassMapperBase<Model15> {
     _$family,
     opt: true,
   );
-  static dynamic _$commonNames(Model15 v) => v.commonNames;
-  static const Field<Model15, dynamic> _f$commonNames = Field(
+  static List<String>? _$commonNames(Model15 v) => v.commonNames;
+  static const Field<Model15, List<String>> _f$commonNames = Field(
     'commonNames',
     _$commonNames,
     opt: true,
@@ -142,13 +142,14 @@ abstract class Model15CopyWith<$R, $In extends Model15, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   GenusCopyWith<$R, Genus, Genus>? get genus;
   FamilyCopyWith<$R, Family, Family>? get family;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get commonNames;
   $R call({
     String? scientificNameWithoutAuthor,
     String? scientificNameAuthorship,
     String? scientificName,
     Genus? genus,
     Family? family,
-    dynamic commonNames,
+    List<String>? commonNames,
   });
   Model15CopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -167,6 +168,15 @@ class _Model15CopyWithImpl<$R, $Out>
   @override
   FamilyCopyWith<$R, Family, Family>? get family =>
       $value.family?.copyWith.$chain((v) => call(family: v));
+  @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+  get commonNames => $value.commonNames != null
+      ? ListCopyWith(
+          $value.commonNames!,
+          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v) => call(commonNames: v),
+        )
+      : null;
   @override
   $R call({
     Object? scientificNameWithoutAuthor = $none,

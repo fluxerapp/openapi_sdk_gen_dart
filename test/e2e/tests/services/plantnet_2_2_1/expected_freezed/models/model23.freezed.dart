@@ -217,13 +217,21 @@ return $default(_that.name,_that.author,_that.family,_that.commonNames,_that.sec
 @JsonSerializable()
 
 class _Model23 implements Model23 {
-  const _Model23({required this.name, required this.author, required this.family, this.commonNames, final  SecondaryCommonNames? secondaryCommonNames, this.project, this.genus, this.powoId, this.gbifId}): _secondaryCommonNames = secondaryCommonNames;
+  const _Model23({required this.name, required this.author, required this.family, final  CommonNames? commonNames, final  SecondaryCommonNames? secondaryCommonNames, this.project, this.genus, this.powoId, this.gbifId}): _commonNames = commonNames,_secondaryCommonNames = secondaryCommonNames;
   factory _Model23.fromJson(Map<String, dynamic> json) => _$Model23FromJson(json);
 
 @override final  String name;
 @override final  String author;
 @override final  String family;
-@override final  CommonNames? commonNames;
+ final  CommonNames? _commonNames;
+@override CommonNames? get commonNames {
+  final value = _commonNames;
+  if (value == null) return null;
+  if (_commonNames is EqualUnmodifiableListView) return _commonNames;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
  final  SecondaryCommonNames? _secondaryCommonNames;
 @override SecondaryCommonNames? get secondaryCommonNames {
   final value = _secondaryCommonNames;
@@ -251,12 +259,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Model23&&(identical(other.name, name) || other.name == name)&&(identical(other.author, author) || other.author == author)&&(identical(other.family, family) || other.family == family)&&const DeepCollectionEquality().equals(other.commonNames, commonNames)&&const DeepCollectionEquality().equals(other._secondaryCommonNames, _secondaryCommonNames)&&(identical(other.project, project) || other.project == project)&&(identical(other.genus, genus) || other.genus == genus)&&(identical(other.powoId, powoId) || other.powoId == powoId)&&(identical(other.gbifId, gbifId) || other.gbifId == gbifId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Model23&&(identical(other.name, name) || other.name == name)&&(identical(other.author, author) || other.author == author)&&(identical(other.family, family) || other.family == family)&&const DeepCollectionEquality().equals(other._commonNames, _commonNames)&&const DeepCollectionEquality().equals(other._secondaryCommonNames, _secondaryCommonNames)&&(identical(other.project, project) || other.project == project)&&(identical(other.genus, genus) || other.genus == genus)&&(identical(other.powoId, powoId) || other.powoId == powoId)&&(identical(other.gbifId, gbifId) || other.gbifId == gbifId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,author,family,const DeepCollectionEquality().hash(commonNames),const DeepCollectionEquality().hash(_secondaryCommonNames),project,genus,powoId,gbifId);
+int get hashCode => Object.hash(runtimeType,name,author,family,const DeepCollectionEquality().hash(_commonNames),const DeepCollectionEquality().hash(_secondaryCommonNames),project,genus,powoId,gbifId);
 
 @override
 String toString() {
@@ -293,7 +301,7 @@ class __$Model23CopyWithImpl<$Res>
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,author: null == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as String,family: null == family ? _self.family : family // ignore: cast_nullable_to_non_nullable
-as String,commonNames: freezed == commonNames ? _self.commonNames : commonNames // ignore: cast_nullable_to_non_nullable
+as String,commonNames: freezed == commonNames ? _self._commonNames : commonNames // ignore: cast_nullable_to_non_nullable
 as CommonNames?,secondaryCommonNames: freezed == secondaryCommonNames ? _self._secondaryCommonNames : secondaryCommonNames // ignore: cast_nullable_to_non_nullable
 as SecondaryCommonNames?,project: freezed == project ? _self.project : project // ignore: cast_nullable_to_non_nullable
 as String?,genus: freezed == genus ? _self.genus : genus // ignore: cast_nullable_to_non_nullable

@@ -5,7 +5,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'gbif.dart';
-import 'images.dart';
+import 'images2.dart';
 import 'model15.dart';
 import 'model16.dart';
 import 'powo.dart';
@@ -27,7 +27,7 @@ class Result {
 
   final num? score;
   final Model15? species;
-  final Images? images;
+  final Images2? images;
   final Gbif? gbif;
   final Powo? powo;
   final Model16? iucn;

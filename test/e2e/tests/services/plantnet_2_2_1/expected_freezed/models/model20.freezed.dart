@@ -210,11 +210,19 @@ return $default(_that.scientificName,_that.commonNames);case _:
 @JsonSerializable()
 
 class _Model20 implements Model20 {
-  const _Model20({this.scientificName, this.commonNames});
+  const _Model20({this.scientificName, final  CommonNames? commonNames}): _commonNames = commonNames;
   factory _Model20.fromJson(Map<String, dynamic> json) => _$Model20FromJson(json);
 
 @override final  String? scientificName;
-@override final  CommonNames? commonNames;
+ final  CommonNames? _commonNames;
+@override CommonNames? get commonNames {
+  final value = _commonNames;
+  if (value == null) return null;
+  if (_commonNames is EqualUnmodifiableListView) return _commonNames;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
 
 /// Create a copy of Model20
 /// with the given fields replaced by the non-null parameter values.
@@ -229,12 +237,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Model20&&(identical(other.scientificName, scientificName) || other.scientificName == scientificName)&&const DeepCollectionEquality().equals(other.commonNames, commonNames));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Model20&&(identical(other.scientificName, scientificName) || other.scientificName == scientificName)&&const DeepCollectionEquality().equals(other._commonNames, _commonNames));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,scientificName,const DeepCollectionEquality().hash(commonNames));
+int get hashCode => Object.hash(runtimeType,scientificName,const DeepCollectionEquality().hash(_commonNames));
 
 @override
 String toString() {
@@ -269,7 +277,7 @@ class __$Model20CopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? scientificName = freezed,Object? commonNames = freezed,}) {
   return _then(_Model20(
 scientificName: freezed == scientificName ? _self.scientificName : scientificName // ignore: cast_nullable_to_non_nullable
-as String?,commonNames: freezed == commonNames ? _self.commonNames : commonNames // ignore: cast_nullable_to_non_nullable
+as String?,commonNames: freezed == commonNames ? _self._commonNames : commonNames // ignore: cast_nullable_to_non_nullable
 as CommonNames?,
   ));
 }

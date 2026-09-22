@@ -10,7 +10,7 @@ Model18 _$Model18FromJson(Map<String, dynamic> json) => Model18(
   score: json['score'] as num?,
   genus: json['genus'] == null
       ? null
-      : Genus.fromJson(json['genus'] as Map<String, dynamic>),
+      : Genus2.fromJson(json['genus'] as Map<String, dynamic>),
   gbif: json['gbif'] == null
       ? null
       : Gbif.fromJson(json['gbif'] as Map<String, dynamic>),

@@ -34,11 +34,12 @@ class McpMcpMcpLocalConfigMapper extends ClassMapperBase<McpMcpMcpLocalConfig> {
   static Map<String, String>? _$environment(McpMcpMcpLocalConfig v) =>
       v.environment;
   static const Field<McpMcpMcpLocalConfig, Map<String, String>> _f$environment =
-      Field('environment', _$environment);
+      Field('environment', _$environment, opt: true);
   static bool? _$enabled(McpMcpMcpLocalConfig v) => v.enabled;
   static const Field<McpMcpMcpLocalConfig, bool> _f$enabled = Field(
     'enabled',
     _$enabled,
+    opt: true,
   );
 
   @override
@@ -223,10 +224,11 @@ class McpMcpMcpRemoteConfigMapper
   static const Field<McpMcpMcpRemoteConfig, bool> _f$enabled = Field(
     'enabled',
     _$enabled,
+    opt: true,
   );
   static Map<String, String>? _$headers(McpMcpMcpRemoteConfig v) => v.headers;
   static const Field<McpMcpMcpRemoteConfig, Map<String, String>> _f$headers =
-      Field('headers', _$headers);
+      Field('headers', _$headers, opt: true);
 
   @override
   final MappableFields<McpMcpMcpRemoteConfig> fields = const {

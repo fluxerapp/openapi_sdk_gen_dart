@@ -21,16 +21,38 @@ class AuthorMapper extends ClassMapperBase<Author> {
   @override
   final String id = 'Author';
 
-  static String _$id(Author v) => v.id;
-  static const Field<Author, String> _f$id = Field('id', _$id);
   static String _$name(Author v) => v.name;
   static const Field<Author, String> _f$name = Field('name', _$name);
+  static String? _$id(Author v) => v.id;
+  static const Field<Author, String> _f$id = Field('id', _$id, opt: true);
+  static String? _$avatar(Author v) => v.avatar;
+  static const Field<Author, String> _f$avatar = Field(
+    'avatar',
+    _$avatar,
+    opt: true,
+  );
+  static String? _$email(Author v) => v.email;
+  static const Field<Author, String> _f$email = Field(
+    'email',
+    _$email,
+    opt: true,
+  );
 
   @override
-  final MappableFields<Author> fields = const {#id: _f$id, #name: _f$name};
+  final MappableFields<Author> fields = const {
+    #name: _f$name,
+    #id: _f$id,
+    #avatar: _f$avatar,
+    #email: _f$email,
+  };
 
   static Author _instantiate(DecodingData data) {
-    return Author(id: data.dec(_f$id), name: data.dec(_f$name));
+    return Author(
+      name: data.dec(_f$name),
+      id: data.dec(_f$id),
+      avatar: data.dec(_f$avatar),
+      email: data.dec(_f$email),
+    );
   }
 
   @override
@@ -79,7 +101,7 @@ extension AuthorValueCopy<$R, $Out> on ObjectCopyWith<$R, Author, $Out> {
 
 abstract class AuthorCopyWith<$R, $In extends Author, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? id, String? name});
+  $R call({String? name, String? id, String? avatar, String? email});
   AuthorCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -90,13 +112,25 @@ class _AuthorCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Author, $Out>
   @override
   late final ClassMapperBase<Author> $mapper = AuthorMapper.ensureInitialized();
   @override
-  $R call({String? id, String? name}) => $apply(
-    FieldCopyWithData({if (id != null) #id: id, if (name != null) #name: name}),
+  $R call({
+    String? name,
+    Object? id = $none,
+    Object? avatar = $none,
+    Object? email = $none,
+  }) => $apply(
+    FieldCopyWithData({
+      if (name != null) #name: name,
+      if (id != $none) #id: id,
+      if (avatar != $none) #avatar: avatar,
+      if (email != $none) #email: email,
+    }),
   );
   @override
   Author $make(CopyWithData data) => Author(
-    id: data.get(#id, or: $value.id),
     name: data.get(#name, or: $value.name),
+    id: data.get(#id, or: $value.id),
+    avatar: data.get(#avatar, or: $value.avatar),
+    email: data.get(#email, or: $value.email),
   );
 
   @override

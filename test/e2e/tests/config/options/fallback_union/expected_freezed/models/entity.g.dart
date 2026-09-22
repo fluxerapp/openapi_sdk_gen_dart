@@ -70,9 +70,3 @@ Map<String, dynamic> _$EntityOrganizationToJson(EntityOrganization instance) =>
       'revenue': instance.revenue,
       'entityType': instance.$type,
     };
-
-EntityUnknown _$EntityUnknownFromJson(Map<String, dynamic> json) =>
-    EntityUnknown($type: json['entityType'] as String?);
-
-Map<String, dynamic> _$EntityUnknownToJson(EntityUnknown instance) =>
-    <String, dynamic>{'entityType': instance.$type};

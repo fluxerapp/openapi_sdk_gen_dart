@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Genus {
 
- String? get scientificName; Family? get family; CommonNames? get commonNames;
+ String? get scientificNameWithoutAuthor; String? get scientificNameAuthorship; String? get scientificName;
 /// Create a copy of Genus
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $GenusCopyWith<Genus> get copyWith => _$GenusCopyWithImpl<Genus>(this as Genus, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Genus&&(identical(other.scientificName, scientificName) || other.scientificName == scientificName)&&(identical(other.family, family) || other.family == family)&&const DeepCollectionEquality().equals(other.commonNames, commonNames));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Genus&&(identical(other.scientificNameWithoutAuthor, scientificNameWithoutAuthor) || other.scientificNameWithoutAuthor == scientificNameWithoutAuthor)&&(identical(other.scientificNameAuthorship, scientificNameAuthorship) || other.scientificNameAuthorship == scientificNameAuthorship)&&(identical(other.scientificName, scientificName) || other.scientificName == scientificName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,scientificName,family,const DeepCollectionEquality().hash(commonNames));
+int get hashCode => Object.hash(runtimeType,scientificNameWithoutAuthor,scientificNameAuthorship,scientificName);
 
 @override
 String toString() {
-  return 'Genus(scientificName: $scientificName, family: $family, commonNames: $commonNames)';
+  return 'Genus(scientificNameWithoutAuthor: $scientificNameWithoutAuthor, scientificNameAuthorship: $scientificNameAuthorship, scientificName: $scientificName)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $GenusCopyWith<$Res>  {
   factory $GenusCopyWith(Genus value, $Res Function(Genus) _then) = _$GenusCopyWithImpl;
 @useResult
 $Res call({
- String? scientificName, Family? family, CommonNames? commonNames
+ String? scientificNameWithoutAuthor, String? scientificNameAuthorship, String? scientificName
 });
 
 
-$FamilyCopyWith<$Res>? get family;
+
 
 }
 /// @nodoc
@@ -65,27 +65,15 @@ class _$GenusCopyWithImpl<$Res>
 
 /// Create a copy of Genus
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? scientificName = freezed,Object? family = freezed,Object? commonNames = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? scientificNameWithoutAuthor = freezed,Object? scientificNameAuthorship = freezed,Object? scientificName = freezed,}) {
   return _then(_self.copyWith(
-scientificName: freezed == scientificName ? _self.scientificName : scientificName // ignore: cast_nullable_to_non_nullable
-as String?,family: freezed == family ? _self.family : family // ignore: cast_nullable_to_non_nullable
-as Family?,commonNames: freezed == commonNames ? _self.commonNames : commonNames // ignore: cast_nullable_to_non_nullable
-as CommonNames?,
+scientificNameWithoutAuthor: freezed == scientificNameWithoutAuthor ? _self.scientificNameWithoutAuthor : scientificNameWithoutAuthor // ignore: cast_nullable_to_non_nullable
+as String?,scientificNameAuthorship: freezed == scientificNameAuthorship ? _self.scientificNameAuthorship : scientificNameAuthorship // ignore: cast_nullable_to_non_nullable
+as String?,scientificName: freezed == scientificName ? _self.scientificName : scientificName // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
-/// Create a copy of Genus
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$FamilyCopyWith<$Res>? get family {
-    if (_self.family == null) {
-    return null;
-  }
 
-  return $FamilyCopyWith<$Res>(_self.family!, (value) {
-    return _then(_self.copyWith(family: value));
-  });
-}
 }
 
 
@@ -167,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? scientificName,  Family? family,  CommonNames? commonNames)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? scientificNameWithoutAuthor,  String? scientificNameAuthorship,  String? scientificName)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Genus() when $default != null:
-return $default(_that.scientificName,_that.family,_that.commonNames);case _:
+return $default(_that.scientificNameWithoutAuthor,_that.scientificNameAuthorship,_that.scientificName);case _:
   return orElse();
 
 }
@@ -188,10 +176,10 @@ return $default(_that.scientificName,_that.family,_that.commonNames);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? scientificName,  Family? family,  CommonNames? commonNames)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? scientificNameWithoutAuthor,  String? scientificNameAuthorship,  String? scientificName)  $default,) {final _that = this;
 switch (_that) {
 case _Genus():
-return $default(_that.scientificName,_that.family,_that.commonNames);case _:
+return $default(_that.scientificNameWithoutAuthor,_that.scientificNameAuthorship,_that.scientificName);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -208,10 +196,10 @@ return $default(_that.scientificName,_that.family,_that.commonNames);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? scientificName,  Family? family,  CommonNames? commonNames)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? scientificNameWithoutAuthor,  String? scientificNameAuthorship,  String? scientificName)?  $default,) {final _that = this;
 switch (_that) {
 case _Genus() when $default != null:
-return $default(_that.scientificName,_that.family,_that.commonNames);case _:
+return $default(_that.scientificNameWithoutAuthor,_that.scientificNameAuthorship,_that.scientificName);case _:
   return null;
 
 }
@@ -223,12 +211,12 @@ return $default(_that.scientificName,_that.family,_that.commonNames);case _:
 @JsonSerializable()
 
 class _Genus implements Genus {
-  const _Genus({this.scientificName, this.family, this.commonNames});
+  const _Genus({this.scientificNameWithoutAuthor, this.scientificNameAuthorship, this.scientificName});
   factory _Genus.fromJson(Map<String, dynamic> json) => _$GenusFromJson(json);
 
+@override final  String? scientificNameWithoutAuthor;
+@override final  String? scientificNameAuthorship;
 @override final  String? scientificName;
-@override final  Family? family;
-@override final  CommonNames? commonNames;
 
 /// Create a copy of Genus
 /// with the given fields replaced by the non-null parameter values.
@@ -243,16 +231,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Genus&&(identical(other.scientificName, scientificName) || other.scientificName == scientificName)&&(identical(other.family, family) || other.family == family)&&const DeepCollectionEquality().equals(other.commonNames, commonNames));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Genus&&(identical(other.scientificNameWithoutAuthor, scientificNameWithoutAuthor) || other.scientificNameWithoutAuthor == scientificNameWithoutAuthor)&&(identical(other.scientificNameAuthorship, scientificNameAuthorship) || other.scientificNameAuthorship == scientificNameAuthorship)&&(identical(other.scientificName, scientificName) || other.scientificName == scientificName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,scientificName,family,const DeepCollectionEquality().hash(commonNames));
+int get hashCode => Object.hash(runtimeType,scientificNameWithoutAuthor,scientificNameAuthorship,scientificName);
 
 @override
 String toString() {
-  return 'Genus(scientificName: $scientificName, family: $family, commonNames: $commonNames)';
+  return 'Genus(scientificNameWithoutAuthor: $scientificNameWithoutAuthor, scientificNameAuthorship: $scientificNameAuthorship, scientificName: $scientificName)';
 }
 
 
@@ -263,11 +251,11 @@ abstract mixin class _$GenusCopyWith<$Res> implements $GenusCopyWith<$Res> {
   factory _$GenusCopyWith(_Genus value, $Res Function(_Genus) _then) = __$GenusCopyWithImpl;
 @override @useResult
 $Res call({
- String? scientificName, Family? family, CommonNames? commonNames
+ String? scientificNameWithoutAuthor, String? scientificNameAuthorship, String? scientificName
 });
 
 
-@override $FamilyCopyWith<$Res>? get family;
+
 
 }
 /// @nodoc
@@ -280,28 +268,16 @@ class __$GenusCopyWithImpl<$Res>
 
 /// Create a copy of Genus
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? scientificName = freezed,Object? family = freezed,Object? commonNames = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? scientificNameWithoutAuthor = freezed,Object? scientificNameAuthorship = freezed,Object? scientificName = freezed,}) {
   return _then(_Genus(
-scientificName: freezed == scientificName ? _self.scientificName : scientificName // ignore: cast_nullable_to_non_nullable
-as String?,family: freezed == family ? _self.family : family // ignore: cast_nullable_to_non_nullable
-as Family?,commonNames: freezed == commonNames ? _self.commonNames : commonNames // ignore: cast_nullable_to_non_nullable
-as CommonNames?,
+scientificNameWithoutAuthor: freezed == scientificNameWithoutAuthor ? _self.scientificNameWithoutAuthor : scientificNameWithoutAuthor // ignore: cast_nullable_to_non_nullable
+as String?,scientificNameAuthorship: freezed == scientificNameAuthorship ? _self.scientificNameAuthorship : scientificNameAuthorship // ignore: cast_nullable_to_non_nullable
+as String?,scientificName: freezed == scientificName ? _self.scientificName : scientificName // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
-/// Create a copy of Genus
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$FamilyCopyWith<$Res>? get family {
-    if (_self.family == null) {
-    return null;
-  }
 
-  return $FamilyCopyWith<$Res>(_self.family!, (value) {
-    return _then(_self.copyWith(family: value));
-  });
-}
 }
 
 // dart format on

@@ -10,22 +10,23 @@ Map<String, dynamic> _$PaymentResponseDetailsDetailsToJson(
   PaymentResponseDetailsDetails instance,
 ) => <String, dynamic>{};
 
-PaymentResponseDetailsDetailsCreditCard
-_$PaymentResponseDetailsDetailsCreditCardFromJson(Map<String, dynamic> json) =>
-    PaymentResponseDetailsDetailsCreditCard(
-      paymentType: CreditCardPaymentPaymentTypePaymentType.fromJson(
-        json['paymentType'] as String,
-      ),
-      cardNumber: json['cardNumber'] as String,
-      expiryMonth: (json['expiryMonth'] as num).toInt(),
-      expiryYear: (json['expiryYear'] as num).toInt(),
-      cvv: json['cvv'] as String,
-      cardholderName: json['cardholderName'] as String?,
-      amount: (json['amount'] as num).toDouble(),
-    );
+PaymentResponseDetailsDetailsCreditCardPayment
+_$PaymentResponseDetailsDetailsCreditCardPaymentFromJson(
+  Map<String, dynamic> json,
+) => PaymentResponseDetailsDetailsCreditCardPayment(
+  paymentType: CreditCardPaymentPaymentTypePaymentType.fromJson(
+    json['paymentType'] as String,
+  ),
+  cardNumber: json['cardNumber'] as String,
+  expiryMonth: (json['expiryMonth'] as num).toInt(),
+  expiryYear: (json['expiryYear'] as num).toInt(),
+  cvv: json['cvv'] as String,
+  cardholderName: json['cardholderName'] as String?,
+  amount: (json['amount'] as num).toDouble(),
+);
 
-Map<String, dynamic> _$PaymentResponseDetailsDetailsCreditCardToJson(
-  PaymentResponseDetailsDetailsCreditCard instance,
+Map<String, dynamic> _$PaymentResponseDetailsDetailsCreditCardPaymentToJson(
+  PaymentResponseDetailsDetailsCreditCardPayment instance,
 ) => <String, dynamic>{
   'paymentType': instance.paymentType,
   'cardNumber': instance.cardNumber,
@@ -36,10 +37,10 @@ Map<String, dynamic> _$PaymentResponseDetailsDetailsCreditCardToJson(
   'amount': instance.amount,
 };
 
-PaymentResponseDetailsDetailsBankTransfer
-_$PaymentResponseDetailsDetailsBankTransferFromJson(
+PaymentResponseDetailsDetailsBankTransferPayment
+_$PaymentResponseDetailsDetailsBankTransferPaymentFromJson(
   Map<String, dynamic> json,
-) => PaymentResponseDetailsDetailsBankTransfer(
+) => PaymentResponseDetailsDetailsBankTransferPayment(
   paymentType: BankTransferPaymentPaymentTypePaymentType.fromJson(
     json['paymentType'] as String,
   ),
@@ -50,8 +51,8 @@ _$PaymentResponseDetailsDetailsBankTransferFromJson(
   reference: json['reference'] as String?,
 );
 
-Map<String, dynamic> _$PaymentResponseDetailsDetailsBankTransferToJson(
-  PaymentResponseDetailsDetailsBankTransfer instance,
+Map<String, dynamic> _$PaymentResponseDetailsDetailsBankTransferPaymentToJson(
+  PaymentResponseDetailsDetailsBankTransferPayment instance,
 ) => <String, dynamic>{
   'paymentType': instance.paymentType,
   'accountNumber': instance.accountNumber,
@@ -61,22 +62,23 @@ Map<String, dynamic> _$PaymentResponseDetailsDetailsBankTransferToJson(
   'reference': instance.reference,
 };
 
-PaymentResponseDetailsDetailsCrypto
-_$PaymentResponseDetailsDetailsCryptoFromJson(Map<String, dynamic> json) =>
-    PaymentResponseDetailsDetailsCrypto(
-      paymentType: CryptoPaymentPaymentTypePaymentType.fromJson(
-        json['paymentType'] as String,
-      ),
-      walletAddress: json['walletAddress'] as String,
-      cryptocurrency: CryptoPaymentCryptocurrencyCryptocurrency.fromJson(
-        json['cryptocurrency'] as String,
-      ),
-      amount: (json['amount'] as num).toDouble(),
-      transactionHash: json['transactionHash'] as String?,
-    );
+PaymentResponseDetailsDetailsCryptoPayment
+_$PaymentResponseDetailsDetailsCryptoPaymentFromJson(
+  Map<String, dynamic> json,
+) => PaymentResponseDetailsDetailsCryptoPayment(
+  paymentType: CryptoPaymentPaymentTypePaymentType.fromJson(
+    json['paymentType'] as String,
+  ),
+  walletAddress: json['walletAddress'] as String,
+  cryptocurrency: CryptoPaymentCryptocurrencyCryptocurrency.fromJson(
+    json['cryptocurrency'] as String,
+  ),
+  amount: (json['amount'] as num).toDouble(),
+  transactionHash: json['transactionHash'] as String?,
+);
 
-Map<String, dynamic> _$PaymentResponseDetailsDetailsCryptoToJson(
-  PaymentResponseDetailsDetailsCrypto instance,
+Map<String, dynamic> _$PaymentResponseDetailsDetailsCryptoPaymentToJson(
+  PaymentResponseDetailsDetailsCryptoPayment instance,
 ) => <String, dynamic>{
   'paymentType': instance.paymentType,
   'walletAddress': instance.walletAddress,

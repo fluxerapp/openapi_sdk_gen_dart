@@ -6,7 +6,7 @@ import 'package:dart_mappable/dart_mappable.dart';
 
 import 'model39.dart';
 import 'position.dart';
-import 'species_list.dart';
+import 'species_list2.dart';
 
 part 'model40.mapper.dart';
 
@@ -25,7 +25,7 @@ class Model40 with Model40Mappable {
   final String? title;
   final String? description;
   @MappableField(key: 'species_list')
-  final SpeciesList? speciesList;
+  final SpeciesList2? speciesList;
   final Model39? images;
   final Position? position;
 

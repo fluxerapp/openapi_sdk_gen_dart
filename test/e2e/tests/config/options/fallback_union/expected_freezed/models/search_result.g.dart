@@ -52,10 +52,3 @@ Map<String, dynamic> _$SearchResultCommentToJson(
   'score': instance.score,
   'type': instance.$type,
 };
-
-SearchResultUnknown _$SearchResultUnknownFromJson(Map<String, dynamic> json) =>
-    SearchResultUnknown($type: json['type'] as String?);
-
-Map<String, dynamic> _$SearchResultUnknownToJson(
-  SearchResultUnknown instance,
-) => <String, dynamic>{'type': instance.$type};

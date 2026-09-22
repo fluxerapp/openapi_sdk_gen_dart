@@ -65,9 +65,9 @@ class PartModelTextPart with PartModelTextPartMappable {
     required this.messageId,
     required this.type,
     required this.text,
-    required this.synthetic,
-    required this.time,
-    required this.metadata,
+    this.synthetic,
+    this.time,
+    this.metadata,
   });
 }
 
@@ -89,7 +89,7 @@ class PartModelReasoningPart with PartModelReasoningPartMappable {
     required this.messageId,
     required this.type,
     required this.text,
-    required this.metadata,
+    this.metadata,
     required this.time,
   });
 }
@@ -113,9 +113,9 @@ class PartModelFilePart with PartModelFilePartMappable {
     required this.messageId,
     required this.type,
     required this.mime,
-    required this.filename,
+    this.filename,
     required this.url,
-    required this.source,
+    this.source,
   });
 }
 
@@ -141,7 +141,7 @@ class PartModelToolPart with PartModelToolPartMappable {
     required this.callId,
     required this.tool,
     required this.state,
-    required this.metadata,
+    this.metadata,
   });
 }
 
@@ -160,7 +160,7 @@ class PartModelStepStartPart with PartModelStepStartPartMappable {
     required this.sessionId,
     required this.messageId,
     required this.type,
-    required this.snapshot,
+    this.snapshot,
   });
 }
 
@@ -181,7 +181,7 @@ class PartModelStepFinishPart with PartModelStepFinishPartMappable {
     required this.sessionId,
     required this.messageId,
     required this.type,
-    required this.snapshot,
+    this.snapshot,
     required this.cost,
     required this.tokens,
   });
@@ -244,6 +244,6 @@ class PartModelAgentPart with PartModelAgentPartMappable {
     required this.messageId,
     required this.type,
     required this.name,
-    required this.source,
+    this.source,
   });
 }

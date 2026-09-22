@@ -1,7 +1,3 @@
-// coverage:ignore-file
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
-
 import 'package:json_annotation/json_annotation.dart';
 
 import 'user_search_result_type_type.dart';
@@ -63,11 +59,7 @@ class SearchResultUser extends SearchResult {
   final User user;
   final double? score;
 
-  const SearchResultUser({
-    required this.type,
-    required this.user,
-    required this.score,
-  });
+  const SearchResultUser({required this.type, required this.user, this.score});
 
   factory SearchResultUser.fromJson(Map<String, dynamic> json) =>
       _$SearchResultUserFromJson(json);
@@ -86,8 +78,8 @@ class SearchResultPost extends SearchResult {
   const SearchResultPost({
     required this.type,
     required this.post,
-    required this.score,
-    required this.highlights,
+    this.score,
+    this.highlights,
   });
 
   factory SearchResultPost.fromJson(Map<String, dynamic> json) =>
@@ -106,7 +98,7 @@ class SearchResultComment extends SearchResult {
   const SearchResultComment({
     required this.type,
     required this.comment,
-    required this.score,
+    this.score,
   });
 
   factory SearchResultComment.fromJson(Map<String, dynamic> json) =>

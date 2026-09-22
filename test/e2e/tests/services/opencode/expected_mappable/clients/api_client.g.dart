@@ -123,13 +123,17 @@ class _ApiClient implements ApiClient {
   @override
   Future<Config> configUpdate({
     String? directory,
+    String? directoryQuery,
     Config? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -193,6 +197,7 @@ class _ApiClient implements ApiClient {
     required String provider,
     required String model,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
@@ -202,6 +207,7 @@ class _ApiClient implements ApiClient {
       r'provider': provider,
       r'model': model,
       r'directory': directory,
+      r'directory': directoryQuery,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -300,13 +306,17 @@ class _ApiClient implements ApiClient {
   @override
   Future<Session> sessionCreate({
     String? directory,
+    String? directoryQuery,
     SessionCreateRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -336,12 +346,16 @@ class _ApiClient implements ApiClient {
   Future<Session> sessionGet({
     required String id,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -370,12 +384,16 @@ class _ApiClient implements ApiClient {
   Future<bool> sessionDelete({
     required String id,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -404,13 +422,19 @@ class _ApiClient implements ApiClient {
   Future<Session> sessionUpdate({
     required String id,
     String? directory,
+    String? directoryQuery,
+    String? directoryQuery2,
     SessionUpdateRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+      r'directory': directoryQuery2,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -440,12 +464,16 @@ class _ApiClient implements ApiClient {
   Future<List<Session>> sessionChildren({
     required String id,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -476,12 +504,16 @@ class _ApiClient implements ApiClient {
   Future<List<Todo>> sessionTodo({
     required String id,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -512,13 +544,19 @@ class _ApiClient implements ApiClient {
   Future<bool> sessionInit({
     required String id,
     String? directory,
+    String? directoryQuery,
+    String? directoryQuery2,
     SessionInitRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+      r'directory': directoryQuery2,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -548,13 +586,19 @@ class _ApiClient implements ApiClient {
   Future<Session> sessionFork({
     required String id,
     String? directory,
+    String? directoryQuery,
+    String? directoryQuery2,
     SessionForkRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+      r'directory': directoryQuery2,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -584,12 +628,16 @@ class _ApiClient implements ApiClient {
   Future<bool> sessionAbort({
     required String id,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -618,12 +666,16 @@ class _ApiClient implements ApiClient {
   Future<Session> sessionShare({
     required String id,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -652,12 +704,16 @@ class _ApiClient implements ApiClient {
   Future<Session> sessionUnshare({
     required String id,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -686,6 +742,8 @@ class _ApiClient implements ApiClient {
   Future<List<FileDiff>> sessionDiff({
     required String id,
     String? directory,
+    String? directoryQuery,
+    String? directoryQuery2,
     String? messageId,
     Map<String, dynamic>? extras,
     RequestOptions? options,
@@ -694,6 +752,8 @@ class _ApiClient implements ApiClient {
     _extra.addAll(extras ?? <String, dynamic>{});
     final queryParameters = <String, dynamic>{
       r'directory': directory,
+      r'directory': directoryQuery,
+      r'directory': directoryQuery2,
       r'messageID': messageId,
     };
     queryParameters.removeWhere((k, v) => v == null);
@@ -726,13 +786,19 @@ class _ApiClient implements ApiClient {
   Future<bool> sessionSummarize({
     required String id,
     String? directory,
+    String? directoryQuery,
+    String? directoryQuery2,
     SessionSummarizeRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+      r'directory': directoryQuery2,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -762,12 +828,16 @@ class _ApiClient implements ApiClient {
   Future<List<SessionMessagesResponse>> sessionMessages({
     required String id,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -801,13 +871,19 @@ class _ApiClient implements ApiClient {
   Future<SessionPromptResponse> sessionPrompt({
     required String id,
     String? directory,
+    String? directoryQuery,
+    String? directoryQuery2,
     SessionPromptRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+      r'directory': directoryQuery2,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -838,12 +914,16 @@ class _ApiClient implements ApiClient {
     required String id,
     required String messageId,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -872,13 +952,19 @@ class _ApiClient implements ApiClient {
   Future<SessionCommandResponse> sessionCommand({
     required String id,
     String? directory,
+    String? directoryQuery,
+    String? directoryQuery2,
     SessionCommandRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+      r'directory': directoryQuery2,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -908,13 +994,19 @@ class _ApiClient implements ApiClient {
   Future<AssistantMessage> sessionShell({
     required String id,
     String? directory,
+    String? directoryQuery,
+    String? directoryQuery2,
     SessionShellRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+      r'directory': directoryQuery2,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -944,13 +1036,19 @@ class _ApiClient implements ApiClient {
   Future<Session> sessionRevert({
     required String id,
     String? directory,
+    String? directoryQuery,
+    String? directoryQuery2,
     SessionRevertRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+      r'directory': directoryQuery2,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -980,12 +1078,16 @@ class _ApiClient implements ApiClient {
   Future<Session> sessionUnrevert({
     required String id,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -1015,13 +1117,19 @@ class _ApiClient implements ApiClient {
     required String id,
     required String permissionId,
     String? directory,
+    String? directoryQuery,
+    String? directoryQuery2,
     PostSessionIdPermissionsPermissionIdRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+      r'directory': directoryQuery2,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1119,6 +1227,7 @@ class _ApiClient implements ApiClient {
   Future<List<FindTextResponse>> findText({
     required String pattern,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
@@ -1127,6 +1236,7 @@ class _ApiClient implements ApiClient {
     final queryParameters = <String, dynamic>{
       r'pattern': pattern,
       r'directory': directory,
+      r'directory': directoryQuery,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -1160,6 +1270,7 @@ class _ApiClient implements ApiClient {
   Future<List<String>> findFiles({
     required String query,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
@@ -1168,6 +1279,7 @@ class _ApiClient implements ApiClient {
     final queryParameters = <String, dynamic>{
       r'query': query,
       r'directory': directory,
+      r'directory': directoryQuery,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -1197,6 +1309,7 @@ class _ApiClient implements ApiClient {
   Future<List<SymbolModel>> findSymbols({
     required String query,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
@@ -1205,6 +1318,7 @@ class _ApiClient implements ApiClient {
     final queryParameters = <String, dynamic>{
       r'query': query,
       r'directory': directory,
+      r'directory': directoryQuery,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -1236,6 +1350,7 @@ class _ApiClient implements ApiClient {
   Future<List<FileNode>> fileList({
     required String path,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
@@ -1244,6 +1359,7 @@ class _ApiClient implements ApiClient {
     final queryParameters = <String, dynamic>{
       r'path': path,
       r'directory': directory,
+      r'directory': directoryQuery,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -1275,6 +1391,7 @@ class _ApiClient implements ApiClient {
   Future<FileContent> fileRead({
     required String path,
     String? directory,
+    String? directoryQuery,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
@@ -1283,6 +1400,7 @@ class _ApiClient implements ApiClient {
     final queryParameters = <String, dynamic>{
       r'path': path,
       r'directory': directory,
+      r'directory': directoryQuery,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -1346,13 +1464,17 @@ class _ApiClient implements ApiClient {
   @override
   Future<bool> appLog({
     String? directory,
+    String? directoryQuery,
     AppLogRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1441,13 +1563,17 @@ class _ApiClient implements ApiClient {
   @override
   Future<bool> tuiAppendPrompt({
     String? directory,
+    String? directoryQuery,
     TuiAppendPromptRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1674,13 +1800,17 @@ class _ApiClient implements ApiClient {
   @override
   Future<bool> tuiExecuteCommand({
     String? directory,
+    String? directoryQuery,
     TuiExecuteCommandRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1709,13 +1839,17 @@ class _ApiClient implements ApiClient {
   @override
   Future<bool> tuiShowToast({
     String? directory,
+    String? directoryQuery,
     TuiShowToastRequest? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1745,13 +1879,19 @@ class _ApiClient implements ApiClient {
   Future<bool> authSet({
     required String id,
     String? directory,
+    String? directoryQuery,
+    String? directoryQuery2,
     Auth? body,
     Map<String, dynamic>? extras,
     RequestOptions? options,
   }) async {
     final _extra = <String, dynamic>{};
     _extra.addAll(extras ?? <String, dynamic>{});
-    final queryParameters = <String, dynamic>{r'directory': directory};
+    final queryParameters = <String, dynamic>{
+      r'directory': directory,
+      r'directory': directoryQuery,
+      r'directory': directoryQuery2,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};

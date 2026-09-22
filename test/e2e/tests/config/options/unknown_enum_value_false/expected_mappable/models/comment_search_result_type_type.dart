@@ -11,7 +11,7 @@ enum CommentSearchResultTypeType {
   @MappableValue('comment')
   comment;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();

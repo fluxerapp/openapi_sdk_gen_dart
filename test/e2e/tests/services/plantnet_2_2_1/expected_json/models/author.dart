@@ -8,12 +8,14 @@ part 'author.g.dart';
 
 @JsonSerializable()
 class Author {
-  const Author({required this.id, required this.name});
+  const Author({required this.name, this.id, this.avatar, this.email});
 
   factory Author.fromJson(Map<String, Object?> json) => _$AuthorFromJson(json);
 
-  final String id;
+  final String? id;
   final String name;
+  final String? avatar;
+  final String? email;
 
   Map<String, Object?> toJson() => _$AuthorToJson(this);
 }

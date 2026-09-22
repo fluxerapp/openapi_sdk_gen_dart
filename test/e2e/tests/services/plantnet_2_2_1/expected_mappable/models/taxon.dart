@@ -4,7 +4,7 @@
 
 import 'package:dart_mappable/dart_mappable.dart';
 
-import 'common_names.dart';
+import 'common_names2.dart';
 
 part 'taxon.mapper.dart';
 
@@ -33,7 +33,7 @@ class Taxon with TaxonMappable {
   final String? genus;
   final String? url;
   @MappableField(key: 'common_names')
-  final CommonNames? commonNames;
+  final CommonNames2? commonNames;
   @MappableField(key: 'iucn_red_list_category')
   final String? iucnRedListCategory;
 

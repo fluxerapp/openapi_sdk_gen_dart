@@ -27,8 +27,8 @@ class Model23Mapper extends ClassMapperBase<Model23> {
   static const Field<Model23, String> _f$author = Field('author', _$author);
   static String _$family(Model23 v) => v.family;
   static const Field<Model23, String> _f$family = Field('family', _$family);
-  static dynamic _$commonNames(Model23 v) => v.commonNames;
-  static const Field<Model23, dynamic> _f$commonNames = Field(
+  static List<String>? _$commonNames(Model23 v) => v.commonNames;
+  static const Field<Model23, List<String>> _f$commonNames = Field(
     'commonNames',
     _$commonNames,
     opt: true,
@@ -149,13 +149,14 @@ extension Model23ValueCopy<$R, $Out> on ObjectCopyWith<$R, Model23, $Out> {
 
 abstract class Model23CopyWith<$R, $In extends Model23, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get commonNames;
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
   get secondaryCommonNames;
   $R call({
     String? name,
     String? author,
     String? family,
-    dynamic commonNames,
+    List<String>? commonNames,
     List<String>? secondaryCommonNames,
     String? project,
     String? genus,
@@ -173,6 +174,15 @@ class _Model23CopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<Model23> $mapper =
       Model23Mapper.ensureInitialized();
+  @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+  get commonNames => $value.commonNames != null
+      ? ListCopyWith(
+          $value.commonNames!,
+          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v) => call(commonNames: v),
+        )
+      : null;
   @override
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
   get secondaryCommonNames => $value.secondaryCommonNames != null

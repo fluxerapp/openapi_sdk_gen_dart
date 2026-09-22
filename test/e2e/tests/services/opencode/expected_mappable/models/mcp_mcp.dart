@@ -34,8 +34,8 @@ class McpMcpMcpLocalConfig with McpMcpMcpLocalConfigMappable {
   const McpMcpMcpLocalConfig({
     required this.type,
     required this.command,
-    required this.environment,
-    required this.enabled,
+    this.environment,
+    this.enabled,
   });
 }
 
@@ -49,7 +49,7 @@ class McpMcpMcpRemoteConfig with McpMcpMcpRemoteConfigMappable {
   const McpMcpMcpRemoteConfig({
     required this.type,
     required this.url,
-    required this.enabled,
-    required this.headers,
+    this.enabled,
+    this.headers,
   });
 }

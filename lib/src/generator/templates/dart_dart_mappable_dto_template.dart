@@ -8,7 +8,6 @@ import 'package:openapi_sdk_gen/src/utils/type_utils.dart';
 
 String dartDartMappableDtoTemplate(
   UniversalComponentClass dataClass, {
-  required bool markFileAsGenerated,
   String? fallbackUnion,
 }) {
   // Use fallback union only if explicitly provided
@@ -135,13 +134,15 @@ String _generateVariantWrapperClasses(
     final directProperties = properties
         .map(
           (prop) =>
-              '${_jsonKey(prop)}${indentation(2)}final ${prop.toSuitableType()} ${prop.name};',
+              '${_jsonKey(prop)}${indentation(2)}final ${_mappableSuitableType(prop)} ${prop.name};',
         )
         .join('\n');
 
-    // Generate constructor parameters
     final constructorParams = properties
-        .map((prop) => '${indentation(4)}required this.${prop.name},')
+        .map(
+          (prop) =>
+              '${indentation(4)}${_required(prop)}this.${prop.name}${getDefaultValue(prop)},',
+        )
         .join('\n');
 
     // Handle empty properties case
@@ -193,13 +194,24 @@ String getFields(
   }
 }
 
+String _mappableSuitableType(UniversalType type) {
+  final result = type.toSuitableType();
+  if (type.isRequired || type.defaultValue != null) {
+    return result;
+  }
+  if (result.endsWith('?') || result.contains('dynamic')) {
+    return result;
+  }
+  return '$result?';
+}
+
 String _fieldsToString(List<UniversalType> parameters) {
   final sortedByRequired = Set<UniversalType>.from(
     parameters.sorted((a, b) => a.compareTo(b)),
   );
   return sortedByRequired
       .mapIndexed((i, e) {
-        return '${_jsonKey(e)}${indentation(2)}final ${e.toSuitableType()} ${e.name};';
+        return '${_jsonKey(e)}${indentation(2)}final ${_mappableSuitableType(e)} ${e.name};';
       })
       .join('\n');
 }
@@ -485,13 +497,15 @@ String _generateDiscriminatedWrapperClasses(
     final directProperties = filteredProperties
         .map(
           (prop) =>
-              '${_jsonKey(prop)}${indentation(2)}final ${prop.toSuitableType()} ${prop.name};',
+              '${_jsonKey(prop)}${indentation(2)}final ${_mappableSuitableType(prop)} ${prop.name};',
         )
         .join('\n');
 
-    // Generate constructor parameters
     final constructorParams = filteredProperties
-        .map((prop) => '${indentation(4)}required this.${prop.name},')
+        .map(
+          (prop) =>
+              '${indentation(4)}${_required(prop)}this.${prop.name}${getDefaultValue(prop)},',
+        )
         .join('\n');
 
     // Handle empty properties case

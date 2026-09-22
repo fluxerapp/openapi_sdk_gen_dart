@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Provider {
 
- String? get api; String? get name; List<String>? get env; String? get id; String? get npm; Map<String, Models>? get models; Map<String, dynamic>? get options;
+ String? get api; String? get name; List<String>? get env; String? get id; String? get npm; Map<String, Models>? get models; ProviderOptions? get options;
 /// Create a copy of Provider
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,12 +28,12 @@ $ProviderCopyWith<Provider> get copyWith => _$ProviderCopyWithImpl<Provider>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Provider&&(identical(other.api, api) || other.api == api)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.env, env)&&(identical(other.id, id) || other.id == id)&&(identical(other.npm, npm) || other.npm == npm)&&const DeepCollectionEquality().equals(other.models, models)&&const DeepCollectionEquality().equals(other.options, options));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Provider&&(identical(other.api, api) || other.api == api)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.env, env)&&(identical(other.id, id) || other.id == id)&&(identical(other.npm, npm) || other.npm == npm)&&const DeepCollectionEquality().equals(other.models, models)&&(identical(other.options, options) || other.options == options));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,api,name,const DeepCollectionEquality().hash(env),id,npm,const DeepCollectionEquality().hash(models),const DeepCollectionEquality().hash(options));
+int get hashCode => Object.hash(runtimeType,api,name,const DeepCollectionEquality().hash(env),id,npm,const DeepCollectionEquality().hash(models),options);
 
 @override
 String toString() {
@@ -48,11 +48,11 @@ abstract mixin class $ProviderCopyWith<$Res>  {
   factory $ProviderCopyWith(Provider value, $Res Function(Provider) _then) = _$ProviderCopyWithImpl;
 @useResult
 $Res call({
- String? api, String? name, List<String>? env, String? id, String? npm, Map<String, Models>? models, Map<String, dynamic>? options
+ String? api, String? name, List<String>? env, String? id, String? npm, Map<String, Models>? models, ProviderOptions? options
 });
 
 
-
+$ProviderOptionsCopyWith<$Res>? get options;
 
 }
 /// @nodoc
@@ -74,10 +74,22 @@ as List<String>?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_n
 as String?,npm: freezed == npm ? _self.npm : npm // ignore: cast_nullable_to_non_nullable
 as String?,models: freezed == models ? _self.models : models // ignore: cast_nullable_to_non_nullable
 as Map<String, Models>?,options: freezed == options ? _self.options : options // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,
+as ProviderOptions?,
   ));
 }
+/// Create a copy of Provider
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProviderOptionsCopyWith<$Res>? get options {
+    if (_self.options == null) {
+    return null;
+  }
 
+  return $ProviderOptionsCopyWith<$Res>(_self.options!, (value) {
+    return _then(_self.copyWith(options: value));
+  });
+}
 }
 
 
@@ -159,7 +171,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? api,  String? name,  List<String>? env,  String? id,  String? npm,  Map<String, Models>? models,  Map<String, dynamic>? options)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? api,  String? name,  List<String>? env,  String? id,  String? npm,  Map<String, Models>? models,  ProviderOptions? options)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Provider() when $default != null:
 return $default(_that.api,_that.name,_that.env,_that.id,_that.npm,_that.models,_that.options);case _:
@@ -180,7 +192,7 @@ return $default(_that.api,_that.name,_that.env,_that.id,_that.npm,_that.models,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? api,  String? name,  List<String>? env,  String? id,  String? npm,  Map<String, Models>? models,  Map<String, dynamic>? options)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? api,  String? name,  List<String>? env,  String? id,  String? npm,  Map<String, Models>? models,  ProviderOptions? options)  $default,) {final _that = this;
 switch (_that) {
 case _Provider():
 return $default(_that.api,_that.name,_that.env,_that.id,_that.npm,_that.models,_that.options);case _:
@@ -200,7 +212,7 @@ return $default(_that.api,_that.name,_that.env,_that.id,_that.npm,_that.models,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? api,  String? name,  List<String>? env,  String? id,  String? npm,  Map<String, Models>? models,  Map<String, dynamic>? options)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? api,  String? name,  List<String>? env,  String? id,  String? npm,  Map<String, Models>? models,  ProviderOptions? options)?  $default,) {final _that = this;
 switch (_that) {
 case _Provider() when $default != null:
 return $default(_that.api,_that.name,_that.env,_that.id,_that.npm,_that.models,_that.options);case _:
@@ -215,7 +227,7 @@ return $default(_that.api,_that.name,_that.env,_that.id,_that.npm,_that.models,_
 @JsonSerializable()
 
 class _Provider implements Provider {
-  const _Provider({this.api, this.name, final  List<String>? env, this.id, this.npm, final  Map<String, Models>? models, final  Map<String, dynamic>? options}): _env = env,_models = models,_options = options;
+  const _Provider({this.api, this.name, final  List<String>? env, this.id, this.npm, final  Map<String, Models>? models, this.options}): _env = env,_models = models;
   factory _Provider.fromJson(Map<String, dynamic> json) => _$ProviderFromJson(json);
 
 @override final  String? api;
@@ -240,15 +252,7 @@ class _Provider implements Provider {
   return EqualUnmodifiableMapView(value);
 }
 
- final  Map<String, dynamic>? _options;
-@override Map<String, dynamic>? get options {
-  final value = _options;
-  if (value == null) return null;
-  if (_options is EqualUnmodifiableMapView) return _options;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(value);
-}
-
+@override final  ProviderOptions? options;
 
 /// Create a copy of Provider
 /// with the given fields replaced by the non-null parameter values.
@@ -263,12 +267,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Provider&&(identical(other.api, api) || other.api == api)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._env, _env)&&(identical(other.id, id) || other.id == id)&&(identical(other.npm, npm) || other.npm == npm)&&const DeepCollectionEquality().equals(other._models, _models)&&const DeepCollectionEquality().equals(other._options, _options));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Provider&&(identical(other.api, api) || other.api == api)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._env, _env)&&(identical(other.id, id) || other.id == id)&&(identical(other.npm, npm) || other.npm == npm)&&const DeepCollectionEquality().equals(other._models, _models)&&(identical(other.options, options) || other.options == options));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,api,name,const DeepCollectionEquality().hash(_env),id,npm,const DeepCollectionEquality().hash(_models),const DeepCollectionEquality().hash(_options));
+int get hashCode => Object.hash(runtimeType,api,name,const DeepCollectionEquality().hash(_env),id,npm,const DeepCollectionEquality().hash(_models),options);
 
 @override
 String toString() {
@@ -283,11 +287,11 @@ abstract mixin class _$ProviderCopyWith<$Res> implements $ProviderCopyWith<$Res>
   factory _$ProviderCopyWith(_Provider value, $Res Function(_Provider) _then) = __$ProviderCopyWithImpl;
 @override @useResult
 $Res call({
- String? api, String? name, List<String>? env, String? id, String? npm, Map<String, Models>? models, Map<String, dynamic>? options
+ String? api, String? name, List<String>? env, String? id, String? npm, Map<String, Models>? models, ProviderOptions? options
 });
 
 
-
+@override $ProviderOptionsCopyWith<$Res>? get options;
 
 }
 /// @nodoc
@@ -308,12 +312,24 @@ as String?,env: freezed == env ? _self._env : env // ignore: cast_nullable_to_no
 as List<String>?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,npm: freezed == npm ? _self.npm : npm // ignore: cast_nullable_to_non_nullable
 as String?,models: freezed == models ? _self._models : models // ignore: cast_nullable_to_non_nullable
-as Map<String, Models>?,options: freezed == options ? _self._options : options // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,
+as Map<String, Models>?,options: freezed == options ? _self.options : options // ignore: cast_nullable_to_non_nullable
+as ProviderOptions?,
   ));
 }
 
+/// Create a copy of Provider
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProviderOptionsCopyWith<$Res>? get options {
+    if (_self.options == null) {
+    return null;
+  }
 
+  return $ProviderOptionsCopyWith<$Res>(_self.options!, (value) {
+    return _then(_self.copyWith(options: value));
+  });
+}
 }
 
 // dart format on

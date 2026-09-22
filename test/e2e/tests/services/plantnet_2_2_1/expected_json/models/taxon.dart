@@ -4,7 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'common_names.dart';
+import 'common_names2.dart';
 
 part 'taxon.g.dart';
 
@@ -35,7 +35,7 @@ class Taxon {
   final String? genus;
   final String? url;
   @JsonKey(name: 'common_names')
-  final CommonNames? commonNames;
+  final CommonNames2? commonNames;
   @JsonKey(name: 'iucn_red_list_category')
   final String? iucnRedListCategory;
 

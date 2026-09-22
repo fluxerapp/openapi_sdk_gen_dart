@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Model40 {
 
- String? get id; String? get title; String? get description;@JsonKey(name: 'species_list') SpeciesList? get speciesList; Model39? get images; Position? get position;
+ String? get id; String? get title; String? get description;@JsonKey(name: 'species_list') SpeciesList2? get speciesList; Model39? get images; Position? get position;
 /// Create a copy of Model40
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $Model40CopyWith<$Res>  {
   factory $Model40CopyWith(Model40 value, $Res Function(Model40) _then) = _$Model40CopyWithImpl;
 @useResult
 $Res call({
- String? id, String? title, String? description,@JsonKey(name: 'species_list') SpeciesList? speciesList, Model39? images, Position? position
+ String? id, String? title, String? description,@JsonKey(name: 'species_list') SpeciesList2? speciesList, Model39? images, Position? position
 });
 
 
@@ -71,7 +71,7 @@ id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,speciesList: freezed == speciesList ? _self.speciesList : speciesList // ignore: cast_nullable_to_non_nullable
-as SpeciesList?,images: freezed == images ? _self.images : images // ignore: cast_nullable_to_non_nullable
+as SpeciesList2?,images: freezed == images ? _self.images : images // ignore: cast_nullable_to_non_nullable
 as Model39?,position: freezed == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
 as Position?,
   ));
@@ -170,7 +170,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? title,  String? description, @JsonKey(name: 'species_list')  SpeciesList? speciesList,  Model39? images,  Position? position)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? title,  String? description, @JsonKey(name: 'species_list')  SpeciesList2? speciesList,  Model39? images,  Position? position)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Model40() when $default != null:
 return $default(_that.id,_that.title,_that.description,_that.speciesList,_that.images,_that.position);case _:
@@ -191,7 +191,7 @@ return $default(_that.id,_that.title,_that.description,_that.speciesList,_that.i
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? title,  String? description, @JsonKey(name: 'species_list')  SpeciesList? speciesList,  Model39? images,  Position? position)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? title,  String? description, @JsonKey(name: 'species_list')  SpeciesList2? speciesList,  Model39? images,  Position? position)  $default,) {final _that = this;
 switch (_that) {
 case _Model40():
 return $default(_that.id,_that.title,_that.description,_that.speciesList,_that.images,_that.position);case _:
@@ -211,7 +211,7 @@ return $default(_that.id,_that.title,_that.description,_that.speciesList,_that.i
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? title,  String? description, @JsonKey(name: 'species_list')  SpeciesList? speciesList,  Model39? images,  Position? position)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? title,  String? description, @JsonKey(name: 'species_list')  SpeciesList2? speciesList,  Model39? images,  Position? position)?  $default,) {final _that = this;
 switch (_that) {
 case _Model40() when $default != null:
 return $default(_that.id,_that.title,_that.description,_that.speciesList,_that.images,_that.position);case _:
@@ -226,14 +226,14 @@ return $default(_that.id,_that.title,_that.description,_that.speciesList,_that.i
 @JsonSerializable()
 
 class _Model40 implements Model40 {
-  const _Model40({this.id, this.title, this.description, @JsonKey(name: 'species_list') final  SpeciesList? speciesList, final  Model39? images, this.position}): _speciesList = speciesList,_images = images;
+  const _Model40({this.id, this.title, this.description, @JsonKey(name: 'species_list') final  SpeciesList2? speciesList, final  Model39? images, this.position}): _speciesList = speciesList,_images = images;
   factory _Model40.fromJson(Map<String, dynamic> json) => _$Model40FromJson(json);
 
 @override final  String? id;
 @override final  String? title;
 @override final  String? description;
- final  SpeciesList? _speciesList;
-@override@JsonKey(name: 'species_list') SpeciesList? get speciesList {
+ final  SpeciesList2? _speciesList;
+@override@JsonKey(name: 'species_list') SpeciesList2? get speciesList {
   final value = _speciesList;
   if (value == null) return null;
   if (_speciesList is EqualUnmodifiableListView) return _speciesList;
@@ -285,7 +285,7 @@ abstract mixin class _$Model40CopyWith<$Res> implements $Model40CopyWith<$Res> {
   factory _$Model40CopyWith(_Model40 value, $Res Function(_Model40) _then) = __$Model40CopyWithImpl;
 @override @useResult
 $Res call({
- String? id, String? title, String? description,@JsonKey(name: 'species_list') SpeciesList? speciesList, Model39? images, Position? position
+ String? id, String? title, String? description,@JsonKey(name: 'species_list') SpeciesList2? speciesList, Model39? images, Position? position
 });
 
 
@@ -308,7 +308,7 @@ id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,speciesList: freezed == speciesList ? _self._speciesList : speciesList // ignore: cast_nullable_to_non_nullable
-as SpeciesList?,images: freezed == images ? _self._images : images // ignore: cast_nullable_to_non_nullable
+as SpeciesList2?,images: freezed == images ? _self._images : images // ignore: cast_nullable_to_non_nullable
 as Model39?,position: freezed == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
 as Position?,
   ));

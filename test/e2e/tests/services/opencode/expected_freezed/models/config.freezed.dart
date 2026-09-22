@@ -27,8 +27,8 @@ mixin _$Config {
  String? get model;/// Small model to use for tasks like title generation in the format of provider/model
 @JsonKey(name: 'small_model') String? get smallModel;/// Custom username to display in conversations instead of system username
  String? get username;/// @deprecated Use `agent` field instead.
- Map<String, AgentConfig>? get mode;/// Agent configuration, see https://opencode.ai/docs/agent
- Map<String, AgentConfig>? get agent;/// Custom provider configurations and model overrides
+ ConfigMode? get mode;/// Agent configuration, see https://opencode.ai/docs/agent
+ ConfigAgent? get agent;/// Custom provider configurations and model overrides
  Map<String, Provider>? get provider;/// MCP (Model Context Protocol) server configurations
  Map<String, McpMcp>? get mcp; Map<String, Formatter>? get formatter; Map<String, LspLsp>? get lsp;/// Additional instruction files or patterns to include
  List<String>? get instructions; LayoutConfig? get layout; ConfigPermission? get permission; Map<String, bool>? get tools; ConfigExperimental? get experimental;
@@ -44,12 +44,12 @@ $ConfigCopyWith<Config> get copyWith => _$ConfigCopyWithImpl<Config>(this as Con
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Config&&(identical(other.schema, schema) || other.schema == schema)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.keybinds, keybinds) || other.keybinds == keybinds)&&(identical(other.tui, tui) || other.tui == tui)&&const DeepCollectionEquality().equals(other.command, command)&&(identical(other.watcher, watcher) || other.watcher == watcher)&&const DeepCollectionEquality().equals(other.plugin, plugin)&&(identical(other.snapshot, snapshot) || other.snapshot == snapshot)&&(identical(other.share, share) || other.share == share)&&(identical(other.autoshare, autoshare) || other.autoshare == autoshare)&&(identical(other.autoupdate, autoupdate) || other.autoupdate == autoupdate)&&const DeepCollectionEquality().equals(other.disabledProviders, disabledProviders)&&(identical(other.model, model) || other.model == model)&&(identical(other.smallModel, smallModel) || other.smallModel == smallModel)&&(identical(other.username, username) || other.username == username)&&const DeepCollectionEquality().equals(other.mode, mode)&&const DeepCollectionEquality().equals(other.agent, agent)&&const DeepCollectionEquality().equals(other.provider, provider)&&const DeepCollectionEquality().equals(other.mcp, mcp)&&const DeepCollectionEquality().equals(other.formatter, formatter)&&const DeepCollectionEquality().equals(other.lsp, lsp)&&const DeepCollectionEquality().equals(other.instructions, instructions)&&(identical(other.layout, layout) || other.layout == layout)&&(identical(other.permission, permission) || other.permission == permission)&&const DeepCollectionEquality().equals(other.tools, tools)&&(identical(other.experimental, experimental) || other.experimental == experimental));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Config&&(identical(other.schema, schema) || other.schema == schema)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.keybinds, keybinds) || other.keybinds == keybinds)&&(identical(other.tui, tui) || other.tui == tui)&&const DeepCollectionEquality().equals(other.command, command)&&(identical(other.watcher, watcher) || other.watcher == watcher)&&const DeepCollectionEquality().equals(other.plugin, plugin)&&(identical(other.snapshot, snapshot) || other.snapshot == snapshot)&&(identical(other.share, share) || other.share == share)&&(identical(other.autoshare, autoshare) || other.autoshare == autoshare)&&(identical(other.autoupdate, autoupdate) || other.autoupdate == autoupdate)&&const DeepCollectionEquality().equals(other.disabledProviders, disabledProviders)&&(identical(other.model, model) || other.model == model)&&(identical(other.smallModel, smallModel) || other.smallModel == smallModel)&&(identical(other.username, username) || other.username == username)&&(identical(other.mode, mode) || other.mode == mode)&&(identical(other.agent, agent) || other.agent == agent)&&const DeepCollectionEquality().equals(other.provider, provider)&&const DeepCollectionEquality().equals(other.mcp, mcp)&&const DeepCollectionEquality().equals(other.formatter, formatter)&&const DeepCollectionEquality().equals(other.lsp, lsp)&&const DeepCollectionEquality().equals(other.instructions, instructions)&&(identical(other.layout, layout) || other.layout == layout)&&(identical(other.permission, permission) || other.permission == permission)&&const DeepCollectionEquality().equals(other.tools, tools)&&(identical(other.experimental, experimental) || other.experimental == experimental));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,schema,theme,keybinds,tui,const DeepCollectionEquality().hash(command),watcher,const DeepCollectionEquality().hash(plugin),snapshot,share,autoshare,autoupdate,const DeepCollectionEquality().hash(disabledProviders),model,smallModel,username,const DeepCollectionEquality().hash(mode),const DeepCollectionEquality().hash(agent),const DeepCollectionEquality().hash(provider),const DeepCollectionEquality().hash(mcp),const DeepCollectionEquality().hash(formatter),const DeepCollectionEquality().hash(lsp),const DeepCollectionEquality().hash(instructions),layout,permission,const DeepCollectionEquality().hash(tools),experimental]);
+int get hashCode => Object.hashAll([runtimeType,schema,theme,keybinds,tui,const DeepCollectionEquality().hash(command),watcher,const DeepCollectionEquality().hash(plugin),snapshot,share,autoshare,autoupdate,const DeepCollectionEquality().hash(disabledProviders),model,smallModel,username,mode,agent,const DeepCollectionEquality().hash(provider),const DeepCollectionEquality().hash(mcp),const DeepCollectionEquality().hash(formatter),const DeepCollectionEquality().hash(lsp),const DeepCollectionEquality().hash(instructions),layout,permission,const DeepCollectionEquality().hash(tools),experimental]);
 
 @override
 String toString() {
@@ -64,11 +64,11 @@ abstract mixin class $ConfigCopyWith<$Res>  {
   factory $ConfigCopyWith(Config value, $Res Function(Config) _then) = _$ConfigCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '\$schema') String? schema, String? theme, KeybindsConfig? keybinds, ConfigTui? tui, Map<String, Command>? command, ConfigWatcher? watcher, List<String>? plugin, bool? snapshot, ConfigShareShare? share, bool? autoshare, bool? autoupdate,@JsonKey(name: 'disabled_providers') List<String>? disabledProviders, String? model,@JsonKey(name: 'small_model') String? smallModel, String? username, Map<String, AgentConfig>? mode, Map<String, AgentConfig>? agent, Map<String, Provider>? provider, Map<String, McpMcp>? mcp, Map<String, Formatter>? formatter, Map<String, LspLsp>? lsp, List<String>? instructions, LayoutConfig? layout, ConfigPermission? permission, Map<String, bool>? tools, ConfigExperimental? experimental
+@JsonKey(name: '\$schema') String? schema, String? theme, KeybindsConfig? keybinds, ConfigTui? tui, Map<String, Command>? command, ConfigWatcher? watcher, List<String>? plugin, bool? snapshot, ConfigShareShare? share, bool? autoshare, bool? autoupdate,@JsonKey(name: 'disabled_providers') List<String>? disabledProviders, String? model,@JsonKey(name: 'small_model') String? smallModel, String? username, ConfigMode? mode, ConfigAgent? agent, Map<String, Provider>? provider, Map<String, McpMcp>? mcp, Map<String, Formatter>? formatter, Map<String, LspLsp>? lsp, List<String>? instructions, LayoutConfig? layout, ConfigPermission? permission, Map<String, bool>? tools, ConfigExperimental? experimental
 });
 
 
-$KeybindsConfigCopyWith<$Res>? get keybinds;$ConfigTuiCopyWith<$Res>? get tui;$ConfigWatcherCopyWith<$Res>? get watcher;$ConfigPermissionCopyWith<$Res>? get permission;$ConfigExperimentalCopyWith<$Res>? get experimental;
+$KeybindsConfigCopyWith<$Res>? get keybinds;$ConfigTuiCopyWith<$Res>? get tui;$ConfigWatcherCopyWith<$Res>? get watcher;$ConfigModeCopyWith<$Res>? get mode;$ConfigAgentCopyWith<$Res>? get agent;$ConfigPermissionCopyWith<$Res>? get permission;$ConfigExperimentalCopyWith<$Res>? get experimental;
 
 }
 /// @nodoc
@@ -99,8 +99,8 @@ as List<String>?,model: freezed == model ? _self.model : model // ignore: cast_n
 as String?,smallModel: freezed == smallModel ? _self.smallModel : smallModel // ignore: cast_nullable_to_non_nullable
 as String?,username: freezed == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
 as String?,mode: freezed == mode ? _self.mode : mode // ignore: cast_nullable_to_non_nullable
-as Map<String, AgentConfig>?,agent: freezed == agent ? _self.agent : agent // ignore: cast_nullable_to_non_nullable
-as Map<String, AgentConfig>?,provider: freezed == provider ? _self.provider : provider // ignore: cast_nullable_to_non_nullable
+as ConfigMode?,agent: freezed == agent ? _self.agent : agent // ignore: cast_nullable_to_non_nullable
+as ConfigAgent?,provider: freezed == provider ? _self.provider : provider // ignore: cast_nullable_to_non_nullable
 as Map<String, Provider>?,mcp: freezed == mcp ? _self.mcp : mcp // ignore: cast_nullable_to_non_nullable
 as Map<String, McpMcp>?,formatter: freezed == formatter ? _self.formatter : formatter // ignore: cast_nullable_to_non_nullable
 as Map<String, Formatter>?,lsp: freezed == lsp ? _self.lsp : lsp // ignore: cast_nullable_to_non_nullable
@@ -147,6 +147,30 @@ $ConfigWatcherCopyWith<$Res>? get watcher {
 
   return $ConfigWatcherCopyWith<$Res>(_self.watcher!, (value) {
     return _then(_self.copyWith(watcher: value));
+  });
+}/// Create a copy of Config
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ConfigModeCopyWith<$Res>? get mode {
+    if (_self.mode == null) {
+    return null;
+  }
+
+  return $ConfigModeCopyWith<$Res>(_self.mode!, (value) {
+    return _then(_self.copyWith(mode: value));
+  });
+}/// Create a copy of Config
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ConfigAgentCopyWith<$Res>? get agent {
+    if (_self.agent == null) {
+    return null;
+  }
+
+  return $ConfigAgentCopyWith<$Res>(_self.agent!, (value) {
+    return _then(_self.copyWith(agent: value));
   });
 }/// Create a copy of Config
 /// with the given fields replaced by the non-null parameter values.
@@ -254,7 +278,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '\$schema')  String? schema,  String? theme,  KeybindsConfig? keybinds,  ConfigTui? tui,  Map<String, Command>? command,  ConfigWatcher? watcher,  List<String>? plugin,  bool? snapshot,  ConfigShareShare? share,  bool? autoshare,  bool? autoupdate, @JsonKey(name: 'disabled_providers')  List<String>? disabledProviders,  String? model, @JsonKey(name: 'small_model')  String? smallModel,  String? username,  Map<String, AgentConfig>? mode,  Map<String, AgentConfig>? agent,  Map<String, Provider>? provider,  Map<String, McpMcp>? mcp,  Map<String, Formatter>? formatter,  Map<String, LspLsp>? lsp,  List<String>? instructions,  LayoutConfig? layout,  ConfigPermission? permission,  Map<String, bool>? tools,  ConfigExperimental? experimental)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '\$schema')  String? schema,  String? theme,  KeybindsConfig? keybinds,  ConfigTui? tui,  Map<String, Command>? command,  ConfigWatcher? watcher,  List<String>? plugin,  bool? snapshot,  ConfigShareShare? share,  bool? autoshare,  bool? autoupdate, @JsonKey(name: 'disabled_providers')  List<String>? disabledProviders,  String? model, @JsonKey(name: 'small_model')  String? smallModel,  String? username,  ConfigMode? mode,  ConfigAgent? agent,  Map<String, Provider>? provider,  Map<String, McpMcp>? mcp,  Map<String, Formatter>? formatter,  Map<String, LspLsp>? lsp,  List<String>? instructions,  LayoutConfig? layout,  ConfigPermission? permission,  Map<String, bool>? tools,  ConfigExperimental? experimental)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Config() when $default != null:
 return $default(_that.schema,_that.theme,_that.keybinds,_that.tui,_that.command,_that.watcher,_that.plugin,_that.snapshot,_that.share,_that.autoshare,_that.autoupdate,_that.disabledProviders,_that.model,_that.smallModel,_that.username,_that.mode,_that.agent,_that.provider,_that.mcp,_that.formatter,_that.lsp,_that.instructions,_that.layout,_that.permission,_that.tools,_that.experimental);case _:
@@ -275,7 +299,7 @@ return $default(_that.schema,_that.theme,_that.keybinds,_that.tui,_that.command,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '\$schema')  String? schema,  String? theme,  KeybindsConfig? keybinds,  ConfigTui? tui,  Map<String, Command>? command,  ConfigWatcher? watcher,  List<String>? plugin,  bool? snapshot,  ConfigShareShare? share,  bool? autoshare,  bool? autoupdate, @JsonKey(name: 'disabled_providers')  List<String>? disabledProviders,  String? model, @JsonKey(name: 'small_model')  String? smallModel,  String? username,  Map<String, AgentConfig>? mode,  Map<String, AgentConfig>? agent,  Map<String, Provider>? provider,  Map<String, McpMcp>? mcp,  Map<String, Formatter>? formatter,  Map<String, LspLsp>? lsp,  List<String>? instructions,  LayoutConfig? layout,  ConfigPermission? permission,  Map<String, bool>? tools,  ConfigExperimental? experimental)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '\$schema')  String? schema,  String? theme,  KeybindsConfig? keybinds,  ConfigTui? tui,  Map<String, Command>? command,  ConfigWatcher? watcher,  List<String>? plugin,  bool? snapshot,  ConfigShareShare? share,  bool? autoshare,  bool? autoupdate, @JsonKey(name: 'disabled_providers')  List<String>? disabledProviders,  String? model, @JsonKey(name: 'small_model')  String? smallModel,  String? username,  ConfigMode? mode,  ConfigAgent? agent,  Map<String, Provider>? provider,  Map<String, McpMcp>? mcp,  Map<String, Formatter>? formatter,  Map<String, LspLsp>? lsp,  List<String>? instructions,  LayoutConfig? layout,  ConfigPermission? permission,  Map<String, bool>? tools,  ConfigExperimental? experimental)  $default,) {final _that = this;
 switch (_that) {
 case _Config():
 return $default(_that.schema,_that.theme,_that.keybinds,_that.tui,_that.command,_that.watcher,_that.plugin,_that.snapshot,_that.share,_that.autoshare,_that.autoupdate,_that.disabledProviders,_that.model,_that.smallModel,_that.username,_that.mode,_that.agent,_that.provider,_that.mcp,_that.formatter,_that.lsp,_that.instructions,_that.layout,_that.permission,_that.tools,_that.experimental);case _:
@@ -295,7 +319,7 @@ return $default(_that.schema,_that.theme,_that.keybinds,_that.tui,_that.command,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '\$schema')  String? schema,  String? theme,  KeybindsConfig? keybinds,  ConfigTui? tui,  Map<String, Command>? command,  ConfigWatcher? watcher,  List<String>? plugin,  bool? snapshot,  ConfigShareShare? share,  bool? autoshare,  bool? autoupdate, @JsonKey(name: 'disabled_providers')  List<String>? disabledProviders,  String? model, @JsonKey(name: 'small_model')  String? smallModel,  String? username,  Map<String, AgentConfig>? mode,  Map<String, AgentConfig>? agent,  Map<String, Provider>? provider,  Map<String, McpMcp>? mcp,  Map<String, Formatter>? formatter,  Map<String, LspLsp>? lsp,  List<String>? instructions,  LayoutConfig? layout,  ConfigPermission? permission,  Map<String, bool>? tools,  ConfigExperimental? experimental)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '\$schema')  String? schema,  String? theme,  KeybindsConfig? keybinds,  ConfigTui? tui,  Map<String, Command>? command,  ConfigWatcher? watcher,  List<String>? plugin,  bool? snapshot,  ConfigShareShare? share,  bool? autoshare,  bool? autoupdate, @JsonKey(name: 'disabled_providers')  List<String>? disabledProviders,  String? model, @JsonKey(name: 'small_model')  String? smallModel,  String? username,  ConfigMode? mode,  ConfigAgent? agent,  Map<String, Provider>? provider,  Map<String, McpMcp>? mcp,  Map<String, Formatter>? formatter,  Map<String, LspLsp>? lsp,  List<String>? instructions,  LayoutConfig? layout,  ConfigPermission? permission,  Map<String, bool>? tools,  ConfigExperimental? experimental)?  $default,) {final _that = this;
 switch (_that) {
 case _Config() when $default != null:
 return $default(_that.schema,_that.theme,_that.keybinds,_that.tui,_that.command,_that.watcher,_that.plugin,_that.snapshot,_that.share,_that.autoshare,_that.autoupdate,_that.disabledProviders,_that.model,_that.smallModel,_that.username,_that.mode,_that.agent,_that.provider,_that.mcp,_that.formatter,_that.lsp,_that.instructions,_that.layout,_that.permission,_that.tools,_that.experimental);case _:
@@ -310,7 +334,7 @@ return $default(_that.schema,_that.theme,_that.keybinds,_that.tui,_that.command,
 @JsonSerializable()
 
 class _Config implements Config {
-  const _Config({@JsonKey(name: '\$schema') this.schema, this.theme, this.keybinds, this.tui, final  Map<String, Command>? command, this.watcher, final  List<String>? plugin, this.snapshot, this.share, this.autoshare, this.autoupdate, @JsonKey(name: 'disabled_providers') final  List<String>? disabledProviders, this.model, @JsonKey(name: 'small_model') this.smallModel, this.username, final  Map<String, AgentConfig>? mode, final  Map<String, AgentConfig>? agent, final  Map<String, Provider>? provider, final  Map<String, McpMcp>? mcp, final  Map<String, Formatter>? formatter, final  Map<String, LspLsp>? lsp, final  List<String>? instructions, this.layout, this.permission, final  Map<String, bool>? tools, this.experimental}): _command = command,_plugin = plugin,_disabledProviders = disabledProviders,_mode = mode,_agent = agent,_provider = provider,_mcp = mcp,_formatter = formatter,_lsp = lsp,_instructions = instructions,_tools = tools;
+  const _Config({@JsonKey(name: '\$schema') this.schema, this.theme, this.keybinds, this.tui, final  Map<String, Command>? command, this.watcher, final  List<String>? plugin, this.snapshot, this.share, this.autoshare, this.autoupdate, @JsonKey(name: 'disabled_providers') final  List<String>? disabledProviders, this.model, @JsonKey(name: 'small_model') this.smallModel, this.username, this.mode, this.agent, final  Map<String, Provider>? provider, final  Map<String, McpMcp>? mcp, final  Map<String, Formatter>? formatter, final  Map<String, LspLsp>? lsp, final  List<String>? instructions, this.layout, this.permission, final  Map<String, bool>? tools, this.experimental}): _command = command,_plugin = plugin,_disabledProviders = disabledProviders,_provider = provider,_mcp = mcp,_formatter = formatter,_lsp = lsp,_instructions = instructions,_tools = tools;
   factory _Config.fromJson(Map<String, dynamic> json) => _$ConfigFromJson(json);
 
 /// JSON schema reference for configuration validation
@@ -366,27 +390,9 @@ class _Config implements Config {
 /// Custom username to display in conversations instead of system username
 @override final  String? username;
 /// @deprecated Use `agent` field instead.
- final  Map<String, AgentConfig>? _mode;
-/// @deprecated Use `agent` field instead.
-@override Map<String, AgentConfig>? get mode {
-  final value = _mode;
-  if (value == null) return null;
-  if (_mode is EqualUnmodifiableMapView) return _mode;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(value);
-}
-
+@override final  ConfigMode? mode;
 /// Agent configuration, see https://opencode.ai/docs/agent
- final  Map<String, AgentConfig>? _agent;
-/// Agent configuration, see https://opencode.ai/docs/agent
-@override Map<String, AgentConfig>? get agent {
-  final value = _agent;
-  if (value == null) return null;
-  if (_agent is EqualUnmodifiableMapView) return _agent;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(value);
-}
-
+@override final  ConfigAgent? agent;
 /// Custom provider configurations and model overrides
  final  Map<String, Provider>? _provider;
 /// Custom provider configurations and model overrides
@@ -464,12 +470,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Config&&(identical(other.schema, schema) || other.schema == schema)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.keybinds, keybinds) || other.keybinds == keybinds)&&(identical(other.tui, tui) || other.tui == tui)&&const DeepCollectionEquality().equals(other._command, _command)&&(identical(other.watcher, watcher) || other.watcher == watcher)&&const DeepCollectionEquality().equals(other._plugin, _plugin)&&(identical(other.snapshot, snapshot) || other.snapshot == snapshot)&&(identical(other.share, share) || other.share == share)&&(identical(other.autoshare, autoshare) || other.autoshare == autoshare)&&(identical(other.autoupdate, autoupdate) || other.autoupdate == autoupdate)&&const DeepCollectionEquality().equals(other._disabledProviders, _disabledProviders)&&(identical(other.model, model) || other.model == model)&&(identical(other.smallModel, smallModel) || other.smallModel == smallModel)&&(identical(other.username, username) || other.username == username)&&const DeepCollectionEquality().equals(other._mode, _mode)&&const DeepCollectionEquality().equals(other._agent, _agent)&&const DeepCollectionEquality().equals(other._provider, _provider)&&const DeepCollectionEquality().equals(other._mcp, _mcp)&&const DeepCollectionEquality().equals(other._formatter, _formatter)&&const DeepCollectionEquality().equals(other._lsp, _lsp)&&const DeepCollectionEquality().equals(other._instructions, _instructions)&&(identical(other.layout, layout) || other.layout == layout)&&(identical(other.permission, permission) || other.permission == permission)&&const DeepCollectionEquality().equals(other._tools, _tools)&&(identical(other.experimental, experimental) || other.experimental == experimental));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Config&&(identical(other.schema, schema) || other.schema == schema)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.keybinds, keybinds) || other.keybinds == keybinds)&&(identical(other.tui, tui) || other.tui == tui)&&const DeepCollectionEquality().equals(other._command, _command)&&(identical(other.watcher, watcher) || other.watcher == watcher)&&const DeepCollectionEquality().equals(other._plugin, _plugin)&&(identical(other.snapshot, snapshot) || other.snapshot == snapshot)&&(identical(other.share, share) || other.share == share)&&(identical(other.autoshare, autoshare) || other.autoshare == autoshare)&&(identical(other.autoupdate, autoupdate) || other.autoupdate == autoupdate)&&const DeepCollectionEquality().equals(other._disabledProviders, _disabledProviders)&&(identical(other.model, model) || other.model == model)&&(identical(other.smallModel, smallModel) || other.smallModel == smallModel)&&(identical(other.username, username) || other.username == username)&&(identical(other.mode, mode) || other.mode == mode)&&(identical(other.agent, agent) || other.agent == agent)&&const DeepCollectionEquality().equals(other._provider, _provider)&&const DeepCollectionEquality().equals(other._mcp, _mcp)&&const DeepCollectionEquality().equals(other._formatter, _formatter)&&const DeepCollectionEquality().equals(other._lsp, _lsp)&&const DeepCollectionEquality().equals(other._instructions, _instructions)&&(identical(other.layout, layout) || other.layout == layout)&&(identical(other.permission, permission) || other.permission == permission)&&const DeepCollectionEquality().equals(other._tools, _tools)&&(identical(other.experimental, experimental) || other.experimental == experimental));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,schema,theme,keybinds,tui,const DeepCollectionEquality().hash(_command),watcher,const DeepCollectionEquality().hash(_plugin),snapshot,share,autoshare,autoupdate,const DeepCollectionEquality().hash(_disabledProviders),model,smallModel,username,const DeepCollectionEquality().hash(_mode),const DeepCollectionEquality().hash(_agent),const DeepCollectionEquality().hash(_provider),const DeepCollectionEquality().hash(_mcp),const DeepCollectionEquality().hash(_formatter),const DeepCollectionEquality().hash(_lsp),const DeepCollectionEquality().hash(_instructions),layout,permission,const DeepCollectionEquality().hash(_tools),experimental]);
+int get hashCode => Object.hashAll([runtimeType,schema,theme,keybinds,tui,const DeepCollectionEquality().hash(_command),watcher,const DeepCollectionEquality().hash(_plugin),snapshot,share,autoshare,autoupdate,const DeepCollectionEquality().hash(_disabledProviders),model,smallModel,username,mode,agent,const DeepCollectionEquality().hash(_provider),const DeepCollectionEquality().hash(_mcp),const DeepCollectionEquality().hash(_formatter),const DeepCollectionEquality().hash(_lsp),const DeepCollectionEquality().hash(_instructions),layout,permission,const DeepCollectionEquality().hash(_tools),experimental]);
 
 @override
 String toString() {
@@ -484,11 +490,11 @@ abstract mixin class _$ConfigCopyWith<$Res> implements $ConfigCopyWith<$Res> {
   factory _$ConfigCopyWith(_Config value, $Res Function(_Config) _then) = __$ConfigCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '\$schema') String? schema, String? theme, KeybindsConfig? keybinds, ConfigTui? tui, Map<String, Command>? command, ConfigWatcher? watcher, List<String>? plugin, bool? snapshot, ConfigShareShare? share, bool? autoshare, bool? autoupdate,@JsonKey(name: 'disabled_providers') List<String>? disabledProviders, String? model,@JsonKey(name: 'small_model') String? smallModel, String? username, Map<String, AgentConfig>? mode, Map<String, AgentConfig>? agent, Map<String, Provider>? provider, Map<String, McpMcp>? mcp, Map<String, Formatter>? formatter, Map<String, LspLsp>? lsp, List<String>? instructions, LayoutConfig? layout, ConfigPermission? permission, Map<String, bool>? tools, ConfigExperimental? experimental
+@JsonKey(name: '\$schema') String? schema, String? theme, KeybindsConfig? keybinds, ConfigTui? tui, Map<String, Command>? command, ConfigWatcher? watcher, List<String>? plugin, bool? snapshot, ConfigShareShare? share, bool? autoshare, bool? autoupdate,@JsonKey(name: 'disabled_providers') List<String>? disabledProviders, String? model,@JsonKey(name: 'small_model') String? smallModel, String? username, ConfigMode? mode, ConfigAgent? agent, Map<String, Provider>? provider, Map<String, McpMcp>? mcp, Map<String, Formatter>? formatter, Map<String, LspLsp>? lsp, List<String>? instructions, LayoutConfig? layout, ConfigPermission? permission, Map<String, bool>? tools, ConfigExperimental? experimental
 });
 
 
-@override $KeybindsConfigCopyWith<$Res>? get keybinds;@override $ConfigTuiCopyWith<$Res>? get tui;@override $ConfigWatcherCopyWith<$Res>? get watcher;@override $ConfigPermissionCopyWith<$Res>? get permission;@override $ConfigExperimentalCopyWith<$Res>? get experimental;
+@override $KeybindsConfigCopyWith<$Res>? get keybinds;@override $ConfigTuiCopyWith<$Res>? get tui;@override $ConfigWatcherCopyWith<$Res>? get watcher;@override $ConfigModeCopyWith<$Res>? get mode;@override $ConfigAgentCopyWith<$Res>? get agent;@override $ConfigPermissionCopyWith<$Res>? get permission;@override $ConfigExperimentalCopyWith<$Res>? get experimental;
 
 }
 /// @nodoc
@@ -518,9 +524,9 @@ as bool?,disabledProviders: freezed == disabledProviders ? _self._disabledProvid
 as List<String>?,model: freezed == model ? _self.model : model // ignore: cast_nullable_to_non_nullable
 as String?,smallModel: freezed == smallModel ? _self.smallModel : smallModel // ignore: cast_nullable_to_non_nullable
 as String?,username: freezed == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
-as String?,mode: freezed == mode ? _self._mode : mode // ignore: cast_nullable_to_non_nullable
-as Map<String, AgentConfig>?,agent: freezed == agent ? _self._agent : agent // ignore: cast_nullable_to_non_nullable
-as Map<String, AgentConfig>?,provider: freezed == provider ? _self._provider : provider // ignore: cast_nullable_to_non_nullable
+as String?,mode: freezed == mode ? _self.mode : mode // ignore: cast_nullable_to_non_nullable
+as ConfigMode?,agent: freezed == agent ? _self.agent : agent // ignore: cast_nullable_to_non_nullable
+as ConfigAgent?,provider: freezed == provider ? _self._provider : provider // ignore: cast_nullable_to_non_nullable
 as Map<String, Provider>?,mcp: freezed == mcp ? _self._mcp : mcp // ignore: cast_nullable_to_non_nullable
 as Map<String, McpMcp>?,formatter: freezed == formatter ? _self._formatter : formatter // ignore: cast_nullable_to_non_nullable
 as Map<String, Formatter>?,lsp: freezed == lsp ? _self._lsp : lsp // ignore: cast_nullable_to_non_nullable
@@ -568,6 +574,30 @@ $ConfigWatcherCopyWith<$Res>? get watcher {
 
   return $ConfigWatcherCopyWith<$Res>(_self.watcher!, (value) {
     return _then(_self.copyWith(watcher: value));
+  });
+}/// Create a copy of Config
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ConfigModeCopyWith<$Res>? get mode {
+    if (_self.mode == null) {
+    return null;
+  }
+
+  return $ConfigModeCopyWith<$Res>(_self.mode!, (value) {
+    return _then(_self.copyWith(mode: value));
+  });
+}/// Create a copy of Config
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ConfigAgentCopyWith<$Res>? get agent {
+    if (_self.agent == null) {
+    return null;
+  }
+
+  return $ConfigAgentCopyWith<$Res>(_self.agent!, (value) {
+    return _then(_self.copyWith(agent: value));
   });
 }/// Create a copy of Config
 /// with the given fields replaced by the non-null parameter values.

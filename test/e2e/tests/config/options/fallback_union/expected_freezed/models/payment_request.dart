@@ -44,8 +44,34 @@ sealed class PaymentRequest with _$PaymentRequest {
     String? transactionHash,
   }) = PaymentRequestCrypto;
 
-  const factory PaymentRequest.unknown() = PaymentRequestUnknown;
+  const factory PaymentRequest.unknown(Map<String, Object?> json) =
+      PaymentRequestUnknown;
 
   factory PaymentRequest.fromJson(Map<String, Object?> json) =>
       _$PaymentRequestFromJson(json);
+}
+
+class PaymentRequestUnknown implements PaymentRequest {
+  const PaymentRequestUnknown(this.json);
+
+  final Map<String, Object?> json;
+
+  factory PaymentRequestUnknown.fromJson(Map<String, dynamic> json) =>
+      PaymentRequestUnknown(Map<String, Object?>.from(json));
+
+  @override
+  Map<String, dynamic> toJson() => Map<String, dynamic>.from(json);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PaymentRequestUnknown &&
+          const DeepCollectionEquality().equals(json, other.json);
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(json));
+
+  @override
+  String toString() => 'PaymentRequest.unknown()';
 }

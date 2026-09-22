@@ -106,3 +106,12 @@ void exitWithError(String message) {
   stderr.writeln('${_red}ERROR: $message$_reset');
   exit(2);
 }
+
+int generationExitCode({
+  required int successSchemasCount,
+  required int schemesCount,
+}) => successSchemasCount == schemesCount ? 0 : 2;
+
+void exitProcess(int code) {
+  exit(code);
+}

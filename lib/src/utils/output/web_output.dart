@@ -94,3 +94,10 @@ void schemaFailedMessage(Object error, StackTrace stack, {String? name}) {
 void exitWithError(String message) {
   print('ERROR: $message');
 }
+
+int generationExitCode({
+  required int successSchemasCount,
+  required int schemesCount,
+}) => successSchemasCount == schemesCount ? 0 : 2;
+
+void exitProcess(int code) {}

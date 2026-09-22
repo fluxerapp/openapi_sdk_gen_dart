@@ -5,7 +5,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'gbif.dart';
-import 'images.dart';
+import 'images2.dart';
 import 'model15.dart';
 import 'model16.dart';
 import 'powo.dart';
@@ -18,7 +18,7 @@ abstract class Result with _$Result {
   const factory Result({
     num? score,
     Model15? species,
-    Images? images,
+    Images2? images,
     Gbif? gbif,
     Powo? powo,
     Model16? iucn,

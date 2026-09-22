@@ -1597,4 +1597,66 @@ abstract class ClassNameClient {
       expect(filledContent.content, expectedContents);
     });
   });
+
+  test('same wire name in different locations stays on the client', () {
+    const restClient = UniversalRestClient(
+      name: 'Pet',
+      imports: {},
+      requests: [
+        UniversalRequest(
+          name: 'create',
+          requestType: HttpRequestType.post,
+          route: '/pet/{id}',
+          returnType: null,
+          contentType: 'multipart/form-data',
+          parameters: [
+            UniversalRequestType(
+              parameterType: HttpParameterType.path,
+              name: 'id',
+              type: UniversalType(
+                type: 'integer',
+                name: 'id',
+                isRequired: true,
+              ),
+            ),
+            UniversalRequestType(
+              parameterType: HttpParameterType.header,
+              name: 'id',
+              type: UniversalType(
+                type: 'integer',
+                name: 'id',
+                isRequired: false,
+              ),
+            ),
+            UniversalRequestType(
+              parameterType: HttpParameterType.query,
+              name: 'id',
+              type: UniversalType(
+                type: 'integer',
+                name: 'id',
+                isRequired: false,
+              ),
+            ),
+            UniversalRequestType(
+              parameterType: HttpParameterType.part,
+              name: 'id',
+              type: UniversalType(
+                type: 'integer',
+                name: 'id',
+                isRequired: false,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+    const fillController = FillController(
+      config: GeneratorConfig(name: '', outputDirectory: '.'),
+    );
+    final content = fillController.fillRestClientContent(restClient).content;
+    expect(content, contains("@Path('id') required int id,"));
+    expect(content, contains("@Header('id') int idHeader,"));
+    expect(content, contains("@Query('id') int idQuery,"));
+    expect(content, contains("@Part(name: 'id') int idPart,"));
+  });
 }

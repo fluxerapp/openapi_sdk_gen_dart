@@ -1,7 +1,3 @@
-// coverage:ignore-file
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
-
 import 'package:json_annotation/json_annotation.dart';
 
 import 'person_entity_entity_type_entity_type.dart';
@@ -63,15 +59,15 @@ class EntityPerson extends Entity {
 
   const EntityPerson({
     required this.id,
-    required this.entityType,
-    required this.name,
-    required this.description,
+    this.entityType,
+    this.name,
+    this.description,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
     required this.dateOfBirth,
-    required this.nationality,
-    required this.occupation,
-    required this.socialProfiles,
+    this.nationality,
+    this.occupation,
+    this.socialProfiles,
   });
 
   factory EntityPerson.fromJson(Map<String, dynamic> json) =>
@@ -97,16 +93,16 @@ class EntityOrganization extends Entity {
 
   const EntityOrganization({
     required this.id,
-    required this.entityType,
-    required this.name,
-    required this.description,
+    this.entityType,
+    this.name,
+    this.description,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
     required this.registrationNumber,
-    required this.foundedDate,
-    required this.industry,
-    required this.employeeCount,
-    required this.revenue,
+    this.foundedDate,
+    this.industry,
+    this.employeeCount,
+    this.revenue,
   });
 
   factory EntityOrganization.fromJson(Map<String, dynamic> json) =>

@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:openapi_sdk_gen/src/generator/model/json_serializer.dart';
 import 'package:openapi_sdk_gen/src/parser/model/normalized_identifier.dart';
 import 'package:openapi_sdk_gen/src/parser/openapi_parser_core.dart';
@@ -99,20 +98,14 @@ String _toClientRequest(
     sb.write('{\n');
   }
 
-  final uniqueParameters = <String, UniversalRequestType>{};
-  for (final param in request.parameters) {
-    final key = param.type.name ?? '';
-    if (!uniqueParameters.containsKey(key)) {
-      uniqueParameters[key] = param;
-    }
-  }
-
-  final sortedByRequired = List<UniversalRequestType>.from(
-    uniqueParameters.values.sorted((a, b) => a.type.compareTo(b.type)),
-  );
-  for (final parameter in sortedByRequired) {
+  final usedNames = <String>{};
+  final namedParameters = [
+    for (final param in request.parameters)
+      (param, _dartParameterName(param, usedNames)),
+  ]..sort((a, b) => a.$1.type.compareTo(b.$1.type));
+  for (final (parameter, dartName) in namedParameters) {
     sb.write(
-      '${_toParameter(parameter, request.isMultiPart, needFieldPrefix)}\n',
+      '${_toParameter(parameter, request.isMultiPart, needFieldPrefix, dartName)}\n',
     );
   }
   if (extrasParameterByDefault) {
@@ -146,10 +139,50 @@ String _addDioOptionsParameter() {
   return '    @DioOptions() RequestOptions? options,\n';
 }
 
+String _dartParameterName(
+  UniversalRequestType parameter,
+  Set<String> usedNames,
+) {
+  final raw = (parameter.type.name ?? parameter.name ?? 'param').toCamel;
+  var name = raw;
+  if (!usedNames.add(name)) {
+    final suffix = switch (parameter.parameterType) {
+      HttpParameterType.header => 'Header',
+      HttpParameterType.path => 'Path',
+      HttpParameterType.query => 'Query',
+      HttpParameterType.part || HttpParameterType.formData => 'Part',
+      HttpParameterType.body => 'Body',
+      HttpParameterType.extras => 'Extras',
+    };
+    name = '$raw$suffix';
+    if (!usedNames.add(name)) {
+      var index = 2;
+      while (!usedNames.add('$name$index')) {
+        index++;
+      }
+      name = '$name$index';
+    }
+  }
+  if (!reservedFieldNames.contains(name)) {
+    return name;
+  }
+  usedNames.remove(name);
+  var renamed = '${name}Param';
+  if (!usedNames.add(renamed)) {
+    var index = 2;
+    while (!usedNames.add('$renamed$index')) {
+      index++;
+    }
+    renamed = '$renamed$index';
+  }
+  return renamed;
+}
+
 String _toParameter(
   UniversalRequestType parameter,
   bool multiPart,
   bool needFieldPrefix,
+  String dartName,
 ) {
   var parameterType = parameter.type.toSuitableType(multiPart: multiPart);
   if (parameter.parameterType.isBody &&
@@ -160,13 +193,6 @@ String _toParameter(
   // Retrofit doesn't support Uint8List serialization, use List<int> instead
   if (parameterType.startsWith('Uint8List')) {
     parameterType = parameterType.replaceFirst('Uint8List', 'List<int>');
-  }
-
-  // Reserved words cannot be used as keyword arguments
-  var keywordArguments =
-      (parameter.type.name ?? parameter.name ?? 'param').toCamel;
-  if (reservedFieldNames.contains(keywordArguments)) {
-    keywordArguments = '${keywordArguments}Param';
   }
 
   final deprecatedAnnotation = parameter.deprecated
@@ -183,7 +209,7 @@ String _toParameter(
       "(${parameter.name != null && !parameter.parameterType.isBody ? "${parameter.parameterType.isPart ? 'name: ' : ''}${_startWith$(parameter.name!) ? 'r' : ''}'${parameter.name}'" : ''}) "
       '${_required(parameter.type)}'
       '$parameterType '
-      '$keywordArguments${_defaultValue(parameter.type)},';
+      '$dartName${_defaultValue(parameter.type)},';
 }
 
 String _contentTypeHeader(UniversalRequest request, String defaultContentType) {

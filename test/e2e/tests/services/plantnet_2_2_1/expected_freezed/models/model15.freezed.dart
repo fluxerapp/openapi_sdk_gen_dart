@@ -238,7 +238,7 @@ return $default(_that.scientificNameWithoutAuthor,_that.scientificNameAuthorship
 @JsonSerializable()
 
 class _Model15 implements Model15 {
-  const _Model15({this.scientificNameWithoutAuthor, this.scientificNameAuthorship, this.scientificName, this.genus, this.family, this.commonNames});
+  const _Model15({this.scientificNameWithoutAuthor, this.scientificNameAuthorship, this.scientificName, this.genus, this.family, final  CommonNames? commonNames}): _commonNames = commonNames;
   factory _Model15.fromJson(Map<String, dynamic> json) => _$Model15FromJson(json);
 
 @override final  String? scientificNameWithoutAuthor;
@@ -246,7 +246,15 @@ class _Model15 implements Model15 {
 @override final  String? scientificName;
 @override final  Genus? genus;
 @override final  Family? family;
-@override final  CommonNames? commonNames;
+ final  CommonNames? _commonNames;
+@override CommonNames? get commonNames {
+  final value = _commonNames;
+  if (value == null) return null;
+  if (_commonNames is EqualUnmodifiableListView) return _commonNames;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
 
 /// Create a copy of Model15
 /// with the given fields replaced by the non-null parameter values.
@@ -261,12 +269,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Model15&&(identical(other.scientificNameWithoutAuthor, scientificNameWithoutAuthor) || other.scientificNameWithoutAuthor == scientificNameWithoutAuthor)&&(identical(other.scientificNameAuthorship, scientificNameAuthorship) || other.scientificNameAuthorship == scientificNameAuthorship)&&(identical(other.scientificName, scientificName) || other.scientificName == scientificName)&&(identical(other.genus, genus) || other.genus == genus)&&(identical(other.family, family) || other.family == family)&&const DeepCollectionEquality().equals(other.commonNames, commonNames));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Model15&&(identical(other.scientificNameWithoutAuthor, scientificNameWithoutAuthor) || other.scientificNameWithoutAuthor == scientificNameWithoutAuthor)&&(identical(other.scientificNameAuthorship, scientificNameAuthorship) || other.scientificNameAuthorship == scientificNameAuthorship)&&(identical(other.scientificName, scientificName) || other.scientificName == scientificName)&&(identical(other.genus, genus) || other.genus == genus)&&(identical(other.family, family) || other.family == family)&&const DeepCollectionEquality().equals(other._commonNames, _commonNames));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,scientificNameWithoutAuthor,scientificNameAuthorship,scientificName,genus,family,const DeepCollectionEquality().hash(commonNames));
+int get hashCode => Object.hash(runtimeType,scientificNameWithoutAuthor,scientificNameAuthorship,scientificName,genus,family,const DeepCollectionEquality().hash(_commonNames));
 
 @override
 String toString() {
@@ -305,7 +313,7 @@ as String?,scientificNameAuthorship: freezed == scientificNameAuthorship ? _self
 as String?,scientificName: freezed == scientificName ? _self.scientificName : scientificName // ignore: cast_nullable_to_non_nullable
 as String?,genus: freezed == genus ? _self.genus : genus // ignore: cast_nullable_to_non_nullable
 as Genus?,family: freezed == family ? _self.family : family // ignore: cast_nullable_to_non_nullable
-as Family?,commonNames: freezed == commonNames ? _self.commonNames : commonNames // ignore: cast_nullable_to_non_nullable
+as Family?,commonNames: freezed == commonNames ? _self._commonNames : commonNames // ignore: cast_nullable_to_non_nullable
 as CommonNames?,
   ));
 }

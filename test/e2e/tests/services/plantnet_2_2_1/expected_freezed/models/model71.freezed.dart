@@ -238,13 +238,21 @@ return $default(_that.name,_that.author,_that.family,_that.commonNames,_that.ima
 @JsonSerializable()
 
 class _Model71 implements Model71 {
-  const _Model71({this.name, this.author, this.family, this.commonNames, final  Images? images, this.iucn, this.predictedName, @JsonKey(name: 'gpn_id') this.gpnId, @JsonKey(name: 'plantnet_id') this.plantnetId, @JsonKey(name: 'gbif_taxon_key') this.gbifTaxonKey, @JsonKey(name: 'is_tree') this.isTree, @JsonKey(name: 'is_invasive') this.isInvasive, @JsonKey(name: 'is_eu_directive') this.isEuDirective, @JsonKey(name: 'is_grin_uses') this.isGrinUses, @JsonKey(name: 'iucn_red_list_category') this.iucnRedListCategory, @JsonKey(name: 'area_surface') this.areaSurface, @JsonKey(name: 'area_species') this.areaSpecies, @JsonKey(name: 'percentage_covered') this.percentageCovered}): _images = images;
+  const _Model71({this.name, this.author, this.family, final  CommonNames? commonNames, final  Images? images, this.iucn, this.predictedName, @JsonKey(name: 'gpn_id') this.gpnId, @JsonKey(name: 'plantnet_id') this.plantnetId, @JsonKey(name: 'gbif_taxon_key') this.gbifTaxonKey, @JsonKey(name: 'is_tree') this.isTree, @JsonKey(name: 'is_invasive') this.isInvasive, @JsonKey(name: 'is_eu_directive') this.isEuDirective, @JsonKey(name: 'is_grin_uses') this.isGrinUses, @JsonKey(name: 'iucn_red_list_category') this.iucnRedListCategory, @JsonKey(name: 'area_surface') this.areaSurface, @JsonKey(name: 'area_species') this.areaSpecies, @JsonKey(name: 'percentage_covered') this.percentageCovered}): _commonNames = commonNames,_images = images;
   factory _Model71.fromJson(Map<String, dynamic> json) => _$Model71FromJson(json);
 
 @override final  String? name;
 @override final  String? author;
 @override final  String? family;
-@override final  CommonNames? commonNames;
+ final  CommonNames? _commonNames;
+@override CommonNames? get commonNames {
+  final value = _commonNames;
+  if (value == null) return null;
+  if (_commonNames is EqualUnmodifiableListView) return _commonNames;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
  final  Images? _images;
 @override Images? get images {
   final value = _images;
@@ -281,12 +289,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Model71&&(identical(other.name, name) || other.name == name)&&(identical(other.author, author) || other.author == author)&&(identical(other.family, family) || other.family == family)&&const DeepCollectionEquality().equals(other.commonNames, commonNames)&&const DeepCollectionEquality().equals(other._images, _images)&&(identical(other.iucn, iucn) || other.iucn == iucn)&&(identical(other.predictedName, predictedName) || other.predictedName == predictedName)&&(identical(other.gpnId, gpnId) || other.gpnId == gpnId)&&(identical(other.plantnetId, plantnetId) || other.plantnetId == plantnetId)&&(identical(other.gbifTaxonKey, gbifTaxonKey) || other.gbifTaxonKey == gbifTaxonKey)&&(identical(other.isTree, isTree) || other.isTree == isTree)&&(identical(other.isInvasive, isInvasive) || other.isInvasive == isInvasive)&&(identical(other.isEuDirective, isEuDirective) || other.isEuDirective == isEuDirective)&&(identical(other.isGrinUses, isGrinUses) || other.isGrinUses == isGrinUses)&&(identical(other.iucnRedListCategory, iucnRedListCategory) || other.iucnRedListCategory == iucnRedListCategory)&&(identical(other.areaSurface, areaSurface) || other.areaSurface == areaSurface)&&(identical(other.areaSpecies, areaSpecies) || other.areaSpecies == areaSpecies)&&(identical(other.percentageCovered, percentageCovered) || other.percentageCovered == percentageCovered));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Model71&&(identical(other.name, name) || other.name == name)&&(identical(other.author, author) || other.author == author)&&(identical(other.family, family) || other.family == family)&&const DeepCollectionEquality().equals(other._commonNames, _commonNames)&&const DeepCollectionEquality().equals(other._images, _images)&&(identical(other.iucn, iucn) || other.iucn == iucn)&&(identical(other.predictedName, predictedName) || other.predictedName == predictedName)&&(identical(other.gpnId, gpnId) || other.gpnId == gpnId)&&(identical(other.plantnetId, plantnetId) || other.plantnetId == plantnetId)&&(identical(other.gbifTaxonKey, gbifTaxonKey) || other.gbifTaxonKey == gbifTaxonKey)&&(identical(other.isTree, isTree) || other.isTree == isTree)&&(identical(other.isInvasive, isInvasive) || other.isInvasive == isInvasive)&&(identical(other.isEuDirective, isEuDirective) || other.isEuDirective == isEuDirective)&&(identical(other.isGrinUses, isGrinUses) || other.isGrinUses == isGrinUses)&&(identical(other.iucnRedListCategory, iucnRedListCategory) || other.iucnRedListCategory == iucnRedListCategory)&&(identical(other.areaSurface, areaSurface) || other.areaSurface == areaSurface)&&(identical(other.areaSpecies, areaSpecies) || other.areaSpecies == areaSpecies)&&(identical(other.percentageCovered, percentageCovered) || other.percentageCovered == percentageCovered));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,author,family,const DeepCollectionEquality().hash(commonNames),const DeepCollectionEquality().hash(_images),iucn,predictedName,gpnId,plantnetId,gbifTaxonKey,isTree,isInvasive,isEuDirective,isGrinUses,iucnRedListCategory,areaSurface,areaSpecies,percentageCovered);
+int get hashCode => Object.hash(runtimeType,name,author,family,const DeepCollectionEquality().hash(_commonNames),const DeepCollectionEquality().hash(_images),iucn,predictedName,gpnId,plantnetId,gbifTaxonKey,isTree,isInvasive,isEuDirective,isGrinUses,iucnRedListCategory,areaSurface,areaSpecies,percentageCovered);
 
 @override
 String toString() {
@@ -323,7 +331,7 @@ class __$Model71CopyWithImpl<$Res>
 name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,author: freezed == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as String?,family: freezed == family ? _self.family : family // ignore: cast_nullable_to_non_nullable
-as String?,commonNames: freezed == commonNames ? _self.commonNames : commonNames // ignore: cast_nullable_to_non_nullable
+as String?,commonNames: freezed == commonNames ? _self._commonNames : commonNames // ignore: cast_nullable_to_non_nullable
 as CommonNames?,images: freezed == images ? _self._images : images // ignore: cast_nullable_to_non_nullable
 as Images?,iucn: freezed == iucn ? _self.iucn : iucn // ignore: cast_nullable_to_non_nullable
 as Iucn?,predictedName: freezed == predictedName ? _self.predictedName : predictedName // ignore: cast_nullable_to_non_nullable

@@ -16,7 +16,7 @@ _AgentConfig _$AgentConfigFromJson(Map<String, dynamic> json) => _AgentConfig(
   ),
   disable: json['disable'] as bool?,
   description: json['description'] as String?,
-  mode: json['mode'],
+  mode: json['mode'] as String?,
   permission: json['permission'] == null
       ? null
       : AgentConfigPermission.fromJson(

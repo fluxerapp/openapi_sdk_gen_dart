@@ -10,7 +10,6 @@ String dartEnumDtoTemplate(
   UniversalEnumClass enumClass, {
   required JsonSerializer jsonSerializer,
   required bool unknownEnumValue,
-  required bool markFileAsGenerated,
 }) {
   if (jsonSerializer == JsonSerializer.dartMappable) {
     return _dartEnumDartMappableTemplate(
@@ -71,7 +70,7 @@ String _dartEnumDartMappableTemplate(
 
   final enumBodyParts = [
     '$values;',
-    '\n\n  String toJson() => toValue().toString();',
+    _toJsonDartMappable(enumClass),
     _toStringDartMappable(),
     if (unknownEnumValue) _valuesDefinedDartMappable(className),
   ];
@@ -219,6 +218,16 @@ String _toString(UniversalEnumClass enumClass) {
   } else {
     return '\n\n  @override\n  String toString() => json?.toString() ?? super.toString();';
   }
+}
+
+String _toJsonDartMappable(UniversalEnumClass enumClass) {
+  final dartType = enumClass.type.toDartType();
+  final isString = dartType == 'String' || dartType.startsWith('String');
+  if (isString) {
+    return "\n\n  String toJson() => toValue() ?? 'null';";
+  }
+  final nullableSign = _nullableSign(dartType);
+  return '\n\n  $dartType$nullableSign toJson() => toValue();';
 }
 
 String _toStringDartMappable() =>

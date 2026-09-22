@@ -11,7 +11,7 @@ enum OrganizationEntityEntityTypeEntityType {
   @MappableValue('organization')
   organization;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();

@@ -381,7 +381,7 @@ enum UserRole {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -408,7 +408,7 @@ enum UserStatus {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -523,7 +523,7 @@ enum PostStatus {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -672,7 +672,7 @@ class PaymentRequestCreditCard extends PaymentRequest
     required this.expiryMonth,
     required this.expiryYear,
     required this.cvv,
-    required this.cardholderName,
+    this.cardholderName,
     required this.amount,
   });
 }
@@ -691,9 +691,9 @@ class PaymentRequestBankTransfer extends PaymentRequest
     required this.paymentType,
     required this.accountNumber,
     required this.routingNumber,
-    required this.accountHolder,
+    this.accountHolder,
     required this.amount,
-    required this.reference,
+    this.reference,
   });
 }
 
@@ -711,7 +711,7 @@ class PaymentRequestCrypto extends PaymentRequest
     required this.walletAddress,
     required this.cryptocurrency,
     required this.amount,
-    required this.transactionHash,
+    this.transactionHash,
   });
 }
 
@@ -820,11 +820,7 @@ class SearchResultUser extends SearchResult with SearchResultUserMappable {
   final User user;
   final double? score;
 
-  const SearchResultUser({
-    required this.type,
-    required this.user,
-    required this.score,
-  });
+  const SearchResultUser({required this.type, required this.user, this.score});
 }
 
 @MappableClass(discriminatorValue: 'post')
@@ -837,8 +833,8 @@ class SearchResultPost extends SearchResult with SearchResultPostMappable {
   const SearchResultPost({
     required this.type,
     required this.post,
-    required this.score,
-    required this.highlights,
+    this.score,
+    this.highlights,
   });
 }
 
@@ -852,7 +848,7 @@ class SearchResultComment extends SearchResult
   const SearchResultComment({
     required this.type,
     required this.comment,
-    required this.score,
+    this.score,
   });
 }
 
@@ -928,15 +924,15 @@ class EntityPerson extends Entity with EntityPersonMappable {
 
   const EntityPerson({
     required this.id,
-    required this.entityType,
-    required this.name,
-    required this.description,
+    this.entityType,
+    this.name,
+    this.description,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
     required this.dateOfBirth,
-    required this.nationality,
-    required this.occupation,
-    required this.socialProfiles,
+    this.nationality,
+    this.occupation,
+    this.socialProfiles,
   });
 }
 
@@ -956,16 +952,16 @@ class EntityOrganization extends Entity with EntityOrganizationMappable {
 
   const EntityOrganization({
     required this.id,
-    required this.entityType,
-    required this.name,
-    required this.description,
+    this.entityType,
+    this.name,
+    this.description,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
     required this.registrationNumber,
-    required this.foundedDate,
-    required this.industry,
-    required this.employeeCount,
-    required this.revenue,
+    this.foundedDate,
+    this.industry,
+    this.employeeCount,
+    this.revenue,
   });
 }
 
@@ -1102,7 +1098,7 @@ enum Status {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1333,9 +1329,9 @@ class UserSettingsPrivacy with UserSettingsPrivacyMappable {
 @MappableClass(
   discriminatorKey: 'paymentType',
   includeSubClasses: [
-    PaymentResponseDetailsDetailsCreditCard,
-    PaymentResponseDetailsDetailsBankTransfer,
-    PaymentResponseDetailsDetailsCrypto,
+    PaymentResponseDetailsDetailsCreditCardPayment,
+    PaymentResponseDetailsDetailsBankTransferPayment,
+    PaymentResponseDetailsDetailsCryptoPayment,
   ],
 )
 sealed class PaymentResponseDetailsDetails
@@ -1346,10 +1342,10 @@ sealed class PaymentResponseDetailsDetails
       PaymentResponseDetailsDetailsMapper.fromJson(json);
 }
 
-@MappableClass(discriminatorValue: 'credit_card')
-class PaymentResponseDetailsDetailsCreditCard
+@MappableClass(discriminatorValue: 'CreditCardPayment')
+class PaymentResponseDetailsDetailsCreditCardPayment
     extends PaymentResponseDetailsDetails
-    with PaymentResponseDetailsDetailsCreditCardMappable {
+    with PaymentResponseDetailsDetailsCreditCardPaymentMappable {
   final CreditCardPaymentPaymentTypePaymentType paymentType;
   final String cardNumber;
   final int expiryMonth;
@@ -1358,21 +1354,21 @@ class PaymentResponseDetailsDetailsCreditCard
   final String? cardholderName;
   final double amount;
 
-  const PaymentResponseDetailsDetailsCreditCard({
+  const PaymentResponseDetailsDetailsCreditCardPayment({
     required this.paymentType,
     required this.cardNumber,
     required this.expiryMonth,
     required this.expiryYear,
     required this.cvv,
-    required this.cardholderName,
+    this.cardholderName,
     required this.amount,
   });
 }
 
-@MappableClass(discriminatorValue: 'bank_transfer')
-class PaymentResponseDetailsDetailsBankTransfer
+@MappableClass(discriminatorValue: 'BankTransferPayment')
+class PaymentResponseDetailsDetailsBankTransferPayment
     extends PaymentResponseDetailsDetails
-    with PaymentResponseDetailsDetailsBankTransferMappable {
+    with PaymentResponseDetailsDetailsBankTransferPaymentMappable {
   final BankTransferPaymentPaymentTypePaymentType paymentType;
   final String accountNumber;
   final String routingNumber;
@@ -1380,31 +1376,32 @@ class PaymentResponseDetailsDetailsBankTransfer
   final double amount;
   final String? reference;
 
-  const PaymentResponseDetailsDetailsBankTransfer({
+  const PaymentResponseDetailsDetailsBankTransferPayment({
     required this.paymentType,
     required this.accountNumber,
     required this.routingNumber,
-    required this.accountHolder,
+    this.accountHolder,
     required this.amount,
-    required this.reference,
+    this.reference,
   });
 }
 
-@MappableClass(discriminatorValue: 'crypto')
-class PaymentResponseDetailsDetailsCrypto extends PaymentResponseDetailsDetails
-    with PaymentResponseDetailsDetailsCryptoMappable {
+@MappableClass(discriminatorValue: 'CryptoPayment')
+class PaymentResponseDetailsDetailsCryptoPayment
+    extends PaymentResponseDetailsDetails
+    with PaymentResponseDetailsDetailsCryptoPaymentMappable {
   final CryptoPaymentPaymentTypePaymentType paymentType;
   final String walletAddress;
   final CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency;
   final double amount;
   final String? transactionHash;
 
-  const PaymentResponseDetailsDetailsCrypto({
+  const PaymentResponseDetailsDetailsCryptoPayment({
     required this.paymentType,
     required this.walletAddress,
     required this.cryptocurrency,
     required this.amount,
-    required this.transactionHash,
+    this.transactionHash,
   });
 }
 
@@ -1451,7 +1448,7 @@ enum Sort {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1479,7 +1476,7 @@ enum Enum0 {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1503,7 +1500,7 @@ enum InternalHealthCheckResponseStatusStatus {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1531,7 +1528,7 @@ enum UserSettingsThemeTheme {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1555,7 +1552,7 @@ enum UserSettingsPrivacyProfileVisibilityProfileVisibility {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1579,7 +1576,7 @@ enum CreditCardPaymentPaymentTypePaymentType {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1601,7 +1598,7 @@ enum BankTransferPaymentPaymentTypePaymentType {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1624,7 +1621,7 @@ enum CryptoPaymentPaymentTypePaymentType {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1652,7 +1649,7 @@ enum CryptoPaymentCryptocurrencyCryptocurrency {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1684,7 +1681,7 @@ enum PaymentResponseStatusStatus {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1703,7 +1700,7 @@ enum UserSearchResultTypeType {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1722,7 +1719,7 @@ enum PostSearchResultTypeType {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1741,7 +1738,7 @@ enum CommentSearchResultTypeType {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1760,7 +1757,7 @@ enum PersonEntityEntityTypeEntityType {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();
@@ -1779,7 +1776,7 @@ enum OrganizationEntityEntityTypeEntityType {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();

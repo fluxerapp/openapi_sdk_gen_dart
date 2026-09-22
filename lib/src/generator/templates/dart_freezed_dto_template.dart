@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:openapi_sdk_gen/src/parser/model/normalized_identifier.dart';
 import 'package:openapi_sdk_gen/src/parser/openapi_parser_core.dart';
+import 'package:openapi_sdk_gen/src/parser/utils/dart_keywords.dart';
 import 'package:openapi_sdk_gen/src/utils/base_utils.dart';
 import 'package:openapi_sdk_gen/src/utils/type_utils.dart';
 
@@ -38,18 +39,63 @@ $variantClasses''';
   }
 
   // For discriminated unions and regular classes, use Freezed
+  final fallbackFactoryName =
+      discriminator != null && fallbackUnion != null && fallbackUnion.isNotEmpty
+      ? _unionFactoryName(fallbackUnion)
+      : null;
+
   return '''
 import 'package:freezed_annotation/freezed_annotation.dart';
 $dartCoreImports${dartImports(imports: _filterUnionImportsForFreezed(dataClass))}
 part '${dataClass.name.toSnake}.freezed.dart';
 part '${dataClass.name.toSnake}.g.dart';
 
-${descriptionComment(dataClass.description)}@Freezed(${[if (discriminator != null) "unionKey: '${discriminator.propertyName}'", if (discriminator != null && fallbackUnion != null && fallbackUnion.isNotEmpty) "fallbackUnion: '$fallbackUnion'"].join(', ')})
+${descriptionComment(dataClass.description)}@Freezed(${[if (discriminator != null) "unionKey: '${discriminator.propertyName}'", if (fallbackFactoryName != null) "fallbackUnion: '$fallbackFactoryName'"].join(', ')})
 ${_classModifier(isUnion: isUnion)}class $className with _\$$className {
-${_factories(dataClass, className, includeIfNull, fallbackUnion, isUnion: isUnion)}
+${_factories(dataClass, className, includeIfNull, fallbackFactoryName, isUnion: isUnion)}
 ${_jsonFactories(className, dataClass.undiscriminatedUnionVariants)}
 ${generateValidator ? dataClass.parameters.map(_validationString).nonNulls.join() : ''}}
-${generateValidator ? _validateMethod(className, dataClass.parameters) : ''}''';
+${generateValidator ? _validateMethod(className, dataClass.parameters) : ''}${fallbackFactoryName == null ? '' : _ejectedFallbackClass(className, fallbackFactoryName)}''';
+}
+
+String _unionFactoryName(String value) {
+  final camel = value.toCamel;
+  if (reservedFieldNames.contains(camel)) {
+    return '${camel}Value';
+  }
+  return camel;
+}
+
+String _ejectedFallbackClass(String className, String factoryName) {
+  final unionItemClassName = '$className${factoryName.toPascal}';
+  return '''
+class $unionItemClassName implements $className {
+  const $unionItemClassName(this.json);
+
+  final Map<String, Object?> json;
+
+  factory $unionItemClassName.fromJson(Map<String, dynamic> json) =>
+      $unionItemClassName(Map<String, Object?>.from(json));
+
+  @override
+  Map<String, dynamic> toJson() => Map<String, dynamic>.from(json);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is $unionItemClassName &&
+          const DeepCollectionEquality().equals(json, other.json);
+
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    const DeepCollectionEquality().hash(json),
+  );
+
+  @override
+  String toString() => '$className.$factoryName()';
+}
+''';
 }
 
 String _classModifier({required bool isUnion}) {
@@ -204,7 +250,7 @@ String _factories(
   final discriminatorPropertyName = dataClass.discriminator!.propertyName;
   for (final discriminatorValue
       in dataClass.discriminator!.discriminatorValueToRefMapping.keys) {
-    final factoryName = discriminatorValue.toCamel;
+    final factoryName = _unionFactoryName(discriminatorValue);
     final discriminatorRef = dataClass
         .discriminator!
         .discriminatorValueToRefMapping[discriminatorValue]!;
@@ -224,7 +270,7 @@ String _factories(
   if (fallbackUnion != null && fallbackUnion.isNotEmpty) {
     final unionItemClassName = className + fallbackUnion.toPascal;
     factories.add('''
-  const factory $className.$fallbackUnion() = $unionItemClassName;
+  const factory $className.$fallbackUnion(Map<String, Object?> json) = $unionItemClassName;
 ''');
   }
 
@@ -313,13 +359,13 @@ String _generateUndiscriminatedVariantClasses(
 
         final fields = properties
             .map((prop) {
-              return '${_jsonKey(prop, includeIfNull)}  final ${prop.toSuitableType()} ${prop.name};';
+              return '${_jsonKey(prop, includeIfNull)}  final ${_freezedSuitableType(prop)} ${prop.name};';
             })
             .join('\n');
 
         final constructorParams = properties.isEmpty
             ? ''
-            : '{\n${properties.map((prop) => '    required this.${prop.name},').join('\n')}\n  }';
+            : '{\n${properties.map((prop) => '    ${_required(prop)}this.${prop.name}${prop.defaultValue == null ? '' : ' = ${_defaultValue(prop)}'},').join('\n')}\n  }';
 
         return '''
 
@@ -406,21 +452,24 @@ String _parametersToString(Set<UniversalType> parameters, bool includeIfNull) {
 
 String _freezedSuitableType(UniversalType type) {
   final baseType = type.toSuitableType();
-
-  if (!type.isRequired &&
-      type.defaultValue == null &&
-      !type.nullable &&
-      !type.referencedNullable) {
-    if (baseType.endsWith('?')) {
-      return baseType;
-    }
-    if (baseType == 'dynamic') {
-      return baseType;
-    }
+  if (_promotedOptional(type)) {
     return '$baseType?';
   }
-
   return baseType;
+}
+
+bool _promotedOptional(UniversalType type) {
+  if (type.isRequired ||
+      type.defaultValue != null ||
+      type.nullable ||
+      type.referencedNullable) {
+    return false;
+  }
+  final baseType = type.toSuitableType();
+  if (baseType.endsWith('?') || baseType == 'dynamic') {
+    return false;
+  }
+  return true;
 }
 
 String _jsonKey(UniversalType t, bool includeIfNull) {
@@ -430,7 +479,8 @@ String _jsonKey(UniversalType t, bool includeIfNull) {
   if (includeIfNull) {
     if (t.isRequired && (t.nullable || t.referencedNullable)) {
       jsonKeyParams['includeIfNull'] = 'true';
-    } else if (!t.isRequired && (t.nullable || t.referencedNullable)) {
+    } else if (!t.isRequired &&
+        (t.nullable || t.referencedNullable || _promotedOptional(t))) {
       jsonKeyParams['includeIfNull'] = 'false';
     }
   }

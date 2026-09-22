@@ -6,7 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'model39.dart';
 import 'position.dart';
-import 'species_list.dart';
+import 'species_list2.dart';
 
 part 'model40.g.dart';
 
@@ -28,7 +28,7 @@ class Model40 {
   final String? title;
   final String? description;
   @JsonKey(name: 'species_list')
-  final SpeciesList? speciesList;
+  final SpeciesList2? speciesList;
   final Model39? images;
   final Position? position;
 

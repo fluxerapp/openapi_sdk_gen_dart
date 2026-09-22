@@ -27,7 +27,7 @@ class SessionPromptRequestPartsPartsTextPartInputMapper
 
   static String? _$id(SessionPromptRequestPartsPartsTextPartInput v) => v.id;
   static const Field<SessionPromptRequestPartsPartsTextPartInput, String>
-  _f$id = Field('id', _$id);
+  _f$id = Field('id', _$id, opt: true);
   static String _$type(SessionPromptRequestPartsPartsTextPartInput v) => v.type;
   static const Field<SessionPromptRequestPartsPartsTextPartInput, String>
   _f$type = Field('type', _$type);
@@ -37,7 +37,7 @@ class SessionPromptRequestPartsPartsTextPartInputMapper
   static bool? _$synthetic(SessionPromptRequestPartsPartsTextPartInput v) =>
       v.synthetic;
   static const Field<SessionPromptRequestPartsPartsTextPartInput, bool>
-  _f$synthetic = Field('synthetic', _$synthetic);
+  _f$synthetic = Field('synthetic', _$synthetic, opt: true);
   static TextPartInputTime? _$time(
     SessionPromptRequestPartsPartsTextPartInput v,
   ) => v.time;
@@ -45,7 +45,7 @@ class SessionPromptRequestPartsPartsTextPartInputMapper
     SessionPromptRequestPartsPartsTextPartInput,
     TextPartInputTime
   >
-  _f$time = Field('time', _$time);
+  _f$time = Field('time', _$time, opt: true);
   static Map<String, dynamic>? _$metadata(
     SessionPromptRequestPartsPartsTextPartInput v,
   ) => v.metadata;
@@ -53,7 +53,7 @@ class SessionPromptRequestPartsPartsTextPartInputMapper
     SessionPromptRequestPartsPartsTextPartInput,
     Map<String, dynamic>
   >
-  _f$metadata = Field('metadata', _$metadata);
+  _f$metadata = Field('metadata', _$metadata, opt: true);
 
   @override
   final MappableFields<SessionPromptRequestPartsPartsTextPartInput> fields =
@@ -279,7 +279,7 @@ class SessionPromptRequestPartsPartsFilePartInputMapper
 
   static String? _$id(SessionPromptRequestPartsPartsFilePartInput v) => v.id;
   static const Field<SessionPromptRequestPartsPartsFilePartInput, String>
-  _f$id = Field('id', _$id);
+  _f$id = Field('id', _$id, opt: true);
   static String _$type(SessionPromptRequestPartsPartsFilePartInput v) => v.type;
   static const Field<SessionPromptRequestPartsPartsFilePartInput, String>
   _f$type = Field('type', _$type);
@@ -289,7 +289,7 @@ class SessionPromptRequestPartsPartsFilePartInputMapper
   static String? _$filename(SessionPromptRequestPartsPartsFilePartInput v) =>
       v.filename;
   static const Field<SessionPromptRequestPartsPartsFilePartInput, String>
-  _f$filename = Field('filename', _$filename);
+  _f$filename = Field('filename', _$filename, opt: true);
   static String _$url(SessionPromptRequestPartsPartsFilePartInput v) => v.url;
   static const Field<SessionPromptRequestPartsPartsFilePartInput, String>
   _f$url = Field('url', _$url);
@@ -300,7 +300,7 @@ class SessionPromptRequestPartsPartsFilePartInputMapper
     SessionPromptRequestPartsPartsFilePartInput,
     FilePartSource
   >
-  _f$source = Field('source', _$source);
+  _f$source = Field('source', _$source, opt: true);
 
   @override
   final MappableFields<SessionPromptRequestPartsPartsFilePartInput> fields =
@@ -513,7 +513,7 @@ class SessionPromptRequestPartsPartsAgentPartInputMapper
 
   static String? _$id(SessionPromptRequestPartsPartsAgentPartInput v) => v.id;
   static const Field<SessionPromptRequestPartsPartsAgentPartInput, String>
-  _f$id = Field('id', _$id);
+  _f$id = Field('id', _$id, opt: true);
   static String _$type(SessionPromptRequestPartsPartsAgentPartInput v) =>
       v.type;
   static const Field<SessionPromptRequestPartsPartsAgentPartInput, String>
@@ -529,7 +529,7 @@ class SessionPromptRequestPartsPartsAgentPartInputMapper
     SessionPromptRequestPartsPartsAgentPartInput,
     AgentPartInputSource
   >
-  _f$source = Field('source', _$source);
+  _f$source = Field('source', _$source, opt: true);
 
   @override
   final MappableFields<SessionPromptRequestPartsPartsAgentPartInput> fields =

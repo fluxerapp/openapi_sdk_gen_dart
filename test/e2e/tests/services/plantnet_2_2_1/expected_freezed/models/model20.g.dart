@@ -8,7 +8,9 @@ part of 'model20.dart';
 
 _Model20 _$Model20FromJson(Map<String, dynamic> json) => _Model20(
   scientificName: json['scientificName'] as String?,
-  commonNames: json['commonNames'],
+  commonNames: (json['commonNames'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
 );
 
 Map<String, dynamic> _$Model20ToJson(_Model20 instance) => <String, dynamic>{

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Model13 {
 
- Species? get species; num? get total;
+ Species2? get species; num? get total;
 /// Create a copy of Model13
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $Model13CopyWith<$Res>  {
   factory $Model13CopyWith(Model13 value, $Res Function(Model13) _then) = _$Model13CopyWithImpl;
 @useResult
 $Res call({
- Species? species, num? total
+ Species2? species, num? total
 });
 
 
@@ -68,7 +68,7 @@ class _$Model13CopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? species = freezed,Object? total = freezed,}) {
   return _then(_self.copyWith(
 species: freezed == species ? _self.species : species // ignore: cast_nullable_to_non_nullable
-as Species?,total: freezed == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
+as Species2?,total: freezed == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
 as num?,
   ));
 }
@@ -154,7 +154,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Species? species,  num? total)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Species2? species,  num? total)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Model13() when $default != null:
 return $default(_that.species,_that.total);case _:
@@ -175,7 +175,7 @@ return $default(_that.species,_that.total);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Species? species,  num? total)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Species2? species,  num? total)  $default,) {final _that = this;
 switch (_that) {
 case _Model13():
 return $default(_that.species,_that.total);case _:
@@ -195,7 +195,7 @@ return $default(_that.species,_that.total);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Species? species,  num? total)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Species2? species,  num? total)?  $default,) {final _that = this;
 switch (_that) {
 case _Model13() when $default != null:
 return $default(_that.species,_that.total);case _:
@@ -210,11 +210,11 @@ return $default(_that.species,_that.total);case _:
 @JsonSerializable()
 
 class _Model13 implements Model13 {
-  const _Model13({final  Species? species, this.total}): _species = species;
+  const _Model13({final  Species2? species, this.total}): _species = species;
   factory _Model13.fromJson(Map<String, dynamic> json) => _$Model13FromJson(json);
 
- final  Species? _species;
-@override Species? get species {
+ final  Species2? _species;
+@override Species2? get species {
   final value = _species;
   if (value == null) return null;
   if (_species is EqualUnmodifiableListView) return _species;
@@ -257,7 +257,7 @@ abstract mixin class _$Model13CopyWith<$Res> implements $Model13CopyWith<$Res> {
   factory _$Model13CopyWith(_Model13 value, $Res Function(_Model13) _then) = __$Model13CopyWithImpl;
 @override @useResult
 $Res call({
- Species? species, num? total
+ Species2? species, num? total
 });
 
 
@@ -277,7 +277,7 @@ class __$Model13CopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? species = freezed,Object? total = freezed,}) {
   return _then(_Model13(
 species: freezed == species ? _self._species : species // ignore: cast_nullable_to_non_nullable
-as Species?,total: freezed == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
+as Species2?,total: freezed == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
 as num?,
   ));
 }

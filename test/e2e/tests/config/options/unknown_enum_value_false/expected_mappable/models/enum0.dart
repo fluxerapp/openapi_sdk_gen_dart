@@ -21,7 +21,7 @@ enum Enum0 {
   @MappableValue('other')
   other;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();

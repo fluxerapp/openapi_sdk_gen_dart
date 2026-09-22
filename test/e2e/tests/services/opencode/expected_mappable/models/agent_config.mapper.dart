@@ -65,8 +65,8 @@ class AgentConfigMapper extends ClassMapperBase<AgentConfig> {
     _$description,
     opt: true,
   );
-  static dynamic _$mode(AgentConfig v) => v.mode;
-  static const Field<AgentConfig, dynamic> _f$mode = Field(
+  static String? _$mode(AgentConfig v) => v.mode;
+  static const Field<AgentConfig, String> _f$mode = Field(
     'mode',
     _$mode,
     opt: true,
@@ -180,7 +180,7 @@ abstract class AgentConfigCopyWith<$R, $In extends AgentConfig, $Out>
     Map<String, bool>? tools,
     bool? disable,
     String? description,
-    dynamic mode,
+    String? mode,
     AgentConfigPermission? permission,
   });
   AgentConfigCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);

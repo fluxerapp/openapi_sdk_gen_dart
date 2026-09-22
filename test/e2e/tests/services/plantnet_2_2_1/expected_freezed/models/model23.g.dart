@@ -10,7 +10,9 @@ _Model23 _$Model23FromJson(Map<String, dynamic> json) => _Model23(
   name: json['name'] as String,
   author: json['author'] as String,
   family: json['family'] as String,
-  commonNames: json['commonNames'],
+  commonNames: (json['commonNames'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
   secondaryCommonNames: (json['secondaryCommonNames'] as List<dynamic>?)
       ?.map((e) => e as String)
       .toList(),

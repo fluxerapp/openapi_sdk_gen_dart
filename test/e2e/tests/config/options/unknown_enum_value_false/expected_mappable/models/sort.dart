@@ -14,7 +14,7 @@ enum Sort {
   @MappableValue('desc')
   desc;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();

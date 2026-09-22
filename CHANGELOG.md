@@ -1,3 +1,25 @@
+## 2.6.0
+
+- Skip path-item `summary`, `description`, and `$ref` instead of crashing.
+- Throw on circular `allOf` instead of recursing forever.
+- Stop treating every field as required when one property uses `allOf`.
+- Collapse scalar `$ref` unions, including OpenAPI 3.1 `type` arrays, to string typedefs.
+- Infer a discriminator mapping from schema names when `mapping` is omitted.
+- Expand `allOf` multipart bodies into form parts.
+- Resolve `components/responses` `$ref`s before choosing the return type.
+- Treat `additionalProperties: true` as `Map<String, dynamic>`.
+- Keep inherited field requiredness on a single-`$ref` `allOf` wrapper.
+- Keep `$ref`s pointed at the schema whose key was actually renamed when two names share a PascalCase form.
+- Decode optional nested `explicit_nulls` fields in json_serializable instead of passing the raw JSON value through `_omit`.
+- Escape `$`, `\`, and `'` in `explicit_nulls` JSON key lookups.
+- Promote optional dart_mappable fields to nullable, and stop marking optional union properties as required.
+- Apply `include_if_null` to optional fields that were promoted to nullable.
+- Return the wire type from dart_mappable enum `toJson()`.
+- Keep the original JSON on freezed fallback union variants, and rename factory names that are Dart keywords.
+- Keep Retrofit parameters that share a name by suffixing later ones with their location.
+- Omit the generated-file banner when `mark_files_as_generated` is false.
+- Exit 2 when any schema fails to generate.
+
 ## 2.5.3
 
 - Generate string typedefs for scalar unions (`anyOf` string|integer and `type: ["string", "number"]`) instead of empty classes or `dynamic`.

@@ -4,7 +4,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'author.dart';
+import 'author2.dart';
 
 part 'partner.freezed.dart';
 part 'partner.g.dart';
@@ -14,7 +14,7 @@ abstract class Partner with _$Partner {
   const factory Partner({
     required String id,
     @JsonKey(name: 'observation_id') required String observationId,
-    Author? author,
+    Author2? author,
     String? avatar,
   }) = _Partner;
 

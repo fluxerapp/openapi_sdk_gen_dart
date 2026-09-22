@@ -52,8 +52,8 @@ class ToolStateToolStateRunning with ToolStateToolStateRunningMappable {
   const ToolStateToolStateRunning({
     required this.status,
     required this.input,
-    required this.title,
-    required this.metadata,
+    this.title,
+    this.metadata,
     required this.time,
   });
 }
@@ -75,7 +75,7 @@ class ToolStateToolStateCompleted with ToolStateToolStateCompletedMappable {
     required this.title,
     required this.metadata,
     required this.time,
-    required this.attachments,
+    this.attachments,
   });
 }
 
@@ -91,7 +91,7 @@ class ToolStateToolStateError with ToolStateToolStateErrorMappable {
     required this.status,
     required this.input,
     required this.error,
-    required this.metadata,
+    this.metadata,
     required this.time,
   });
 }

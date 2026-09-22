@@ -52,7 +52,14 @@ Future<void> main(List<String> arguments) async {
       successSchemasCount: successSchemasCount,
       schemesCount: configs.length,
     );
-  } on Exception catch (e) {
+    final code = generationExitCode(
+      successSchemasCount: successSchemasCount,
+      schemesCount: configs.length,
+    );
+    if (code != 0) {
+      exitProcess(code);
+    }
+  } on Object catch (e) {
     exitWithError('Failed to generate files.\n$e');
   }
 }

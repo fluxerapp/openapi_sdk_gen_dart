@@ -26,7 +26,7 @@ enum Organs {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();

@@ -152,13 +152,13 @@ return unknown(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int mewCount)?  cat,TResult Function( String barkSound)?  dog,TResult Function( String job)?  human,TResult Function()?  unknown,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int mewCount)?  cat,TResult Function( String barkSound)?  dog,TResult Function( String job)?  human,TResult Function( Map<String, Object?> json)?  unknown,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case FamilyMembersMembersCat() when cat != null:
 return cat(_that.mewCount);case FamilyMembersMembersDog() when dog != null:
 return dog(_that.barkSound);case FamilyMembersMembersHuman() when human != null:
 return human(_that.job);case FamilyMembersMembersUnknown() when unknown != null:
-return unknown();case _:
+return unknown(_that.json);case _:
   return orElse();
 
 }
@@ -176,13 +176,13 @@ return unknown();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int mewCount)  cat,required TResult Function( String barkSound)  dog,required TResult Function( String job)  human,required TResult Function()  unknown,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int mewCount)  cat,required TResult Function( String barkSound)  dog,required TResult Function( String job)  human,required TResult Function( Map<String, Object?> json)  unknown,}) {final _that = this;
 switch (_that) {
 case FamilyMembersMembersCat():
 return cat(_that.mewCount);case FamilyMembersMembersDog():
 return dog(_that.barkSound);case FamilyMembersMembersHuman():
 return human(_that.job);case FamilyMembersMembersUnknown():
-return unknown();}
+return unknown(_that.json);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -196,13 +196,13 @@ return unknown();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int mewCount)?  cat,TResult? Function( String barkSound)?  dog,TResult? Function( String job)?  human,TResult? Function()?  unknown,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int mewCount)?  cat,TResult? Function( String barkSound)?  dog,TResult? Function( String job)?  human,TResult? Function( Map<String, Object?> json)?  unknown,}) {final _that = this;
 switch (_that) {
 case FamilyMembersMembersCat() when cat != null:
 return cat(_that.mewCount);case FamilyMembersMembersDog() when dog != null:
 return dog(_that.barkSound);case FamilyMembersMembersHuman() when human != null:
 return human(_that.job);case FamilyMembersMembersUnknown() when unknown != null:
-return unknown();case _:
+return unknown(_that.json);case _:
   return null;
 
 }
@@ -431,44 +431,6 @@ as String,
 
 
 }
-
-/// @nodoc
-@JsonSerializable()
-
-class FamilyMembersMembersUnknown implements FamilyMembersMembers {
-  const FamilyMembersMembersUnknown({final  String? $type}): $type = $type ?? 'unknown';
-  factory FamilyMembersMembersUnknown.fromJson(Map<String, dynamic> json) => _$FamilyMembersMembersUnknownFromJson(json);
-
-
-
-@JsonKey(name: 'type')
-final String $type;
-
-
-
-@override
-Map<String, dynamic> toJson() {
-  return _$FamilyMembersMembersUnknownToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FamilyMembersMembersUnknown);
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'FamilyMembersMembers.unknown()';
-}
-
-
-}
-
-
 
 
 // dart format on

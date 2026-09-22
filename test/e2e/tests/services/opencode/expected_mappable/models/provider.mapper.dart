@@ -15,6 +15,7 @@ class ProviderMapper extends ClassMapperBase<Provider> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ProviderMapper._());
       ModelsMapper.ensureInitialized();
+      ProviderOptionsMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -46,8 +47,8 @@ class ProviderMapper extends ClassMapperBase<Provider> {
     _$models,
     opt: true,
   );
-  static Map<String, dynamic>? _$options(Provider v) => v.options;
-  static const Field<Provider, Map<String, dynamic>> _f$options = Field(
+  static ProviderOptions? _$options(Provider v) => v.options;
+  static const Field<Provider, ProviderOptions> _f$options = Field(
     'options',
     _$options,
     opt: true,
@@ -136,8 +137,7 @@ abstract class ProviderCopyWith<$R, $In extends Provider, $Out>
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get env;
   MapCopyWith<$R, String, Models, ModelsCopyWith<$R, Models, Models>>?
   get models;
-  MapCopyWith<$R, String, dynamic, ObjectCopyWith<$R, dynamic, dynamic>>?
-  get options;
+  ProviderOptionsCopyWith<$R, ProviderOptions, ProviderOptions>? get options;
   $R call({
     String? api,
     String? name,
@@ -145,7 +145,7 @@ abstract class ProviderCopyWith<$R, $In extends Provider, $Out>
     String? id,
     String? npm,
     Map<String, Models>? models,
-    Map<String, dynamic>? options,
+    ProviderOptions? options,
   });
   ProviderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -177,14 +177,8 @@ class _ProviderCopyWithImpl<$R, $Out>
         )
       : null;
   @override
-  MapCopyWith<$R, String, dynamic, ObjectCopyWith<$R, dynamic, dynamic>>?
-  get options => $value.options != null
-      ? MapCopyWith(
-          $value.options!,
-          (v, t) => ObjectCopyWith(v, $identity, t),
-          (v) => call(options: v),
-        )
-      : null;
+  ProviderOptionsCopyWith<$R, ProviderOptions, ProviderOptions>? get options =>
+      $value.options?.copyWith.$chain((v) => call(options: v));
   @override
   $R call({
     Object? api = $none,

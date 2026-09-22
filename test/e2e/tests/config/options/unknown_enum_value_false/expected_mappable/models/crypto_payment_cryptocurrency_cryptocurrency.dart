@@ -20,7 +20,7 @@ enum CryptoPaymentCryptocurrencyCryptocurrency {
   @MappableValue('BNB')
   bnb;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();

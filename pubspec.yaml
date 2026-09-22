@@ -1,7 +1,7 @@
 name: openapi_sdk_gen
 description: Package that generates REST clients and data classes from OpenApi definition file
 
-version: 2.5.3
+version: 2.6.0
 
 repository: https://github.com/fluxerapp/openapi_sdk_gen_dart
 
@@ -18,15 +18,15 @@ environment:
 dependencies:
   args: ^2.7.0
   collection: ^1.19.0
-  dart_style: ^3.1.0
-  meta: ^1.16.0
+  dart_style: ^3.1.13
+  meta: ^1.19.0
   path: ^1.9.0
   yaml: ^3.1.0
-  dart_mappable: ^4.6.0
-  dio: ^5.10.0
-  retrofit: ^4.9.0
+  dart_mappable: ^4.10.0
+  dio: ^5.11.1
+  retrofit: ^4.10.0
   freezed_annotation: ^3.1.0
-  json_annotation: ^4.9.0
+  json_annotation: ^4.12.0
 
 dev_dependencies:
   test: ^1.27.0

@@ -23,7 +23,11 @@ class NullableUserDtoMapper extends ClassMapperBase<NullableUserDto> {
   final String id = 'NullableUserDto';
 
   static UserDto? _$data(NullableUserDto v) => v.data;
-  static const Field<NullableUserDto, UserDto> _f$data = Field('data', _$data);
+  static const Field<NullableUserDto, UserDto> _f$data = Field(
+    'data',
+    _$data,
+    opt: true,
+  );
 
   @override
   final MappableFields<NullableUserDto> fields = const {#data: _f$data};

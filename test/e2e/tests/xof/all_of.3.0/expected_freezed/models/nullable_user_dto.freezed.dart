@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NullableUserDto {
 
-@JsonKey(includeIfNull: true) UserDto? get data;
+@JsonKey(includeIfNull: false) UserDto? get data;
 /// Create a copy of NullableUserDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $NullableUserDtoCopyWith<$Res>  {
   factory $NullableUserDtoCopyWith(NullableUserDto value, $Res Function(NullableUserDto) _then) = _$NullableUserDtoCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(includeIfNull: true) UserDto? data
+@JsonKey(includeIfNull: false) UserDto? data
 });
 
 
@@ -165,7 +165,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(includeIfNull: true)  UserDto? data)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(includeIfNull: false)  UserDto? data)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NullableUserDto() when $default != null:
 return $default(_that.data);case _:
@@ -186,7 +186,7 @@ return $default(_that.data);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(includeIfNull: true)  UserDto? data)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(includeIfNull: false)  UserDto? data)  $default,) {final _that = this;
 switch (_that) {
 case _NullableUserDto():
 return $default(_that.data);case _:
@@ -206,7 +206,7 @@ return $default(_that.data);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(includeIfNull: true)  UserDto? data)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(includeIfNull: false)  UserDto? data)?  $default,) {final _that = this;
 switch (_that) {
 case _NullableUserDto() when $default != null:
 return $default(_that.data);case _:
@@ -221,10 +221,10 @@ return $default(_that.data);case _:
 @JsonSerializable()
 
 class _NullableUserDto implements NullableUserDto {
-  const _NullableUserDto({@JsonKey(includeIfNull: true) required this.data});
+  const _NullableUserDto({@JsonKey(includeIfNull: false) this.data});
   factory _NullableUserDto.fromJson(Map<String, dynamic> json) => _$NullableUserDtoFromJson(json);
 
-@override@JsonKey(includeIfNull: true) final  UserDto? data;
+@override@JsonKey(includeIfNull: false) final  UserDto? data;
 
 /// Create a copy of NullableUserDto
 /// with the given fields replaced by the non-null parameter values.
@@ -259,7 +259,7 @@ abstract mixin class _$NullableUserDtoCopyWith<$Res> implements $NullableUserDto
   factory _$NullableUserDtoCopyWith(_NullableUserDto value, $Res Function(_NullableUserDto) _then) = __$NullableUserDtoCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(includeIfNull: true) UserDto? data
+@JsonKey(includeIfNull: false) UserDto? data
 });
 
 

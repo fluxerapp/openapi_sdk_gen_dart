@@ -13019,16 +13019,16 @@ PaymentResponseDetailsDetails _$PaymentResponseDetailsDetailsFromJson(
   Map<String, dynamic> json
 ) {
         switch (json['paymentType']) {
-                  case 'credit_card':
-          return PaymentResponseDetailsDetailsCreditCard.fromJson(
+                  case 'CreditCardPayment':
+          return PaymentResponseDetailsDetailsCreditCardPayment.fromJson(
             json
           );
-                case 'bank_transfer':
-          return PaymentResponseDetailsDetailsBankTransfer.fromJson(
+                case 'BankTransferPayment':
+          return PaymentResponseDetailsDetailsBankTransferPayment.fromJson(
             json
           );
-                case 'crypto':
-          return PaymentResponseDetailsDetailsCrypto.fromJson(
+                case 'CryptoPayment':
+          return PaymentResponseDetailsDetailsCryptoPayment.fromJson(
             json
           );
         
@@ -13120,13 +13120,13 @@ extension PaymentResponseDetailsDetailsPatterns on PaymentResponseDetailsDetails
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PaymentResponseDetailsDetailsCreditCard value)?  creditCard,TResult Function( PaymentResponseDetailsDetailsBankTransfer value)?  bankTransfer,TResult Function( PaymentResponseDetailsDetailsCrypto value)?  crypto,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PaymentResponseDetailsDetailsCreditCardPayment value)?  creditCardPayment,TResult Function( PaymentResponseDetailsDetailsBankTransferPayment value)?  bankTransferPayment,TResult Function( PaymentResponseDetailsDetailsCryptoPayment value)?  cryptoPayment,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case PaymentResponseDetailsDetailsCreditCard() when creditCard != null:
-return creditCard(_that);case PaymentResponseDetailsDetailsBankTransfer() when bankTransfer != null:
-return bankTransfer(_that);case PaymentResponseDetailsDetailsCrypto() when crypto != null:
-return crypto(_that);case _:
+case PaymentResponseDetailsDetailsCreditCardPayment() when creditCardPayment != null:
+return creditCardPayment(_that);case PaymentResponseDetailsDetailsBankTransferPayment() when bankTransferPayment != null:
+return bankTransferPayment(_that);case PaymentResponseDetailsDetailsCryptoPayment() when cryptoPayment != null:
+return cryptoPayment(_that);case _:
   return orElse();
 
 }
@@ -13144,13 +13144,13 @@ return crypto(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PaymentResponseDetailsDetailsCreditCard value)  creditCard,required TResult Function( PaymentResponseDetailsDetailsBankTransfer value)  bankTransfer,required TResult Function( PaymentResponseDetailsDetailsCrypto value)  crypto,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PaymentResponseDetailsDetailsCreditCardPayment value)  creditCardPayment,required TResult Function( PaymentResponseDetailsDetailsBankTransferPayment value)  bankTransferPayment,required TResult Function( PaymentResponseDetailsDetailsCryptoPayment value)  cryptoPayment,}){
 final _that = this;
 switch (_that) {
-case PaymentResponseDetailsDetailsCreditCard():
-return creditCard(_that);case PaymentResponseDetailsDetailsBankTransfer():
-return bankTransfer(_that);case PaymentResponseDetailsDetailsCrypto():
-return crypto(_that);}
+case PaymentResponseDetailsDetailsCreditCardPayment():
+return creditCardPayment(_that);case PaymentResponseDetailsDetailsBankTransferPayment():
+return bankTransferPayment(_that);case PaymentResponseDetailsDetailsCryptoPayment():
+return cryptoPayment(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -13164,13 +13164,13 @@ return crypto(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PaymentResponseDetailsDetailsCreditCard value)?  creditCard,TResult? Function( PaymentResponseDetailsDetailsBankTransfer value)?  bankTransfer,TResult? Function( PaymentResponseDetailsDetailsCrypto value)?  crypto,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PaymentResponseDetailsDetailsCreditCardPayment value)?  creditCardPayment,TResult? Function( PaymentResponseDetailsDetailsBankTransferPayment value)?  bankTransferPayment,TResult? Function( PaymentResponseDetailsDetailsCryptoPayment value)?  cryptoPayment,}){
 final _that = this;
 switch (_that) {
-case PaymentResponseDetailsDetailsCreditCard() when creditCard != null:
-return creditCard(_that);case PaymentResponseDetailsDetailsBankTransfer() when bankTransfer != null:
-return bankTransfer(_that);case PaymentResponseDetailsDetailsCrypto() when crypto != null:
-return crypto(_that);case _:
+case PaymentResponseDetailsDetailsCreditCardPayment() when creditCardPayment != null:
+return creditCardPayment(_that);case PaymentResponseDetailsDetailsBankTransferPayment() when bankTransferPayment != null:
+return bankTransferPayment(_that);case PaymentResponseDetailsDetailsCryptoPayment() when cryptoPayment != null:
+return cryptoPayment(_that);case _:
   return null;
 
 }
@@ -13187,12 +13187,12 @@ return crypto(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String cardNumber,  int expiryMonth,  int expiryYear,  String cvv,  double amount,  String? cardholderName)?  creditCard,TResult Function( String accountNumber,  String routingNumber,  double amount,  String? accountHolder,  String? reference)?  bankTransfer,TResult Function( String walletAddress,  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,  double amount,  String? transactionHash)?  crypto,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String cardNumber,  int expiryMonth,  int expiryYear,  String cvv,  double amount,  String? cardholderName)?  creditCardPayment,TResult Function( String accountNumber,  String routingNumber,  double amount,  String? accountHolder,  String? reference)?  bankTransferPayment,TResult Function( String walletAddress,  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,  double amount,  String? transactionHash)?  cryptoPayment,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case PaymentResponseDetailsDetailsCreditCard() when creditCard != null:
-return creditCard(_that.cardNumber,_that.expiryMonth,_that.expiryYear,_that.cvv,_that.amount,_that.cardholderName);case PaymentResponseDetailsDetailsBankTransfer() when bankTransfer != null:
-return bankTransfer(_that.accountNumber,_that.routingNumber,_that.amount,_that.accountHolder,_that.reference);case PaymentResponseDetailsDetailsCrypto() when crypto != null:
-return crypto(_that.walletAddress,_that.cryptocurrency,_that.amount,_that.transactionHash);case _:
+case PaymentResponseDetailsDetailsCreditCardPayment() when creditCardPayment != null:
+return creditCardPayment(_that.cardNumber,_that.expiryMonth,_that.expiryYear,_that.cvv,_that.amount,_that.cardholderName);case PaymentResponseDetailsDetailsBankTransferPayment() when bankTransferPayment != null:
+return bankTransferPayment(_that.accountNumber,_that.routingNumber,_that.amount,_that.accountHolder,_that.reference);case PaymentResponseDetailsDetailsCryptoPayment() when cryptoPayment != null:
+return cryptoPayment(_that.walletAddress,_that.cryptocurrency,_that.amount,_that.transactionHash);case _:
   return orElse();
 
 }
@@ -13210,12 +13210,12 @@ return crypto(_that.walletAddress,_that.cryptocurrency,_that.amount,_that.transa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String cardNumber,  int expiryMonth,  int expiryYear,  String cvv,  double amount,  String? cardholderName)  creditCard,required TResult Function( String accountNumber,  String routingNumber,  double amount,  String? accountHolder,  String? reference)  bankTransfer,required TResult Function( String walletAddress,  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,  double amount,  String? transactionHash)  crypto,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String cardNumber,  int expiryMonth,  int expiryYear,  String cvv,  double amount,  String? cardholderName)  creditCardPayment,required TResult Function( String accountNumber,  String routingNumber,  double amount,  String? accountHolder,  String? reference)  bankTransferPayment,required TResult Function( String walletAddress,  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,  double amount,  String? transactionHash)  cryptoPayment,}) {final _that = this;
 switch (_that) {
-case PaymentResponseDetailsDetailsCreditCard():
-return creditCard(_that.cardNumber,_that.expiryMonth,_that.expiryYear,_that.cvv,_that.amount,_that.cardholderName);case PaymentResponseDetailsDetailsBankTransfer():
-return bankTransfer(_that.accountNumber,_that.routingNumber,_that.amount,_that.accountHolder,_that.reference);case PaymentResponseDetailsDetailsCrypto():
-return crypto(_that.walletAddress,_that.cryptocurrency,_that.amount,_that.transactionHash);}
+case PaymentResponseDetailsDetailsCreditCardPayment():
+return creditCardPayment(_that.cardNumber,_that.expiryMonth,_that.expiryYear,_that.cvv,_that.amount,_that.cardholderName);case PaymentResponseDetailsDetailsBankTransferPayment():
+return bankTransferPayment(_that.accountNumber,_that.routingNumber,_that.amount,_that.accountHolder,_that.reference);case PaymentResponseDetailsDetailsCryptoPayment():
+return cryptoPayment(_that.walletAddress,_that.cryptocurrency,_that.amount,_that.transactionHash);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -13229,12 +13229,12 @@ return crypto(_that.walletAddress,_that.cryptocurrency,_that.amount,_that.transa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String cardNumber,  int expiryMonth,  int expiryYear,  String cvv,  double amount,  String? cardholderName)?  creditCard,TResult? Function( String accountNumber,  String routingNumber,  double amount,  String? accountHolder,  String? reference)?  bankTransfer,TResult? Function( String walletAddress,  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,  double amount,  String? transactionHash)?  crypto,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String cardNumber,  int expiryMonth,  int expiryYear,  String cvv,  double amount,  String? cardholderName)?  creditCardPayment,TResult? Function( String accountNumber,  String routingNumber,  double amount,  String? accountHolder,  String? reference)?  bankTransferPayment,TResult? Function( String walletAddress,  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,  double amount,  String? transactionHash)?  cryptoPayment,}) {final _that = this;
 switch (_that) {
-case PaymentResponseDetailsDetailsCreditCard() when creditCard != null:
-return creditCard(_that.cardNumber,_that.expiryMonth,_that.expiryYear,_that.cvv,_that.amount,_that.cardholderName);case PaymentResponseDetailsDetailsBankTransfer() when bankTransfer != null:
-return bankTransfer(_that.accountNumber,_that.routingNumber,_that.amount,_that.accountHolder,_that.reference);case PaymentResponseDetailsDetailsCrypto() when crypto != null:
-return crypto(_that.walletAddress,_that.cryptocurrency,_that.amount,_that.transactionHash);case _:
+case PaymentResponseDetailsDetailsCreditCardPayment() when creditCardPayment != null:
+return creditCardPayment(_that.cardNumber,_that.expiryMonth,_that.expiryYear,_that.cvv,_that.amount,_that.cardholderName);case PaymentResponseDetailsDetailsBankTransferPayment() when bankTransferPayment != null:
+return bankTransferPayment(_that.accountNumber,_that.routingNumber,_that.amount,_that.accountHolder,_that.reference);case PaymentResponseDetailsDetailsCryptoPayment() when cryptoPayment != null:
+return cryptoPayment(_that.walletAddress,_that.cryptocurrency,_that.amount,_that.transactionHash);case _:
   return null;
 
 }
@@ -13245,9 +13245,9 @@ return crypto(_that.walletAddress,_that.cryptocurrency,_that.amount,_that.transa
 /// @nodoc
 @JsonSerializable()
 
-class PaymentResponseDetailsDetailsCreditCard implements PaymentResponseDetailsDetails {
-  const PaymentResponseDetailsDetailsCreditCard({required this.cardNumber, required this.expiryMonth, required this.expiryYear, required this.cvv, required this.amount, this.cardholderName, final  String? $type}): $type = $type ?? 'credit_card';
-  factory PaymentResponseDetailsDetailsCreditCard.fromJson(Map<String, dynamic> json) => _$PaymentResponseDetailsDetailsCreditCardFromJson(json);
+class PaymentResponseDetailsDetailsCreditCardPayment implements PaymentResponseDetailsDetails {
+  const PaymentResponseDetailsDetailsCreditCardPayment({required this.cardNumber, required this.expiryMonth, required this.expiryYear, required this.cvv, required this.amount, this.cardholderName, final  String? $type}): $type = $type ?? 'CreditCardPayment';
+  factory PaymentResponseDetailsDetailsCreditCardPayment.fromJson(Map<String, dynamic> json) => _$PaymentResponseDetailsDetailsCreditCardPaymentFromJson(json);
 
  final  String cardNumber;
  final  int expiryMonth;
@@ -13264,16 +13264,16 @@ final String $type;
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$PaymentResponseDetailsDetailsCreditCardCopyWith<PaymentResponseDetailsDetailsCreditCard> get copyWith => _$PaymentResponseDetailsDetailsCreditCardCopyWithImpl<PaymentResponseDetailsDetailsCreditCard>(this, _$identity);
+$PaymentResponseDetailsDetailsCreditCardPaymentCopyWith<PaymentResponseDetailsDetailsCreditCardPayment> get copyWith => _$PaymentResponseDetailsDetailsCreditCardPaymentCopyWithImpl<PaymentResponseDetailsDetailsCreditCardPayment>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$PaymentResponseDetailsDetailsCreditCardToJson(this, );
+  return _$PaymentResponseDetailsDetailsCreditCardPaymentToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentResponseDetailsDetailsCreditCard&&(identical(other.cardNumber, cardNumber) || other.cardNumber == cardNumber)&&(identical(other.expiryMonth, expiryMonth) || other.expiryMonth == expiryMonth)&&(identical(other.expiryYear, expiryYear) || other.expiryYear == expiryYear)&&(identical(other.cvv, cvv) || other.cvv == cvv)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.cardholderName, cardholderName) || other.cardholderName == cardholderName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentResponseDetailsDetailsCreditCardPayment&&(identical(other.cardNumber, cardNumber) || other.cardNumber == cardNumber)&&(identical(other.expiryMonth, expiryMonth) || other.expiryMonth == expiryMonth)&&(identical(other.expiryYear, expiryYear) || other.expiryYear == expiryYear)&&(identical(other.cvv, cvv) || other.cvv == cvv)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.cardholderName, cardholderName) || other.cardholderName == cardholderName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -13282,15 +13282,15 @@ int get hashCode => Object.hash(runtimeType,cardNumber,expiryMonth,expiryYear,cv
 
 @override
 String toString() {
-  return 'PaymentResponseDetailsDetails.creditCard(cardNumber: $cardNumber, expiryMonth: $expiryMonth, expiryYear: $expiryYear, cvv: $cvv, amount: $amount, cardholderName: $cardholderName)';
+  return 'PaymentResponseDetailsDetails.creditCardPayment(cardNumber: $cardNumber, expiryMonth: $expiryMonth, expiryYear: $expiryYear, cvv: $cvv, amount: $amount, cardholderName: $cardholderName)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $PaymentResponseDetailsDetailsCreditCardCopyWith<$Res> implements $PaymentResponseDetailsDetailsCopyWith<$Res> {
-  factory $PaymentResponseDetailsDetailsCreditCardCopyWith(PaymentResponseDetailsDetailsCreditCard value, $Res Function(PaymentResponseDetailsDetailsCreditCard) _then) = _$PaymentResponseDetailsDetailsCreditCardCopyWithImpl;
+abstract mixin class $PaymentResponseDetailsDetailsCreditCardPaymentCopyWith<$Res> implements $PaymentResponseDetailsDetailsCopyWith<$Res> {
+  factory $PaymentResponseDetailsDetailsCreditCardPaymentCopyWith(PaymentResponseDetailsDetailsCreditCardPayment value, $Res Function(PaymentResponseDetailsDetailsCreditCardPayment) _then) = _$PaymentResponseDetailsDetailsCreditCardPaymentCopyWithImpl;
 @override @useResult
 $Res call({
  String cardNumber, int expiryMonth, int expiryYear, String cvv, double amount, String? cardholderName
@@ -13301,17 +13301,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$PaymentResponseDetailsDetailsCreditCardCopyWithImpl<$Res>
-    implements $PaymentResponseDetailsDetailsCreditCardCopyWith<$Res> {
-  _$PaymentResponseDetailsDetailsCreditCardCopyWithImpl(this._self, this._then);
+class _$PaymentResponseDetailsDetailsCreditCardPaymentCopyWithImpl<$Res>
+    implements $PaymentResponseDetailsDetailsCreditCardPaymentCopyWith<$Res> {
+  _$PaymentResponseDetailsDetailsCreditCardPaymentCopyWithImpl(this._self, this._then);
 
-  final PaymentResponseDetailsDetailsCreditCard _self;
-  final $Res Function(PaymentResponseDetailsDetailsCreditCard) _then;
+  final PaymentResponseDetailsDetailsCreditCardPayment _self;
+  final $Res Function(PaymentResponseDetailsDetailsCreditCardPayment) _then;
 
 /// Create a copy of PaymentResponseDetailsDetails
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? cardNumber = null,Object? expiryMonth = null,Object? expiryYear = null,Object? cvv = null,Object? amount = null,Object? cardholderName = freezed,}) {
-  return _then(PaymentResponseDetailsDetailsCreditCard(
+  return _then(PaymentResponseDetailsDetailsCreditCardPayment(
 cardNumber: null == cardNumber ? _self.cardNumber : cardNumber // ignore: cast_nullable_to_non_nullable
 as String,expiryMonth: null == expiryMonth ? _self.expiryMonth : expiryMonth // ignore: cast_nullable_to_non_nullable
 as int,expiryYear: null == expiryYear ? _self.expiryYear : expiryYear // ignore: cast_nullable_to_non_nullable
@@ -13328,9 +13328,9 @@ as String?,
 /// @nodoc
 @JsonSerializable()
 
-class PaymentResponseDetailsDetailsBankTransfer implements PaymentResponseDetailsDetails {
-  const PaymentResponseDetailsDetailsBankTransfer({required this.accountNumber, required this.routingNumber, required this.amount, this.accountHolder, this.reference, final  String? $type}): $type = $type ?? 'bank_transfer';
-  factory PaymentResponseDetailsDetailsBankTransfer.fromJson(Map<String, dynamic> json) => _$PaymentResponseDetailsDetailsBankTransferFromJson(json);
+class PaymentResponseDetailsDetailsBankTransferPayment implements PaymentResponseDetailsDetails {
+  const PaymentResponseDetailsDetailsBankTransferPayment({required this.accountNumber, required this.routingNumber, required this.amount, this.accountHolder, this.reference, final  String? $type}): $type = $type ?? 'BankTransferPayment';
+  factory PaymentResponseDetailsDetailsBankTransferPayment.fromJson(Map<String, dynamic> json) => _$PaymentResponseDetailsDetailsBankTransferPaymentFromJson(json);
 
  final  String accountNumber;
  final  String routingNumber;
@@ -13346,16 +13346,16 @@ final String $type;
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$PaymentResponseDetailsDetailsBankTransferCopyWith<PaymentResponseDetailsDetailsBankTransfer> get copyWith => _$PaymentResponseDetailsDetailsBankTransferCopyWithImpl<PaymentResponseDetailsDetailsBankTransfer>(this, _$identity);
+$PaymentResponseDetailsDetailsBankTransferPaymentCopyWith<PaymentResponseDetailsDetailsBankTransferPayment> get copyWith => _$PaymentResponseDetailsDetailsBankTransferPaymentCopyWithImpl<PaymentResponseDetailsDetailsBankTransferPayment>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$PaymentResponseDetailsDetailsBankTransferToJson(this, );
+  return _$PaymentResponseDetailsDetailsBankTransferPaymentToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentResponseDetailsDetailsBankTransfer&&(identical(other.accountNumber, accountNumber) || other.accountNumber == accountNumber)&&(identical(other.routingNumber, routingNumber) || other.routingNumber == routingNumber)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.accountHolder, accountHolder) || other.accountHolder == accountHolder)&&(identical(other.reference, reference) || other.reference == reference));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentResponseDetailsDetailsBankTransferPayment&&(identical(other.accountNumber, accountNumber) || other.accountNumber == accountNumber)&&(identical(other.routingNumber, routingNumber) || other.routingNumber == routingNumber)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.accountHolder, accountHolder) || other.accountHolder == accountHolder)&&(identical(other.reference, reference) || other.reference == reference));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -13364,15 +13364,15 @@ int get hashCode => Object.hash(runtimeType,accountNumber,routingNumber,amount,a
 
 @override
 String toString() {
-  return 'PaymentResponseDetailsDetails.bankTransfer(accountNumber: $accountNumber, routingNumber: $routingNumber, amount: $amount, accountHolder: $accountHolder, reference: $reference)';
+  return 'PaymentResponseDetailsDetails.bankTransferPayment(accountNumber: $accountNumber, routingNumber: $routingNumber, amount: $amount, accountHolder: $accountHolder, reference: $reference)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $PaymentResponseDetailsDetailsBankTransferCopyWith<$Res> implements $PaymentResponseDetailsDetailsCopyWith<$Res> {
-  factory $PaymentResponseDetailsDetailsBankTransferCopyWith(PaymentResponseDetailsDetailsBankTransfer value, $Res Function(PaymentResponseDetailsDetailsBankTransfer) _then) = _$PaymentResponseDetailsDetailsBankTransferCopyWithImpl;
+abstract mixin class $PaymentResponseDetailsDetailsBankTransferPaymentCopyWith<$Res> implements $PaymentResponseDetailsDetailsCopyWith<$Res> {
+  factory $PaymentResponseDetailsDetailsBankTransferPaymentCopyWith(PaymentResponseDetailsDetailsBankTransferPayment value, $Res Function(PaymentResponseDetailsDetailsBankTransferPayment) _then) = _$PaymentResponseDetailsDetailsBankTransferPaymentCopyWithImpl;
 @override @useResult
 $Res call({
  String accountNumber, String routingNumber, double amount, String? accountHolder, String? reference
@@ -13383,17 +13383,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$PaymentResponseDetailsDetailsBankTransferCopyWithImpl<$Res>
-    implements $PaymentResponseDetailsDetailsBankTransferCopyWith<$Res> {
-  _$PaymentResponseDetailsDetailsBankTransferCopyWithImpl(this._self, this._then);
+class _$PaymentResponseDetailsDetailsBankTransferPaymentCopyWithImpl<$Res>
+    implements $PaymentResponseDetailsDetailsBankTransferPaymentCopyWith<$Res> {
+  _$PaymentResponseDetailsDetailsBankTransferPaymentCopyWithImpl(this._self, this._then);
 
-  final PaymentResponseDetailsDetailsBankTransfer _self;
-  final $Res Function(PaymentResponseDetailsDetailsBankTransfer) _then;
+  final PaymentResponseDetailsDetailsBankTransferPayment _self;
+  final $Res Function(PaymentResponseDetailsDetailsBankTransferPayment) _then;
 
 /// Create a copy of PaymentResponseDetailsDetails
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? accountNumber = null,Object? routingNumber = null,Object? amount = null,Object? accountHolder = freezed,Object? reference = freezed,}) {
-  return _then(PaymentResponseDetailsDetailsBankTransfer(
+  return _then(PaymentResponseDetailsDetailsBankTransferPayment(
 accountNumber: null == accountNumber ? _self.accountNumber : accountNumber // ignore: cast_nullable_to_non_nullable
 as String,routingNumber: null == routingNumber ? _self.routingNumber : routingNumber // ignore: cast_nullable_to_non_nullable
 as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
@@ -13409,9 +13409,9 @@ as String?,
 /// @nodoc
 @JsonSerializable()
 
-class PaymentResponseDetailsDetailsCrypto implements PaymentResponseDetailsDetails {
-  const PaymentResponseDetailsDetailsCrypto({required this.walletAddress, required this.cryptocurrency, required this.amount, this.transactionHash, final  String? $type}): $type = $type ?? 'crypto';
-  factory PaymentResponseDetailsDetailsCrypto.fromJson(Map<String, dynamic> json) => _$PaymentResponseDetailsDetailsCryptoFromJson(json);
+class PaymentResponseDetailsDetailsCryptoPayment implements PaymentResponseDetailsDetails {
+  const PaymentResponseDetailsDetailsCryptoPayment({required this.walletAddress, required this.cryptocurrency, required this.amount, this.transactionHash, final  String? $type}): $type = $type ?? 'CryptoPayment';
+  factory PaymentResponseDetailsDetailsCryptoPayment.fromJson(Map<String, dynamic> json) => _$PaymentResponseDetailsDetailsCryptoPaymentFromJson(json);
 
  final  String walletAddress;
  final  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency;
@@ -13426,16 +13426,16 @@ final String $type;
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$PaymentResponseDetailsDetailsCryptoCopyWith<PaymentResponseDetailsDetailsCrypto> get copyWith => _$PaymentResponseDetailsDetailsCryptoCopyWithImpl<PaymentResponseDetailsDetailsCrypto>(this, _$identity);
+$PaymentResponseDetailsDetailsCryptoPaymentCopyWith<PaymentResponseDetailsDetailsCryptoPayment> get copyWith => _$PaymentResponseDetailsDetailsCryptoPaymentCopyWithImpl<PaymentResponseDetailsDetailsCryptoPayment>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$PaymentResponseDetailsDetailsCryptoToJson(this, );
+  return _$PaymentResponseDetailsDetailsCryptoPaymentToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentResponseDetailsDetailsCrypto&&(identical(other.walletAddress, walletAddress) || other.walletAddress == walletAddress)&&(identical(other.cryptocurrency, cryptocurrency) || other.cryptocurrency == cryptocurrency)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.transactionHash, transactionHash) || other.transactionHash == transactionHash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentResponseDetailsDetailsCryptoPayment&&(identical(other.walletAddress, walletAddress) || other.walletAddress == walletAddress)&&(identical(other.cryptocurrency, cryptocurrency) || other.cryptocurrency == cryptocurrency)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.transactionHash, transactionHash) || other.transactionHash == transactionHash));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -13444,15 +13444,15 @@ int get hashCode => Object.hash(runtimeType,walletAddress,cryptocurrency,amount,
 
 @override
 String toString() {
-  return 'PaymentResponseDetailsDetails.crypto(walletAddress: $walletAddress, cryptocurrency: $cryptocurrency, amount: $amount, transactionHash: $transactionHash)';
+  return 'PaymentResponseDetailsDetails.cryptoPayment(walletAddress: $walletAddress, cryptocurrency: $cryptocurrency, amount: $amount, transactionHash: $transactionHash)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $PaymentResponseDetailsDetailsCryptoCopyWith<$Res> implements $PaymentResponseDetailsDetailsCopyWith<$Res> {
-  factory $PaymentResponseDetailsDetailsCryptoCopyWith(PaymentResponseDetailsDetailsCrypto value, $Res Function(PaymentResponseDetailsDetailsCrypto) _then) = _$PaymentResponseDetailsDetailsCryptoCopyWithImpl;
+abstract mixin class $PaymentResponseDetailsDetailsCryptoPaymentCopyWith<$Res> implements $PaymentResponseDetailsDetailsCopyWith<$Res> {
+  factory $PaymentResponseDetailsDetailsCryptoPaymentCopyWith(PaymentResponseDetailsDetailsCryptoPayment value, $Res Function(PaymentResponseDetailsDetailsCryptoPayment) _then) = _$PaymentResponseDetailsDetailsCryptoPaymentCopyWithImpl;
 @override @useResult
 $Res call({
  String walletAddress, CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency, double amount, String? transactionHash
@@ -13463,17 +13463,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$PaymentResponseDetailsDetailsCryptoCopyWithImpl<$Res>
-    implements $PaymentResponseDetailsDetailsCryptoCopyWith<$Res> {
-  _$PaymentResponseDetailsDetailsCryptoCopyWithImpl(this._self, this._then);
+class _$PaymentResponseDetailsDetailsCryptoPaymentCopyWithImpl<$Res>
+    implements $PaymentResponseDetailsDetailsCryptoPaymentCopyWith<$Res> {
+  _$PaymentResponseDetailsDetailsCryptoPaymentCopyWithImpl(this._self, this._then);
 
-  final PaymentResponseDetailsDetailsCrypto _self;
-  final $Res Function(PaymentResponseDetailsDetailsCrypto) _then;
+  final PaymentResponseDetailsDetailsCryptoPayment _self;
+  final $Res Function(PaymentResponseDetailsDetailsCryptoPayment) _then;
 
 /// Create a copy of PaymentResponseDetailsDetails
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? walletAddress = null,Object? cryptocurrency = null,Object? amount = null,Object? transactionHash = freezed,}) {
-  return _then(PaymentResponseDetailsDetailsCrypto(
+  return _then(PaymentResponseDetailsDetailsCryptoPayment(
 walletAddress: null == walletAddress ? _self.walletAddress : walletAddress // ignore: cast_nullable_to_non_nullable
 as String,cryptocurrency: null == cryptocurrency ? _self.cryptocurrency : cryptocurrency // ignore: cast_nullable_to_non_nullable
 as CryptoPaymentCryptocurrencyCryptocurrency,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable

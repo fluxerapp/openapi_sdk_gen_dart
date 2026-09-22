@@ -19,7 +19,8 @@ class ConfigMapper extends ClassMapperBase<Config> {
       CommandMapper.ensureInitialized();
       ConfigWatcherMapper.ensureInitialized();
       ConfigShareShareMapper.ensureInitialized();
-      AgentConfigMapper.ensureInitialized();
+      ConfigModeMapper.ensureInitialized();
+      ConfigAgentMapper.ensureInitialized();
       ProviderMapper.ensureInitialized();
       FormatterMapper.ensureInitialized();
       LayoutConfigMapper.ensureInitialized();
@@ -121,14 +122,14 @@ class ConfigMapper extends ClassMapperBase<Config> {
     _$username,
     opt: true,
   );
-  static Map<String, AgentConfig>? _$mode(Config v) => v.mode;
-  static const Field<Config, Map<String, AgentConfig>> _f$mode = Field(
+  static ConfigMode? _$mode(Config v) => v.mode;
+  static const Field<Config, ConfigMode> _f$mode = Field(
     'mode',
     _$mode,
     opt: true,
   );
-  static Map<String, AgentConfig>? _$agent(Config v) => v.agent;
-  static const Field<Config, Map<String, AgentConfig>> _f$agent = Field(
+  static ConfigAgent? _$agent(Config v) => v.agent;
+  static const Field<Config, ConfigAgent> _f$agent = Field(
     'agent',
     _$agent,
     opt: true,
@@ -303,20 +304,8 @@ abstract class ConfigCopyWith<$R, $In extends Config, $Out>
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get plugin;
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
   get disabledProviders;
-  MapCopyWith<
-    $R,
-    String,
-    AgentConfig,
-    AgentConfigCopyWith<$R, AgentConfig, AgentConfig>
-  >?
-  get mode;
-  MapCopyWith<
-    $R,
-    String,
-    AgentConfig,
-    AgentConfigCopyWith<$R, AgentConfig, AgentConfig>
-  >?
-  get agent;
+  ConfigModeCopyWith<$R, ConfigMode, ConfigMode>? get mode;
+  ConfigAgentCopyWith<$R, ConfigAgent, ConfigAgent>? get agent;
   MapCopyWith<$R, String, Provider, ProviderCopyWith<$R, Provider, Provider>>?
   get provider;
   MapCopyWith<$R, String, McpMcp, ObjectCopyWith<$R, McpMcp, McpMcp>>? get mcp;
@@ -351,8 +340,8 @@ abstract class ConfigCopyWith<$R, $In extends Config, $Out>
     String? model,
     String? smallModel,
     String? username,
-    Map<String, AgentConfig>? mode,
-    Map<String, AgentConfig>? agent,
+    ConfigMode? mode,
+    ConfigAgent? agent,
     Map<String, Provider>? provider,
     Map<String, McpMcp>? mcp,
     Map<String, Formatter>? formatter,
@@ -409,33 +398,11 @@ class _ConfigCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Config, $Out>
         )
       : null;
   @override
-  MapCopyWith<
-    $R,
-    String,
-    AgentConfig,
-    AgentConfigCopyWith<$R, AgentConfig, AgentConfig>
-  >?
-  get mode => $value.mode != null
-      ? MapCopyWith(
-          $value.mode!,
-          (v, t) => v.copyWith.$chain(t),
-          (v) => call(mode: v),
-        )
-      : null;
+  ConfigModeCopyWith<$R, ConfigMode, ConfigMode>? get mode =>
+      $value.mode?.copyWith.$chain((v) => call(mode: v));
   @override
-  MapCopyWith<
-    $R,
-    String,
-    AgentConfig,
-    AgentConfigCopyWith<$R, AgentConfig, AgentConfig>
-  >?
-  get agent => $value.agent != null
-      ? MapCopyWith(
-          $value.agent!,
-          (v, t) => v.copyWith.$chain(t),
-          (v) => call(agent: v),
-        )
-      : null;
+  ConfigAgentCopyWith<$R, ConfigAgent, ConfigAgent>? get agent =>
+      $value.agent?.copyWith.$chain((v) => call(agent: v));
   @override
   MapCopyWith<$R, String, Provider, ProviderCopyWith<$R, Provider, Provider>>?
   get provider => $value.provider != null

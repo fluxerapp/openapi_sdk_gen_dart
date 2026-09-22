@@ -4,7 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'author.dart';
+import 'author2.dart';
 
 part 'partner.g.dart';
 
@@ -20,7 +20,7 @@ class Partner {
   factory Partner.fromJson(Map<String, Object?> json) =>
       _$PartnerFromJson(json);
 
-  final Author? author;
+  final Author2? author;
   final String id;
   @JsonKey(name: 'observation_id')
   final String observationId;

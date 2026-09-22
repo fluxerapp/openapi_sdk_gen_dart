@@ -48,5 +48,5 @@ class MessagePartDtoTool extends MessagePartDto
   final String toolName;
   final dynamic toolArgs;
 
-  const MessagePartDtoTool({required this.toolName, required this.toolArgs});
+  const MessagePartDtoTool({required this.toolName, this.toolArgs});
 }

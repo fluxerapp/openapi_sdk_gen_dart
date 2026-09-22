@@ -41,7 +41,32 @@ sealed class Entity with _$Entity {
     double? revenue,
   }) = EntityOrganization;
 
-  const factory Entity.unknown() = EntityUnknown;
+  const factory Entity.unknown(Map<String, Object?> json) = EntityUnknown;
 
   factory Entity.fromJson(Map<String, Object?> json) => _$EntityFromJson(json);
+}
+
+class EntityUnknown implements Entity {
+  const EntityUnknown(this.json);
+
+  final Map<String, Object?> json;
+
+  factory EntityUnknown.fromJson(Map<String, dynamic> json) =>
+      EntityUnknown(Map<String, Object?>.from(json));
+
+  @override
+  Map<String, dynamic> toJson() => Map<String, dynamic>.from(json);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is EntityUnknown &&
+          const DeepCollectionEquality().equals(json, other.json);
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(json));
+
+  @override
+  String toString() => 'Entity.unknown()';
 }

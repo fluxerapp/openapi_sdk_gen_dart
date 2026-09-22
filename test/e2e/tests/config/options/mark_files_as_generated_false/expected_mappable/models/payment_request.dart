@@ -1,7 +1,3 @@
-// coverage:ignore-file
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
-
 import 'package:dart_mappable/dart_mappable.dart';
 
 import 'bank_transfer_payment.dart';
@@ -46,7 +42,7 @@ class PaymentRequestCreditCard extends PaymentRequest
     required this.expiryMonth,
     required this.expiryYear,
     required this.cvv,
-    required this.cardholderName,
+    this.cardholderName,
     required this.amount,
   });
 }
@@ -65,9 +61,9 @@ class PaymentRequestBankTransfer extends PaymentRequest
     required this.paymentType,
     required this.accountNumber,
     required this.routingNumber,
-    required this.accountHolder,
+    this.accountHolder,
     required this.amount,
-    required this.reference,
+    this.reference,
   });
 }
 
@@ -85,6 +81,6 @@ class PaymentRequestCrypto extends PaymentRequest
     required this.walletAddress,
     required this.cryptocurrency,
     required this.amount,
-    required this.transactionHash,
+    this.transactionHash,
   });
 }

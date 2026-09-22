@@ -86,6 +86,7 @@ class SearchResultUserMapper extends SubClassMapperBase<SearchResultUser> {
   static const Field<SearchResultUser, double> _f$score = Field(
     'score',
     _$score,
+    opt: true,
   );
 
   @override
@@ -246,11 +247,13 @@ class SearchResultPostMapper extends SubClassMapperBase<SearchResultPost> {
   static const Field<SearchResultPost, double> _f$score = Field(
     'score',
     _$score,
+    opt: true,
   );
   static List<String>? _$highlights(SearchResultPost v) => v.highlights;
   static const Field<SearchResultPost, List<String>> _f$highlights = Field(
     'highlights',
     _$highlights,
+    opt: true,
   );
 
   @override
@@ -432,6 +435,7 @@ class SearchResultCommentMapper
   static const Field<SearchResultComment, double> _f$score = Field(
     'score',
     _$score,
+    opt: true,
   );
 
   @override

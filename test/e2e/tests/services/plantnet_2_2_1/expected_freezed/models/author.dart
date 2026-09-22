@@ -9,7 +9,12 @@ part 'author.g.dart';
 
 @Freezed()
 abstract class Author with _$Author {
-  const factory Author({required String id, required String name}) = _Author;
+  const factory Author({
+    required String name,
+    String? id,
+    String? avatar,
+    String? email,
+  }) = _Author;
 
   factory Author.fromJson(Map<String, Object?> json) => _$AuthorFromJson(json);
 }

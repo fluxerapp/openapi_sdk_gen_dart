@@ -18,9 +18,9 @@ part 'payment_response_details_details.mapper.dart';
 @MappableClass(
   discriminatorKey: 'paymentType',
   includeSubClasses: [
-    PaymentResponseDetailsDetailsCreditCard,
-    PaymentResponseDetailsDetailsBankTransfer,
-    PaymentResponseDetailsDetailsCrypto,
+    PaymentResponseDetailsDetailsCreditCardPayment,
+    PaymentResponseDetailsDetailsBankTransferPayment,
+    PaymentResponseDetailsDetailsCryptoPayment,
     PaymentResponseDetailsDetailsUnknown,
   ],
 )
@@ -32,10 +32,10 @@ sealed class PaymentResponseDetailsDetails
       PaymentResponseDetailsDetailsMapper.fromJson(json);
 }
 
-@MappableClass(discriminatorValue: 'credit_card')
-class PaymentResponseDetailsDetailsCreditCard
+@MappableClass(discriminatorValue: 'CreditCardPayment')
+class PaymentResponseDetailsDetailsCreditCardPayment
     extends PaymentResponseDetailsDetails
-    with PaymentResponseDetailsDetailsCreditCardMappable {
+    with PaymentResponseDetailsDetailsCreditCardPaymentMappable {
   final CreditCardPaymentPaymentTypePaymentType paymentType;
   final String cardNumber;
   final int expiryMonth;
@@ -44,21 +44,21 @@ class PaymentResponseDetailsDetailsCreditCard
   final String? cardholderName;
   final double amount;
 
-  const PaymentResponseDetailsDetailsCreditCard({
+  const PaymentResponseDetailsDetailsCreditCardPayment({
     required this.paymentType,
     required this.cardNumber,
     required this.expiryMonth,
     required this.expiryYear,
     required this.cvv,
-    required this.cardholderName,
+    this.cardholderName,
     required this.amount,
   });
 }
 
-@MappableClass(discriminatorValue: 'bank_transfer')
-class PaymentResponseDetailsDetailsBankTransfer
+@MappableClass(discriminatorValue: 'BankTransferPayment')
+class PaymentResponseDetailsDetailsBankTransferPayment
     extends PaymentResponseDetailsDetails
-    with PaymentResponseDetailsDetailsBankTransferMappable {
+    with PaymentResponseDetailsDetailsBankTransferPaymentMappable {
   final BankTransferPaymentPaymentTypePaymentType paymentType;
   final String accountNumber;
   final String routingNumber;
@@ -66,31 +66,32 @@ class PaymentResponseDetailsDetailsBankTransfer
   final double amount;
   final String? reference;
 
-  const PaymentResponseDetailsDetailsBankTransfer({
+  const PaymentResponseDetailsDetailsBankTransferPayment({
     required this.paymentType,
     required this.accountNumber,
     required this.routingNumber,
-    required this.accountHolder,
+    this.accountHolder,
     required this.amount,
-    required this.reference,
+    this.reference,
   });
 }
 
-@MappableClass(discriminatorValue: 'crypto')
-class PaymentResponseDetailsDetailsCrypto extends PaymentResponseDetailsDetails
-    with PaymentResponseDetailsDetailsCryptoMappable {
+@MappableClass(discriminatorValue: 'CryptoPayment')
+class PaymentResponseDetailsDetailsCryptoPayment
+    extends PaymentResponseDetailsDetails
+    with PaymentResponseDetailsDetailsCryptoPaymentMappable {
   final CryptoPaymentPaymentTypePaymentType paymentType;
   final String walletAddress;
   final CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency;
   final double amount;
   final String? transactionHash;
 
-  const PaymentResponseDetailsDetailsCrypto({
+  const PaymentResponseDetailsDetailsCryptoPayment({
     required this.paymentType,
     required this.walletAddress,
     required this.cryptocurrency,
     required this.amount,
-    required this.transactionHash,
+    this.transactionHash,
   });
 }
 

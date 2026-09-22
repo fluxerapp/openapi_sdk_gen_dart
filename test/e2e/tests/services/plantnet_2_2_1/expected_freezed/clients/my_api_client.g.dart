@@ -145,7 +145,7 @@ class _MyApiClient implements MyApiClient {
   }
 
   @override
-  Future<List<String>> getV2Species({
+  Future<List<Species>> getV2Species({
     String? prefix,
     String? apiKey,
     Lang? lang = Lang.en,
@@ -165,7 +165,7 @@ class _MyApiClient implements MyApiClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<String>>(
+    final _options = _setStreamType<List<Species>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -176,9 +176,11 @@ class _MyApiClient implements MyApiClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<String> _value;
+    late List<Species> _value;
     try {
-      _value = _result.data!.cast<String>();
+      _value = _result.data!
+          .map((dynamic i) => Species.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -391,7 +393,7 @@ class _MyApiClient implements MyApiClient {
   }
 
   @override
-  Future<List<String>> getV2ProjectsProjectSpecies({
+  Future<List<Species>> getV2ProjectsProjectSpecies({
     String? prefix,
     String? apiKey,
     Lang? lang = Lang.en,
@@ -410,7 +412,7 @@ class _MyApiClient implements MyApiClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<String>>(
+    final _options = _setStreamType<List<Species>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -421,9 +423,11 @@ class _MyApiClient implements MyApiClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<String> _value;
+    late List<Species> _value;
     try {
-      _value = _result.data!.cast<String>();
+      _value = _result.data!
+          .map((dynamic i) => Species.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

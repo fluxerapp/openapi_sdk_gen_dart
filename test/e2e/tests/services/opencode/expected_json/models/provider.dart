@@ -5,6 +5,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'models.dart';
+import 'provider_options.dart';
 
 part 'provider.g.dart';
 
@@ -29,7 +30,7 @@ class Provider {
   final String? id;
   final String? npm;
   final Map<String, Models>? models;
-  final Map<String, dynamic>? options;
+  final ProviderOptions? options;
 
   Map<String, Object?> toJson() => _$ProviderToJson(this);
 }

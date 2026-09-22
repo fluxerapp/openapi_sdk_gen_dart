@@ -20,7 +20,7 @@ enum UserStatus {
   @MappableValue('banned')
   banned;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();

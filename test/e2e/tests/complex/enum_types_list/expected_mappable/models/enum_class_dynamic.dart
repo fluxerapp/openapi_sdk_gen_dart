@@ -60,7 +60,7 @@ enum EnumClassDynamic {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  dynamic toJson() => toValue();
 
   @override
   String toString() => toValue().toString();

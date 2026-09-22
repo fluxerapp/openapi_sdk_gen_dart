@@ -44,15 +44,17 @@ class PartModelTextPartMapper extends ClassMapperBase<PartModelTextPart> {
   static const Field<PartModelTextPart, bool> _f$synthetic = Field(
     'synthetic',
     _$synthetic,
+    opt: true,
   );
   static TextPartTime? _$time(PartModelTextPart v) => v.time;
   static const Field<PartModelTextPart, TextPartTime> _f$time = Field(
     'time',
     _$time,
+    opt: true,
   );
   static Map<String, dynamic>? _$metadata(PartModelTextPart v) => v.metadata;
   static const Field<PartModelTextPart, Map<String, dynamic>> _f$metadata =
-      Field('metadata', _$metadata);
+      Field('metadata', _$metadata, opt: true);
 
   @override
   final MappableFields<PartModelTextPart> fields = const {
@@ -271,7 +273,7 @@ class PartModelReasoningPartMapper
   static Map<String, dynamic>? _$metadata(PartModelReasoningPart v) =>
       v.metadata;
   static const Field<PartModelReasoningPart, Map<String, dynamic>> _f$metadata =
-      Field('metadata', _$metadata);
+      Field('metadata', _$metadata, opt: true);
   static ReasoningPartTime _$time(PartModelReasoningPart v) => v.time;
   static const Field<PartModelReasoningPart, ReasoningPartTime> _f$time = Field(
     'time',
@@ -482,6 +484,7 @@ class PartModelFilePartMapper extends ClassMapperBase<PartModelFilePart> {
   static const Field<PartModelFilePart, String> _f$filename = Field(
     'filename',
     _$filename,
+    opt: true,
   );
   static String _$url(PartModelFilePart v) => v.url;
   static const Field<PartModelFilePart, String> _f$url = Field('url', _$url);
@@ -489,6 +492,7 @@ class PartModelFilePartMapper extends ClassMapperBase<PartModelFilePart> {
   static const Field<PartModelFilePart, FilePartSource> _f$source = Field(
     'source',
     _$source,
+    opt: true,
   );
 
   @override
@@ -695,7 +699,7 @@ class PartModelToolPartMapper extends ClassMapperBase<PartModelToolPart> {
   );
   static Map<String, dynamic>? _$metadata(PartModelToolPart v) => v.metadata;
   static const Field<PartModelToolPart, Map<String, dynamic>> _f$metadata =
-      Field('metadata', _$metadata);
+      Field('metadata', _$metadata, opt: true);
 
   @override
   final MappableFields<PartModelToolPart> fields = const {
@@ -905,6 +909,7 @@ class PartModelStepStartPartMapper
   static const Field<PartModelStepStartPart, String> _f$snapshot = Field(
     'snapshot',
     _$snapshot,
+    opt: true,
   );
 
   @override
@@ -1089,6 +1094,7 @@ class PartModelStepFinishPartMapper
   static const Field<PartModelStepFinishPart, String> _f$snapshot = Field(
     'snapshot',
     _$snapshot,
+    opt: true,
   );
   static num _$cost(PartModelStepFinishPart v) => v.cost;
   static const Field<PartModelStepFinishPart, num> _f$cost = Field(
@@ -1679,6 +1685,7 @@ class PartModelAgentPartMapper extends ClassMapperBase<PartModelAgentPart> {
   static const Field<PartModelAgentPart, AgentPartSource> _f$source = Field(
     'source',
     _$source,
+    opt: true,
   );
 
   @override

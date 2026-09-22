@@ -20,7 +20,7 @@ enum PostStatus {
   @MappableValue('deleted')
   deleted;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();

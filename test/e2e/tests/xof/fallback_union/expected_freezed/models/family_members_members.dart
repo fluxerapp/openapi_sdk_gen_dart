@@ -34,8 +34,34 @@ sealed class FamilyMembersMembers with _$FamilyMembersMembers {
     required String job,
   }) = FamilyMembersMembersHuman;
 
-  const factory FamilyMembersMembers.unknown() = FamilyMembersMembersUnknown;
+  const factory FamilyMembersMembers.unknown(Map<String, Object?> json) =
+      FamilyMembersMembersUnknown;
 
   factory FamilyMembersMembers.fromJson(Map<String, Object?> json) =>
       _$FamilyMembersMembersFromJson(json);
+}
+
+class FamilyMembersMembersUnknown implements FamilyMembersMembers {
+  const FamilyMembersMembersUnknown(this.json);
+
+  final Map<String, Object?> json;
+
+  factory FamilyMembersMembersUnknown.fromJson(Map<String, dynamic> json) =>
+      FamilyMembersMembersUnknown(Map<String, Object?>.from(json));
+
+  @override
+  Map<String, dynamic> toJson() => Map<String, dynamic>.from(json);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FamilyMembersMembersUnknown &&
+          const DeepCollectionEquality().equals(json, other.json);
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(json));
+
+  @override
+  String toString() => 'FamilyMembersMembers.unknown()';
 }

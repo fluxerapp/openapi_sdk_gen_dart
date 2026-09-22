@@ -34,7 +34,6 @@ final class FillController {
       dataClass,
       jsonSerializer: config.jsonSerializer,
       unknownEnumValue: config.unknownEnumValue,
-      markFilesAsGenerated: config.markFilesAsGenerated,
       generateValidator: config.generateValidator,
       includeIfNull: config.includeIfNull,
       explicitNulls: config.explicitNulls,
@@ -46,7 +45,6 @@ final class FillController {
     UniversalDataClass dataClass, {
     required JsonSerializer jsonSerializer,
     required bool unknownEnumValue,
-    required bool markFilesAsGenerated,
     required bool generateValidator,
     required bool includeIfNull,
     required bool explicitNulls,
@@ -57,7 +55,6 @@ final class FillController {
         dataClass,
         jsonSerializer: jsonSerializer,
         unknownEnumValue: unknownEnumValue,
-        markFileAsGenerated: markFilesAsGenerated,
       );
     } else if (dataClass is UniversalComponentClass) {
       if (dataClass.typeDef) {
@@ -72,14 +69,12 @@ final class FillController {
         ),
         JsonSerializer.jsonSerializable => dartJsonSerializableDtoTemplate(
           dataClass,
-          markFileAsGenerated: markFilesAsGenerated,
           includeIfNull: includeIfNull,
           explicitNulls: explicitNulls,
           fallbackUnion: fallbackUnion,
         ),
         JsonSerializer.dartMappable => dartDartMappableDtoTemplate(
           dataClass,
-          markFileAsGenerated: markFilesAsGenerated,
           fallbackUnion: fallbackUnion,
         ),
       };
@@ -133,7 +128,6 @@ final class FillController {
         clientsNames: clientsNames,
         postfix: postfix.toPascal,
         putClientsInFolder: config.putClientsInFolder,
-        markFileAsGenerated: config.markFilesAsGenerated,
         clientsNameMap: clientsNameMap,
       ),
     );
@@ -187,7 +181,9 @@ final class FillController {
         }
       }
     }
-    final buffer = StringBuffer(generatedFileComment());
+    final buffer = StringBuffer(
+      config.markFilesAsGenerated ? generatedFileComment() : '',
+    );
 
     if (dartImports.isNotEmpty) {
       for (final import in dartImports.toList()..sort()) {
@@ -224,6 +220,9 @@ final class FillController {
   }
 
   List<GeneratedFile> addGeneratedFileComments(List<GeneratedFile> files) {
+    if (!config.markFilesAsGenerated) {
+      return files;
+    }
     final comment = generatedFileComment();
     return files
         .map(

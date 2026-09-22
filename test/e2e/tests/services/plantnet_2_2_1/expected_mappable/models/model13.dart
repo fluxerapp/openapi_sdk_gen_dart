@@ -4,7 +4,7 @@
 
 import 'package:dart_mappable/dart_mappable.dart';
 
-import 'species.dart';
+import 'species2.dart';
 
 part 'model13.mapper.dart';
 
@@ -12,7 +12,7 @@ part 'model13.mapper.dart';
 class Model13 with Model13Mappable {
   const Model13({this.species, this.total});
 
-  final Species? species;
+  final Species2? species;
   final num? total;
 
   static Model13 fromJson(Map<String, dynamic> json) =>

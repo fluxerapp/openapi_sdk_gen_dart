@@ -1064,7 +1064,7 @@ part 'class_name.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ClassName {
   const ClassName({
     required this.anotherList,
@@ -1078,6 +1078,15 @@ class ClassName {
     _listPresent = !identical(list, _omit),
     another = identical(another, _omit) ? null : another as Another?,
     _anotherPresent = !identical(another, _omit);
+
+  const ClassName._({
+    required this.anotherList,
+    this.intType,
+    this.list,
+    this.another,
+  }) : _intTypePresent = false,
+    _listPresent = false,
+    _anotherPresent = false;
   factory ClassName.fromJson(Map<String, Object?> json) {
     final value = _$ClassNameFromJson(json);
     return ClassName(
@@ -2414,6 +2423,240 @@ class AnimalUnionDog {
 }
 ''';
       expect(generated.content, expectedContents);
+    });
+  });
+
+  group('generator correctness', () {
+    test('explicit nulls escape json keys', () {
+      final dataClass = UniversalComponentClass(
+        name: 'ClassName',
+        imports: const {},
+        parameters: {
+          const UniversalType(
+            type: 'string',
+            name: 'fooBar',
+            jsonKey: r'foo$bar',
+            isRequired: false,
+          ),
+          const UniversalType(
+            type: 'string',
+            name: 'oclock',
+            jsonKey: "o'clock",
+            isRequired: false,
+          ),
+        },
+      );
+      const fillController = FillController(
+        config: GeneratorConfig(
+          name: '',
+          outputDirectory: '.',
+          explicitNulls: true,
+        ),
+      );
+      final content = fillController.fillDtoContent(dataClass).content;
+      expect(content, contains(r"containsKey('foo\$bar')"));
+      expect(content, contains(r"putIfAbsent('foo\$bar', () => fooBar)"));
+      expect(content, contains(r"containsKey('o\'clock')"));
+      expect(content, contains(r"putIfAbsent('o\'clock', () => oclock)"));
+    });
+
+    test('includeIfNull covers promoted optional fields', () {
+      final dataClass = UniversalComponentClass(
+        name: 'ClassName',
+        imports: {},
+        parameters: {
+          UniversalType(type: 'string', name: 'nickname', isRequired: false),
+        },
+      );
+      const fillController = FillController(
+        config: GeneratorConfig(
+          name: '',
+          outputDirectory: '.',
+          includeIfNull: true,
+        ),
+      );
+      final content = fillController.fillDtoContent(dataClass).content;
+      expect(content, contains('@JsonKey(includeIfNull: false)'));
+      expect(content, contains('final String? nickname;'));
+    });
+
+    test('dart_mappable promotes optional fields', () {
+      final dataClass = UniversalComponentClass(
+        name: 'ClassName',
+        imports: {},
+        parameters: {
+          UniversalType(type: 'string', name: 'nickname', isRequired: false),
+          UniversalType(type: 'string', name: 'id', isRequired: true),
+        },
+      );
+      const fillController = FillController(
+        config: GeneratorConfig(
+          name: '',
+          outputDirectory: '.',
+          jsonSerializer: JsonSerializer.dartMappable,
+        ),
+      );
+      final content = fillController.fillDtoContent(dataClass).content;
+      expect(content, contains('final String? nickname;'));
+      expect(content, contains('final String id;'));
+      expect(content, contains('this.nickname,'));
+      expect(content, isNot(contains('required this.nickname')));
+      expect(content, contains('required this.id'));
+    });
+
+    test('union wrappers keep optional properties optional', () {
+      final dataClass = UniversalComponentClass(
+        name: 'AnimalUnion',
+        imports: const {},
+        parameters: const {},
+        undiscriminatedUnionVariants: {
+          'Cat': {
+            const UniversalType(
+              type: 'string',
+              name: 'nickname',
+              isRequired: false,
+            ),
+            const UniversalType(type: 'string', name: 'id', isRequired: true),
+          },
+        },
+      );
+      const jsonController = FillController(
+        config: GeneratorConfig(name: '', outputDirectory: '.'),
+      );
+      final json = jsonController.fillDtoContent(dataClass).content;
+      expect(json, contains('final String? nickname;'));
+      expect(json, contains('final String id;'));
+      expect(json, contains('this.nickname,'));
+      expect(json, isNot(contains('required this.nickname')));
+      expect(json, contains('required this.id'));
+
+      const mappableController = FillController(
+        config: GeneratorConfig(
+          name: '',
+          outputDirectory: '.',
+          jsonSerializer: JsonSerializer.dartMappable,
+        ),
+      );
+      final mappable = mappableController.fillDtoContent(dataClass).content;
+      expect(mappable, contains('final String? nickname;'));
+      expect(mappable, isNot(contains('required this.nickname')));
+    });
+
+    test('dart_mappable enum toJson keeps the wire type', () {
+      final intEnum = UniversalEnumClass(
+        name: 'StatusCode',
+        type: 'integer',
+        items: {const UniversalEnumItem(name: 'ok', jsonKey: '200')},
+      );
+      final stringEnum = UniversalEnumClass(
+        name: 'StatusName',
+        type: 'string',
+        items: {const UniversalEnumItem(name: 'ok', jsonKey: 'ok')},
+      );
+      const fillController = FillController(
+        config: GeneratorConfig(
+          name: '',
+          outputDirectory: '.',
+          jsonSerializer: JsonSerializer.dartMappable,
+        ),
+      );
+      expect(
+        fillController.fillDtoContent(intEnum).content,
+        contains('int? toJson() => toValue();'),
+      );
+      expect(
+        fillController.fillDtoContent(stringEnum).content,
+        contains("String toJson() => toValue() ?? 'null';"),
+      );
+    });
+
+    test('freezed fallback keeps the payload and renames keyword factories', () {
+      final dataClass = UniversalComponentClass(
+        name: 'Pet',
+        imports: const {},
+        parameters: const {},
+        discriminator: (
+          propertyName: 'kind',
+          discriminatorValueToRefMapping: {'default': 'Dog', 'cat': 'Cat'},
+          refProperties: {
+            'Dog': {
+              const UniversalType(
+                type: 'string',
+                name: 'name',
+                isRequired: false,
+              ),
+            },
+            'Cat': {
+              const UniversalType(
+                type: 'string',
+                name: 'name',
+                isRequired: true,
+              ),
+            },
+          },
+        ),
+      );
+      const fillController = FillController(
+        config: GeneratorConfig(
+          name: '',
+          outputDirectory: '.',
+          jsonSerializer: JsonSerializer.freezed,
+          fallbackUnion: 'unknown',
+        ),
+      );
+      final content = fillController.fillDtoContent(dataClass).content;
+      expect(
+        content,
+        contains("@Freezed(unionKey: 'kind', fallbackUnion: 'unknown')"),
+      );
+      expect(content, contains("@FreezedUnionValue('default')"));
+      expect(content, contains('const factory Pet.defaultValue('));
+      expect(content, contains('String? name'));
+      expect(content, contains('required String name'));
+      expect(
+        content,
+        contains(
+          'const factory Pet.unknown(Map<String, Object?> json) = PetUnknown;',
+        ),
+      );
+      expect(content, contains('class PetUnknown implements Pet'));
+      expect(
+        content,
+        contains(
+          'Map<String, dynamic> toJson() => Map<String, dynamic>.from(json);',
+        ),
+      );
+    });
+
+    test('markFilesAsGenerated gates the generated banner', () {
+      const dataClass = UniversalComponentClass(
+        name: 'ClassName',
+        imports: {},
+        parameters: {},
+      );
+      const unmarked = FillController(
+        config: GeneratorConfig(
+          name: '',
+          outputDirectory: '.',
+          markFilesAsGenerated: false,
+        ),
+      );
+      const marked = FillController(
+        config: GeneratorConfig(
+          name: '',
+          outputDirectory: '.',
+          markFilesAsGenerated: true,
+        ),
+      );
+      final file = unmarked.fillDtoContent(dataClass);
+      expect(
+        unmarked.addGeneratedFileComments([file]).single.content,
+        isNot(contains('GENERATED CODE')),
+      );
+      expect(
+        marked.addGeneratedFileComments([file]).single.content,
+        startsWith('// coverage:ignore-file'),
+      );
     });
   });
 }

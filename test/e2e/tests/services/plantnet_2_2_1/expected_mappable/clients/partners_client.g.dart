@@ -127,7 +127,7 @@ class _PartnersClient implements PartnersClient {
   }
 
   @override
-  Future<List<Prediction>> getV2PredictionGeoSpecies({
+  Future<List<Prediction2>> getV2PredictionGeoSpecies({
     required num topLeftLon,
     required num topLeftLat,
     required num bottomRightLon,
@@ -149,7 +149,7 @@ class _PartnersClient implements PartnersClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<Prediction>>(
+    final _options = _setStreamType<List<Prediction2>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -160,10 +160,10 @@ class _PartnersClient implements PartnersClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<Prediction> _value;
+    late List<Prediction2> _value;
     try {
       _value = _result.data!
-          .map((dynamic i) => Prediction.fromJson(i as Map<String, dynamic>))
+          .map((dynamic i) => Prediction2.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

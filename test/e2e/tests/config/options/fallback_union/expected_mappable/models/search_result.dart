@@ -38,11 +38,7 @@ class SearchResultUser extends SearchResult with SearchResultUserMappable {
   final User user;
   final double? score;
 
-  const SearchResultUser({
-    required this.type,
-    required this.user,
-    required this.score,
-  });
+  const SearchResultUser({required this.type, required this.user, this.score});
 }
 
 @MappableClass(discriminatorValue: 'post')
@@ -55,8 +51,8 @@ class SearchResultPost extends SearchResult with SearchResultPostMappable {
   const SearchResultPost({
     required this.type,
     required this.post,
-    required this.score,
-    required this.highlights,
+    this.score,
+    this.highlights,
   });
 }
 
@@ -70,7 +66,7 @@ class SearchResultComment extends SearchResult
   const SearchResultComment({
     required this.type,
     required this.comment,
-    required this.score,
+    this.score,
   });
 }
 

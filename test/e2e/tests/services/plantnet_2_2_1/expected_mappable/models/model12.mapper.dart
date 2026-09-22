@@ -14,7 +14,7 @@ class Model12Mapper extends ClassMapperBase<Model12> {
   static Model12Mapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = Model12Mapper._());
-      ImageMapper.ensureInitialized();
+      Model11Mapper.ensureInitialized();
       IucnMapper.ensureInitialized();
     }
     return _instance!;
@@ -41,14 +41,14 @@ class Model12Mapper extends ClassMapperBase<Model12> {
     _$family,
     opt: true,
   );
-  static dynamic _$commonNames(Model12 v) => v.commonNames;
-  static const Field<Model12, dynamic> _f$commonNames = Field(
+  static List<String>? _$commonNames(Model12 v) => v.commonNames;
+  static const Field<Model12, List<String>> _f$commonNames = Field(
     'commonNames',
     _$commonNames,
     opt: true,
   );
-  static List<Image>? _$images(Model12 v) => v.images;
-  static const Field<Model12, List<Image>> _f$images = Field(
+  static List<Model11>? _$images(Model12 v) => v.images;
+  static const Field<Model12, List<Model11>> _f$images = Field(
     'images',
     _$images,
     opt: true,
@@ -142,14 +142,15 @@ extension Model12ValueCopy<$R, $Out> on ObjectCopyWith<$R, Model12, $Out> {
 
 abstract class Model12CopyWith<$R, $In extends Model12, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<$R, Image, ImageCopyWith<$R, Image, Image>>? get images;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get commonNames;
+  ListCopyWith<$R, Model11, Model11CopyWith<$R, Model11, Model11>>? get images;
   IucnCopyWith<$R, Iucn, Iucn>? get iucn;
   $R call({
     String? name,
     String? author,
     String? family,
-    dynamic commonNames,
-    List<Image>? images,
+    List<String>? commonNames,
+    List<Model11>? images,
     Iucn? iucn,
     String? predictedName,
   });
@@ -165,8 +166,17 @@ class _Model12CopyWithImpl<$R, $Out>
   late final ClassMapperBase<Model12> $mapper =
       Model12Mapper.ensureInitialized();
   @override
-  ListCopyWith<$R, Image, ImageCopyWith<$R, Image, Image>>? get images =>
-      $value.images != null
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+  get commonNames => $value.commonNames != null
+      ? ListCopyWith(
+          $value.commonNames!,
+          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v) => call(commonNames: v),
+        )
+      : null;
+  @override
+  ListCopyWith<$R, Model11, Model11CopyWith<$R, Model11, Model11>>?
+  get images => $value.images != null
       ? ListCopyWith(
           $value.images!,
           (v, t) => v.copyWith.$chain(t),

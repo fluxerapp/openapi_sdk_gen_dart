@@ -5,8 +5,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'gbif.dart';
-import 'genus.dart';
-import 'images.dart';
+import 'genus2.dart';
+import 'images2.dart';
 
 part 'model18.g.dart';
 
@@ -18,9 +18,9 @@ class Model18 {
       _$Model18FromJson(json);
 
   final num? score;
-  final Genus? genus;
+  final Genus2? genus;
   final Gbif? gbif;
-  final Images? images;
+  final Images2? images;
 
   Map<String, Object?> toJson() => _$Model18ToJson(this);
 }

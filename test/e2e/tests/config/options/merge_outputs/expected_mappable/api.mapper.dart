@@ -4125,7 +4125,7 @@ class PaymentRequestCreditCardMapper
   static String? _$cardholderName(PaymentRequestCreditCard v) =>
       v.cardholderName;
   static const Field<PaymentRequestCreditCard, String> _f$cardholderName =
-      Field('cardholderName', _$cardholderName);
+      Field('cardholderName', _$cardholderName, opt: true);
   static double _$amount(PaymentRequestCreditCard v) => v.amount;
   static const Field<PaymentRequestCreditCard, double> _f$amount = Field(
     'amount',
@@ -4332,7 +4332,7 @@ class PaymentRequestBankTransferMapper
   static String? _$accountHolder(PaymentRequestBankTransfer v) =>
       v.accountHolder;
   static const Field<PaymentRequestBankTransfer, String> _f$accountHolder =
-      Field('accountHolder', _$accountHolder);
+      Field('accountHolder', _$accountHolder, opt: true);
   static double _$amount(PaymentRequestBankTransfer v) => v.amount;
   static const Field<PaymentRequestBankTransfer, double> _f$amount = Field(
     'amount',
@@ -4342,6 +4342,7 @@ class PaymentRequestBankTransferMapper
   static const Field<PaymentRequestBankTransfer, String> _f$reference = Field(
     'reference',
     _$reference,
+    opt: true,
   );
 
   @override
@@ -4554,6 +4555,7 @@ class PaymentRequestCryptoMapper
   static const Field<PaymentRequestCrypto, String> _f$transactionHash = Field(
     'transactionHash',
     _$transactionHash,
+    opt: true,
   );
 
   @override
@@ -5484,9 +5486,9 @@ class PaymentResponseDetailsDetailsMapper
       MapperContainer.globals.use(
         _instance = PaymentResponseDetailsDetailsMapper._(),
       );
-      PaymentResponseDetailsDetailsCreditCardMapper.ensureInitialized();
-      PaymentResponseDetailsDetailsBankTransferMapper.ensureInitialized();
-      PaymentResponseDetailsDetailsCryptoMapper.ensureInitialized();
+      PaymentResponseDetailsDetailsCreditCardPaymentMapper.ensureInitialized();
+      PaymentResponseDetailsDetailsBankTransferPaymentMapper.ensureInitialized();
+      PaymentResponseDetailsDetailsCryptoPaymentMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -5540,15 +5542,16 @@ abstract class PaymentResponseDetailsDetailsCopyWith<
   );
 }
 
-class PaymentResponseDetailsDetailsCreditCardMapper
-    extends SubClassMapperBase<PaymentResponseDetailsDetailsCreditCard> {
-  PaymentResponseDetailsDetailsCreditCardMapper._();
+class PaymentResponseDetailsDetailsCreditCardPaymentMapper
+    extends SubClassMapperBase<PaymentResponseDetailsDetailsCreditCardPayment> {
+  PaymentResponseDetailsDetailsCreditCardPaymentMapper._();
 
-  static PaymentResponseDetailsDetailsCreditCardMapper? _instance;
-  static PaymentResponseDetailsDetailsCreditCardMapper ensureInitialized() {
+  static PaymentResponseDetailsDetailsCreditCardPaymentMapper? _instance;
+  static PaymentResponseDetailsDetailsCreditCardPaymentMapper
+  ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(
-        _instance = PaymentResponseDetailsDetailsCreditCardMapper._(),
+        _instance = PaymentResponseDetailsDetailsCreditCardPaymentMapper._(),
       );
       PaymentResponseDetailsDetailsMapper.ensureInitialized().addSubMapper(
         _instance!,
@@ -5559,62 +5562,67 @@ class PaymentResponseDetailsDetailsCreditCardMapper
   }
 
   @override
-  final String id = 'PaymentResponseDetailsDetailsCreditCard';
+  final String id = 'PaymentResponseDetailsDetailsCreditCardPayment';
 
   static CreditCardPaymentPaymentTypePaymentType _$paymentType(
-    PaymentResponseDetailsDetailsCreditCard v,
+    PaymentResponseDetailsDetailsCreditCardPayment v,
   ) => v.paymentType;
   static const Field<
-    PaymentResponseDetailsDetailsCreditCard,
+    PaymentResponseDetailsDetailsCreditCardPayment,
     CreditCardPaymentPaymentTypePaymentType
   >
   _f$paymentType = Field('paymentType', _$paymentType);
-  static String _$cardNumber(PaymentResponseDetailsDetailsCreditCard v) =>
-      v.cardNumber;
-  static const Field<PaymentResponseDetailsDetailsCreditCard, String>
+  static String _$cardNumber(
+    PaymentResponseDetailsDetailsCreditCardPayment v,
+  ) => v.cardNumber;
+  static const Field<PaymentResponseDetailsDetailsCreditCardPayment, String>
   _f$cardNumber = Field('cardNumber', _$cardNumber);
-  static int _$expiryMonth(PaymentResponseDetailsDetailsCreditCard v) =>
+  static int _$expiryMonth(PaymentResponseDetailsDetailsCreditCardPayment v) =>
       v.expiryMonth;
-  static const Field<PaymentResponseDetailsDetailsCreditCard, int>
+  static const Field<PaymentResponseDetailsDetailsCreditCardPayment, int>
   _f$expiryMonth = Field('expiryMonth', _$expiryMonth);
-  static int _$expiryYear(PaymentResponseDetailsDetailsCreditCard v) =>
+  static int _$expiryYear(PaymentResponseDetailsDetailsCreditCardPayment v) =>
       v.expiryYear;
-  static const Field<PaymentResponseDetailsDetailsCreditCard, int>
+  static const Field<PaymentResponseDetailsDetailsCreditCardPayment, int>
   _f$expiryYear = Field('expiryYear', _$expiryYear);
-  static String _$cvv(PaymentResponseDetailsDetailsCreditCard v) => v.cvv;
-  static const Field<PaymentResponseDetailsDetailsCreditCard, String> _f$cvv =
-      Field('cvv', _$cvv);
-  static String? _$cardholderName(PaymentResponseDetailsDetailsCreditCard v) =>
-      v.cardholderName;
-  static const Field<PaymentResponseDetailsDetailsCreditCard, String>
-  _f$cardholderName = Field('cardholderName', _$cardholderName);
-  static double _$amount(PaymentResponseDetailsDetailsCreditCard v) => v.amount;
-  static const Field<PaymentResponseDetailsDetailsCreditCard, double>
+  static String _$cvv(PaymentResponseDetailsDetailsCreditCardPayment v) =>
+      v.cvv;
+  static const Field<PaymentResponseDetailsDetailsCreditCardPayment, String>
+  _f$cvv = Field('cvv', _$cvv);
+  static String? _$cardholderName(
+    PaymentResponseDetailsDetailsCreditCardPayment v,
+  ) => v.cardholderName;
+  static const Field<PaymentResponseDetailsDetailsCreditCardPayment, String>
+  _f$cardholderName = Field('cardholderName', _$cardholderName, opt: true);
+  static double _$amount(PaymentResponseDetailsDetailsCreditCardPayment v) =>
+      v.amount;
+  static const Field<PaymentResponseDetailsDetailsCreditCardPayment, double>
   _f$amount = Field('amount', _$amount);
 
   @override
-  final MappableFields<PaymentResponseDetailsDetailsCreditCard> fields = const {
-    #paymentType: _f$paymentType,
-    #cardNumber: _f$cardNumber,
-    #expiryMonth: _f$expiryMonth,
-    #expiryYear: _f$expiryYear,
-    #cvv: _f$cvv,
-    #cardholderName: _f$cardholderName,
-    #amount: _f$amount,
-  };
+  final MappableFields<PaymentResponseDetailsDetailsCreditCardPayment> fields =
+      const {
+        #paymentType: _f$paymentType,
+        #cardNumber: _f$cardNumber,
+        #expiryMonth: _f$expiryMonth,
+        #expiryYear: _f$expiryYear,
+        #cvv: _f$cvv,
+        #cardholderName: _f$cardholderName,
+        #amount: _f$amount,
+      };
 
   @override
   final String discriminatorKey = 'paymentType';
   @override
-  final dynamic discriminatorValue = 'credit_card';
+  final dynamic discriminatorValue = 'CreditCardPayment';
   @override
   late final ClassMapperBase superMapper =
       PaymentResponseDetailsDetailsMapper.ensureInitialized();
 
-  static PaymentResponseDetailsDetailsCreditCard _instantiate(
+  static PaymentResponseDetailsDetailsCreditCardPayment _instantiate(
     DecodingData data,
   ) {
-    return PaymentResponseDetailsDetailsCreditCard(
+    return PaymentResponseDetailsDetailsCreditCardPayment(
       paymentType: data.dec(_f$paymentType),
       cardNumber: data.dec(_f$cardNumber),
       expiryMonth: data.dec(_f$expiryMonth),
@@ -5628,73 +5636,87 @@ class PaymentResponseDetailsDetailsCreditCardMapper
   @override
   final Function instantiate = _instantiate;
 
-  static PaymentResponseDetailsDetailsCreditCard fromJson(
+  static PaymentResponseDetailsDetailsCreditCardPayment fromJson(
     Map<String, dynamic> map,
   ) {
     return ensureInitialized()
-        .decodeMap<PaymentResponseDetailsDetailsCreditCard>(map);
+        .decodeMap<PaymentResponseDetailsDetailsCreditCardPayment>(map);
   }
 
-  static PaymentResponseDetailsDetailsCreditCard fromJsonString(String json) {
+  static PaymentResponseDetailsDetailsCreditCardPayment fromJsonString(
+    String json,
+  ) {
     return ensureInitialized()
-        .decodeJson<PaymentResponseDetailsDetailsCreditCard>(json);
+        .decodeJson<PaymentResponseDetailsDetailsCreditCardPayment>(json);
   }
 }
 
-mixin PaymentResponseDetailsDetailsCreditCardMappable {
+mixin PaymentResponseDetailsDetailsCreditCardPaymentMappable {
   String toJsonString() {
-    return PaymentResponseDetailsDetailsCreditCardMapper.ensureInitialized()
-        .encodeJson<PaymentResponseDetailsDetailsCreditCard>(
-          this as PaymentResponseDetailsDetailsCreditCard,
+    return PaymentResponseDetailsDetailsCreditCardPaymentMapper.ensureInitialized()
+        .encodeJson<PaymentResponseDetailsDetailsCreditCardPayment>(
+          this as PaymentResponseDetailsDetailsCreditCardPayment,
         );
   }
 
   Map<String, dynamic> toJson() {
-    return PaymentResponseDetailsDetailsCreditCardMapper.ensureInitialized()
-        .encodeMap<PaymentResponseDetailsDetailsCreditCard>(
-          this as PaymentResponseDetailsDetailsCreditCard,
+    return PaymentResponseDetailsDetailsCreditCardPaymentMapper.ensureInitialized()
+        .encodeMap<PaymentResponseDetailsDetailsCreditCardPayment>(
+          this as PaymentResponseDetailsDetailsCreditCardPayment,
         );
   }
 
-  PaymentResponseDetailsDetailsCreditCardCopyWith<
-    PaymentResponseDetailsDetailsCreditCard,
-    PaymentResponseDetailsDetailsCreditCard,
-    PaymentResponseDetailsDetailsCreditCard
+  PaymentResponseDetailsDetailsCreditCardPaymentCopyWith<
+    PaymentResponseDetailsDetailsCreditCardPayment,
+    PaymentResponseDetailsDetailsCreditCardPayment,
+    PaymentResponseDetailsDetailsCreditCardPayment
   >
   get copyWith =>
-      _PaymentResponseDetailsDetailsCreditCardCopyWithImpl<
-        PaymentResponseDetailsDetailsCreditCard,
-        PaymentResponseDetailsDetailsCreditCard
-      >(this as PaymentResponseDetailsDetailsCreditCard, $identity, $identity);
+      _PaymentResponseDetailsDetailsCreditCardPaymentCopyWithImpl<
+        PaymentResponseDetailsDetailsCreditCardPayment,
+        PaymentResponseDetailsDetailsCreditCardPayment
+      >(
+        this as PaymentResponseDetailsDetailsCreditCardPayment,
+        $identity,
+        $identity,
+      );
   @override
   String toString() {
-    return PaymentResponseDetailsDetailsCreditCardMapper.ensureInitialized()
-        .stringifyValue(this as PaymentResponseDetailsDetailsCreditCard);
+    return PaymentResponseDetailsDetailsCreditCardPaymentMapper.ensureInitialized()
+        .stringifyValue(this as PaymentResponseDetailsDetailsCreditCardPayment);
   }
 
   @override
   bool operator ==(Object other) {
-    return PaymentResponseDetailsDetailsCreditCardMapper.ensureInitialized()
-        .equalsValue(this as PaymentResponseDetailsDetailsCreditCard, other);
+    return PaymentResponseDetailsDetailsCreditCardPaymentMapper.ensureInitialized()
+        .equalsValue(
+          this as PaymentResponseDetailsDetailsCreditCardPayment,
+          other,
+        );
   }
 
   @override
   int get hashCode {
-    return PaymentResponseDetailsDetailsCreditCardMapper.ensureInitialized()
-        .hashValue(this as PaymentResponseDetailsDetailsCreditCard);
+    return PaymentResponseDetailsDetailsCreditCardPaymentMapper.ensureInitialized()
+        .hashValue(this as PaymentResponseDetailsDetailsCreditCardPayment);
   }
 }
 
-extension PaymentResponseDetailsDetailsCreditCardValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PaymentResponseDetailsDetailsCreditCard, $Out> {
-  PaymentResponseDetailsDetailsCreditCardCopyWith<
+extension PaymentResponseDetailsDetailsCreditCardPaymentValueCopy<$R, $Out>
+    on
+        ObjectCopyWith<
+          $R,
+          PaymentResponseDetailsDetailsCreditCardPayment,
+          $Out
+        > {
+  PaymentResponseDetailsDetailsCreditCardPaymentCopyWith<
     $R,
-    PaymentResponseDetailsDetailsCreditCard,
+    PaymentResponseDetailsDetailsCreditCardPayment,
     $Out
   >
-  get $asPaymentResponseDetailsDetailsCreditCard => $base.as(
+  get $asPaymentResponseDetailsDetailsCreditCardPayment => $base.as(
     (v, t, t2) =>
-        _PaymentResponseDetailsDetailsCreditCardCopyWithImpl<$R, $Out>(
+        _PaymentResponseDetailsDetailsCreditCardPaymentCopyWithImpl<$R, $Out>(
           v,
           t,
           t2,
@@ -5702,9 +5724,9 @@ extension PaymentResponseDetailsDetailsCreditCardValueCopy<$R, $Out>
   );
 }
 
-abstract class PaymentResponseDetailsDetailsCreditCardCopyWith<
+abstract class PaymentResponseDetailsDetailsCreditCardPaymentCopyWith<
   $R,
-  $In extends PaymentResponseDetailsDetailsCreditCard,
+  $In extends PaymentResponseDetailsDetailsCreditCardPayment,
   $Out
 >
     implements PaymentResponseDetailsDetailsCopyWith<$R, $In, $Out> {
@@ -5718,27 +5740,33 @@ abstract class PaymentResponseDetailsDetailsCreditCardCopyWith<
     String? cardholderName,
     double? amount,
   });
-  PaymentResponseDetailsDetailsCreditCardCopyWith<$R2, $In, $Out2>
+  PaymentResponseDetailsDetailsCreditCardPaymentCopyWith<$R2, $In, $Out2>
   $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _PaymentResponseDetailsDetailsCreditCardCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PaymentResponseDetailsDetailsCreditCard, $Out>
-    implements
-        PaymentResponseDetailsDetailsCreditCardCopyWith<
+class _PaymentResponseDetailsDetailsCreditCardPaymentCopyWithImpl<$R, $Out>
+    extends
+        ClassCopyWithBase<
           $R,
-          PaymentResponseDetailsDetailsCreditCard,
+          PaymentResponseDetailsDetailsCreditCardPayment,
+          $Out
+        >
+    implements
+        PaymentResponseDetailsDetailsCreditCardPaymentCopyWith<
+          $R,
+          PaymentResponseDetailsDetailsCreditCardPayment,
           $Out
         > {
-  _PaymentResponseDetailsDetailsCreditCardCopyWithImpl(
+  _PaymentResponseDetailsDetailsCreditCardPaymentCopyWithImpl(
     super.value,
     super.then,
     super.then2,
   );
 
   @override
-  late final ClassMapperBase<PaymentResponseDetailsDetailsCreditCard> $mapper =
-      PaymentResponseDetailsDetailsCreditCardMapper.ensureInitialized();
+  late final ClassMapperBase<PaymentResponseDetailsDetailsCreditCardPayment>
+  $mapper =
+      PaymentResponseDetailsDetailsCreditCardPaymentMapper.ensureInitialized();
   @override
   $R call({
     CreditCardPaymentPaymentTypePaymentType? paymentType,
@@ -5760,8 +5788,8 @@ class _PaymentResponseDetailsDetailsCreditCardCopyWithImpl<$R, $Out>
     }),
   );
   @override
-  PaymentResponseDetailsDetailsCreditCard $make(CopyWithData data) =>
-      PaymentResponseDetailsDetailsCreditCard(
+  PaymentResponseDetailsDetailsCreditCardPayment $make(CopyWithData data) =>
+      PaymentResponseDetailsDetailsCreditCardPayment(
         paymentType: data.get(#paymentType, or: $value.paymentType),
         cardNumber: data.get(#cardNumber, or: $value.cardNumber),
         expiryMonth: data.get(#expiryMonth, or: $value.expiryMonth),
@@ -5772,28 +5800,30 @@ class _PaymentResponseDetailsDetailsCreditCardCopyWithImpl<$R, $Out>
       );
 
   @override
-  PaymentResponseDetailsDetailsCreditCardCopyWith<
+  PaymentResponseDetailsDetailsCreditCardPaymentCopyWith<
     $R2,
-    PaymentResponseDetailsDetailsCreditCard,
+    PaymentResponseDetailsDetailsCreditCardPayment,
     $Out2
   >
   $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _PaymentResponseDetailsDetailsCreditCardCopyWithImpl<$R2, $Out2>(
+      _PaymentResponseDetailsDetailsCreditCardPaymentCopyWithImpl<$R2, $Out2>(
         $value,
         $cast,
         t,
       );
 }
 
-class PaymentResponseDetailsDetailsBankTransferMapper
-    extends SubClassMapperBase<PaymentResponseDetailsDetailsBankTransfer> {
-  PaymentResponseDetailsDetailsBankTransferMapper._();
+class PaymentResponseDetailsDetailsBankTransferPaymentMapper
+    extends
+        SubClassMapperBase<PaymentResponseDetailsDetailsBankTransferPayment> {
+  PaymentResponseDetailsDetailsBankTransferPaymentMapper._();
 
-  static PaymentResponseDetailsDetailsBankTransferMapper? _instance;
-  static PaymentResponseDetailsDetailsBankTransferMapper ensureInitialized() {
+  static PaymentResponseDetailsDetailsBankTransferPaymentMapper? _instance;
+  static PaymentResponseDetailsDetailsBankTransferPaymentMapper
+  ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(
-        _instance = PaymentResponseDetailsDetailsBankTransferMapper._(),
+        _instance = PaymentResponseDetailsDetailsBankTransferPaymentMapper._(),
       );
       PaymentResponseDetailsDetailsMapper.ensureInitialized().addSubMapper(
         _instance!,
@@ -5804,60 +5834,64 @@ class PaymentResponseDetailsDetailsBankTransferMapper
   }
 
   @override
-  final String id = 'PaymentResponseDetailsDetailsBankTransfer';
+  final String id = 'PaymentResponseDetailsDetailsBankTransferPayment';
 
   static BankTransferPaymentPaymentTypePaymentType _$paymentType(
-    PaymentResponseDetailsDetailsBankTransfer v,
+    PaymentResponseDetailsDetailsBankTransferPayment v,
   ) => v.paymentType;
   static const Field<
-    PaymentResponseDetailsDetailsBankTransfer,
+    PaymentResponseDetailsDetailsBankTransferPayment,
     BankTransferPaymentPaymentTypePaymentType
   >
   _f$paymentType = Field('paymentType', _$paymentType);
-  static String _$accountNumber(PaymentResponseDetailsDetailsBankTransfer v) =>
-      v.accountNumber;
-  static const Field<PaymentResponseDetailsDetailsBankTransfer, String>
+  static String _$accountNumber(
+    PaymentResponseDetailsDetailsBankTransferPayment v,
+  ) => v.accountNumber;
+  static const Field<PaymentResponseDetailsDetailsBankTransferPayment, String>
   _f$accountNumber = Field('accountNumber', _$accountNumber);
-  static String _$routingNumber(PaymentResponseDetailsDetailsBankTransfer v) =>
-      v.routingNumber;
-  static const Field<PaymentResponseDetailsDetailsBankTransfer, String>
+  static String _$routingNumber(
+    PaymentResponseDetailsDetailsBankTransferPayment v,
+  ) => v.routingNumber;
+  static const Field<PaymentResponseDetailsDetailsBankTransferPayment, String>
   _f$routingNumber = Field('routingNumber', _$routingNumber);
-  static String? _$accountHolder(PaymentResponseDetailsDetailsBankTransfer v) =>
-      v.accountHolder;
-  static const Field<PaymentResponseDetailsDetailsBankTransfer, String>
-  _f$accountHolder = Field('accountHolder', _$accountHolder);
-  static double _$amount(PaymentResponseDetailsDetailsBankTransfer v) =>
+  static String? _$accountHolder(
+    PaymentResponseDetailsDetailsBankTransferPayment v,
+  ) => v.accountHolder;
+  static const Field<PaymentResponseDetailsDetailsBankTransferPayment, String>
+  _f$accountHolder = Field('accountHolder', _$accountHolder, opt: true);
+  static double _$amount(PaymentResponseDetailsDetailsBankTransferPayment v) =>
       v.amount;
-  static const Field<PaymentResponseDetailsDetailsBankTransfer, double>
+  static const Field<PaymentResponseDetailsDetailsBankTransferPayment, double>
   _f$amount = Field('amount', _$amount);
-  static String? _$reference(PaymentResponseDetailsDetailsBankTransfer v) =>
-      v.reference;
-  static const Field<PaymentResponseDetailsDetailsBankTransfer, String>
-  _f$reference = Field('reference', _$reference);
+  static String? _$reference(
+    PaymentResponseDetailsDetailsBankTransferPayment v,
+  ) => v.reference;
+  static const Field<PaymentResponseDetailsDetailsBankTransferPayment, String>
+  _f$reference = Field('reference', _$reference, opt: true);
 
   @override
-  final MappableFields<PaymentResponseDetailsDetailsBankTransfer> fields =
-      const {
-        #paymentType: _f$paymentType,
-        #accountNumber: _f$accountNumber,
-        #routingNumber: _f$routingNumber,
-        #accountHolder: _f$accountHolder,
-        #amount: _f$amount,
-        #reference: _f$reference,
-      };
+  final MappableFields<PaymentResponseDetailsDetailsBankTransferPayment>
+  fields = const {
+    #paymentType: _f$paymentType,
+    #accountNumber: _f$accountNumber,
+    #routingNumber: _f$routingNumber,
+    #accountHolder: _f$accountHolder,
+    #amount: _f$amount,
+    #reference: _f$reference,
+  };
 
   @override
   final String discriminatorKey = 'paymentType';
   @override
-  final dynamic discriminatorValue = 'bank_transfer';
+  final dynamic discriminatorValue = 'BankTransferPayment';
   @override
   late final ClassMapperBase superMapper =
       PaymentResponseDetailsDetailsMapper.ensureInitialized();
 
-  static PaymentResponseDetailsDetailsBankTransfer _instantiate(
+  static PaymentResponseDetailsDetailsBankTransferPayment _instantiate(
     DecodingData data,
   ) {
-    return PaymentResponseDetailsDetailsBankTransfer(
+    return PaymentResponseDetailsDetailsBankTransferPayment(
       paymentType: data.dec(_f$paymentType),
       accountNumber: data.dec(_f$accountNumber),
       routingNumber: data.dec(_f$routingNumber),
@@ -5870,77 +5904,89 @@ class PaymentResponseDetailsDetailsBankTransferMapper
   @override
   final Function instantiate = _instantiate;
 
-  static PaymentResponseDetailsDetailsBankTransfer fromJson(
+  static PaymentResponseDetailsDetailsBankTransferPayment fromJson(
     Map<String, dynamic> map,
   ) {
     return ensureInitialized()
-        .decodeMap<PaymentResponseDetailsDetailsBankTransfer>(map);
+        .decodeMap<PaymentResponseDetailsDetailsBankTransferPayment>(map);
   }
 
-  static PaymentResponseDetailsDetailsBankTransfer fromJsonString(String json) {
+  static PaymentResponseDetailsDetailsBankTransferPayment fromJsonString(
+    String json,
+  ) {
     return ensureInitialized()
-        .decodeJson<PaymentResponseDetailsDetailsBankTransfer>(json);
+        .decodeJson<PaymentResponseDetailsDetailsBankTransferPayment>(json);
   }
 }
 
-mixin PaymentResponseDetailsDetailsBankTransferMappable {
+mixin PaymentResponseDetailsDetailsBankTransferPaymentMappable {
   String toJsonString() {
-    return PaymentResponseDetailsDetailsBankTransferMapper.ensureInitialized()
-        .encodeJson<PaymentResponseDetailsDetailsBankTransfer>(
-          this as PaymentResponseDetailsDetailsBankTransfer,
+    return PaymentResponseDetailsDetailsBankTransferPaymentMapper.ensureInitialized()
+        .encodeJson<PaymentResponseDetailsDetailsBankTransferPayment>(
+          this as PaymentResponseDetailsDetailsBankTransferPayment,
         );
   }
 
   Map<String, dynamic> toJson() {
-    return PaymentResponseDetailsDetailsBankTransferMapper.ensureInitialized()
-        .encodeMap<PaymentResponseDetailsDetailsBankTransfer>(
-          this as PaymentResponseDetailsDetailsBankTransfer,
+    return PaymentResponseDetailsDetailsBankTransferPaymentMapper.ensureInitialized()
+        .encodeMap<PaymentResponseDetailsDetailsBankTransferPayment>(
+          this as PaymentResponseDetailsDetailsBankTransferPayment,
         );
   }
 
-  PaymentResponseDetailsDetailsBankTransferCopyWith<
-    PaymentResponseDetailsDetailsBankTransfer,
-    PaymentResponseDetailsDetailsBankTransfer,
-    PaymentResponseDetailsDetailsBankTransfer
+  PaymentResponseDetailsDetailsBankTransferPaymentCopyWith<
+    PaymentResponseDetailsDetailsBankTransferPayment,
+    PaymentResponseDetailsDetailsBankTransferPayment,
+    PaymentResponseDetailsDetailsBankTransferPayment
   >
   get copyWith =>
-      _PaymentResponseDetailsDetailsBankTransferCopyWithImpl<
-        PaymentResponseDetailsDetailsBankTransfer,
-        PaymentResponseDetailsDetailsBankTransfer
+      _PaymentResponseDetailsDetailsBankTransferPaymentCopyWithImpl<
+        PaymentResponseDetailsDetailsBankTransferPayment,
+        PaymentResponseDetailsDetailsBankTransferPayment
       >(
-        this as PaymentResponseDetailsDetailsBankTransfer,
+        this as PaymentResponseDetailsDetailsBankTransferPayment,
         $identity,
         $identity,
       );
   @override
   String toString() {
-    return PaymentResponseDetailsDetailsBankTransferMapper.ensureInitialized()
-        .stringifyValue(this as PaymentResponseDetailsDetailsBankTransfer);
+    return PaymentResponseDetailsDetailsBankTransferPaymentMapper.ensureInitialized()
+        .stringifyValue(
+          this as PaymentResponseDetailsDetailsBankTransferPayment,
+        );
   }
 
   @override
   bool operator ==(Object other) {
-    return PaymentResponseDetailsDetailsBankTransferMapper.ensureInitialized()
-        .equalsValue(this as PaymentResponseDetailsDetailsBankTransfer, other);
+    return PaymentResponseDetailsDetailsBankTransferPaymentMapper.ensureInitialized()
+        .equalsValue(
+          this as PaymentResponseDetailsDetailsBankTransferPayment,
+          other,
+        );
   }
 
   @override
   int get hashCode {
-    return PaymentResponseDetailsDetailsBankTransferMapper.ensureInitialized()
-        .hashValue(this as PaymentResponseDetailsDetailsBankTransfer);
+    return PaymentResponseDetailsDetailsBankTransferPaymentMapper.ensureInitialized()
+        .hashValue(this as PaymentResponseDetailsDetailsBankTransferPayment);
   }
 }
 
-extension PaymentResponseDetailsDetailsBankTransferValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PaymentResponseDetailsDetailsBankTransfer, $Out> {
-  PaymentResponseDetailsDetailsBankTransferCopyWith<
+extension PaymentResponseDetailsDetailsBankTransferPaymentValueCopy<$R, $Out>
+    on
+        ObjectCopyWith<
+          $R,
+          PaymentResponseDetailsDetailsBankTransferPayment,
+          $Out
+        > {
+  PaymentResponseDetailsDetailsBankTransferPaymentCopyWith<
     $R,
-    PaymentResponseDetailsDetailsBankTransfer,
+    PaymentResponseDetailsDetailsBankTransferPayment,
     $Out
   >
-  get $asPaymentResponseDetailsDetailsBankTransfer => $base.as(
+  get $asPaymentResponseDetailsDetailsBankTransferPayment => $base.as(
     (v, t, t2) =>
-        _PaymentResponseDetailsDetailsBankTransferCopyWithImpl<$R, $Out>(
+        _PaymentResponseDetailsDetailsBankTransferPaymentCopyWithImpl<$R, $Out>(
           v,
           t,
           t2,
@@ -5948,9 +5994,9 @@ extension PaymentResponseDetailsDetailsBankTransferValueCopy<$R, $Out>
   );
 }
 
-abstract class PaymentResponseDetailsDetailsBankTransferCopyWith<
+abstract class PaymentResponseDetailsDetailsBankTransferPaymentCopyWith<
   $R,
-  $In extends PaymentResponseDetailsDetailsBankTransfer,
+  $In extends PaymentResponseDetailsDetailsBankTransferPayment,
   $Out
 >
     implements PaymentResponseDetailsDetailsCopyWith<$R, $In, $Out> {
@@ -5963,28 +6009,33 @@ abstract class PaymentResponseDetailsDetailsBankTransferCopyWith<
     double? amount,
     String? reference,
   });
-  PaymentResponseDetailsDetailsBankTransferCopyWith<$R2, $In, $Out2>
+  PaymentResponseDetailsDetailsBankTransferPaymentCopyWith<$R2, $In, $Out2>
   $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _PaymentResponseDetailsDetailsBankTransferCopyWithImpl<$R, $Out>
+class _PaymentResponseDetailsDetailsBankTransferPaymentCopyWithImpl<$R, $Out>
     extends
-        ClassCopyWithBase<$R, PaymentResponseDetailsDetailsBankTransfer, $Out>
-    implements
-        PaymentResponseDetailsDetailsBankTransferCopyWith<
+        ClassCopyWithBase<
           $R,
-          PaymentResponseDetailsDetailsBankTransfer,
+          PaymentResponseDetailsDetailsBankTransferPayment,
+          $Out
+        >
+    implements
+        PaymentResponseDetailsDetailsBankTransferPaymentCopyWith<
+          $R,
+          PaymentResponseDetailsDetailsBankTransferPayment,
           $Out
         > {
-  _PaymentResponseDetailsDetailsBankTransferCopyWithImpl(
+  _PaymentResponseDetailsDetailsBankTransferPaymentCopyWithImpl(
     super.value,
     super.then,
     super.then2,
   );
 
   @override
-  late final ClassMapperBase<PaymentResponseDetailsDetailsBankTransfer>
-  $mapper = PaymentResponseDetailsDetailsBankTransferMapper.ensureInitialized();
+  late final ClassMapperBase<PaymentResponseDetailsDetailsBankTransferPayment>
+  $mapper =
+      PaymentResponseDetailsDetailsBankTransferPaymentMapper.ensureInitialized();
   @override
   $R call({
     BankTransferPaymentPaymentTypePaymentType? paymentType,
@@ -6004,8 +6055,8 @@ class _PaymentResponseDetailsDetailsBankTransferCopyWithImpl<$R, $Out>
     }),
   );
   @override
-  PaymentResponseDetailsDetailsBankTransfer $make(CopyWithData data) =>
-      PaymentResponseDetailsDetailsBankTransfer(
+  PaymentResponseDetailsDetailsBankTransferPayment $make(CopyWithData data) =>
+      PaymentResponseDetailsDetailsBankTransferPayment(
         paymentType: data.get(#paymentType, or: $value.paymentType),
         accountNumber: data.get(#accountNumber, or: $value.accountNumber),
         routingNumber: data.get(#routingNumber, or: $value.routingNumber),
@@ -6015,28 +6066,28 @@ class _PaymentResponseDetailsDetailsBankTransferCopyWithImpl<$R, $Out>
       );
 
   @override
-  PaymentResponseDetailsDetailsBankTransferCopyWith<
+  PaymentResponseDetailsDetailsBankTransferPaymentCopyWith<
     $R2,
-    PaymentResponseDetailsDetailsBankTransfer,
+    PaymentResponseDetailsDetailsBankTransferPayment,
     $Out2
   >
   $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _PaymentResponseDetailsDetailsBankTransferCopyWithImpl<$R2, $Out2>(
+      _PaymentResponseDetailsDetailsBankTransferPaymentCopyWithImpl<$R2, $Out2>(
         $value,
         $cast,
         t,
       );
 }
 
-class PaymentResponseDetailsDetailsCryptoMapper
-    extends SubClassMapperBase<PaymentResponseDetailsDetailsCrypto> {
-  PaymentResponseDetailsDetailsCryptoMapper._();
+class PaymentResponseDetailsDetailsCryptoPaymentMapper
+    extends SubClassMapperBase<PaymentResponseDetailsDetailsCryptoPayment> {
+  PaymentResponseDetailsDetailsCryptoPaymentMapper._();
 
-  static PaymentResponseDetailsDetailsCryptoMapper? _instance;
-  static PaymentResponseDetailsDetailsCryptoMapper ensureInitialized() {
+  static PaymentResponseDetailsDetailsCryptoPaymentMapper? _instance;
+  static PaymentResponseDetailsDetailsCryptoPaymentMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(
-        _instance = PaymentResponseDetailsDetailsCryptoMapper._(),
+        _instance = PaymentResponseDetailsDetailsCryptoPaymentMapper._(),
       );
       PaymentResponseDetailsDetailsMapper.ensureInitialized().addSubMapper(
         _instance!,
@@ -6048,55 +6099,60 @@ class PaymentResponseDetailsDetailsCryptoMapper
   }
 
   @override
-  final String id = 'PaymentResponseDetailsDetailsCrypto';
+  final String id = 'PaymentResponseDetailsDetailsCryptoPayment';
 
   static CryptoPaymentPaymentTypePaymentType _$paymentType(
-    PaymentResponseDetailsDetailsCrypto v,
+    PaymentResponseDetailsDetailsCryptoPayment v,
   ) => v.paymentType;
   static const Field<
-    PaymentResponseDetailsDetailsCrypto,
+    PaymentResponseDetailsDetailsCryptoPayment,
     CryptoPaymentPaymentTypePaymentType
   >
   _f$paymentType = Field('paymentType', _$paymentType);
-  static String _$walletAddress(PaymentResponseDetailsDetailsCrypto v) =>
+  static String _$walletAddress(PaymentResponseDetailsDetailsCryptoPayment v) =>
       v.walletAddress;
-  static const Field<PaymentResponseDetailsDetailsCrypto, String>
+  static const Field<PaymentResponseDetailsDetailsCryptoPayment, String>
   _f$walletAddress = Field('walletAddress', _$walletAddress);
   static CryptoPaymentCryptocurrencyCryptocurrency _$cryptocurrency(
-    PaymentResponseDetailsDetailsCrypto v,
+    PaymentResponseDetailsDetailsCryptoPayment v,
   ) => v.cryptocurrency;
   static const Field<
-    PaymentResponseDetailsDetailsCrypto,
+    PaymentResponseDetailsDetailsCryptoPayment,
     CryptoPaymentCryptocurrencyCryptocurrency
   >
   _f$cryptocurrency = Field('cryptocurrency', _$cryptocurrency);
-  static double _$amount(PaymentResponseDetailsDetailsCrypto v) => v.amount;
-  static const Field<PaymentResponseDetailsDetailsCrypto, double> _f$amount =
-      Field('amount', _$amount);
-  static String? _$transactionHash(PaymentResponseDetailsDetailsCrypto v) =>
-      v.transactionHash;
-  static const Field<PaymentResponseDetailsDetailsCrypto, String>
-  _f$transactionHash = Field('transactionHash', _$transactionHash);
+  static double _$amount(PaymentResponseDetailsDetailsCryptoPayment v) =>
+      v.amount;
+  static const Field<PaymentResponseDetailsDetailsCryptoPayment, double>
+  _f$amount = Field('amount', _$amount);
+  static String? _$transactionHash(
+    PaymentResponseDetailsDetailsCryptoPayment v,
+  ) => v.transactionHash;
+  static const Field<PaymentResponseDetailsDetailsCryptoPayment, String>
+  _f$transactionHash = Field('transactionHash', _$transactionHash, opt: true);
 
   @override
-  final MappableFields<PaymentResponseDetailsDetailsCrypto> fields = const {
-    #paymentType: _f$paymentType,
-    #walletAddress: _f$walletAddress,
-    #cryptocurrency: _f$cryptocurrency,
-    #amount: _f$amount,
-    #transactionHash: _f$transactionHash,
-  };
+  final MappableFields<PaymentResponseDetailsDetailsCryptoPayment> fields =
+      const {
+        #paymentType: _f$paymentType,
+        #walletAddress: _f$walletAddress,
+        #cryptocurrency: _f$cryptocurrency,
+        #amount: _f$amount,
+        #transactionHash: _f$transactionHash,
+      };
 
   @override
   final String discriminatorKey = 'paymentType';
   @override
-  final dynamic discriminatorValue = 'crypto';
+  final dynamic discriminatorValue = 'CryptoPayment';
   @override
   late final ClassMapperBase superMapper =
       PaymentResponseDetailsDetailsMapper.ensureInitialized();
 
-  static PaymentResponseDetailsDetailsCrypto _instantiate(DecodingData data) {
-    return PaymentResponseDetailsDetailsCrypto(
+  static PaymentResponseDetailsDetailsCryptoPayment _instantiate(
+    DecodingData data,
+  ) {
+    return PaymentResponseDetailsDetailsCryptoPayment(
       paymentType: data.dec(_f$paymentType),
       walletAddress: data.dec(_f$walletAddress),
       cryptocurrency: data.dec(_f$cryptocurrency),
@@ -6108,81 +6164,89 @@ class PaymentResponseDetailsDetailsCryptoMapper
   @override
   final Function instantiate = _instantiate;
 
-  static PaymentResponseDetailsDetailsCrypto fromJson(
+  static PaymentResponseDetailsDetailsCryptoPayment fromJson(
     Map<String, dynamic> map,
   ) {
-    return ensureInitialized().decodeMap<PaymentResponseDetailsDetailsCrypto>(
-      map,
-    );
+    return ensureInitialized()
+        .decodeMap<PaymentResponseDetailsDetailsCryptoPayment>(map);
   }
 
-  static PaymentResponseDetailsDetailsCrypto fromJsonString(String json) {
-    return ensureInitialized().decodeJson<PaymentResponseDetailsDetailsCrypto>(
-      json,
-    );
+  static PaymentResponseDetailsDetailsCryptoPayment fromJsonString(
+    String json,
+  ) {
+    return ensureInitialized()
+        .decodeJson<PaymentResponseDetailsDetailsCryptoPayment>(json);
   }
 }
 
-mixin PaymentResponseDetailsDetailsCryptoMappable {
+mixin PaymentResponseDetailsDetailsCryptoPaymentMappable {
   String toJsonString() {
-    return PaymentResponseDetailsDetailsCryptoMapper.ensureInitialized()
-        .encodeJson<PaymentResponseDetailsDetailsCrypto>(
-          this as PaymentResponseDetailsDetailsCrypto,
+    return PaymentResponseDetailsDetailsCryptoPaymentMapper.ensureInitialized()
+        .encodeJson<PaymentResponseDetailsDetailsCryptoPayment>(
+          this as PaymentResponseDetailsDetailsCryptoPayment,
         );
   }
 
   Map<String, dynamic> toJson() {
-    return PaymentResponseDetailsDetailsCryptoMapper.ensureInitialized()
-        .encodeMap<PaymentResponseDetailsDetailsCrypto>(
-          this as PaymentResponseDetailsDetailsCrypto,
+    return PaymentResponseDetailsDetailsCryptoPaymentMapper.ensureInitialized()
+        .encodeMap<PaymentResponseDetailsDetailsCryptoPayment>(
+          this as PaymentResponseDetailsDetailsCryptoPayment,
         );
   }
 
-  PaymentResponseDetailsDetailsCryptoCopyWith<
-    PaymentResponseDetailsDetailsCrypto,
-    PaymentResponseDetailsDetailsCrypto,
-    PaymentResponseDetailsDetailsCrypto
+  PaymentResponseDetailsDetailsCryptoPaymentCopyWith<
+    PaymentResponseDetailsDetailsCryptoPayment,
+    PaymentResponseDetailsDetailsCryptoPayment,
+    PaymentResponseDetailsDetailsCryptoPayment
   >
   get copyWith =>
-      _PaymentResponseDetailsDetailsCryptoCopyWithImpl<
-        PaymentResponseDetailsDetailsCrypto,
-        PaymentResponseDetailsDetailsCrypto
-      >(this as PaymentResponseDetailsDetailsCrypto, $identity, $identity);
+      _PaymentResponseDetailsDetailsCryptoPaymentCopyWithImpl<
+        PaymentResponseDetailsDetailsCryptoPayment,
+        PaymentResponseDetailsDetailsCryptoPayment
+      >(
+        this as PaymentResponseDetailsDetailsCryptoPayment,
+        $identity,
+        $identity,
+      );
   @override
   String toString() {
-    return PaymentResponseDetailsDetailsCryptoMapper.ensureInitialized()
-        .stringifyValue(this as PaymentResponseDetailsDetailsCrypto);
+    return PaymentResponseDetailsDetailsCryptoPaymentMapper.ensureInitialized()
+        .stringifyValue(this as PaymentResponseDetailsDetailsCryptoPayment);
   }
 
   @override
   bool operator ==(Object other) {
-    return PaymentResponseDetailsDetailsCryptoMapper.ensureInitialized()
-        .equalsValue(this as PaymentResponseDetailsDetailsCrypto, other);
+    return PaymentResponseDetailsDetailsCryptoPaymentMapper.ensureInitialized()
+        .equalsValue(this as PaymentResponseDetailsDetailsCryptoPayment, other);
   }
 
   @override
   int get hashCode {
-    return PaymentResponseDetailsDetailsCryptoMapper.ensureInitialized()
-        .hashValue(this as PaymentResponseDetailsDetailsCrypto);
+    return PaymentResponseDetailsDetailsCryptoPaymentMapper.ensureInitialized()
+        .hashValue(this as PaymentResponseDetailsDetailsCryptoPayment);
   }
 }
 
-extension PaymentResponseDetailsDetailsCryptoValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PaymentResponseDetailsDetailsCrypto, $Out> {
-  PaymentResponseDetailsDetailsCryptoCopyWith<
+extension PaymentResponseDetailsDetailsCryptoPaymentValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, PaymentResponseDetailsDetailsCryptoPayment, $Out> {
+  PaymentResponseDetailsDetailsCryptoPaymentCopyWith<
     $R,
-    PaymentResponseDetailsDetailsCrypto,
+    PaymentResponseDetailsDetailsCryptoPayment,
     $Out
   >
-  get $asPaymentResponseDetailsDetailsCrypto => $base.as(
+  get $asPaymentResponseDetailsDetailsCryptoPayment => $base.as(
     (v, t, t2) =>
-        _PaymentResponseDetailsDetailsCryptoCopyWithImpl<$R, $Out>(v, t, t2),
+        _PaymentResponseDetailsDetailsCryptoPaymentCopyWithImpl<$R, $Out>(
+          v,
+          t,
+          t2,
+        ),
   );
 }
 
-abstract class PaymentResponseDetailsDetailsCryptoCopyWith<
+abstract class PaymentResponseDetailsDetailsCryptoPaymentCopyWith<
   $R,
-  $In extends PaymentResponseDetailsDetailsCrypto,
+  $In extends PaymentResponseDetailsDetailsCryptoPayment,
   $Out
 >
     implements PaymentResponseDetailsDetailsCopyWith<$R, $In, $Out> {
@@ -6194,27 +6258,29 @@ abstract class PaymentResponseDetailsDetailsCryptoCopyWith<
     double? amount,
     String? transactionHash,
   });
-  PaymentResponseDetailsDetailsCryptoCopyWith<$R2, $In, $Out2>
+  PaymentResponseDetailsDetailsCryptoPaymentCopyWith<$R2, $In, $Out2>
   $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _PaymentResponseDetailsDetailsCryptoCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PaymentResponseDetailsDetailsCrypto, $Out>
+class _PaymentResponseDetailsDetailsCryptoPaymentCopyWithImpl<$R, $Out>
+    extends
+        ClassCopyWithBase<$R, PaymentResponseDetailsDetailsCryptoPayment, $Out>
     implements
-        PaymentResponseDetailsDetailsCryptoCopyWith<
+        PaymentResponseDetailsDetailsCryptoPaymentCopyWith<
           $R,
-          PaymentResponseDetailsDetailsCrypto,
+          PaymentResponseDetailsDetailsCryptoPayment,
           $Out
         > {
-  _PaymentResponseDetailsDetailsCryptoCopyWithImpl(
+  _PaymentResponseDetailsDetailsCryptoPaymentCopyWithImpl(
     super.value,
     super.then,
     super.then2,
   );
 
   @override
-  late final ClassMapperBase<PaymentResponseDetailsDetailsCrypto> $mapper =
-      PaymentResponseDetailsDetailsCryptoMapper.ensureInitialized();
+  late final ClassMapperBase<PaymentResponseDetailsDetailsCryptoPayment>
+  $mapper =
+      PaymentResponseDetailsDetailsCryptoPaymentMapper.ensureInitialized();
   @override
   $R call({
     CryptoPaymentPaymentTypePaymentType? paymentType,
@@ -6232,8 +6298,8 @@ class _PaymentResponseDetailsDetailsCryptoCopyWithImpl<$R, $Out>
     }),
   );
   @override
-  PaymentResponseDetailsDetailsCrypto $make(CopyWithData data) =>
-      PaymentResponseDetailsDetailsCrypto(
+  PaymentResponseDetailsDetailsCryptoPayment $make(CopyWithData data) =>
+      PaymentResponseDetailsDetailsCryptoPayment(
         paymentType: data.get(#paymentType, or: $value.paymentType),
         walletAddress: data.get(#walletAddress, or: $value.walletAddress),
         cryptocurrency: data.get(#cryptocurrency, or: $value.cryptocurrency),
@@ -6242,13 +6308,13 @@ class _PaymentResponseDetailsDetailsCryptoCopyWithImpl<$R, $Out>
       );
 
   @override
-  PaymentResponseDetailsDetailsCryptoCopyWith<
+  PaymentResponseDetailsDetailsCryptoPaymentCopyWith<
     $R2,
-    PaymentResponseDetailsDetailsCrypto,
+    PaymentResponseDetailsDetailsCryptoPayment,
     $Out2
   >
   $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _PaymentResponseDetailsDetailsCryptoCopyWithImpl<$R2, $Out2>(
+      _PaymentResponseDetailsDetailsCryptoPaymentCopyWithImpl<$R2, $Out2>(
         $value,
         $cast,
         t,
@@ -6333,6 +6399,7 @@ class SearchResultUserMapper extends SubClassMapperBase<SearchResultUser> {
   static const Field<SearchResultUser, double> _f$score = Field(
     'score',
     _$score,
+    opt: true,
   );
 
   @override
@@ -6493,11 +6560,13 @@ class SearchResultPostMapper extends SubClassMapperBase<SearchResultPost> {
   static const Field<SearchResultPost, double> _f$score = Field(
     'score',
     _$score,
+    opt: true,
   );
   static List<String>? _$highlights(SearchResultPost v) => v.highlights;
   static const Field<SearchResultPost, List<String>> _f$highlights = Field(
     'highlights',
     _$highlights,
+    opt: true,
   );
 
   @override
@@ -6679,6 +6748,7 @@ class SearchResultCommentMapper
   static const Field<SearchResultComment, double> _f$score = Field(
     'score',
     _$score,
+    opt: true,
   );
 
   @override
@@ -7374,13 +7444,18 @@ class EntityPersonMapper extends SubClassMapperBase<EntityPerson> {
   static PersonEntityEntityTypeEntityType? _$entityType(EntityPerson v) =>
       v.entityType;
   static const Field<EntityPerson, PersonEntityEntityTypeEntityType>
-  _f$entityType = Field('entityType', _$entityType);
+  _f$entityType = Field('entityType', _$entityType, opt: true);
   static String? _$name(EntityPerson v) => v.name;
-  static const Field<EntityPerson, String> _f$name = Field('name', _$name);
+  static const Field<EntityPerson, String> _f$name = Field(
+    'name',
+    _$name,
+    opt: true,
+  );
   static String? _$description(EntityPerson v) => v.description;
   static const Field<EntityPerson, String> _f$description = Field(
     'description',
     _$description,
+    opt: true,
   );
   static DateTime _$createdAt(EntityPerson v) => v.createdAt;
   static const Field<EntityPerson, DateTime> _f$createdAt = Field(
@@ -7391,6 +7466,7 @@ class EntityPersonMapper extends SubClassMapperBase<EntityPerson> {
   static const Field<EntityPerson, DateTime> _f$updatedAt = Field(
     'updatedAt',
     _$updatedAt,
+    opt: true,
   );
   static DateTime _$dateOfBirth(EntityPerson v) => v.dateOfBirth;
   static const Field<EntityPerson, DateTime> _f$dateOfBirth = Field(
@@ -7401,16 +7477,18 @@ class EntityPersonMapper extends SubClassMapperBase<EntityPerson> {
   static const Field<EntityPerson, String> _f$nationality = Field(
     'nationality',
     _$nationality,
+    opt: true,
   );
   static String? _$occupation(EntityPerson v) => v.occupation;
   static const Field<EntityPerson, String> _f$occupation = Field(
     'occupation',
     _$occupation,
+    opt: true,
   );
   static Map<String, String>? _$socialProfiles(EntityPerson v) =>
       v.socialProfiles;
   static const Field<EntityPerson, Map<String, String>> _f$socialProfiles =
-      Field('socialProfiles', _$socialProfiles);
+      Field('socialProfiles', _$socialProfiles, opt: true);
 
   @override
   final MappableFields<EntityPerson> fields = const {
@@ -7613,16 +7691,18 @@ class EntityOrganizationMapper extends SubClassMapperBase<EntityOrganization> {
     EntityOrganization v,
   ) => v.entityType;
   static const Field<EntityOrganization, OrganizationEntityEntityTypeEntityType>
-  _f$entityType = Field('entityType', _$entityType);
+  _f$entityType = Field('entityType', _$entityType, opt: true);
   static String? _$name(EntityOrganization v) => v.name;
   static const Field<EntityOrganization, String> _f$name = Field(
     'name',
     _$name,
+    opt: true,
   );
   static String? _$description(EntityOrganization v) => v.description;
   static const Field<EntityOrganization, String> _f$description = Field(
     'description',
     _$description,
+    opt: true,
   );
   static DateTime _$createdAt(EntityOrganization v) => v.createdAt;
   static const Field<EntityOrganization, DateTime> _f$createdAt = Field(
@@ -7633,6 +7713,7 @@ class EntityOrganizationMapper extends SubClassMapperBase<EntityOrganization> {
   static const Field<EntityOrganization, DateTime> _f$updatedAt = Field(
     'updatedAt',
     _$updatedAt,
+    opt: true,
   );
   static String _$registrationNumber(EntityOrganization v) =>
       v.registrationNumber;
@@ -7644,21 +7725,25 @@ class EntityOrganizationMapper extends SubClassMapperBase<EntityOrganization> {
   static const Field<EntityOrganization, DateTime> _f$foundedDate = Field(
     'foundedDate',
     _$foundedDate,
+    opt: true,
   );
   static String? _$industry(EntityOrganization v) => v.industry;
   static const Field<EntityOrganization, String> _f$industry = Field(
     'industry',
     _$industry,
+    opt: true,
   );
   static int? _$employeeCount(EntityOrganization v) => v.employeeCount;
   static const Field<EntityOrganization, int> _f$employeeCount = Field(
     'employeeCount',
     _$employeeCount,
+    opt: true,
   );
   static double? _$revenue(EntityOrganization v) => v.revenue;
   static const Field<EntityOrganization, double> _f$revenue = Field(
     'revenue',
     _$revenue,
+    opt: true,
   );
 
   @override

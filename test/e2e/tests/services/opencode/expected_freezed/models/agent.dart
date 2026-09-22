@@ -14,7 +14,7 @@ part 'agent.g.dart';
 abstract class Agent with _$Agent {
   const factory Agent({
     required String name,
-    required dynamic mode,
+    required String mode,
     required bool builtIn,
     required AgentPermission permission,
     required Map<String, bool> tools,

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Taxon {
 
- num? get id; String? get name; String? get rank;@JsonKey(name: 'rank_level') num? get rankLevel; String? get kingdom; String? get family; String? get genus; String? get url;@JsonKey(name: 'common_names') CommonNames? get commonNames;@JsonKey(name: 'iucn_red_list_category') String? get iucnRedListCategory;
+ num? get id; String? get name; String? get rank;@JsonKey(name: 'rank_level') num? get rankLevel; String? get kingdom; String? get family; String? get genus; String? get url;@JsonKey(name: 'common_names') CommonNames2? get commonNames;@JsonKey(name: 'iucn_red_list_category') String? get iucnRedListCategory;
 /// Create a copy of Taxon
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $TaxonCopyWith<$Res>  {
   factory $TaxonCopyWith(Taxon value, $Res Function(Taxon) _then) = _$TaxonCopyWithImpl;
 @useResult
 $Res call({
- num? id, String? name, String? rank,@JsonKey(name: 'rank_level') num? rankLevel, String? kingdom, String? family, String? genus, String? url,@JsonKey(name: 'common_names') CommonNames? commonNames,@JsonKey(name: 'iucn_red_list_category') String? iucnRedListCategory
+ num? id, String? name, String? rank,@JsonKey(name: 'rank_level') num? rankLevel, String? kingdom, String? family, String? genus, String? url,@JsonKey(name: 'common_names') CommonNames2? commonNames,@JsonKey(name: 'iucn_red_list_category') String? iucnRedListCategory
 });
 
 
@@ -76,7 +76,7 @@ as String?,family: freezed == family ? _self.family : family // ignore: cast_nul
 as String?,genus: freezed == genus ? _self.genus : genus // ignore: cast_nullable_to_non_nullable
 as String?,url: freezed == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String?,commonNames: freezed == commonNames ? _self.commonNames : commonNames // ignore: cast_nullable_to_non_nullable
-as CommonNames?,iucnRedListCategory: freezed == iucnRedListCategory ? _self.iucnRedListCategory : iucnRedListCategory // ignore: cast_nullable_to_non_nullable
+as CommonNames2?,iucnRedListCategory: freezed == iucnRedListCategory ? _self.iucnRedListCategory : iucnRedListCategory // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -162,7 +162,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( num? id,  String? name,  String? rank, @JsonKey(name: 'rank_level')  num? rankLevel,  String? kingdom,  String? family,  String? genus,  String? url, @JsonKey(name: 'common_names')  CommonNames? commonNames, @JsonKey(name: 'iucn_red_list_category')  String? iucnRedListCategory)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( num? id,  String? name,  String? rank, @JsonKey(name: 'rank_level')  num? rankLevel,  String? kingdom,  String? family,  String? genus,  String? url, @JsonKey(name: 'common_names')  CommonNames2? commonNames, @JsonKey(name: 'iucn_red_list_category')  String? iucnRedListCategory)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Taxon() when $default != null:
 return $default(_that.id,_that.name,_that.rank,_that.rankLevel,_that.kingdom,_that.family,_that.genus,_that.url,_that.commonNames,_that.iucnRedListCategory);case _:
@@ -183,7 +183,7 @@ return $default(_that.id,_that.name,_that.rank,_that.rankLevel,_that.kingdom,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( num? id,  String? name,  String? rank, @JsonKey(name: 'rank_level')  num? rankLevel,  String? kingdom,  String? family,  String? genus,  String? url, @JsonKey(name: 'common_names')  CommonNames? commonNames, @JsonKey(name: 'iucn_red_list_category')  String? iucnRedListCategory)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( num? id,  String? name,  String? rank, @JsonKey(name: 'rank_level')  num? rankLevel,  String? kingdom,  String? family,  String? genus,  String? url, @JsonKey(name: 'common_names')  CommonNames2? commonNames, @JsonKey(name: 'iucn_red_list_category')  String? iucnRedListCategory)  $default,) {final _that = this;
 switch (_that) {
 case _Taxon():
 return $default(_that.id,_that.name,_that.rank,_that.rankLevel,_that.kingdom,_that.family,_that.genus,_that.url,_that.commonNames,_that.iucnRedListCategory);case _:
@@ -203,7 +203,7 @@ return $default(_that.id,_that.name,_that.rank,_that.rankLevel,_that.kingdom,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( num? id,  String? name,  String? rank, @JsonKey(name: 'rank_level')  num? rankLevel,  String? kingdom,  String? family,  String? genus,  String? url, @JsonKey(name: 'common_names')  CommonNames? commonNames, @JsonKey(name: 'iucn_red_list_category')  String? iucnRedListCategory)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( num? id,  String? name,  String? rank, @JsonKey(name: 'rank_level')  num? rankLevel,  String? kingdom,  String? family,  String? genus,  String? url, @JsonKey(name: 'common_names')  CommonNames2? commonNames, @JsonKey(name: 'iucn_red_list_category')  String? iucnRedListCategory)?  $default,) {final _that = this;
 switch (_that) {
 case _Taxon() when $default != null:
 return $default(_that.id,_that.name,_that.rank,_that.rankLevel,_that.kingdom,_that.family,_that.genus,_that.url,_that.commonNames,_that.iucnRedListCategory);case _:
@@ -229,7 +229,7 @@ class _Taxon implements Taxon {
 @override final  String? family;
 @override final  String? genus;
 @override final  String? url;
-@override@JsonKey(name: 'common_names') final  CommonNames? commonNames;
+@override@JsonKey(name: 'common_names') final  CommonNames2? commonNames;
 @override@JsonKey(name: 'iucn_red_list_category') final  String? iucnRedListCategory;
 
 /// Create a copy of Taxon
@@ -265,7 +265,7 @@ abstract mixin class _$TaxonCopyWith<$Res> implements $TaxonCopyWith<$Res> {
   factory _$TaxonCopyWith(_Taxon value, $Res Function(_Taxon) _then) = __$TaxonCopyWithImpl;
 @override @useResult
 $Res call({
- num? id, String? name, String? rank,@JsonKey(name: 'rank_level') num? rankLevel, String? kingdom, String? family, String? genus, String? url,@JsonKey(name: 'common_names') CommonNames? commonNames,@JsonKey(name: 'iucn_red_list_category') String? iucnRedListCategory
+ num? id, String? name, String? rank,@JsonKey(name: 'rank_level') num? rankLevel, String? kingdom, String? family, String? genus, String? url,@JsonKey(name: 'common_names') CommonNames2? commonNames,@JsonKey(name: 'iucn_red_list_category') String? iucnRedListCategory
 });
 
 
@@ -293,7 +293,7 @@ as String?,family: freezed == family ? _self.family : family // ignore: cast_nul
 as String?,genus: freezed == genus ? _self.genus : genus // ignore: cast_nullable_to_non_nullable
 as String?,url: freezed == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String?,commonNames: freezed == commonNames ? _self.commonNames : commonNames // ignore: cast_nullable_to_non_nullable
-as CommonNames?,iucnRedListCategory: freezed == iucnRedListCategory ? _self.iucnRedListCategory : iucnRedListCategory // ignore: cast_nullable_to_non_nullable
+as CommonNames2?,iucnRedListCategory: freezed == iucnRedListCategory ? _self.iucnRedListCategory : iucnRedListCategory // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

@@ -152,13 +152,13 @@ return unknown(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( User user,  double? score)?  user,TResult Function( PostModel post,  double? score,  List<String>? highlights)?  post,TResult Function( Comment comment,  double? score)?  comment,TResult Function()?  unknown,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( User user,  double? score)?  user,TResult Function( PostModel post,  double? score,  List<String>? highlights)?  post,TResult Function( Comment comment,  double? score)?  comment,TResult Function( Map<String, Object?> json)?  unknown,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case SearchResultUser() when user != null:
 return user(_that.user,_that.score);case SearchResultPost() when post != null:
 return post(_that.post,_that.score,_that.highlights);case SearchResultComment() when comment != null:
 return comment(_that.comment,_that.score);case SearchResultUnknown() when unknown != null:
-return unknown();case _:
+return unknown(_that.json);case _:
   return orElse();
 
 }
@@ -176,13 +176,13 @@ return unknown();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( User user,  double? score)  user,required TResult Function( PostModel post,  double? score,  List<String>? highlights)  post,required TResult Function( Comment comment,  double? score)  comment,required TResult Function()  unknown,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( User user,  double? score)  user,required TResult Function( PostModel post,  double? score,  List<String>? highlights)  post,required TResult Function( Comment comment,  double? score)  comment,required TResult Function( Map<String, Object?> json)  unknown,}) {final _that = this;
 switch (_that) {
 case SearchResultUser():
 return user(_that.user,_that.score);case SearchResultPost():
 return post(_that.post,_that.score,_that.highlights);case SearchResultComment():
 return comment(_that.comment,_that.score);case SearchResultUnknown():
-return unknown();}
+return unknown(_that.json);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -196,13 +196,13 @@ return unknown();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( User user,  double? score)?  user,TResult? Function( PostModel post,  double? score,  List<String>? highlights)?  post,TResult? Function( Comment comment,  double? score)?  comment,TResult? Function()?  unknown,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( User user,  double? score)?  user,TResult? Function( PostModel post,  double? score,  List<String>? highlights)?  post,TResult? Function( Comment comment,  double? score)?  comment,TResult? Function( Map<String, Object?> json)?  unknown,}) {final _that = this;
 switch (_that) {
 case SearchResultUser() when user != null:
 return user(_that.user,_that.score);case SearchResultPost() when post != null:
 return post(_that.post,_that.score,_that.highlights);case SearchResultComment() when comment != null:
 return comment(_that.comment,_that.score);case SearchResultUnknown() when unknown != null:
-return unknown();case _:
+return unknown(_that.json);case _:
   return null;
 
 }
@@ -471,44 +471,6 @@ $CommentCopyWith<$Res> get comment {
   });
 }
 }
-
-/// @nodoc
-@JsonSerializable()
-
-class SearchResultUnknown implements SearchResult {
-  const SearchResultUnknown({final  String? $type}): $type = $type ?? 'unknown';
-  factory SearchResultUnknown.fromJson(Map<String, dynamic> json) => _$SearchResultUnknownFromJson(json);
-
-
-
-@JsonKey(name: 'type')
-final String $type;
-
-
-
-@override
-Map<String, dynamic> toJson() {
-  return _$SearchResultUnknownToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchResultUnknown);
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'SearchResult.unknown()';
-}
-
-
-}
-
-
 
 
 // dart format on

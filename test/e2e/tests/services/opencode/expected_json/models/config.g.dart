@@ -34,12 +34,12 @@ Config _$ConfigFromJson(Map<String, dynamic> json) => Config(
   model: json['model'] as String?,
   smallModel: json['small_model'] as String?,
   username: json['username'] as String?,
-  mode: (json['mode'] as Map<String, dynamic>?)?.map(
-    (k, e) => MapEntry(k, AgentConfig.fromJson(e as Map<String, dynamic>)),
-  ),
-  agent: (json['agent'] as Map<String, dynamic>?)?.map(
-    (k, e) => MapEntry(k, AgentConfig.fromJson(e as Map<String, dynamic>)),
-  ),
+  mode: json['mode'] == null
+      ? null
+      : ConfigMode.fromJson(json['mode'] as Map<String, dynamic>),
+  agent: json['agent'] == null
+      ? null
+      : ConfigAgent.fromJson(json['agent'] as Map<String, dynamic>),
   provider: (json['provider'] as Map<String, dynamic>?)?.map(
     (k, e) => MapEntry(k, Provider.fromJson(e as Map<String, dynamic>)),
   ),

@@ -214,7 +214,7 @@ class MessageAssistantMessageMapper
   static AssistantMessageErrorError? _$error(MessageAssistantMessage v) =>
       v.error;
   static const Field<MessageAssistantMessage, AssistantMessageErrorError>
-  _f$error = Field('error', _$error);
+  _f$error = Field('error', _$error, opt: true);
   static List<String> _$system(MessageAssistantMessage v) => v.system;
   static const Field<MessageAssistantMessage, List<String>> _f$system = Field(
     'system',
@@ -244,6 +244,7 @@ class MessageAssistantMessageMapper
   static const Field<MessageAssistantMessage, bool> _f$summary = Field(
     'summary',
     _$summary,
+    opt: true,
   );
   static num _$cost(MessageAssistantMessage v) => v.cost;
   static const Field<MessageAssistantMessage, num> _f$cost = Field(

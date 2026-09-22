@@ -112,7 +112,7 @@ class PaymentRequestCreditCardMapper
   static String? _$cardholderName(PaymentRequestCreditCard v) =>
       v.cardholderName;
   static const Field<PaymentRequestCreditCard, String> _f$cardholderName =
-      Field('cardholderName', _$cardholderName);
+      Field('cardholderName', _$cardholderName, opt: true);
   static double _$amount(PaymentRequestCreditCard v) => v.amount;
   static const Field<PaymentRequestCreditCard, double> _f$amount = Field(
     'amount',
@@ -319,7 +319,7 @@ class PaymentRequestBankTransferMapper
   static String? _$accountHolder(PaymentRequestBankTransfer v) =>
       v.accountHolder;
   static const Field<PaymentRequestBankTransfer, String> _f$accountHolder =
-      Field('accountHolder', _$accountHolder);
+      Field('accountHolder', _$accountHolder, opt: true);
   static double _$amount(PaymentRequestBankTransfer v) => v.amount;
   static const Field<PaymentRequestBankTransfer, double> _f$amount = Field(
     'amount',
@@ -329,6 +329,7 @@ class PaymentRequestBankTransferMapper
   static const Field<PaymentRequestBankTransfer, String> _f$reference = Field(
     'reference',
     _$reference,
+    opt: true,
   );
 
   @override
@@ -541,6 +542,7 @@ class PaymentRequestCryptoMapper
   static const Field<PaymentRequestCrypto, String> _f$transactionHash = Field(
     'transactionHash',
     _$transactionHash,
+    opt: true,
   );
 
   @override

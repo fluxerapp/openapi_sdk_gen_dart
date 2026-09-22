@@ -14,7 +14,7 @@ class PartnerMapper extends ClassMapperBase<Partner> {
   static PartnerMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = PartnerMapper._());
-      AuthorMapper.ensureInitialized();
+      Author2Mapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -30,8 +30,8 @@ class PartnerMapper extends ClassMapperBase<Partner> {
     _$observationId,
     key: r'observation_id',
   );
-  static Author? _$author(Partner v) => v.author;
-  static const Field<Partner, Author> _f$author = Field(
+  static Author2? _$author(Partner v) => v.author;
+  static const Field<Partner, Author2> _f$author = Field(
     'author',
     _$author,
     opt: true,
@@ -117,8 +117,8 @@ extension PartnerValueCopy<$R, $Out> on ObjectCopyWith<$R, Partner, $Out> {
 
 abstract class PartnerCopyWith<$R, $In extends Partner, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  AuthorCopyWith<$R, Author, Author>? get author;
-  $R call({String? id, String? observationId, Author? author, String? avatar});
+  Author2CopyWith<$R, Author2, Author2>? get author;
+  $R call({String? id, String? observationId, Author2? author, String? avatar});
   PartnerCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -131,7 +131,7 @@ class _PartnerCopyWithImpl<$R, $Out>
   late final ClassMapperBase<Partner> $mapper =
       PartnerMapper.ensureInitialized();
   @override
-  AuthorCopyWith<$R, Author, Author>? get author =>
+  Author2CopyWith<$R, Author2, Author2>? get author =>
       $value.author?.copyWith.$chain((v) => call(author: v));
   @override
   $R call({

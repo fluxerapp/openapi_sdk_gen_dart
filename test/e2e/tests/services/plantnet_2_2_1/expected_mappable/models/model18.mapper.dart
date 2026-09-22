@@ -14,7 +14,7 @@ class Model18Mapper extends ClassMapperBase<Model18> {
   static Model18Mapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = Model18Mapper._());
-      GenusMapper.ensureInitialized();
+      Genus2Mapper.ensureInitialized();
       GbifMapper.ensureInitialized();
       ImageMapper.ensureInitialized();
     }
@@ -30,8 +30,8 @@ class Model18Mapper extends ClassMapperBase<Model18> {
     _$score,
     opt: true,
   );
-  static Genus? _$genus(Model18 v) => v.genus;
-  static const Field<Model18, Genus> _f$genus = Field(
+  static Genus2? _$genus(Model18 v) => v.genus;
+  static const Field<Model18, Genus2> _f$genus = Field(
     'genus',
     _$genus,
     opt: true,
@@ -119,10 +119,10 @@ extension Model18ValueCopy<$R, $Out> on ObjectCopyWith<$R, Model18, $Out> {
 
 abstract class Model18CopyWith<$R, $In extends Model18, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  GenusCopyWith<$R, Genus, Genus>? get genus;
+  Genus2CopyWith<$R, Genus2, Genus2>? get genus;
   GbifCopyWith<$R, Gbif, Gbif>? get gbif;
   ListCopyWith<$R, Image, ImageCopyWith<$R, Image, Image>>? get images;
-  $R call({num? score, Genus? genus, Gbif? gbif, List<Image>? images});
+  $R call({num? score, Genus2? genus, Gbif? gbif, List<Image>? images});
   Model18CopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -135,7 +135,7 @@ class _Model18CopyWithImpl<$R, $Out>
   late final ClassMapperBase<Model18> $mapper =
       Model18Mapper.ensureInitialized();
   @override
-  GenusCopyWith<$R, Genus, Genus>? get genus =>
+  Genus2CopyWith<$R, Genus2, Genus2>? get genus =>
       $value.genus?.copyWith.$chain((v) => call(genus: v));
   @override
   GbifCopyWith<$R, Gbif, Gbif>? get gbif =>

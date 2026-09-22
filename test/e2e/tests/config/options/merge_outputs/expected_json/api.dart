@@ -748,7 +748,7 @@ class PaymentRequestCreditCard extends PaymentRequest {
     required this.expiryMonth,
     required this.expiryYear,
     required this.cvv,
-    required this.cardholderName,
+    this.cardholderName,
     required this.amount,
   });
 
@@ -772,9 +772,9 @@ class PaymentRequestBankTransfer extends PaymentRequest {
     required this.paymentType,
     required this.accountNumber,
     required this.routingNumber,
-    required this.accountHolder,
+    this.accountHolder,
     required this.amount,
-    required this.reference,
+    this.reference,
   });
 
   factory PaymentRequestBankTransfer.fromJson(Map<String, dynamic> json) =>
@@ -797,7 +797,7 @@ class PaymentRequestCrypto extends PaymentRequest {
     required this.walletAddress,
     required this.cryptocurrency,
     required this.amount,
-    required this.transactionHash,
+    this.transactionHash,
   });
 
   factory PaymentRequestCrypto.fromJson(Map<String, dynamic> json) =>
@@ -953,11 +953,7 @@ class SearchResultUser extends SearchResult {
   final User user;
   final double? score;
 
-  const SearchResultUser({
-    required this.type,
-    required this.user,
-    required this.score,
-  });
+  const SearchResultUser({required this.type, required this.user, this.score});
 
   factory SearchResultUser.fromJson(Map<String, dynamic> json) =>
       _$SearchResultUserFromJson(json);
@@ -976,8 +972,8 @@ class SearchResultPost extends SearchResult {
   const SearchResultPost({
     required this.type,
     required this.post,
-    required this.score,
-    required this.highlights,
+    this.score,
+    this.highlights,
   });
 
   factory SearchResultPost.fromJson(Map<String, dynamic> json) =>
@@ -996,7 +992,7 @@ class SearchResultComment extends SearchResult {
   const SearchResultComment({
     required this.type,
     required this.comment,
-    required this.score,
+    this.score,
   });
 
   factory SearchResultComment.fromJson(Map<String, dynamic> json) =>
@@ -1112,15 +1108,15 @@ class EntityPerson extends Entity {
 
   const EntityPerson({
     required this.id,
-    required this.entityType,
-    required this.name,
-    required this.description,
+    this.entityType,
+    this.name,
+    this.description,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
     required this.dateOfBirth,
-    required this.nationality,
-    required this.occupation,
-    required this.socialProfiles,
+    this.nationality,
+    this.occupation,
+    this.socialProfiles,
   });
 
   factory EntityPerson.fromJson(Map<String, dynamic> json) =>
@@ -1146,16 +1142,16 @@ class EntityOrganization extends Entity {
 
   const EntityOrganization({
     required this.id,
-    required this.entityType,
-    required this.name,
-    required this.description,
+    this.entityType,
+    this.name,
+    this.description,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
     required this.registrationNumber,
-    required this.foundedDate,
-    required this.industry,
-    required this.employeeCount,
-    required this.revenue,
+    this.foundedDate,
+    this.industry,
+    this.employeeCount,
+    this.revenue,
   });
 
   factory EntityOrganization.fromJson(Map<String, dynamic> json) =>
@@ -1589,31 +1585,34 @@ extension PaymentResponseDetailsDetailsUnionDeserializer
     Map<Type, Object?>? mapping,
   }) {
     final mappingFallback = const <Type, Object?>{
-      PaymentResponseDetailsDetailsCreditCard: 'credit_card',
-      PaymentResponseDetailsDetailsBankTransfer: 'bank_transfer',
-      PaymentResponseDetailsDetailsCrypto: 'crypto',
+      PaymentResponseDetailsDetailsCreditCardPayment: 'CreditCardPayment',
+      PaymentResponseDetailsDetailsBankTransferPayment: 'BankTransferPayment',
+      PaymentResponseDetailsDetailsCryptoPayment: 'CryptoPayment',
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
     final valueAsString = value?.toString();
     return switch (value) {
       _
-          when value == effective[PaymentResponseDetailsDetailsCreditCard] ||
+          when value ==
+                  effective[PaymentResponseDetailsDetailsCreditCardPayment] ||
               valueAsString ==
-                  effective[PaymentResponseDetailsDetailsCreditCard]
+                  effective[PaymentResponseDetailsDetailsCreditCardPayment]
                       ?.toString() =>
-        PaymentResponseDetailsDetailsCreditCard.fromJson(json),
+        PaymentResponseDetailsDetailsCreditCardPayment.fromJson(json),
       _
-          when value == effective[PaymentResponseDetailsDetailsBankTransfer] ||
+          when value ==
+                  effective[PaymentResponseDetailsDetailsBankTransferPayment] ||
               valueAsString ==
-                  effective[PaymentResponseDetailsDetailsBankTransfer]
+                  effective[PaymentResponseDetailsDetailsBankTransferPayment]
                       ?.toString() =>
-        PaymentResponseDetailsDetailsBankTransfer.fromJson(json),
+        PaymentResponseDetailsDetailsBankTransferPayment.fromJson(json),
       _
-          when value == effective[PaymentResponseDetailsDetailsCrypto] ||
+          when value == effective[PaymentResponseDetailsDetailsCryptoPayment] ||
               valueAsString ==
-                  effective[PaymentResponseDetailsDetailsCrypto]?.toString() =>
-        PaymentResponseDetailsDetailsCrypto.fromJson(json),
+                  effective[PaymentResponseDetailsDetailsCryptoPayment]
+                      ?.toString() =>
+        PaymentResponseDetailsDetailsCryptoPayment.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for PaymentResponseDetailsDetails',
       ),
@@ -1622,7 +1621,7 @@ extension PaymentResponseDetailsDetailsUnionDeserializer
 }
 
 @JsonSerializable()
-class PaymentResponseDetailsDetailsCreditCard
+class PaymentResponseDetailsDetailsCreditCardPayment
     extends PaymentResponseDetailsDetails {
   final CreditCardPaymentPaymentTypePaymentType paymentType;
   final String cardNumber;
@@ -1632,27 +1631,27 @@ class PaymentResponseDetailsDetailsCreditCard
   final String? cardholderName;
   final double amount;
 
-  const PaymentResponseDetailsDetailsCreditCard({
+  const PaymentResponseDetailsDetailsCreditCardPayment({
     required this.paymentType,
     required this.cardNumber,
     required this.expiryMonth,
     required this.expiryYear,
     required this.cvv,
-    required this.cardholderName,
+    this.cardholderName,
     required this.amount,
   });
 
-  factory PaymentResponseDetailsDetailsCreditCard.fromJson(
+  factory PaymentResponseDetailsDetailsCreditCardPayment.fromJson(
     Map<String, dynamic> json,
-  ) => _$PaymentResponseDetailsDetailsCreditCardFromJson(json);
+  ) => _$PaymentResponseDetailsDetailsCreditCardPaymentFromJson(json);
 
   @override
   Map<String, dynamic> toJson() =>
-      _$PaymentResponseDetailsDetailsCreditCardToJson(this);
+      _$PaymentResponseDetailsDetailsCreditCardPaymentToJson(this);
 }
 
 @JsonSerializable()
-class PaymentResponseDetailsDetailsBankTransfer
+class PaymentResponseDetailsDetailsBankTransferPayment
     extends PaymentResponseDetailsDetails {
   final BankTransferPaymentPaymentTypePaymentType paymentType;
   final String accountNumber;
@@ -1661,26 +1660,26 @@ class PaymentResponseDetailsDetailsBankTransfer
   final double amount;
   final String? reference;
 
-  const PaymentResponseDetailsDetailsBankTransfer({
+  const PaymentResponseDetailsDetailsBankTransferPayment({
     required this.paymentType,
     required this.accountNumber,
     required this.routingNumber,
-    required this.accountHolder,
+    this.accountHolder,
     required this.amount,
-    required this.reference,
+    this.reference,
   });
 
-  factory PaymentResponseDetailsDetailsBankTransfer.fromJson(
+  factory PaymentResponseDetailsDetailsBankTransferPayment.fromJson(
     Map<String, dynamic> json,
-  ) => _$PaymentResponseDetailsDetailsBankTransferFromJson(json);
+  ) => _$PaymentResponseDetailsDetailsBankTransferPaymentFromJson(json);
 
   @override
   Map<String, dynamic> toJson() =>
-      _$PaymentResponseDetailsDetailsBankTransferToJson(this);
+      _$PaymentResponseDetailsDetailsBankTransferPaymentToJson(this);
 }
 
 @JsonSerializable()
-class PaymentResponseDetailsDetailsCrypto
+class PaymentResponseDetailsDetailsCryptoPayment
     extends PaymentResponseDetailsDetails {
   final CryptoPaymentPaymentTypePaymentType paymentType;
   final String walletAddress;
@@ -1688,21 +1687,21 @@ class PaymentResponseDetailsDetailsCrypto
   final double amount;
   final String? transactionHash;
 
-  const PaymentResponseDetailsDetailsCrypto({
+  const PaymentResponseDetailsDetailsCryptoPayment({
     required this.paymentType,
     required this.walletAddress,
     required this.cryptocurrency,
     required this.amount,
-    required this.transactionHash,
+    this.transactionHash,
   });
 
-  factory PaymentResponseDetailsDetailsCrypto.fromJson(
+  factory PaymentResponseDetailsDetailsCryptoPayment.fromJson(
     Map<String, dynamic> json,
-  ) => _$PaymentResponseDetailsDetailsCryptoFromJson(json);
+  ) => _$PaymentResponseDetailsDetailsCryptoPaymentFromJson(json);
 
   @override
   Map<String, dynamic> toJson() =>
-      _$PaymentResponseDetailsDetailsCryptoToJson(this);
+      _$PaymentResponseDetailsDetailsCryptoPaymentToJson(this);
 }
 
 @JsonSerializable()

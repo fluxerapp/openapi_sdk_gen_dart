@@ -173,11 +173,12 @@ class ToolStateToolStateRunningMapper
   static const Field<ToolStateToolStateRunning, String> _f$title = Field(
     'title',
     _$title,
+    opt: true,
   );
   static Map<String, dynamic>? _$metadata(ToolStateToolStateRunning v) =>
       v.metadata;
   static const Field<ToolStateToolStateRunning, Map<String, dynamic>>
-  _f$metadata = Field('metadata', _$metadata);
+  _f$metadata = Field('metadata', _$metadata, opt: true);
   static ToolStateRunningTime _$time(ToolStateToolStateRunning v) => v.time;
   static const Field<ToolStateToolStateRunning, ToolStateRunningTime> _f$time =
       Field('time', _$time);
@@ -391,7 +392,7 @@ class ToolStateToolStateCompletedMapper
   static List<FilePart>? _$attachments(ToolStateToolStateCompleted v) =>
       v.attachments;
   static const Field<ToolStateToolStateCompleted, List<FilePart>>
-  _f$attachments = Field('attachments', _$attachments);
+  _f$attachments = Field('attachments', _$attachments, opt: true);
 
   @override
   final MappableFields<ToolStateToolStateCompleted> fields = const {
@@ -635,7 +636,7 @@ class ToolStateToolStateErrorMapper
   static Map<String, dynamic>? _$metadata(ToolStateToolStateError v) =>
       v.metadata;
   static const Field<ToolStateToolStateError, Map<String, dynamic>>
-  _f$metadata = Field('metadata', _$metadata);
+  _f$metadata = Field('metadata', _$metadata, opt: true);
   static ToolStateErrorTime _$time(ToolStateToolStateError v) => v.time;
   static const Field<ToolStateToolStateError, ToolStateErrorTime> _f$time =
       Field('time', _$time);

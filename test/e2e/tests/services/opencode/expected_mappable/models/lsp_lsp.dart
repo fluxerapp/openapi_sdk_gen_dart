@@ -36,9 +36,9 @@ class LspLspVariant2 with LspLspVariant2Mappable {
 
   const LspLspVariant2({
     required this.command,
-    required this.extensions,
-    required this.disabled,
-    required this.env,
-    required this.initialization,
+    this.extensions,
+    this.disabled,
+    this.env,
+    this.initialization,
   });
 }

@@ -1,7 +1,3 @@
-// coverage:ignore-file
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
-
 import 'package:dart_mappable/dart_mappable.dart';
 
 import 'comment.dart';
@@ -33,11 +29,7 @@ class SearchResultUser extends SearchResult with SearchResultUserMappable {
   final User user;
   final double? score;
 
-  const SearchResultUser({
-    required this.type,
-    required this.user,
-    required this.score,
-  });
+  const SearchResultUser({required this.type, required this.user, this.score});
 }
 
 @MappableClass(discriminatorValue: 'post')
@@ -50,8 +42,8 @@ class SearchResultPost extends SearchResult with SearchResultPostMappable {
   const SearchResultPost({
     required this.type,
     required this.post,
-    required this.score,
-    required this.highlights,
+    this.score,
+    this.highlights,
   });
 }
 
@@ -65,6 +57,6 @@ class SearchResultComment extends SearchResult
   const SearchResultComment({
     required this.type,
     required this.comment,
-    required this.score,
+    this.score,
   });
 }

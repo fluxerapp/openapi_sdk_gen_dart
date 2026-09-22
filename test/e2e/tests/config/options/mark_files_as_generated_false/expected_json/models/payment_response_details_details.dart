@@ -1,7 +1,3 @@
-// coverage:ignore-file
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
-
 import 'package:json_annotation/json_annotation.dart';
 
 import 'credit_card_payment_payment_type_payment_type.dart';
@@ -29,31 +25,34 @@ extension PaymentResponseDetailsDetailsUnionDeserializer
     Map<Type, Object?>? mapping,
   }) {
     final mappingFallback = const <Type, Object?>{
-      PaymentResponseDetailsDetailsCreditCard: 'credit_card',
-      PaymentResponseDetailsDetailsBankTransfer: 'bank_transfer',
-      PaymentResponseDetailsDetailsCrypto: 'crypto',
+      PaymentResponseDetailsDetailsCreditCardPayment: 'CreditCardPayment',
+      PaymentResponseDetailsDetailsBankTransferPayment: 'BankTransferPayment',
+      PaymentResponseDetailsDetailsCryptoPayment: 'CryptoPayment',
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
     final valueAsString = value?.toString();
     return switch (value) {
       _
-          when value == effective[PaymentResponseDetailsDetailsCreditCard] ||
+          when value ==
+                  effective[PaymentResponseDetailsDetailsCreditCardPayment] ||
               valueAsString ==
-                  effective[PaymentResponseDetailsDetailsCreditCard]
+                  effective[PaymentResponseDetailsDetailsCreditCardPayment]
                       ?.toString() =>
-        PaymentResponseDetailsDetailsCreditCard.fromJson(json),
+        PaymentResponseDetailsDetailsCreditCardPayment.fromJson(json),
       _
-          when value == effective[PaymentResponseDetailsDetailsBankTransfer] ||
+          when value ==
+                  effective[PaymentResponseDetailsDetailsBankTransferPayment] ||
               valueAsString ==
-                  effective[PaymentResponseDetailsDetailsBankTransfer]
+                  effective[PaymentResponseDetailsDetailsBankTransferPayment]
                       ?.toString() =>
-        PaymentResponseDetailsDetailsBankTransfer.fromJson(json),
+        PaymentResponseDetailsDetailsBankTransferPayment.fromJson(json),
       _
-          when value == effective[PaymentResponseDetailsDetailsCrypto] ||
+          when value == effective[PaymentResponseDetailsDetailsCryptoPayment] ||
               valueAsString ==
-                  effective[PaymentResponseDetailsDetailsCrypto]?.toString() =>
-        PaymentResponseDetailsDetailsCrypto.fromJson(json),
+                  effective[PaymentResponseDetailsDetailsCryptoPayment]
+                      ?.toString() =>
+        PaymentResponseDetailsDetailsCryptoPayment.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for PaymentResponseDetailsDetails',
       ),
@@ -62,7 +61,7 @@ extension PaymentResponseDetailsDetailsUnionDeserializer
 }
 
 @JsonSerializable()
-class PaymentResponseDetailsDetailsCreditCard
+class PaymentResponseDetailsDetailsCreditCardPayment
     extends PaymentResponseDetailsDetails {
   final CreditCardPaymentPaymentTypePaymentType paymentType;
   final String cardNumber;
@@ -72,27 +71,27 @@ class PaymentResponseDetailsDetailsCreditCard
   final String? cardholderName;
   final double amount;
 
-  const PaymentResponseDetailsDetailsCreditCard({
+  const PaymentResponseDetailsDetailsCreditCardPayment({
     required this.paymentType,
     required this.cardNumber,
     required this.expiryMonth,
     required this.expiryYear,
     required this.cvv,
-    required this.cardholderName,
+    this.cardholderName,
     required this.amount,
   });
 
-  factory PaymentResponseDetailsDetailsCreditCard.fromJson(
+  factory PaymentResponseDetailsDetailsCreditCardPayment.fromJson(
     Map<String, dynamic> json,
-  ) => _$PaymentResponseDetailsDetailsCreditCardFromJson(json);
+  ) => _$PaymentResponseDetailsDetailsCreditCardPaymentFromJson(json);
 
   @override
   Map<String, dynamic> toJson() =>
-      _$PaymentResponseDetailsDetailsCreditCardToJson(this);
+      _$PaymentResponseDetailsDetailsCreditCardPaymentToJson(this);
 }
 
 @JsonSerializable()
-class PaymentResponseDetailsDetailsBankTransfer
+class PaymentResponseDetailsDetailsBankTransferPayment
     extends PaymentResponseDetailsDetails {
   final BankTransferPaymentPaymentTypePaymentType paymentType;
   final String accountNumber;
@@ -101,26 +100,26 @@ class PaymentResponseDetailsDetailsBankTransfer
   final double amount;
   final String? reference;
 
-  const PaymentResponseDetailsDetailsBankTransfer({
+  const PaymentResponseDetailsDetailsBankTransferPayment({
     required this.paymentType,
     required this.accountNumber,
     required this.routingNumber,
-    required this.accountHolder,
+    this.accountHolder,
     required this.amount,
-    required this.reference,
+    this.reference,
   });
 
-  factory PaymentResponseDetailsDetailsBankTransfer.fromJson(
+  factory PaymentResponseDetailsDetailsBankTransferPayment.fromJson(
     Map<String, dynamic> json,
-  ) => _$PaymentResponseDetailsDetailsBankTransferFromJson(json);
+  ) => _$PaymentResponseDetailsDetailsBankTransferPaymentFromJson(json);
 
   @override
   Map<String, dynamic> toJson() =>
-      _$PaymentResponseDetailsDetailsBankTransferToJson(this);
+      _$PaymentResponseDetailsDetailsBankTransferPaymentToJson(this);
 }
 
 @JsonSerializable()
-class PaymentResponseDetailsDetailsCrypto
+class PaymentResponseDetailsDetailsCryptoPayment
     extends PaymentResponseDetailsDetails {
   final CryptoPaymentPaymentTypePaymentType paymentType;
   final String walletAddress;
@@ -128,19 +127,19 @@ class PaymentResponseDetailsDetailsCrypto
   final double amount;
   final String? transactionHash;
 
-  const PaymentResponseDetailsDetailsCrypto({
+  const PaymentResponseDetailsDetailsCryptoPayment({
     required this.paymentType,
     required this.walletAddress,
     required this.cryptocurrency,
     required this.amount,
-    required this.transactionHash,
+    this.transactionHash,
   });
 
-  factory PaymentResponseDetailsDetailsCrypto.fromJson(
+  factory PaymentResponseDetailsDetailsCryptoPayment.fromJson(
     Map<String, dynamic> json,
-  ) => _$PaymentResponseDetailsDetailsCryptoFromJson(json);
+  ) => _$PaymentResponseDetailsDetailsCryptoPaymentFromJson(json);
 
   @override
   Map<String, dynamic> toJson() =>
-      _$PaymentResponseDetailsDetailsCryptoToJson(this);
+      _$PaymentResponseDetailsDetailsCryptoPaymentToJson(this);
 }

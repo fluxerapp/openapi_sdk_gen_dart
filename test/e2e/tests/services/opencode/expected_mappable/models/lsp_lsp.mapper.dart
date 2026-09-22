@@ -146,21 +146,24 @@ class LspLspVariant2Mapper extends ClassMapperBase<LspLspVariant2> {
   static const Field<LspLspVariant2, List<String>> _f$extensions = Field(
     'extensions',
     _$extensions,
+    opt: true,
   );
   static bool? _$disabled(LspLspVariant2 v) => v.disabled;
   static const Field<LspLspVariant2, bool> _f$disabled = Field(
     'disabled',
     _$disabled,
+    opt: true,
   );
   static Map<String, String>? _$env(LspLspVariant2 v) => v.env;
   static const Field<LspLspVariant2, Map<String, String>> _f$env = Field(
     'env',
     _$env,
+    opt: true,
   );
   static Map<String, dynamic>? _$initialization(LspLspVariant2 v) =>
       v.initialization;
   static const Field<LspLspVariant2, Map<String, dynamic>> _f$initialization =
-      Field('initialization', _$initialization);
+      Field('initialization', _$initialization, opt: true);
 
   @override
   final MappableFields<LspLspVariant2> fields = const {

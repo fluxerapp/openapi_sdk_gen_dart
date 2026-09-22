@@ -5,6 +5,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
 import 'models.dart';
+import 'provider_options.dart';
 
 part 'provider.mapper.dart';
 
@@ -26,7 +27,7 @@ class Provider with ProviderMappable {
   final String? id;
   final String? npm;
   final Map<String, Models>? models;
-  final Map<String, dynamic>? options;
+  final ProviderOptions? options;
 
   static Provider fromJson(Map<String, dynamic> json) =>
       ProviderMapper.fromJson(json);

@@ -4,20 +4,21 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'common_names.dart';
-import 'family.dart';
-
 part 'genus.g.dart';
 
 @JsonSerializable()
 class Genus {
-  const Genus({this.scientificName, this.family, this.commonNames});
+  const Genus({
+    this.scientificNameWithoutAuthor,
+    this.scientificNameAuthorship,
+    this.scientificName,
+  });
 
   factory Genus.fromJson(Map<String, Object?> json) => _$GenusFromJson(json);
 
+  final String? scientificNameWithoutAuthor;
+  final String? scientificNameAuthorship;
   final String? scientificName;
-  final Family? family;
-  final CommonNames? commonNames;
 
   Map<String, Object?> toJson() => _$GenusToJson(this);
 }

@@ -56,9 +56,9 @@ class PartModelTextPart {
     required this.messageId,
     required this.type,
     required this.text,
-    required this.synthetic,
-    required this.time,
-    required this.metadata,
+    this.synthetic,
+    this.time,
+    this.metadata,
   });
 
   factory PartModelTextPart.fromJson(Map<String, Object?> json) =>
@@ -85,7 +85,7 @@ class PartModelReasoningPart {
     required this.messageId,
     required this.type,
     required this.text,
-    required this.metadata,
+    this.metadata,
     required this.time,
   });
 
@@ -114,9 +114,9 @@ class PartModelFilePart {
     required this.messageId,
     required this.type,
     required this.mime,
-    required this.filename,
+    this.filename,
     required this.url,
-    required this.source,
+    this.source,
   });
 
   factory PartModelFilePart.fromJson(Map<String, Object?> json) =>
@@ -147,7 +147,7 @@ class PartModelToolPart {
     required this.callId,
     required this.tool,
     required this.state,
-    required this.metadata,
+    this.metadata,
   });
 
   factory PartModelToolPart.fromJson(Map<String, Object?> json) =>
@@ -171,7 +171,7 @@ class PartModelStepStartPart {
     required this.sessionId,
     required this.messageId,
     required this.type,
-    required this.snapshot,
+    this.snapshot,
   });
 
   factory PartModelStepStartPart.fromJson(Map<String, Object?> json) =>
@@ -197,7 +197,7 @@ class PartModelStepFinishPart {
     required this.sessionId,
     required this.messageId,
     required this.type,
-    required this.snapshot,
+    this.snapshot,
     required this.cost,
     required this.tokens,
   });
@@ -275,7 +275,7 @@ class PartModelAgentPart {
     required this.messageId,
     required this.type,
     required this.name,
-    required this.source,
+    this.source,
   });
 
   factory PartModelAgentPart.fromJson(Map<String, Object?> json) =>

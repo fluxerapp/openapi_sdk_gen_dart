@@ -10,23 +10,24 @@ Map<String, dynamic> _$PaymentResponseDetailsDetailsToJson(
   PaymentResponseDetailsDetails instance,
 ) => <String, dynamic>{};
 
-PaymentResponseDetailsDetailsCreditCard
-_$PaymentResponseDetailsDetailsCreditCardFromJson(Map<String, dynamic> json) =>
-    PaymentResponseDetailsDetailsCreditCard(
-      paymentType: $enumDecode(
-        _$CreditCardPaymentPaymentTypePaymentTypeEnumMap,
-        json['paymentType'],
-      ),
-      cardNumber: json['cardNumber'] as String,
-      expiryMonth: (json['expiryMonth'] as num).toInt(),
-      expiryYear: (json['expiryYear'] as num).toInt(),
-      cvv: json['cvv'] as String,
-      cardholderName: json['cardholderName'] as String?,
-      amount: (json['amount'] as num).toDouble(),
-    );
+PaymentResponseDetailsDetailsCreditCardPayment
+_$PaymentResponseDetailsDetailsCreditCardPaymentFromJson(
+  Map<String, dynamic> json,
+) => PaymentResponseDetailsDetailsCreditCardPayment(
+  paymentType: $enumDecode(
+    _$CreditCardPaymentPaymentTypePaymentTypeEnumMap,
+    json['paymentType'],
+  ),
+  cardNumber: json['cardNumber'] as String,
+  expiryMonth: (json['expiryMonth'] as num).toInt(),
+  expiryYear: (json['expiryYear'] as num).toInt(),
+  cvv: json['cvv'] as String,
+  cardholderName: json['cardholderName'] as String?,
+  amount: (json['amount'] as num).toDouble(),
+);
 
-Map<String, dynamic> _$PaymentResponseDetailsDetailsCreditCardToJson(
-  PaymentResponseDetailsDetailsCreditCard instance,
+Map<String, dynamic> _$PaymentResponseDetailsDetailsCreditCardPaymentToJson(
+  PaymentResponseDetailsDetailsCreditCardPayment instance,
 ) => <String, dynamic>{
   'paymentType': instance.paymentType,
   'cardNumber': instance.cardNumber,
@@ -41,10 +42,10 @@ const _$CreditCardPaymentPaymentTypePaymentTypeEnumMap = {
   CreditCardPaymentPaymentTypePaymentType.creditCard: 'credit_card',
 };
 
-PaymentResponseDetailsDetailsBankTransfer
-_$PaymentResponseDetailsDetailsBankTransferFromJson(
+PaymentResponseDetailsDetailsBankTransferPayment
+_$PaymentResponseDetailsDetailsBankTransferPaymentFromJson(
   Map<String, dynamic> json,
-) => PaymentResponseDetailsDetailsBankTransfer(
+) => PaymentResponseDetailsDetailsBankTransferPayment(
   paymentType: $enumDecode(
     _$BankTransferPaymentPaymentTypePaymentTypeEnumMap,
     json['paymentType'],
@@ -56,8 +57,8 @@ _$PaymentResponseDetailsDetailsBankTransferFromJson(
   reference: json['reference'] as String?,
 );
 
-Map<String, dynamic> _$PaymentResponseDetailsDetailsBankTransferToJson(
-  PaymentResponseDetailsDetailsBankTransfer instance,
+Map<String, dynamic> _$PaymentResponseDetailsDetailsBankTransferPaymentToJson(
+  PaymentResponseDetailsDetailsBankTransferPayment instance,
 ) => <String, dynamic>{
   'paymentType': instance.paymentType,
   'accountNumber': instance.accountNumber,
@@ -71,24 +72,25 @@ const _$BankTransferPaymentPaymentTypePaymentTypeEnumMap = {
   BankTransferPaymentPaymentTypePaymentType.bankTransfer: 'bank_transfer',
 };
 
-PaymentResponseDetailsDetailsCrypto
-_$PaymentResponseDetailsDetailsCryptoFromJson(Map<String, dynamic> json) =>
-    PaymentResponseDetailsDetailsCrypto(
-      paymentType: $enumDecode(
-        _$CryptoPaymentPaymentTypePaymentTypeEnumMap,
-        json['paymentType'],
-      ),
-      walletAddress: json['walletAddress'] as String,
-      cryptocurrency: $enumDecode(
-        _$CryptoPaymentCryptocurrencyCryptocurrencyEnumMap,
-        json['cryptocurrency'],
-      ),
-      amount: (json['amount'] as num).toDouble(),
-      transactionHash: json['transactionHash'] as String?,
-    );
+PaymentResponseDetailsDetailsCryptoPayment
+_$PaymentResponseDetailsDetailsCryptoPaymentFromJson(
+  Map<String, dynamic> json,
+) => PaymentResponseDetailsDetailsCryptoPayment(
+  paymentType: $enumDecode(
+    _$CryptoPaymentPaymentTypePaymentTypeEnumMap,
+    json['paymentType'],
+  ),
+  walletAddress: json['walletAddress'] as String,
+  cryptocurrency: $enumDecode(
+    _$CryptoPaymentCryptocurrencyCryptocurrencyEnumMap,
+    json['cryptocurrency'],
+  ),
+  amount: (json['amount'] as num).toDouble(),
+  transactionHash: json['transactionHash'] as String?,
+);
 
-Map<String, dynamic> _$PaymentResponseDetailsDetailsCryptoToJson(
-  PaymentResponseDetailsDetailsCrypto instance,
+Map<String, dynamic> _$PaymentResponseDetailsDetailsCryptoPaymentToJson(
+  PaymentResponseDetailsDetailsCryptoPayment instance,
 ) => <String, dynamic>{
   'paymentType': instance.paymentType,
   'walletAddress': instance.walletAddress,

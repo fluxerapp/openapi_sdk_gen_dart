@@ -11,7 +11,7 @@ enum UserSearchResultTypeType {
   @MappableValue('user')
   user;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();

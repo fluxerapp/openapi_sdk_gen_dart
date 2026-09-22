@@ -14,4 +14,4 @@ NullableUserDto _$NullableUserDtoFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$NullableUserDtoToJson(NullableUserDto instance) =>
-    <String, dynamic>{'data': instance.data};
+    <String, dynamic>{'data': ?instance.data};

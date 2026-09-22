@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Model21 {
 
- num? get score; Model20? get family; Gbif? get gbif; Images? get images;
+ num? get score; Model20? get family; Gbif? get gbif; Images2? get images;
 /// Create a copy of Model21
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $Model21CopyWith<$Res>  {
   factory $Model21CopyWith(Model21 value, $Res Function(Model21) _then) = _$Model21CopyWithImpl;
 @useResult
 $Res call({
- num? score, Model20? family, Gbif? gbif, Images? images
+ num? score, Model20? family, Gbif? gbif, Images2? images
 });
 
 
@@ -71,7 +71,7 @@ score: freezed == score ? _self.score : score // ignore: cast_nullable_to_non_nu
 as num?,family: freezed == family ? _self.family : family // ignore: cast_nullable_to_non_nullable
 as Model20?,gbif: freezed == gbif ? _self.gbif : gbif // ignore: cast_nullable_to_non_nullable
 as Gbif?,images: freezed == images ? _self.images : images // ignore: cast_nullable_to_non_nullable
-as Images?,
+as Images2?,
   ));
 }
 /// Create a copy of Model21
@@ -180,7 +180,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( num? score,  Model20? family,  Gbif? gbif,  Images? images)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( num? score,  Model20? family,  Gbif? gbif,  Images2? images)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Model21() when $default != null:
 return $default(_that.score,_that.family,_that.gbif,_that.images);case _:
@@ -201,7 +201,7 @@ return $default(_that.score,_that.family,_that.gbif,_that.images);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( num? score,  Model20? family,  Gbif? gbif,  Images? images)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( num? score,  Model20? family,  Gbif? gbif,  Images2? images)  $default,) {final _that = this;
 switch (_that) {
 case _Model21():
 return $default(_that.score,_that.family,_that.gbif,_that.images);case _:
@@ -221,7 +221,7 @@ return $default(_that.score,_that.family,_that.gbif,_that.images);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( num? score,  Model20? family,  Gbif? gbif,  Images? images)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( num? score,  Model20? family,  Gbif? gbif,  Images2? images)?  $default,) {final _that = this;
 switch (_that) {
 case _Model21() when $default != null:
 return $default(_that.score,_that.family,_that.gbif,_that.images);case _:
@@ -236,14 +236,14 @@ return $default(_that.score,_that.family,_that.gbif,_that.images);case _:
 @JsonSerializable()
 
 class _Model21 implements Model21 {
-  const _Model21({this.score, this.family, this.gbif, final  Images? images}): _images = images;
+  const _Model21({this.score, this.family, this.gbif, final  Images2? images}): _images = images;
   factory _Model21.fromJson(Map<String, dynamic> json) => _$Model21FromJson(json);
 
 @override final  num? score;
 @override final  Model20? family;
 @override final  Gbif? gbif;
- final  Images? _images;
-@override Images? get images {
+ final  Images2? _images;
+@override Images2? get images {
   final value = _images;
   if (value == null) return null;
   if (_images is EqualUnmodifiableListView) return _images;
@@ -285,7 +285,7 @@ abstract mixin class _$Model21CopyWith<$Res> implements $Model21CopyWith<$Res> {
   factory _$Model21CopyWith(_Model21 value, $Res Function(_Model21) _then) = __$Model21CopyWithImpl;
 @override @useResult
 $Res call({
- num? score, Model20? family, Gbif? gbif, Images? images
+ num? score, Model20? family, Gbif? gbif, Images2? images
 });
 
 
@@ -308,7 +308,7 @@ score: freezed == score ? _self.score : score // ignore: cast_nullable_to_non_nu
 as num?,family: freezed == family ? _self.family : family // ignore: cast_nullable_to_non_nullable
 as Model20?,gbif: freezed == gbif ? _self.gbif : gbif // ignore: cast_nullable_to_non_nullable
 as Gbif?,images: freezed == images ? _self._images : images // ignore: cast_nullable_to_non_nullable
-as Images?,
+as Images2?,
   ));
 }
 

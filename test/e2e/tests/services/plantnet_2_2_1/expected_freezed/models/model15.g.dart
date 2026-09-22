@@ -16,7 +16,9 @@ _Model15 _$Model15FromJson(Map<String, dynamic> json) => _Model15(
   family: json['family'] == null
       ? null
       : Family.fromJson(json['family'] as Map<String, dynamic>),
-  commonNames: json['commonNames'],
+  commonNames: (json['commonNames'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
 );
 
 Map<String, dynamic> _$Model15ToJson(_Model15 instance) => <String, dynamic>{

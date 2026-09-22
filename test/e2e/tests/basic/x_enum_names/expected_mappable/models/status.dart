@@ -20,7 +20,7 @@ enum Status {
   @MappableValue('unknown')
   unknown;
 
-  String toJson() => toValue().toString();
+  int? toJson() => toValue();
 
   @override
   String toString() => toValue().toString();

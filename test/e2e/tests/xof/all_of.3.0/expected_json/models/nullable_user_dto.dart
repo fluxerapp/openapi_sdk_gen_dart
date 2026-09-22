@@ -10,12 +10,12 @@ part 'nullable_user_dto.g.dart';
 
 @JsonSerializable()
 class NullableUserDto {
-  const NullableUserDto({required this.data});
+  const NullableUserDto({this.data});
 
   factory NullableUserDto.fromJson(Map<String, Object?> json) =>
       _$NullableUserDtoFromJson(json);
 
-  @JsonKey(includeIfNull: true)
+  @JsonKey(includeIfNull: false)
   final UserDto? data;
 
   Map<String, Object?> toJson() => _$NullableUserDtoToJson(this);

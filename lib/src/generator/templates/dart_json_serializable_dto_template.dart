@@ -7,7 +7,6 @@ import 'package:openapi_sdk_gen/src/utils/type_utils.dart';
 /// Provides template for generating dart DTO using JSON serializable
 String dartJsonSerializableDtoTemplate(
   UniversalComponentClass dataClass, {
-  required bool markFileAsGenerated,
   required bool includeIfNull,
   bool explicitNulls = false,
   String? fallbackUnion,
@@ -60,9 +59,11 @@ part '$classNameSnake.g.dart';
 
 const Object _omit = Object();
 
-${descriptionComment(dataClass.description)}@JsonSerializable()
+${descriptionComment(dataClass.description)}@JsonSerializable(constructor: '_')
 class $className {
   ${_constructor(className, dataClass.parameters, tracked)}
+
+  ${_jsonConstructor(className, dataClass.parameters, tracked)}
   ${_fromJson(className, dataClass.parameters, tracked)}
   ${_parametersInClass(dataClass.parameters, includeIfNull, tracked)}${_presentFields(tracked)}
 
@@ -351,17 +352,10 @@ String _generateDiscriminatedWrapperClasses(
             })
             .join('\n');
 
-        // Generate constructor parameters
-        final constructorParams = properties
-            .map((prop) => '    required this.${prop.name},')
-            .join('\n');
-
-        // Handle empty properties case
-        final constructorSignature = properties.isEmpty
-            ? 'const $wrapperClassName();'
-            : '''const $wrapperClassName({
-$constructorParams
-  });''';
+        final constructorSignature = _wrapperConstructor(
+          wrapperClassName,
+          properties,
+        );
 
         return '''
 @JsonSerializable()
@@ -427,17 +421,10 @@ String _generateUndiscriminatedWrapperClasses(
             })
             .join('\n');
 
-        // Generate constructor parameters
-        final constructorParams = properties
-            .map((prop) => '    required this.${prop.name},')
-            .join('\n');
-
-        // Handle empty properties case
-        final constructorSignature = properties.isEmpty
-            ? 'const $wrapperClassName();'
-            : '''const $wrapperClassName({
-$constructorParams
-  });''';
+        final constructorSignature = _wrapperConstructor(
+          wrapperClassName,
+          properties,
+        );
 
         return '''
 @JsonSerializable()
@@ -501,16 +488,37 @@ String _parametersInClass(
 }).join();
 
 String _jsonSerializableSuitableType(UniversalType type) {
-  var result = type.toSuitableType();
-
-  if (!type.isRequired &&
-      type.defaultValue == null &&
-      !result.endsWith('?') &&
-      !result.contains('dynamic')) {
-    result = '$result?';
+  final result = type.toSuitableType();
+  if (_promotedOptional(type)) {
+    return '$result?';
   }
-
   return result;
+}
+
+bool _promotedOptional(UniversalType type) {
+  if (type.isRequired || type.defaultValue != null) {
+    return false;
+  }
+  final result = type.toSuitableType();
+  return !result.endsWith('?') && !result.contains('dynamic');
+}
+
+String _wrapperConstructor(
+  String className,
+  Iterable<UniversalType> properties,
+) {
+  if (properties.isEmpty) {
+    return 'const $className();';
+  }
+  final params = properties
+      .map(
+        (prop) =>
+            '    ${_required(prop)}this.${prop.name}${_defaultValue(prop)},',
+      )
+      .join('\n');
+  return '''const $className({
+$params
+  });''';
 }
 
 String _parametersInConstructor(
@@ -534,6 +542,14 @@ bool _tracksExplicitNull(UniversalType t) =>
 
 String _jsonName(UniversalType t) =>
     t.jsonKey != null && t.jsonKey!.isNotEmpty ? t.jsonKey! : t.name!;
+
+String _dartSingleQuoted(String value) {
+  final escaped = value
+      .replaceAll(r'\', r'\\')
+      .replaceAll(r'$', r'\$')
+      .replaceAll("'", r"\'");
+  return "'$escaped'";
+}
 
 String _presentFieldName(UniversalType t) => '_${t.name}Present';
 
@@ -562,6 +578,28 @@ String _constructor(
   return 'const $className({$params\n  }) :$initializers;';
 }
 
+/// json_serializable reads this constructor so nested fields are decoded.
+String _jsonConstructor(
+  String className,
+  Set<UniversalType> parameters,
+  List<UniversalType> tracked,
+) {
+  final trackedNames = {for (final t in tracked) t.name};
+  final sorted = Set<UniversalType>.from(
+    parameters.sorted((a, b) => a.compareTo(b)),
+  );
+  final params = sorted.map((e) {
+    if (trackedNames.contains(e.name)) {
+      return '\n    this.${e.name},';
+    }
+    return '\n    ${_required(e)}this.${e.name}${_defaultValue(e)},';
+  }).join();
+  final flags = tracked
+      .map((t) => '${_presentFieldName(t)} = false')
+      .join(',\n    ');
+  return 'const $className._({$params\n  }) : $flags;';
+}
+
 String _fromJson(
   String className,
   Set<UniversalType> parameters,
@@ -573,8 +611,8 @@ String _fromJson(
   );
   final args = sorted.map((e) {
     if (trackedNames.contains(e.name)) {
-      final jsonName = _jsonName(e);
-      return '\n      ${e.name}: json.containsKey(\'$jsonName\') ? value.${e.name} : _omit,';
+      final jsonName = _dartSingleQuoted(_jsonName(e));
+      return '\n      ${e.name}: json.containsKey($jsonName) ? value.${e.name} : _omit,';
     }
     return '\n      ${e.name}: value.${e.name},';
   }).join();
@@ -592,8 +630,8 @@ String _presentFields(List<UniversalType> tracked) {
 String _toJson(String className, List<UniversalType> tracked) {
   final restores = tracked
       .map((t) {
-        final jsonName = _jsonName(t);
-        return "    if (${_presentFieldName(t)}) {\n      json.putIfAbsent('$jsonName', () => ${t.name});\n    }";
+        final jsonName = _dartSingleQuoted(_jsonName(t));
+        return "    if (${_presentFieldName(t)}) {\n      json.putIfAbsent($jsonName, () => ${t.name});\n    }";
       })
       .join('\n');
   return '''Map<String, Object?> toJson() {
@@ -617,7 +655,10 @@ String _jsonKey(
     if (t.isRequired && (t.nullable || t.referencedNullable)) {
       jsonKeyParams['includeIfNull'] = 'true';
     } else if (!t.isRequired &&
-        (t.nullable || t.referencedNullable || trackExplicitNull)) {
+        (t.nullable ||
+            t.referencedNullable ||
+            trackExplicitNull ||
+            _promotedOptional(t))) {
       jsonKeyParams['includeIfNull'] = 'false';
     }
   }

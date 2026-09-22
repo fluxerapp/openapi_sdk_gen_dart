@@ -38,12 +38,12 @@ class SessionPromptRequestPartsPartsTextPartInput {
   final Map<String, dynamic>? metadata;
 
   const SessionPromptRequestPartsPartsTextPartInput({
-    required this.id,
+    this.id,
     required this.type,
     required this.text,
-    required this.synthetic,
-    required this.time,
-    required this.metadata,
+    this.synthetic,
+    this.time,
+    this.metadata,
   });
 
   factory SessionPromptRequestPartsPartsTextPartInput.fromJson(
@@ -64,12 +64,12 @@ class SessionPromptRequestPartsPartsFilePartInput {
   final FilePartSource? source;
 
   const SessionPromptRequestPartsPartsFilePartInput({
-    required this.id,
+    this.id,
     required this.type,
     required this.mime,
-    required this.filename,
+    this.filename,
     required this.url,
-    required this.source,
+    this.source,
   });
 
   factory SessionPromptRequestPartsPartsFilePartInput.fromJson(
@@ -88,10 +88,10 @@ class SessionPromptRequestPartsPartsAgentPartInput {
   final AgentPartInputSource? source;
 
   const SessionPromptRequestPartsPartsAgentPartInput({
-    required this.id,
+    this.id,
     required this.type,
     required this.name,
-    required this.source,
+    this.source,
   });
 
   factory SessionPromptRequestPartsPartsAgentPartInput.fromJson(

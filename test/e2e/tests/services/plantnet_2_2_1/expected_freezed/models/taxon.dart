@@ -4,7 +4,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'common_names.dart';
+import 'common_names2.dart';
 
 part 'taxon.freezed.dart';
 part 'taxon.g.dart';
@@ -20,7 +20,7 @@ abstract class Taxon with _$Taxon {
     String? family,
     String? genus,
     String? url,
-    @JsonKey(name: 'common_names') CommonNames? commonNames,
+    @JsonKey(name: 'common_names') CommonNames2? commonNames,
     @JsonKey(name: 'iucn_red_list_category') String? iucnRedListCategory,
   }) = _Taxon;
 

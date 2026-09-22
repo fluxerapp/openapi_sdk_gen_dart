@@ -4,9 +4,10 @@
 
 import 'package:dart_mappable/dart_mappable.dart';
 
-import 'agent_config.dart';
 import 'command.dart';
+import 'config_agent.dart';
 import 'config_experimental.dart';
+import 'config_mode.dart';
 import 'config_permission.dart';
 import 'config_share_share.dart';
 import 'config_tui.dart';
@@ -69,8 +70,8 @@ class Config with ConfigMappable {
   @MappableField(key: 'small_model')
   final String? smallModel;
   final String? username;
-  final Map<String, AgentConfig>? mode;
-  final Map<String, AgentConfig>? agent;
+  final ConfigMode? mode;
+  final ConfigAgent? agent;
   final Map<String, Provider>? provider;
   final Map<String, McpMcp>? mcp;
   final Map<String, Formatter>? formatter;

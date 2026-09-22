@@ -4,9 +4,10 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'agent_config.dart';
 import 'command.dart';
+import 'config_agent.dart';
 import 'config_experimental.dart';
+import 'config_mode.dart';
 import 'config_permission.dart';
 import 'config_share_share.dart';
 import 'config_tui.dart';
@@ -62,10 +63,10 @@ abstract class Config with _$Config {
     String? username,
 
     /// @deprecated Use `agent` field instead.
-    Map<String, AgentConfig>? mode,
+    ConfigMode? mode,
 
     /// Agent configuration, see https://opencode.ai/docs/agent
-    Map<String, AgentConfig>? agent,
+    ConfigAgent? agent,
 
     /// Custom provider configurations and model overrides
     Map<String, Provider>? provider,

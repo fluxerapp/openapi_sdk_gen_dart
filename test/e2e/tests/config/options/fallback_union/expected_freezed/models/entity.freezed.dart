@@ -145,12 +145,12 @@ return unknown(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String id,  DateTime createdAt,  DateTime dateOfBirth,  String? name,  String? description,  DateTime? updatedAt,  String? nationality,  String? occupation,  Map<String, String>? socialProfiles)?  person,TResult Function( String id,  DateTime createdAt,  String registrationNumber,  String? name,  String? description,  DateTime? updatedAt,  DateTime? foundedDate,  String? industry,  int? employeeCount,  double? revenue)?  organization,TResult Function()?  unknown,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String id,  DateTime createdAt,  DateTime dateOfBirth,  String? name,  String? description,  DateTime? updatedAt,  String? nationality,  String? occupation,  Map<String, String>? socialProfiles)?  person,TResult Function( String id,  DateTime createdAt,  String registrationNumber,  String? name,  String? description,  DateTime? updatedAt,  DateTime? foundedDate,  String? industry,  int? employeeCount,  double? revenue)?  organization,TResult Function( Map<String, Object?> json)?  unknown,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case EntityPerson() when person != null:
 return person(_that.id,_that.createdAt,_that.dateOfBirth,_that.name,_that.description,_that.updatedAt,_that.nationality,_that.occupation,_that.socialProfiles);case EntityOrganization() when organization != null:
 return organization(_that.id,_that.createdAt,_that.registrationNumber,_that.name,_that.description,_that.updatedAt,_that.foundedDate,_that.industry,_that.employeeCount,_that.revenue);case EntityUnknown() when unknown != null:
-return unknown();case _:
+return unknown(_that.json);case _:
   return orElse();
 
 }
@@ -168,12 +168,12 @@ return unknown();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String id,  DateTime createdAt,  DateTime dateOfBirth,  String? name,  String? description,  DateTime? updatedAt,  String? nationality,  String? occupation,  Map<String, String>? socialProfiles)  person,required TResult Function( String id,  DateTime createdAt,  String registrationNumber,  String? name,  String? description,  DateTime? updatedAt,  DateTime? foundedDate,  String? industry,  int? employeeCount,  double? revenue)  organization,required TResult Function()  unknown,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String id,  DateTime createdAt,  DateTime dateOfBirth,  String? name,  String? description,  DateTime? updatedAt,  String? nationality,  String? occupation,  Map<String, String>? socialProfiles)  person,required TResult Function( String id,  DateTime createdAt,  String registrationNumber,  String? name,  String? description,  DateTime? updatedAt,  DateTime? foundedDate,  String? industry,  int? employeeCount,  double? revenue)  organization,required TResult Function( Map<String, Object?> json)  unknown,}) {final _that = this;
 switch (_that) {
 case EntityPerson():
 return person(_that.id,_that.createdAt,_that.dateOfBirth,_that.name,_that.description,_that.updatedAt,_that.nationality,_that.occupation,_that.socialProfiles);case EntityOrganization():
 return organization(_that.id,_that.createdAt,_that.registrationNumber,_that.name,_that.description,_that.updatedAt,_that.foundedDate,_that.industry,_that.employeeCount,_that.revenue);case EntityUnknown():
-return unknown();}
+return unknown(_that.json);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -187,12 +187,12 @@ return unknown();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String id,  DateTime createdAt,  DateTime dateOfBirth,  String? name,  String? description,  DateTime? updatedAt,  String? nationality,  String? occupation,  Map<String, String>? socialProfiles)?  person,TResult? Function( String id,  DateTime createdAt,  String registrationNumber,  String? name,  String? description,  DateTime? updatedAt,  DateTime? foundedDate,  String? industry,  int? employeeCount,  double? revenue)?  organization,TResult? Function()?  unknown,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String id,  DateTime createdAt,  DateTime dateOfBirth,  String? name,  String? description,  DateTime? updatedAt,  String? nationality,  String? occupation,  Map<String, String>? socialProfiles)?  person,TResult? Function( String id,  DateTime createdAt,  String registrationNumber,  String? name,  String? description,  DateTime? updatedAt,  DateTime? foundedDate,  String? industry,  int? employeeCount,  double? revenue)?  organization,TResult? Function( Map<String, Object?> json)?  unknown,}) {final _that = this;
 switch (_that) {
 case EntityPerson() when person != null:
 return person(_that.id,_that.createdAt,_that.dateOfBirth,_that.name,_that.description,_that.updatedAt,_that.nationality,_that.occupation,_that.socialProfiles);case EntityOrganization() when organization != null:
 return organization(_that.id,_that.createdAt,_that.registrationNumber,_that.name,_that.description,_that.updatedAt,_that.foundedDate,_that.industry,_that.employeeCount,_that.revenue);case EntityUnknown() when unknown != null:
-return unknown();case _:
+return unknown(_that.json);case _:
   return null;
 
 }
@@ -387,44 +387,6 @@ as double?,
 
 
 }
-
-/// @nodoc
-@JsonSerializable()
-
-class EntityUnknown implements Entity {
-  const EntityUnknown({final  String? $type}): $type = $type ?? 'unknown';
-  factory EntityUnknown.fromJson(Map<String, dynamic> json) => _$EntityUnknownFromJson(json);
-
-
-
-@JsonKey(name: 'entityType')
-final String $type;
-
-
-
-@override
-Map<String, dynamic> toJson() {
-  return _$EntityUnknownToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is EntityUnknown);
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'Entity.unknown()';
-}
-
-
-}
-
-
 
 
 // dart format on

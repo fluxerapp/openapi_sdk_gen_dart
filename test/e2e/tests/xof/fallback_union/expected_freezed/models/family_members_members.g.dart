@@ -38,11 +38,3 @@ FamilyMembersMembersHuman _$FamilyMembersMembersHumanFromJson(
 Map<String, dynamic> _$FamilyMembersMembersHumanToJson(
   FamilyMembersMembersHuman instance,
 ) => <String, dynamic>{'job': instance.job, 'type': instance.$type};
-
-FamilyMembersMembersUnknown _$FamilyMembersMembersUnknownFromJson(
-  Map<String, dynamic> json,
-) => FamilyMembersMembersUnknown($type: json['type'] as String?);
-
-Map<String, dynamic> _$FamilyMembersMembersUnknownToJson(
-  FamilyMembersMembersUnknown instance,
-) => <String, dynamic>{'type': instance.$type};

@@ -4,9 +4,10 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'agent_config.dart';
 import 'command.dart';
+import 'config_agent.dart';
 import 'config_experimental.dart';
+import 'config_mode.dart';
 import 'config_permission.dart';
 import 'config_share_share.dart';
 import 'config_tui.dart';
@@ -94,10 +95,10 @@ class Config {
   final String? username;
 
   /// @deprecated Use `agent` field instead.
-  final Map<String, AgentConfig>? mode;
+  final ConfigMode? mode;
 
   /// Agent configuration, see https://opencode.ai/docs/agent
-  final Map<String, AgentConfig>? agent;
+  final ConfigAgent? agent;
 
   /// Custom provider configurations and model overrides
   final Map<String, Provider>? provider;

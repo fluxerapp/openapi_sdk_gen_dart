@@ -80,6 +80,7 @@ abstract class ApiClient {
   @PATCH('/config')
   Future<Config> configUpdate({
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Body() Config? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -99,6 +100,7 @@ abstract class ApiClient {
     @Query('provider') required String provider,
     @Query('model') required String model,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -123,6 +125,7 @@ abstract class ApiClient {
   @POST('/session')
   Future<Session> sessionCreate({
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Body() SessionCreateRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -133,6 +136,7 @@ abstract class ApiClient {
   Future<Session> sessionGet({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -142,6 +146,7 @@ abstract class ApiClient {
   Future<bool> sessionDelete({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -151,6 +156,8 @@ abstract class ApiClient {
   Future<Session> sessionUpdate({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
+    @Query('directory') String? directoryQuery2,
     @Body() SessionUpdateRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -161,6 +168,7 @@ abstract class ApiClient {
   Future<List<Session>> sessionChildren({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -172,6 +180,7 @@ abstract class ApiClient {
   Future<List<Todo>> sessionTodo({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -183,6 +192,8 @@ abstract class ApiClient {
   Future<bool> sessionInit({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
+    @Query('directory') String? directoryQuery2,
     @Body() SessionInitRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -193,6 +204,8 @@ abstract class ApiClient {
   Future<Session> sessionFork({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
+    @Query('directory') String? directoryQuery2,
     @Body() SessionForkRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -203,6 +216,7 @@ abstract class ApiClient {
   Future<bool> sessionAbort({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -212,6 +226,7 @@ abstract class ApiClient {
   Future<Session> sessionShare({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -221,6 +236,7 @@ abstract class ApiClient {
   Future<Session> sessionUnshare({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -230,6 +246,8 @@ abstract class ApiClient {
   Future<List<FileDiff>> sessionDiff({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
+    @Query('directory') String? directoryQuery2,
     @Query('messageID') String? messageId,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -242,6 +260,8 @@ abstract class ApiClient {
   Future<bool> sessionSummarize({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
+    @Query('directory') String? directoryQuery2,
     @Body() SessionSummarizeRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -254,6 +274,7 @@ abstract class ApiClient {
   Future<List<SessionMessagesResponse>> sessionMessages({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -265,6 +286,8 @@ abstract class ApiClient {
   Future<SessionPromptResponse> sessionPrompt({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
+    @Query('directory') String? directoryQuery2,
     @Body() SessionPromptRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -280,6 +303,7 @@ abstract class ApiClient {
     @Path('id') required String id,
     @Path('messageID') required String messageId,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -291,6 +315,8 @@ abstract class ApiClient {
   Future<SessionCommandResponse> sessionCommand({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
+    @Query('directory') String? directoryQuery2,
     @Body() SessionCommandRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -303,6 +329,8 @@ abstract class ApiClient {
   Future<AssistantMessage> sessionShell({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
+    @Query('directory') String? directoryQuery2,
     @Body() SessionShellRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -313,6 +341,8 @@ abstract class ApiClient {
   Future<Session> sessionRevert({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
+    @Query('directory') String? directoryQuery2,
     @Body() SessionRevertRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -323,6 +353,7 @@ abstract class ApiClient {
   Future<Session> sessionUnrevert({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -333,6 +364,8 @@ abstract class ApiClient {
     @Path('id') required String id,
     @Path('permissionID') required String permissionId,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
+    @Query('directory') String? directoryQuery2,
     @Body() PostSessionIdPermissionsPermissionIdRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -359,6 +392,7 @@ abstract class ApiClient {
   Future<List<FindTextResponse>> findText({
     @Query('pattern') required String pattern,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -368,6 +402,7 @@ abstract class ApiClient {
   Future<List<String>> findFiles({
     @Query('query') required String query,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -377,6 +412,7 @@ abstract class ApiClient {
   Future<List<SymbolModel>> findSymbols({
     @Query('query') required String query,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -386,6 +422,7 @@ abstract class ApiClient {
   Future<List<FileNode>> fileList({
     @Query('path') required String path,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -395,6 +432,7 @@ abstract class ApiClient {
   Future<FileContent> fileRead({
     @Query('path') required String path,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
   });
@@ -411,6 +449,7 @@ abstract class ApiClient {
   @POST('/log')
   Future<bool> appLog({
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Body() AppLogRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -436,6 +475,7 @@ abstract class ApiClient {
   @POST('/tui/append-prompt')
   Future<bool> tuiAppendPrompt({
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Body() TuiAppendPromptRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -493,6 +533,7 @@ abstract class ApiClient {
   @POST('/tui/execute-command')
   Future<bool> tuiExecuteCommand({
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Body() TuiExecuteCommandRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -502,6 +543,7 @@ abstract class ApiClient {
   @POST('/tui/show-toast')
   Future<bool> tuiShowToast({
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
     @Body() TuiShowToastRequest? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,
@@ -514,6 +556,8 @@ abstract class ApiClient {
   Future<bool> authSet({
     @Path('id') required String id,
     @Query('directory') String? directory,
+    @Query('directory') String? directoryQuery,
+    @Query('directory') String? directoryQuery2,
     @Body() Auth? body,
     @Extras() Map<String, dynamic>? extras,
     @DioOptions() RequestOptions? options,

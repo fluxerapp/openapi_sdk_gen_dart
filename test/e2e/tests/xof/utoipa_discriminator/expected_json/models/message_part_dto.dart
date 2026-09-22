@@ -83,7 +83,7 @@ class MessagePartDtoTool extends MessagePartDto {
   @JsonKey(includeIfNull: false)
   final dynamic toolArgs;
 
-  const MessagePartDtoTool({required this.toolName, required this.toolArgs});
+  const MessagePartDtoTool({required this.toolName, this.toolArgs});
 
   factory MessagePartDtoTool.fromJson(Map<String, dynamic> json) =>
       _$MessagePartDtoToolFromJson(json);

@@ -53,8 +53,8 @@ class ToolStateToolStateRunning {
   const ToolStateToolStateRunning({
     required this.status,
     required this.input,
-    required this.title,
-    required this.metadata,
+    this.title,
+    this.metadata,
     required this.time,
   });
 
@@ -81,7 +81,7 @@ class ToolStateToolStateCompleted {
     required this.title,
     required this.metadata,
     required this.time,
-    required this.attachments,
+    this.attachments,
   });
 
   factory ToolStateToolStateCompleted.fromJson(Map<String, Object?> json) =>
@@ -102,7 +102,7 @@ class ToolStateToolStateError {
     required this.status,
     required this.input,
     required this.error,
-    required this.metadata,
+    this.metadata,
     required this.time,
   });
 

@@ -5,7 +5,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'gbif.dart';
-import 'images.dart';
+import 'images2.dart';
 import 'model20.dart';
 
 part 'model21.freezed.dart';
@@ -17,7 +17,7 @@ abstract class Model21 with _$Model21 {
     num? score,
     Model20? family,
     Gbif? gbif,
-    Images? images,
+    Images2? images,
   }) = _Model21;
 
   factory Model21.fromJson(Map<String, Object?> json) =>

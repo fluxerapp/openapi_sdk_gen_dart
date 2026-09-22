@@ -47,7 +47,7 @@ class PaymentRequestCreditCard extends PaymentRequest
     required this.expiryMonth,
     required this.expiryYear,
     required this.cvv,
-    required this.cardholderName,
+    this.cardholderName,
     required this.amount,
   });
 }
@@ -66,9 +66,9 @@ class PaymentRequestBankTransfer extends PaymentRequest
     required this.paymentType,
     required this.accountNumber,
     required this.routingNumber,
-    required this.accountHolder,
+    this.accountHolder,
     required this.amount,
-    required this.reference,
+    this.reference,
   });
 }
 
@@ -86,7 +86,7 @@ class PaymentRequestCrypto extends PaymentRequest
     required this.walletAddress,
     required this.cryptocurrency,
     required this.amount,
-    required this.transactionHash,
+    this.transactionHash,
   });
 }
 

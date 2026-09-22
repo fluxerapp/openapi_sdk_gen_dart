@@ -2,27 +2,32 @@ import 'package:openapi_sdk_gen/src/parser/openapi_parser_core.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test(
-    'scalar-ref union property becomes dynamic, not an empty-class union',
-    () {
-      const spec = r'''
+  test('scalar-ref union property collapses to string', () {
+    const spec = r'''
 {"openapi":"3.1.0","info":{"title":"t","version":"1"},"components":{"schemas":{
   "Int32Type":{"type":"integer"},"SnowflakeType":{"type":"string"},
+  "NullableString":{"type":["string","null"]},
   "AttachRef":{"type":"object","required":["id"],"properties":{"id":{"oneOf":[
-    {"$ref":"#/components/schemas/Int32Type"},{"$ref":"#/components/schemas/SnowflakeType"}]}}}}}}
+    {"$ref":"#/components/schemas/Int32Type"},{"$ref":"#/components/schemas/SnowflakeType"}]}}},
+  "NullableRef":{"oneOf":[
+    {"$ref":"#/components/schemas/NullableString"},{"$ref":"#/components/schemas/Int32Type"}]}}}}
 ''';
-      final classes = OpenApiParser(
-        const ParserConfig(spec, isJson: true),
-      ).parseDataClasses().whereType<UniversalComponentClass>();
+    final classes = OpenApiParser(
+      const ParserConfig(spec, isJson: true),
+    ).parseDataClasses().whereType<UniversalComponentClass>();
 
-      expect(classes.where((c) => c.name.startsWith('AttachRefId')), isEmpty);
-      final id = classes
-          .firstWhere((c) => c.name == 'AttachRef')
-          .parameters
-          .single;
-      expect(id.type, 'object');
-    },
-  );
+    expect(classes.where((c) => c.name.startsWith('AttachRefId')), isEmpty);
+    final id = classes
+        .firstWhere((c) => c.name == 'AttachRef')
+        .parameters
+        .single;
+    expect(id.type, 'string');
+
+    final nullableRef = classes.firstWhere((c) => c.name == 'NullableRef');
+    expect(nullableRef.typeDef, isTrue);
+    expect(nullableRef.parameters.single.type, 'string');
+    expect(nullableRef.parameters.single.nullable, isTrue);
+  });
 
   test('scalar anyOf and type arrays become string typedefs', () {
     const spec = r'''

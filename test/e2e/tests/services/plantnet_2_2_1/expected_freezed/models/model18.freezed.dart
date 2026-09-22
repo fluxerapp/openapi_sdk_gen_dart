@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Model18 {
 
- num? get score; Genus? get genus; Gbif? get gbif; Images? get images;
+ num? get score; Genus2? get genus; Gbif? get gbif; Images2? get images;
 /// Create a copy of Model18
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,11 +48,11 @@ abstract mixin class $Model18CopyWith<$Res>  {
   factory $Model18CopyWith(Model18 value, $Res Function(Model18) _then) = _$Model18CopyWithImpl;
 @useResult
 $Res call({
- num? score, Genus? genus, Gbif? gbif, Images? images
+ num? score, Genus2? genus, Gbif? gbif, Images2? images
 });
 
 
-$GenusCopyWith<$Res>? get genus;$GbifCopyWith<$Res>? get gbif;
+$Genus2CopyWith<$Res>? get genus;$GbifCopyWith<$Res>? get gbif;
 
 }
 /// @nodoc
@@ -69,21 +69,21 @@ class _$Model18CopyWithImpl<$Res>
   return _then(_self.copyWith(
 score: freezed == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
 as num?,genus: freezed == genus ? _self.genus : genus // ignore: cast_nullable_to_non_nullable
-as Genus?,gbif: freezed == gbif ? _self.gbif : gbif // ignore: cast_nullable_to_non_nullable
+as Genus2?,gbif: freezed == gbif ? _self.gbif : gbif // ignore: cast_nullable_to_non_nullable
 as Gbif?,images: freezed == images ? _self.images : images // ignore: cast_nullable_to_non_nullable
-as Images?,
+as Images2?,
   ));
 }
 /// Create a copy of Model18
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenusCopyWith<$Res>? get genus {
+$Genus2CopyWith<$Res>? get genus {
     if (_self.genus == null) {
     return null;
   }
 
-  return $GenusCopyWith<$Res>(_self.genus!, (value) {
+  return $Genus2CopyWith<$Res>(_self.genus!, (value) {
     return _then(_self.copyWith(genus: value));
   });
 }/// Create a copy of Model18
@@ -180,7 +180,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( num? score,  Genus? genus,  Gbif? gbif,  Images? images)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( num? score,  Genus2? genus,  Gbif? gbif,  Images2? images)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Model18() when $default != null:
 return $default(_that.score,_that.genus,_that.gbif,_that.images);case _:
@@ -201,7 +201,7 @@ return $default(_that.score,_that.genus,_that.gbif,_that.images);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( num? score,  Genus? genus,  Gbif? gbif,  Images? images)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( num? score,  Genus2? genus,  Gbif? gbif,  Images2? images)  $default,) {final _that = this;
 switch (_that) {
 case _Model18():
 return $default(_that.score,_that.genus,_that.gbif,_that.images);case _:
@@ -221,7 +221,7 @@ return $default(_that.score,_that.genus,_that.gbif,_that.images);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( num? score,  Genus? genus,  Gbif? gbif,  Images? images)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( num? score,  Genus2? genus,  Gbif? gbif,  Images2? images)?  $default,) {final _that = this;
 switch (_that) {
 case _Model18() when $default != null:
 return $default(_that.score,_that.genus,_that.gbif,_that.images);case _:
@@ -236,14 +236,14 @@ return $default(_that.score,_that.genus,_that.gbif,_that.images);case _:
 @JsonSerializable()
 
 class _Model18 implements Model18 {
-  const _Model18({this.score, this.genus, this.gbif, final  Images? images}): _images = images;
+  const _Model18({this.score, this.genus, this.gbif, final  Images2? images}): _images = images;
   factory _Model18.fromJson(Map<String, dynamic> json) => _$Model18FromJson(json);
 
 @override final  num? score;
-@override final  Genus? genus;
+@override final  Genus2? genus;
 @override final  Gbif? gbif;
- final  Images? _images;
-@override Images? get images {
+ final  Images2? _images;
+@override Images2? get images {
   final value = _images;
   if (value == null) return null;
   if (_images is EqualUnmodifiableListView) return _images;
@@ -285,11 +285,11 @@ abstract mixin class _$Model18CopyWith<$Res> implements $Model18CopyWith<$Res> {
   factory _$Model18CopyWith(_Model18 value, $Res Function(_Model18) _then) = __$Model18CopyWithImpl;
 @override @useResult
 $Res call({
- num? score, Genus? genus, Gbif? gbif, Images? images
+ num? score, Genus2? genus, Gbif? gbif, Images2? images
 });
 
 
-@override $GenusCopyWith<$Res>? get genus;@override $GbifCopyWith<$Res>? get gbif;
+@override $Genus2CopyWith<$Res>? get genus;@override $GbifCopyWith<$Res>? get gbif;
 
 }
 /// @nodoc
@@ -306,9 +306,9 @@ class __$Model18CopyWithImpl<$Res>
   return _then(_Model18(
 score: freezed == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
 as num?,genus: freezed == genus ? _self.genus : genus // ignore: cast_nullable_to_non_nullable
-as Genus?,gbif: freezed == gbif ? _self.gbif : gbif // ignore: cast_nullable_to_non_nullable
+as Genus2?,gbif: freezed == gbif ? _self.gbif : gbif // ignore: cast_nullable_to_non_nullable
 as Gbif?,images: freezed == images ? _self._images : images // ignore: cast_nullable_to_non_nullable
-as Images?,
+as Images2?,
   ));
 }
 
@@ -316,12 +316,12 @@ as Images?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenusCopyWith<$Res>? get genus {
+$Genus2CopyWith<$Res>? get genus {
     if (_self.genus == null) {
     return null;
   }
 
-  return $GenusCopyWith<$Res>(_self.genus!, (value) {
+  return $Genus2CopyWith<$Res>(_self.genus!, (value) {
     return _then(_self.copyWith(genus: value));
   });
 }/// Create a copy of Model18

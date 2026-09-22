@@ -31,8 +31,8 @@ class McpMcpMcpLocalConfig {
   const McpMcpMcpLocalConfig({
     required this.type,
     required this.command,
-    required this.environment,
-    required this.enabled,
+    this.environment,
+    this.enabled,
   });
 
   factory McpMcpMcpLocalConfig.fromJson(Map<String, dynamic> json) =>
@@ -51,8 +51,8 @@ class McpMcpMcpRemoteConfig {
   const McpMcpMcpRemoteConfig({
     required this.type,
     required this.url,
-    required this.enabled,
-    required this.headers,
+    this.enabled,
+    this.headers,
   });
 
   factory McpMcpMcpRemoteConfig.fromJson(Map<String, dynamic> json) =>

@@ -10,9 +10,11 @@ _Model71 _$Model71FromJson(Map<String, dynamic> json) => _Model71(
   name: json['name'] as String?,
   author: json['author'] as String?,
   family: json['family'] as String?,
-  commonNames: json['commonNames'],
+  commonNames: (json['commonNames'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
   images: (json['images'] as List<dynamic>?)
-      ?.map((e) => Image.fromJson(e as Map<String, dynamic>))
+      ?.map((e) => Model11.fromJson(e as Map<String, dynamic>))
       .toList(),
   iucn: json['iucn'] == null
       ? null

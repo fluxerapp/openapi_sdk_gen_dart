@@ -5,6 +5,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'models.dart';
+import 'provider_options.dart';
 
 part 'provider.freezed.dart';
 part 'provider.g.dart';
@@ -18,7 +19,7 @@ abstract class Provider with _$Provider {
     String? id,
     String? npm,
     Map<String, Models>? models,
-    Map<String, dynamic>? options,
+    ProviderOptions? options,
   }) = _Provider;
 
   factory Provider.fromJson(Map<String, Object?> json) =>

@@ -8,4 +8,5 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
     - "**/*.mappable.dart"
+    - build/**
 

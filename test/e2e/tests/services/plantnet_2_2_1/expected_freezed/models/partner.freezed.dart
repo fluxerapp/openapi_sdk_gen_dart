@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Partner {
 
- String get id;@JsonKey(name: 'observation_id') String get observationId; Author? get author; String? get avatar;
+ String get id;@JsonKey(name: 'observation_id') String get observationId; Author2? get author; String? get avatar;
 /// Create a copy of Partner
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,11 +48,11 @@ abstract mixin class $PartnerCopyWith<$Res>  {
   factory $PartnerCopyWith(Partner value, $Res Function(Partner) _then) = _$PartnerCopyWithImpl;
 @useResult
 $Res call({
- String id,@JsonKey(name: 'observation_id') String observationId, Author? author, String? avatar
+ String id,@JsonKey(name: 'observation_id') String observationId, Author2? author, String? avatar
 });
 
 
-$AuthorCopyWith<$Res>? get author;
+$Author2CopyWith<$Res>? get author;
 
 }
 /// @nodoc
@@ -70,7 +70,7 @@ class _$PartnerCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,observationId: null == observationId ? _self.observationId : observationId // ignore: cast_nullable_to_non_nullable
 as String,author: freezed == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
-as Author?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
+as Author2?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -78,12 +78,12 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$AuthorCopyWith<$Res>? get author {
+$Author2CopyWith<$Res>? get author {
     if (_self.author == null) {
     return null;
   }
 
-  return $AuthorCopyWith<$Res>(_self.author!, (value) {
+  return $Author2CopyWith<$Res>(_self.author!, (value) {
     return _then(_self.copyWith(author: value));
   });
 }
@@ -168,7 +168,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'observation_id')  String observationId,  Author? author,  String? avatar)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'observation_id')  String observationId,  Author2? author,  String? avatar)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Partner() when $default != null:
 return $default(_that.id,_that.observationId,_that.author,_that.avatar);case _:
@@ -189,7 +189,7 @@ return $default(_that.id,_that.observationId,_that.author,_that.avatar);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'observation_id')  String observationId,  Author? author,  String? avatar)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'observation_id')  String observationId,  Author2? author,  String? avatar)  $default,) {final _that = this;
 switch (_that) {
 case _Partner():
 return $default(_that.id,_that.observationId,_that.author,_that.avatar);case _:
@@ -209,7 +209,7 @@ return $default(_that.id,_that.observationId,_that.author,_that.avatar);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: 'observation_id')  String observationId,  Author? author,  String? avatar)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: 'observation_id')  String observationId,  Author2? author,  String? avatar)?  $default,) {final _that = this;
 switch (_that) {
 case _Partner() when $default != null:
 return $default(_that.id,_that.observationId,_that.author,_that.avatar);case _:
@@ -229,7 +229,7 @@ class _Partner implements Partner {
 
 @override final  String id;
 @override@JsonKey(name: 'observation_id') final  String observationId;
-@override final  Author? author;
+@override final  Author2? author;
 @override final  String? avatar;
 
 /// Create a copy of Partner
@@ -265,11 +265,11 @@ abstract mixin class _$PartnerCopyWith<$Res> implements $PartnerCopyWith<$Res> {
   factory _$PartnerCopyWith(_Partner value, $Res Function(_Partner) _then) = __$PartnerCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@JsonKey(name: 'observation_id') String observationId, Author? author, String? avatar
+ String id,@JsonKey(name: 'observation_id') String observationId, Author2? author, String? avatar
 });
 
 
-@override $AuthorCopyWith<$Res>? get author;
+@override $Author2CopyWith<$Res>? get author;
 
 }
 /// @nodoc
@@ -287,7 +287,7 @@ class __$PartnerCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,observationId: null == observationId ? _self.observationId : observationId // ignore: cast_nullable_to_non_nullable
 as String,author: freezed == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
-as Author?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
+as Author2?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -296,12 +296,12 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$AuthorCopyWith<$Res>? get author {
+$Author2CopyWith<$Res>? get author {
     if (_self.author == null) {
     return null;
   }
 
-  return $AuthorCopyWith<$Res>(_self.author!, (value) {
+  return $Author2CopyWith<$Res>(_self.author!, (value) {
     return _then(_self.copyWith(author: value));
   });
 }

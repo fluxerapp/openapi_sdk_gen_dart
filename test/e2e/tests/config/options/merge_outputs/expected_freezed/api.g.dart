@@ -1053,20 +1053,21 @@ Map<String, dynamic> _$UserSettingsPrivacyToJson(
   'showEmail': instance.showEmail,
 };
 
-PaymentResponseDetailsDetailsCreditCard
-_$PaymentResponseDetailsDetailsCreditCardFromJson(Map<String, dynamic> json) =>
-    PaymentResponseDetailsDetailsCreditCard(
-      cardNumber: json['cardNumber'] as String,
-      expiryMonth: (json['expiryMonth'] as num).toInt(),
-      expiryYear: (json['expiryYear'] as num).toInt(),
-      cvv: json['cvv'] as String,
-      amount: (json['amount'] as num).toDouble(),
-      cardholderName: json['cardholderName'] as String?,
-      $type: json['paymentType'] as String?,
-    );
+PaymentResponseDetailsDetailsCreditCardPayment
+_$PaymentResponseDetailsDetailsCreditCardPaymentFromJson(
+  Map<String, dynamic> json,
+) => PaymentResponseDetailsDetailsCreditCardPayment(
+  cardNumber: json['cardNumber'] as String,
+  expiryMonth: (json['expiryMonth'] as num).toInt(),
+  expiryYear: (json['expiryYear'] as num).toInt(),
+  cvv: json['cvv'] as String,
+  amount: (json['amount'] as num).toDouble(),
+  cardholderName: json['cardholderName'] as String?,
+  $type: json['paymentType'] as String?,
+);
 
-Map<String, dynamic> _$PaymentResponseDetailsDetailsCreditCardToJson(
-  PaymentResponseDetailsDetailsCreditCard instance,
+Map<String, dynamic> _$PaymentResponseDetailsDetailsCreditCardPaymentToJson(
+  PaymentResponseDetailsDetailsCreditCardPayment instance,
 ) => <String, dynamic>{
   'cardNumber': instance.cardNumber,
   'expiryMonth': instance.expiryMonth,
@@ -1077,10 +1078,10 @@ Map<String, dynamic> _$PaymentResponseDetailsDetailsCreditCardToJson(
   'paymentType': instance.$type,
 };
 
-PaymentResponseDetailsDetailsBankTransfer
-_$PaymentResponseDetailsDetailsBankTransferFromJson(
+PaymentResponseDetailsDetailsBankTransferPayment
+_$PaymentResponseDetailsDetailsBankTransferPaymentFromJson(
   Map<String, dynamic> json,
-) => PaymentResponseDetailsDetailsBankTransfer(
+) => PaymentResponseDetailsDetailsBankTransferPayment(
   accountNumber: json['accountNumber'] as String,
   routingNumber: json['routingNumber'] as String,
   amount: (json['amount'] as num).toDouble(),
@@ -1089,8 +1090,8 @@ _$PaymentResponseDetailsDetailsBankTransferFromJson(
   $type: json['paymentType'] as String?,
 );
 
-Map<String, dynamic> _$PaymentResponseDetailsDetailsBankTransferToJson(
-  PaymentResponseDetailsDetailsBankTransfer instance,
+Map<String, dynamic> _$PaymentResponseDetailsDetailsBankTransferPaymentToJson(
+  PaymentResponseDetailsDetailsBankTransferPayment instance,
 ) => <String, dynamic>{
   'accountNumber': instance.accountNumber,
   'routingNumber': instance.routingNumber,
@@ -1100,20 +1101,21 @@ Map<String, dynamic> _$PaymentResponseDetailsDetailsBankTransferToJson(
   'paymentType': instance.$type,
 };
 
-PaymentResponseDetailsDetailsCrypto
-_$PaymentResponseDetailsDetailsCryptoFromJson(Map<String, dynamic> json) =>
-    PaymentResponseDetailsDetailsCrypto(
-      walletAddress: json['walletAddress'] as String,
-      cryptocurrency: CryptoPaymentCryptocurrencyCryptocurrency.fromJson(
-        json['cryptocurrency'] as String,
-      ),
-      amount: (json['amount'] as num).toDouble(),
-      transactionHash: json['transactionHash'] as String?,
-      $type: json['paymentType'] as String?,
-    );
+PaymentResponseDetailsDetailsCryptoPayment
+_$PaymentResponseDetailsDetailsCryptoPaymentFromJson(
+  Map<String, dynamic> json,
+) => PaymentResponseDetailsDetailsCryptoPayment(
+  walletAddress: json['walletAddress'] as String,
+  cryptocurrency: CryptoPaymentCryptocurrencyCryptocurrency.fromJson(
+    json['cryptocurrency'] as String,
+  ),
+  amount: (json['amount'] as num).toDouble(),
+  transactionHash: json['transactionHash'] as String?,
+  $type: json['paymentType'] as String?,
+);
 
-Map<String, dynamic> _$PaymentResponseDetailsDetailsCryptoToJson(
-  PaymentResponseDetailsDetailsCrypto instance,
+Map<String, dynamic> _$PaymentResponseDetailsDetailsCryptoPaymentToJson(
+  PaymentResponseDetailsDetailsCryptoPayment instance,
 ) => <String, dynamic>{
   'walletAddress': instance.walletAddress,
   'cryptocurrency': instance.cryptocurrency,

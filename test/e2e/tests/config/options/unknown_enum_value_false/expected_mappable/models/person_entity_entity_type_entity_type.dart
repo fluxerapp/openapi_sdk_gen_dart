@@ -11,7 +11,7 @@ enum PersonEntityEntityTypeEntityType {
   @MappableValue('person')
   person;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();

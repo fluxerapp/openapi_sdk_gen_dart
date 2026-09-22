@@ -73,11 +73,3 @@ Map<String, dynamic> _$PaymentRequestCryptoToJson(
   'transactionHash': instance.transactionHash,
   'paymentType': instance.$type,
 };
-
-PaymentRequestUnknown _$PaymentRequestUnknownFromJson(
-  Map<String, dynamic> json,
-) => PaymentRequestUnknown($type: json['paymentType'] as String?);
-
-Map<String, dynamic> _$PaymentRequestUnknownToJson(
-  PaymentRequestUnknown instance,
-) => <String, dynamic>{'paymentType': instance.$type};

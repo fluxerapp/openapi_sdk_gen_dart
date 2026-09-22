@@ -36,8 +36,34 @@ sealed class SearchResult with _$SearchResult {
     double? score,
   }) = SearchResultComment;
 
-  const factory SearchResult.unknown() = SearchResultUnknown;
+  const factory SearchResult.unknown(Map<String, Object?> json) =
+      SearchResultUnknown;
 
   factory SearchResult.fromJson(Map<String, Object?> json) =>
       _$SearchResultFromJson(json);
+}
+
+class SearchResultUnknown implements SearchResult {
+  const SearchResultUnknown(this.json);
+
+  final Map<String, Object?> json;
+
+  factory SearchResultUnknown.fromJson(Map<String, dynamic> json) =>
+      SearchResultUnknown(Map<String, Object?>.from(json));
+
+  @override
+  Map<String, dynamic> toJson() => Map<String, dynamic>.from(json);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SearchResultUnknown &&
+          const DeepCollectionEquality().equals(json, other.json);
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(json));
+
+  @override
+  String toString() => 'SearchResult.unknown()';
 }

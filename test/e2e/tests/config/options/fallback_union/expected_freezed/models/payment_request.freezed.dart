@@ -152,13 +152,13 @@ return unknown(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String cardNumber,  int expiryMonth,  int expiryYear,  String cvv,  double amount,  String? cardholderName)?  creditCard,TResult Function( String accountNumber,  String routingNumber,  double amount,  String? accountHolder,  String? reference)?  bankTransfer,TResult Function( String walletAddress,  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,  double amount,  String? transactionHash)?  crypto,TResult Function()?  unknown,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String cardNumber,  int expiryMonth,  int expiryYear,  String cvv,  double amount,  String? cardholderName)?  creditCard,TResult Function( String accountNumber,  String routingNumber,  double amount,  String? accountHolder,  String? reference)?  bankTransfer,TResult Function( String walletAddress,  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,  double amount,  String? transactionHash)?  crypto,TResult Function( Map<String, Object?> json)?  unknown,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case PaymentRequestCreditCard() when creditCard != null:
 return creditCard(_that.cardNumber,_that.expiryMonth,_that.expiryYear,_that.cvv,_that.amount,_that.cardholderName);case PaymentRequestBankTransfer() when bankTransfer != null:
 return bankTransfer(_that.accountNumber,_that.routingNumber,_that.amount,_that.accountHolder,_that.reference);case PaymentRequestCrypto() when crypto != null:
 return crypto(_that.walletAddress,_that.cryptocurrency,_that.amount,_that.transactionHash);case PaymentRequestUnknown() when unknown != null:
-return unknown();case _:
+return unknown(_that.json);case _:
   return orElse();
 
 }
@@ -176,13 +176,13 @@ return unknown();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String cardNumber,  int expiryMonth,  int expiryYear,  String cvv,  double amount,  String? cardholderName)  creditCard,required TResult Function( String accountNumber,  String routingNumber,  double amount,  String? accountHolder,  String? reference)  bankTransfer,required TResult Function( String walletAddress,  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,  double amount,  String? transactionHash)  crypto,required TResult Function()  unknown,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String cardNumber,  int expiryMonth,  int expiryYear,  String cvv,  double amount,  String? cardholderName)  creditCard,required TResult Function( String accountNumber,  String routingNumber,  double amount,  String? accountHolder,  String? reference)  bankTransfer,required TResult Function( String walletAddress,  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,  double amount,  String? transactionHash)  crypto,required TResult Function( Map<String, Object?> json)  unknown,}) {final _that = this;
 switch (_that) {
 case PaymentRequestCreditCard():
 return creditCard(_that.cardNumber,_that.expiryMonth,_that.expiryYear,_that.cvv,_that.amount,_that.cardholderName);case PaymentRequestBankTransfer():
 return bankTransfer(_that.accountNumber,_that.routingNumber,_that.amount,_that.accountHolder,_that.reference);case PaymentRequestCrypto():
 return crypto(_that.walletAddress,_that.cryptocurrency,_that.amount,_that.transactionHash);case PaymentRequestUnknown():
-return unknown();}
+return unknown(_that.json);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -196,13 +196,13 @@ return unknown();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String cardNumber,  int expiryMonth,  int expiryYear,  String cvv,  double amount,  String? cardholderName)?  creditCard,TResult? Function( String accountNumber,  String routingNumber,  double amount,  String? accountHolder,  String? reference)?  bankTransfer,TResult? Function( String walletAddress,  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,  double amount,  String? transactionHash)?  crypto,TResult? Function()?  unknown,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String cardNumber,  int expiryMonth,  int expiryYear,  String cvv,  double amount,  String? cardholderName)?  creditCard,TResult? Function( String accountNumber,  String routingNumber,  double amount,  String? accountHolder,  String? reference)?  bankTransfer,TResult? Function( String walletAddress,  CryptoPaymentCryptocurrencyCryptocurrency cryptocurrency,  double amount,  String? transactionHash)?  crypto,TResult? Function( Map<String, Object?> json)?  unknown,}) {final _that = this;
 switch (_that) {
 case PaymentRequestCreditCard() when creditCard != null:
 return creditCard(_that.cardNumber,_that.expiryMonth,_that.expiryYear,_that.cvv,_that.amount,_that.cardholderName);case PaymentRequestBankTransfer() when bankTransfer != null:
 return bankTransfer(_that.accountNumber,_that.routingNumber,_that.amount,_that.accountHolder,_that.reference);case PaymentRequestCrypto() when crypto != null:
 return crypto(_that.walletAddress,_that.cryptocurrency,_that.amount,_that.transactionHash);case PaymentRequestUnknown() when unknown != null:
-return unknown();case _:
+return unknown(_that.json);case _:
   return null;
 
 }
@@ -452,44 +452,6 @@ as String?,
 
 
 }
-
-/// @nodoc
-@JsonSerializable()
-
-class PaymentRequestUnknown implements PaymentRequest {
-  const PaymentRequestUnknown({final  String? $type}): $type = $type ?? 'unknown';
-  factory PaymentRequestUnknown.fromJson(Map<String, dynamic> json) => _$PaymentRequestUnknownFromJson(json);
-
-
-
-@JsonKey(name: 'paymentType')
-final String $type;
-
-
-
-@override
-Map<String, dynamic> toJson() {
-  return _$PaymentRequestUnknownToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentRequestUnknown);
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'PaymentRequest.unknown()';
-}
-
-
-}
-
-
 
 
 // dart format on

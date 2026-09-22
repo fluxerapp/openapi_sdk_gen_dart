@@ -35,7 +35,7 @@ class AgentConfig {
 
   /// Description of when to use the agent
   final String? description;
-  final dynamic mode;
+  final String? mode;
   final AgentConfigPermission? permission;
 
   Map<String, Object?> toJson() => _$AgentConfigToJson(this);

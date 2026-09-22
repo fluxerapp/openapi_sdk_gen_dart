@@ -41,10 +41,10 @@ class LspLspVariant2 {
 
   const LspLspVariant2({
     required this.command,
-    required this.extensions,
-    required this.disabled,
-    required this.env,
-    required this.initialization,
+    this.extensions,
+    this.disabled,
+    this.env,
+    this.initialization,
   });
 
   factory LspLspVariant2.fromJson(Map<String, dynamic> json) =>

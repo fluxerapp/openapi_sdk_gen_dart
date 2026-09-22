@@ -15,7 +15,7 @@ enum Status {
   @MappableValue('inactive')
   inactive;
 
-  String toJson() => toValue().toString();
+  String toJson() => toValue() ?? 'null';
 
   @override
   String toString() => toValue().toString();

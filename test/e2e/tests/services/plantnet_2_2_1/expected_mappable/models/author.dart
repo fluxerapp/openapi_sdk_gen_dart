@@ -8,10 +8,12 @@ part 'author.mapper.dart';
 
 @MappableClass()
 class Author with AuthorMappable {
-  const Author({required this.id, required this.name});
+  const Author({required this.name, this.id, this.avatar, this.email});
 
-  final String id;
   final String name;
+  final String? id;
+  final String? avatar;
+  final String? email;
 
   static Author fromJson(Map<String, dynamic> json) =>
       AuthorMapper.fromJson(json);

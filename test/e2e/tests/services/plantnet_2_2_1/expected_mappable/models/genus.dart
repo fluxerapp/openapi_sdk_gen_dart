@@ -4,18 +4,19 @@
 
 import 'package:dart_mappable/dart_mappable.dart';
 
-import 'common_names.dart';
-import 'family.dart';
-
 part 'genus.mapper.dart';
 
 @MappableClass()
 class Genus with GenusMappable {
-  const Genus({this.scientificName, this.family, this.commonNames});
+  const Genus({
+    this.scientificNameWithoutAuthor,
+    this.scientificNameAuthorship,
+    this.scientificName,
+  });
 
+  final String? scientificNameWithoutAuthor;
+  final String? scientificNameAuthorship;
   final String? scientificName;
-  final Family? family;
-  final CommonNames? commonNames;
 
   static Genus fromJson(Map<String, dynamic> json) =>
       GenusMapper.fromJson(json);

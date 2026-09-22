@@ -27,8 +27,8 @@ class Model20Mapper extends ClassMapperBase<Model20> {
     _$scientificName,
     opt: true,
   );
-  static dynamic _$commonNames(Model20 v) => v.commonNames;
-  static const Field<Model20, dynamic> _f$commonNames = Field(
+  static List<String>? _$commonNames(Model20 v) => v.commonNames;
+  static const Field<Model20, List<String>> _f$commonNames = Field(
     'commonNames',
     _$commonNames,
     opt: true,
@@ -104,7 +104,8 @@ extension Model20ValueCopy<$R, $Out> on ObjectCopyWith<$R, Model20, $Out> {
 
 abstract class Model20CopyWith<$R, $In extends Model20, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? scientificName, dynamic commonNames});
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get commonNames;
+  $R call({String? scientificName, List<String>? commonNames});
   Model20CopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -116,6 +117,15 @@ class _Model20CopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<Model20> $mapper =
       Model20Mapper.ensureInitialized();
+  @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+  get commonNames => $value.commonNames != null
+      ? ListCopyWith(
+          $value.commonNames!,
+          (v, t) => ObjectCopyWith(v, $identity, t),
+          (v) => call(commonNames: v),
+        )
+      : null;
   @override
   $R call({Object? scientificName = $none, Object? commonNames = $none}) =>
       $apply(

@@ -5,8 +5,8 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
 import 'gbif.dart';
-import 'genus.dart';
-import 'images.dart';
+import 'genus2.dart';
+import 'images2.dart';
 
 part 'model18.mapper.dart';
 
@@ -15,9 +15,9 @@ class Model18 with Model18Mappable {
   const Model18({this.score, this.genus, this.gbif, this.images});
 
   final num? score;
-  final Genus? genus;
+  final Genus2? genus;
   final Gbif? gbif;
-  final Images? images;
+  final Images2? images;
 
   static Model18 fromJson(Map<String, dynamic> json) =>
       Model18Mapper.fromJson(json);

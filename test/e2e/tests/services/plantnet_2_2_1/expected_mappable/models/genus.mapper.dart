@@ -14,7 +14,6 @@ class GenusMapper extends ClassMapperBase<Genus> {
   static GenusMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GenusMapper._());
-      FamilyMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -22,37 +21,39 @@ class GenusMapper extends ClassMapperBase<Genus> {
   @override
   final String id = 'Genus';
 
+  static String? _$scientificNameWithoutAuthor(Genus v) =>
+      v.scientificNameWithoutAuthor;
+  static const Field<Genus, String> _f$scientificNameWithoutAuthor = Field(
+    'scientificNameWithoutAuthor',
+    _$scientificNameWithoutAuthor,
+    opt: true,
+  );
+  static String? _$scientificNameAuthorship(Genus v) =>
+      v.scientificNameAuthorship;
+  static const Field<Genus, String> _f$scientificNameAuthorship = Field(
+    'scientificNameAuthorship',
+    _$scientificNameAuthorship,
+    opt: true,
+  );
   static String? _$scientificName(Genus v) => v.scientificName;
   static const Field<Genus, String> _f$scientificName = Field(
     'scientificName',
     _$scientificName,
     opt: true,
   );
-  static Family? _$family(Genus v) => v.family;
-  static const Field<Genus, Family> _f$family = Field(
-    'family',
-    _$family,
-    opt: true,
-  );
-  static dynamic _$commonNames(Genus v) => v.commonNames;
-  static const Field<Genus, dynamic> _f$commonNames = Field(
-    'commonNames',
-    _$commonNames,
-    opt: true,
-  );
 
   @override
   final MappableFields<Genus> fields = const {
+    #scientificNameWithoutAuthor: _f$scientificNameWithoutAuthor,
+    #scientificNameAuthorship: _f$scientificNameAuthorship,
     #scientificName: _f$scientificName,
-    #family: _f$family,
-    #commonNames: _f$commonNames,
   };
 
   static Genus _instantiate(DecodingData data) {
     return Genus(
+      scientificNameWithoutAuthor: data.dec(_f$scientificNameWithoutAuthor),
+      scientificNameAuthorship: data.dec(_f$scientificNameAuthorship),
       scientificName: data.dec(_f$scientificName),
-      family: data.dec(_f$family),
-      commonNames: data.dec(_f$commonNames),
     );
   }
 
@@ -102,8 +103,11 @@ extension GenusValueCopy<$R, $Out> on ObjectCopyWith<$R, Genus, $Out> {
 
 abstract class GenusCopyWith<$R, $In extends Genus, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  FamilyCopyWith<$R, Family, Family>? get family;
-  $R call({String? scientificName, Family? family, dynamic commonNames});
+  $R call({
+    String? scientificNameWithoutAuthor,
+    String? scientificNameAuthorship,
+    String? scientificName,
+  });
   GenusCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -114,25 +118,30 @@ class _GenusCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Genus, $Out>
   @override
   late final ClassMapperBase<Genus> $mapper = GenusMapper.ensureInitialized();
   @override
-  FamilyCopyWith<$R, Family, Family>? get family =>
-      $value.family?.copyWith.$chain((v) => call(family: v));
-  @override
   $R call({
+    Object? scientificNameWithoutAuthor = $none,
+    Object? scientificNameAuthorship = $none,
     Object? scientificName = $none,
-    Object? family = $none,
-    Object? commonNames = $none,
   }) => $apply(
     FieldCopyWithData({
+      if (scientificNameWithoutAuthor != $none)
+        #scientificNameWithoutAuthor: scientificNameWithoutAuthor,
+      if (scientificNameAuthorship != $none)
+        #scientificNameAuthorship: scientificNameAuthorship,
       if (scientificName != $none) #scientificName: scientificName,
-      if (family != $none) #family: family,
-      if (commonNames != $none) #commonNames: commonNames,
     }),
   );
   @override
   Genus $make(CopyWithData data) => Genus(
+    scientificNameWithoutAuthor: data.get(
+      #scientificNameWithoutAuthor,
+      or: $value.scientificNameWithoutAuthor,
+    ),
+    scientificNameAuthorship: data.get(
+      #scientificNameAuthorship,
+      or: $value.scientificNameAuthorship,
+    ),
     scientificName: data.get(#scientificName, or: $value.scientificName),
-    family: data.get(#family, or: $value.family),
-    commonNames: data.get(#commonNames, or: $value.commonNames),
   );
 
   @override

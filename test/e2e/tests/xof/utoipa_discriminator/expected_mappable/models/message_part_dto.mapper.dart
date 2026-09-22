@@ -364,6 +364,7 @@ class MessagePartDtoToolMapper extends SubClassMapperBase<MessagePartDtoTool> {
   static const Field<MessagePartDtoTool, dynamic> _f$toolArgs = Field(
     'toolArgs',
     _$toolArgs,
+    opt: true,
   );
 
   @override

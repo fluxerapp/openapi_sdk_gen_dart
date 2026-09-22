@@ -10,7 +10,7 @@ part 'nullable_user_dto.mapper.dart';
 
 @MappableClass()
 class NullableUserDto with NullableUserDtoMappable {
-  const NullableUserDto({required this.data});
+  const NullableUserDto({this.data});
 
   final UserDto? data;
 

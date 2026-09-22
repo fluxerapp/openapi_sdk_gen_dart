@@ -4,14 +4,14 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'species.dart';
+import 'species2.dart';
 
 part 'model13.freezed.dart';
 part 'model13.g.dart';
 
 @Freezed()
 abstract class Model13 with _$Model13 {
-  const factory Model13({Species? species, num? total}) = _Model13;
+  const factory Model13({Species2? species, num? total}) = _Model13;
 
   factory Model13.fromJson(Map<String, Object?> json) =>
       _$Model13FromJson(json);

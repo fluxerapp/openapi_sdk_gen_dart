@@ -11,7 +11,7 @@ Partner _$PartnerFromJson(Map<String, dynamic> json) => Partner(
   observationId: json['observation_id'] as String,
   author: json['author'] == null
       ? null
-      : Author.fromJson(json['author'] as Map<String, dynamic>),
+      : Author2.fromJson(json['author'] as Map<String, dynamic>),
   avatar: json['avatar'] as String?,
 );
 
