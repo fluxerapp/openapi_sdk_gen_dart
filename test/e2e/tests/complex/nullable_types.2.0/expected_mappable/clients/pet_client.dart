@@ -66,7 +66,7 @@ abstract class PetClient {
   @FormUrlEncoded()
   @POST('/pet/{petId}')
   Future<void> updatePetWithForm({
-    @Path('petId') required int petId,
+    @Path('petId') required int? petId,
     @Part(name: 'name') String? name,
     @Part(name: 'status') String? status,
   });

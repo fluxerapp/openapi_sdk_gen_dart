@@ -146,7 +146,7 @@ class _PetClient implements PetClient {
 
   @override
   Future<void> updatePetWithForm({
-    required int petId,
+    required int? petId,
     String? name,
     String? status,
   }) async {

@@ -107,8 +107,9 @@ String _validateMethod(String className, Set<UniversalType> types) {
 
   for (final type in types) {
     final staticName = '$className.${type.name}';
-    final nullCheckCondition = type.nullable ? '${type.name} != null &&' : '';
-    final typeName = type.nullable ? '${type.name}!' : type.name;
+    final dartNullable = type.nullable || type.promotesToOptional();
+    final nullCheckCondition = dartNullable ? '${type.name} != null &&' : '';
+    final typeName = dartNullable ? '${type.name}!' : type.name;
 
     if (type.min != null) {
       bodyBuffer
@@ -450,27 +451,7 @@ String _parametersToString(Set<UniversalType> parameters, bool includeIfNull) {
   }).join();
 }
 
-String _freezedSuitableType(UniversalType type) {
-  final baseType = type.toSuitableType();
-  if (_promotedOptional(type)) {
-    return '$baseType?';
-  }
-  return baseType;
-}
-
-bool _promotedOptional(UniversalType type) {
-  if (type.isRequired ||
-      type.defaultValue != null ||
-      type.nullable ||
-      type.referencedNullable) {
-    return false;
-  }
-  final baseType = type.toSuitableType();
-  if (baseType.endsWith('?') || baseType == 'dynamic') {
-    return false;
-  }
-  return true;
-}
+String _freezedSuitableType(UniversalType type) => type.toRequestType();
 
 String _jsonKey(UniversalType t, bool includeIfNull) {
   final sb = StringBuffer();
@@ -479,8 +460,7 @@ String _jsonKey(UniversalType t, bool includeIfNull) {
   if (includeIfNull) {
     if (t.isRequired && (t.nullable || t.referencedNullable)) {
       jsonKeyParams['includeIfNull'] = 'true';
-    } else if (!t.isRequired &&
-        (t.nullable || t.referencedNullable || _promotedOptional(t))) {
+    } else if (t.omitsNull) {
       jsonKeyParams['includeIfNull'] = 'false';
     }
   }

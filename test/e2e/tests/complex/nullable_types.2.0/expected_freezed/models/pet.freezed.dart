@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Pet {
 
- String get name; List<String> get photoUrls;@JsonKey(includeIfNull: false) int? get id;@JsonKey(includeIfNull: false) Category? get category;@JsonKey(includeIfNull: false) List<Tag>? get tags;/// pet status in the store
+@JsonKey(includeIfNull: true) String? get name; List<String?> get photoUrls;@JsonKey(includeIfNull: false) int? get id;@JsonKey(includeIfNull: false) Category? get category;@JsonKey(includeIfNull: false) List<Tag>? get tags;/// pet status in the store
 @JsonKey(includeIfNull: false) PetStatusStatus? get status;
 /// Create a copy of Pet
 /// with the given fields replaced by the non-null parameter values.
@@ -49,7 +49,7 @@ abstract mixin class $PetCopyWith<$Res>  {
   factory $PetCopyWith(Pet value, $Res Function(Pet) _then) = _$PetCopyWithImpl;
 @useResult
 $Res call({
- String name, List<String> photoUrls,@JsonKey(includeIfNull: false) int? id,@JsonKey(includeIfNull: false) Category? category,@JsonKey(includeIfNull: false) List<Tag>? tags,@JsonKey(includeIfNull: false) PetStatusStatus? status
+@JsonKey(includeIfNull: true) String? name, List<String?> photoUrls,@JsonKey(includeIfNull: false) int? id,@JsonKey(includeIfNull: false) Category? category,@JsonKey(includeIfNull: false) List<Tag>? tags,@JsonKey(includeIfNull: false) PetStatusStatus? status
 });
 
 
@@ -66,11 +66,11 @@ class _$PetCopyWithImpl<$Res>
 
 /// Create a copy of Pet
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? photoUrls = null,Object? id = freezed,Object? category = freezed,Object? tags = freezed,Object? status = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? photoUrls = null,Object? id = freezed,Object? category = freezed,Object? tags = freezed,Object? status = freezed,}) {
   return _then(_self.copyWith(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,photoUrls: null == photoUrls ? _self.photoUrls : photoUrls // ignore: cast_nullable_to_non_nullable
-as List<String>,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,photoUrls: null == photoUrls ? _self.photoUrls : photoUrls // ignore: cast_nullable_to_non_nullable
+as List<String?>,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as Category?,tags: freezed == tags ? _self.tags : tags // ignore: cast_nullable_to_non_nullable
 as List<Tag>?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
@@ -171,7 +171,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  List<String> photoUrls, @JsonKey(includeIfNull: false)  int? id, @JsonKey(includeIfNull: false)  Category? category, @JsonKey(includeIfNull: false)  List<Tag>? tags, @JsonKey(includeIfNull: false)  PetStatusStatus? status)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(includeIfNull: true)  String? name,  List<String?> photoUrls, @JsonKey(includeIfNull: false)  int? id, @JsonKey(includeIfNull: false)  Category? category, @JsonKey(includeIfNull: false)  List<Tag>? tags, @JsonKey(includeIfNull: false)  PetStatusStatus? status)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Pet() when $default != null:
 return $default(_that.name,_that.photoUrls,_that.id,_that.category,_that.tags,_that.status);case _:
@@ -192,7 +192,7 @@ return $default(_that.name,_that.photoUrls,_that.id,_that.category,_that.tags,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  List<String> photoUrls, @JsonKey(includeIfNull: false)  int? id, @JsonKey(includeIfNull: false)  Category? category, @JsonKey(includeIfNull: false)  List<Tag>? tags, @JsonKey(includeIfNull: false)  PetStatusStatus? status)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(includeIfNull: true)  String? name,  List<String?> photoUrls, @JsonKey(includeIfNull: false)  int? id, @JsonKey(includeIfNull: false)  Category? category, @JsonKey(includeIfNull: false)  List<Tag>? tags, @JsonKey(includeIfNull: false)  PetStatusStatus? status)  $default,) {final _that = this;
 switch (_that) {
 case _Pet():
 return $default(_that.name,_that.photoUrls,_that.id,_that.category,_that.tags,_that.status);case _:
@@ -212,7 +212,7 @@ return $default(_that.name,_that.photoUrls,_that.id,_that.category,_that.tags,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  List<String> photoUrls, @JsonKey(includeIfNull: false)  int? id, @JsonKey(includeIfNull: false)  Category? category, @JsonKey(includeIfNull: false)  List<Tag>? tags, @JsonKey(includeIfNull: false)  PetStatusStatus? status)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(includeIfNull: true)  String? name,  List<String?> photoUrls, @JsonKey(includeIfNull: false)  int? id, @JsonKey(includeIfNull: false)  Category? category, @JsonKey(includeIfNull: false)  List<Tag>? tags, @JsonKey(includeIfNull: false)  PetStatusStatus? status)?  $default,) {final _that = this;
 switch (_that) {
 case _Pet() when $default != null:
 return $default(_that.name,_that.photoUrls,_that.id,_that.category,_that.tags,_that.status);case _:
@@ -227,12 +227,12 @@ return $default(_that.name,_that.photoUrls,_that.id,_that.category,_that.tags,_t
 @JsonSerializable()
 
 class _Pet implements Pet {
-  const _Pet({required this.name, required final  List<String> photoUrls, @JsonKey(includeIfNull: false) this.id, @JsonKey(includeIfNull: false) this.category, @JsonKey(includeIfNull: false) final  List<Tag>? tags, @JsonKey(includeIfNull: false) this.status}): _photoUrls = photoUrls,_tags = tags;
+  const _Pet({@JsonKey(includeIfNull: true) required this.name, required final  List<String?> photoUrls, @JsonKey(includeIfNull: false) this.id, @JsonKey(includeIfNull: false) this.category, @JsonKey(includeIfNull: false) final  List<Tag>? tags, @JsonKey(includeIfNull: false) this.status}): _photoUrls = photoUrls,_tags = tags;
   factory _Pet.fromJson(Map<String, dynamic> json) => _$PetFromJson(json);
 
-@override final  String name;
- final  List<String> _photoUrls;
-@override List<String> get photoUrls {
+@override@JsonKey(includeIfNull: true) final  String? name;
+ final  List<String?> _photoUrls;
+@override List<String?> get photoUrls {
   if (_photoUrls is EqualUnmodifiableListView) return _photoUrls;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_photoUrls);
@@ -285,7 +285,7 @@ abstract mixin class _$PetCopyWith<$Res> implements $PetCopyWith<$Res> {
   factory _$PetCopyWith(_Pet value, $Res Function(_Pet) _then) = __$PetCopyWithImpl;
 @override @useResult
 $Res call({
- String name, List<String> photoUrls,@JsonKey(includeIfNull: false) int? id,@JsonKey(includeIfNull: false) Category? category,@JsonKey(includeIfNull: false) List<Tag>? tags,@JsonKey(includeIfNull: false) PetStatusStatus? status
+@JsonKey(includeIfNull: true) String? name, List<String?> photoUrls,@JsonKey(includeIfNull: false) int? id,@JsonKey(includeIfNull: false) Category? category,@JsonKey(includeIfNull: false) List<Tag>? tags,@JsonKey(includeIfNull: false) PetStatusStatus? status
 });
 
 
@@ -302,11 +302,11 @@ class __$PetCopyWithImpl<$Res>
 
 /// Create a copy of Pet
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? photoUrls = null,Object? id = freezed,Object? category = freezed,Object? tags = freezed,Object? status = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = freezed,Object? photoUrls = null,Object? id = freezed,Object? category = freezed,Object? tags = freezed,Object? status = freezed,}) {
   return _then(_Pet(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,photoUrls: null == photoUrls ? _self._photoUrls : photoUrls // ignore: cast_nullable_to_non_nullable
-as List<String>,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,photoUrls: null == photoUrls ? _self._photoUrls : photoUrls // ignore: cast_nullable_to_non_nullable
+as List<String?>,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as Category?,tags: freezed == tags ? _self._tags : tags // ignore: cast_nullable_to_non_nullable
 as List<Tag>?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable

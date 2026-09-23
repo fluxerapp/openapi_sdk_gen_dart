@@ -59,9 +59,9 @@ openapi_generator:
   # Default: false
   include_if_null: false
 
-  # Track which optional fields were passed so toJson() can emit explicit nulls
-  # on PATCH bodies without sending every unset field.
-  # Default: false
+  # Track optional fields the schema allows to be null, so toJson() can emit
+  # JSON null on PATCH bodies. Optional fields that are not nullable omit null
+  # instead of sending it. Default: false
   explicit_nulls: false
 
   # ============================================================================

@@ -7,9 +7,9 @@ part of 'pet.dart';
 // **************************************************************************
 
 Pet _$PetFromJson(Map<String, dynamic> json) => Pet(
-  name: json['name'] as String,
+  name: json['name'] as String?,
   photoUrls: (json['photoUrls'] as List<dynamic>)
-      .map((e) => e as String)
+      .map((e) => e as String?)
       .toList(),
   id: (json['id'] as num?)?.toInt(),
   category: json['category'] == null

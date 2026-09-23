@@ -54,4 +54,50 @@ extension UniversalTypeX on UniversalType {
 
     return sb.toString();
   }
+
+  /// Schema allows a JSON null, distinct from a Dart optional parameter.
+  bool get allowsExplicitNull {
+    if (nullable || referencedNullable) {
+      return true;
+    }
+    if (wrappingCollections.isEmpty) {
+      return false;
+    }
+    return wrappingCollections.first.collectionSuffixQuestionMark == '?';
+  }
+
+  /// Optional field whose Dart type is not already nullable at the outside.
+  bool promotesToOptional({bool multiPart = false}) {
+    if (isRequired || allowsExplicitNull) {
+      return false;
+    }
+    final rendered = toSuitableType(multiPart: multiPart);
+    if (rendered == 'dynamic') {
+      return false;
+    }
+    if (wrappingCollections.isNotEmpty) {
+      return true;
+    }
+    return !rendered.endsWith('?');
+  }
+
+  /// Optional field that should drop a Dart null from JSON.
+  bool get omitsNull {
+    if (isRequired) {
+      return false;
+    }
+    if (nullable || referencedNullable || promotesToOptional()) {
+      return true;
+    }
+    return toSuitableType() == 'dynamic';
+  }
+
+  /// Dart type used for a request field, promoting optional values to nullable.
+  String toRequestType({bool multiPart = false}) {
+    final rendered = toSuitableType(multiPart: multiPart);
+    if (!promotesToOptional(multiPart: multiPart)) {
+      return rendered;
+    }
+    return '$rendered?';
+  }
 }

@@ -1025,7 +1025,7 @@ class ClassName {
           ),
           const UniversalType(
             type: 'string',
-            wrappingCollections: [UniversalCollections.nullableList],
+            wrappingCollections: [UniversalCollections.list],
             name: 'list',
             isRequired: false,
           ),
@@ -1069,13 +1069,11 @@ class ClassName {
   const ClassName({
     required this.anotherList,
     Object? intType = _omit,
-    Object? list = _omit,
+    this.list,
     Object? another = _omit,
   }) :
     intType = identical(intType, _omit) ? null : intType as int?,
     _intTypePresent = !identical(intType, _omit),
-    list = identical(list, _omit) ? null : list as List<String>?,
-    _listPresent = !identical(list, _omit),
     another = identical(another, _omit) ? null : another as Another?,
     _anotherPresent = !identical(another, _omit);
 
@@ -1085,14 +1083,13 @@ class ClassName {
     this.list,
     this.another,
   }) : _intTypePresent = false,
-    _listPresent = false,
     _anotherPresent = false;
   factory ClassName.fromJson(Map<String, Object?> json) {
     final value = _$ClassNameFromJson(json);
     return ClassName(
       anotherList: value.anotherList,
       intType: json.containsKey('intType') ? value.intType : _omit,
-      list: json.containsKey('list') ? value.list : _omit,
+      list: value.list,
       another: json.containsKey('another') ? value.another : _omit,
     );
   }
@@ -1105,16 +1102,12 @@ class ClassName {
   final Another? another;
   final List<List<Another>> anotherList;
   final bool _intTypePresent;
-  final bool _listPresent;
   final bool _anotherPresent;
 
   Map<String, Object?> toJson() {
     final json = _$ClassNameToJson(this);
     if (_intTypePresent) {
       json.putIfAbsent('intType', () => intType);
-    }
-    if (_listPresent) {
-      json.putIfAbsent('list', () => list);
     }
     if (_anotherPresent) {
       json.putIfAbsent('another', () => another);
@@ -2437,13 +2430,16 @@ class AnimalUnionDog {
             name: 'fooBar',
             jsonKey: r'foo$bar',
             isRequired: false,
+            nullable: true,
           ),
           const UniversalType(
             type: 'string',
             name: 'oclock',
             jsonKey: "o'clock",
             isRequired: false,
+            nullable: true,
           ),
+          const UniversalType(type: 'string', name: 'plain', isRequired: false),
         },
       );
       const fillController = FillController(
@@ -2458,6 +2454,8 @@ class AnimalUnionDog {
       expect(content, contains(r"putIfAbsent('foo\$bar', () => fooBar)"));
       expect(content, contains(r"containsKey('o\'clock')"));
       expect(content, contains(r"putIfAbsent('o\'clock', () => oclock)"));
+      expect(content, contains('this.plain'));
+      expect(content, isNot(contains('_plainPresent')));
     });
 
     test('includeIfNull covers promoted optional fields', () {

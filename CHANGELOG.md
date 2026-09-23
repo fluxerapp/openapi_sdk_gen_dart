@@ -1,3 +1,10 @@
+## 2.6.1
+
+- Stop treating optional properties as nullable. JSON null is recorded only when the schema allows it (`nullable`, `x-nullable` when `use_x_nullable` is on, or a `null` union member).
+- `explicit_nulls` now tracks only those nullable fields. Other optional fields omit null, including `dynamic` and when `include_if_null` is off.
+- Promote optional `List<T?>` and `Map<String, dynamic>` fields, and optional request parameters (including ones with defaults), so the Dart type stays nullable when the value itself cannot be JSON null.
+- Null-check freezed validators on optional fields that were promoted to a nullable Dart type.
+
 ## 2.6.0
 
 - Skip path-item `summary`, `description`, and `$ref` instead of crashing.

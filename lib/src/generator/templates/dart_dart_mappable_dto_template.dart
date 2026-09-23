@@ -194,16 +194,7 @@ String getFields(
   }
 }
 
-String _mappableSuitableType(UniversalType type) {
-  final result = type.toSuitableType();
-  if (type.isRequired || type.defaultValue != null) {
-    return result;
-  }
-  if (result.endsWith('?') || result.contains('dynamic')) {
-    return result;
-  }
-  return '$result?';
-}
+String _mappableSuitableType(UniversalType type) => type.toRequestType();
 
 String _fieldsToString(List<UniversalType> parameters) {
   final sortedByRequired = Set<UniversalType>.from(

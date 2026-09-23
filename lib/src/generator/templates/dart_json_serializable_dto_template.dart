@@ -34,6 +34,7 @@ String dartJsonSerializableDtoTemplate(
   final tracked = explicitNulls
       ? dataClass.parameters.where(_tracksExplicitNull).toList()
       : const <UniversalType>[];
+  final annotateNulls = includeIfNull || explicitNulls;
 
   if (tracked.isEmpty) {
     return '''
@@ -46,7 +47,7 @@ class $className {
   const $className(${dataClass.parameters.isNotEmpty ? '{' : ''}${_parametersInConstructor(dataClass.parameters)}${dataClass.parameters.isNotEmpty ? '\n  }' : ''});
   
   factory $className.fromJson(Map<String, Object?> json) => _\$${className}FromJson(json);
-  ${_parametersInClass(dataClass.parameters, includeIfNull)}${dataClass.parameters.isNotEmpty ? '\n' : ''}
+  ${_parametersInClass(dataClass.parameters, annotateNulls)}${dataClass.parameters.isNotEmpty ? '\n' : ''}
   Map<String, Object?> toJson() => _\$${className}ToJson(this);
 }
 ''';
@@ -65,7 +66,7 @@ class $className {
 
   ${_jsonConstructor(className, dataClass.parameters, tracked)}
   ${_fromJson(className, dataClass.parameters, tracked)}
-  ${_parametersInClass(dataClass.parameters, includeIfNull, tracked)}${_presentFields(tracked)}
+  ${_parametersInClass(dataClass.parameters, annotateNulls, tracked)}${_presentFields(tracked)}
 
   ${_toJson(className, tracked)}
 }
@@ -484,24 +485,11 @@ String _parametersInClass(
   final trackedNames = {for (final t in tracked) t.name};
 
   return '\n${descriptionComment(description, tab: '  ')}'
-      '${_jsonKey(e, includeIfNull, trackExplicitNull: trackedNames.contains(e.name))}  final ${_jsonSerializableSuitableType(e)} ${e.name};';
+      '${_jsonKey(e, includeIfNull, trackExplicitNull: trackedNames.contains(e.name))}  final ${e.toRequestType()} ${e.name};';
 }).join();
 
-String _jsonSerializableSuitableType(UniversalType type) {
-  final result = type.toSuitableType();
-  if (_promotedOptional(type)) {
-    return '$result?';
-  }
-  return result;
-}
-
-bool _promotedOptional(UniversalType type) {
-  if (type.isRequired || type.defaultValue != null) {
-    return false;
-  }
-  final result = type.toSuitableType();
-  return !result.endsWith('?') && !result.contains('dynamic');
-}
+String _jsonSerializableSuitableType(UniversalType type) =>
+    type.toRequestType();
 
 String _wrapperConstructor(
   String className,
@@ -538,7 +526,7 @@ String _parametersInConstructor(
 }
 
 bool _tracksExplicitNull(UniversalType t) =>
-    !t.isRequired && t.defaultValue == null;
+    !t.isRequired && t.defaultValue == null && t.allowsExplicitNull;
 
 String _jsonName(UniversalType t) =>
     t.jsonKey != null && t.jsonKey!.isNotEmpty ? t.jsonKey! : t.name!;
@@ -654,11 +642,7 @@ String _jsonKey(
   if (includeIfNull || trackExplicitNull) {
     if (t.isRequired && (t.nullable || t.referencedNullable)) {
       jsonKeyParams['includeIfNull'] = 'true';
-    } else if (!t.isRequired &&
-        (t.nullable ||
-            t.referencedNullable ||
-            trackExplicitNull ||
-            _promotedOptional(t))) {
+    } else if (trackExplicitNull || t.omitsNull) {
       jsonKeyParams['includeIfNull'] = 'false';
     }
   }

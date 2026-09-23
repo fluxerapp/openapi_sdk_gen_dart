@@ -847,26 +847,7 @@ class OpenApiParser {
     if (map case {_propertiesConst: final Map<String, dynamic> props}) {
       for (final propertyName in props.keys) {
         final propertyValue = props[propertyName] as Map<String, dynamic>;
-        var isNullable = propertyValue[_nullableConst].toString().toBool();
-        // OpenAPI 2.0 nullable value
-        isNullable =
-            isNullable ?? propertyValue[_xNullableConst].toString().toBool();
         final hasDefaultKey = propertyValue.containsKey(_defaultConst);
-
-        isNullable =
-            isNullable ??
-            switch (propertyValue) {
-              {_anyOfConst: final List<dynamic> anyOf} => anyOf.any(
-                (e) => e is Map<String, dynamic> && e['type'] == 'null',
-              ),
-              {_oneOfConst: final List<dynamic> oneOf} => oneOf.any(
-                (e) => e is Map<String, dynamic> && e['type'] == 'null',
-              ),
-              {_allOfConst: final List<dynamic> allOf} => allOf.any(
-                (e) => e is Map<String, dynamic> && e['type'] == 'null',
-              ),
-              _ => false,
-            };
 
         final isRequired = requiredParameters.contains(propertyName);
         final nestedAdditionalName = additionalName != null
@@ -1497,7 +1478,6 @@ class OpenApiParser {
   ({UniversalType type, String? import}) _findType(
     Map<String, dynamic> map, {
     required bool isRequired,
-    bool root = true,
     String? name,
     String? additionalName,
   }) {
@@ -1511,9 +1491,7 @@ class OpenApiParser {
         arrayItemsSchema,
         name: name, // Or a modified name specific to items if needed
         additionalName: additionalName,
-        root: false,
-        isRequired:
-            true, // This doesn't affect itemDetails.nullable due to root:false
+        isRequired: true,
       );
 
       final (newName, description) = protectName(
@@ -1521,14 +1499,7 @@ class OpenApiParser {
         description: map[_descriptionConst]?.toString(),
       );
 
-      // Nullability of the array itself.
-      final isCollectionItselfNullable = switch (map[_nullableConst]
-          .toString()
-          .toBool()) {
-        null => !isRequired,
-        true => true,
-        false => !isRequired,
-      };
+      final isCollectionItselfNullable = _schemaAllowsNull(map);
 
       // Nullability of the items within the array.
       final areItemsNullable = itemDetails.nullable;
@@ -1587,9 +1558,7 @@ class OpenApiParser {
         mapValueSchema,
         name: name, // Or a modified name specific to values
         additionalName: name, // Or additionalName
-        root: false,
-        isRequired:
-            true, // This doesn't affect valueDetails.nullable due to root:false
+        isRequired: true,
       );
 
       final (newName, description) = protectName(
@@ -1597,9 +1566,7 @@ class OpenApiParser {
         description: map[_descriptionConst]?.toString(),
       );
 
-      // Nullability of the map itself.
-      final isMapItselfNullable =
-          map[_nullableConst].toString().toBool() ?? (root && !isRequired);
+      final isMapItselfNullable = _schemaAllowsNull(map);
 
       // Nullability of the values within the map.
       final areValuesNullable = valueDetails.nullable;
@@ -1708,15 +1675,7 @@ class OpenApiParser {
         _anchorRegistry.registerInlineSchema(enumClass.name, context);
       }
 
-      final type = map[_typeConst];
-      // Determine nullability for enums, considering if "null" is a type or if nullable is true
-      var isEnumNullable = map[_nullableConst].toString().toBool() ?? false;
-      if (!isEnumNullable && type is List) {
-        isEnumNullable = type.any((e) => e.toString() == 'null');
-      }
-      if (!isEnumNullable && root && !isRequired) {
-        isEnumNullable = true;
-      }
+      final isEnumNullable = _schemaAllowsNull(map);
 
       final enumFormat = map[_formatConst]?.toString();
 
@@ -1851,11 +1810,7 @@ class OpenApiParser {
           format: format,
           jsonKey: name,
           defaultValue: defaultValue,
-          nullable: switch (map[_nullableConst].toString().toBool()) {
-            null => !isRequired,
-            true => true,
-            false => !isRequired,
-          },
+          nullable: _schemaAllowsNull(map),
           isRequired: isRequired,
           deprecated: map[_deprecatedConst].toString().toBool() ?? false,
         ),
@@ -1902,6 +1857,7 @@ class OpenApiParser {
               newFirstCollection = firstCollection;
           }
           return type.copyWith(
+            nullable: true,
             wrappingCollections: [
               newFirstCollection,
               ...type.wrappingCollections.skip(1),
@@ -1965,8 +1921,7 @@ class OpenApiParser {
           if (item is Map<String, dynamic>) {
             (import: ofImport, type: ofType) = _findType(
               item,
-              root: root, // Pass root along
-              isRequired: isRequired, // Pass isRequired along
+              isRequired: isRequired,
               name: name,
               additionalName: additionalName,
             );
@@ -2008,8 +1963,6 @@ class OpenApiParser {
 
             final (:type, :import) = _findType(
               optionalItem,
-              root: root,
-              // Pass root along
               // If nullItems is present, this type is effectively not required at this level of anyOf,
               // as 'null' is an alternative. The overall 'isRequired' for the property still applies.
               isRequired: nullItems.isEmpty && isRequired,
@@ -2097,9 +2050,7 @@ class OpenApiParser {
                 ofType = UniversalType(
                   type: newName.toPascal,
                   isRequired: isRequired, // Will be adjusted by nullItems check
-                  nullable:
-                      map[_nullableConst].toString().toBool() ??
-                      (root && !isRequired),
+                  nullable: _schemaAllowsNull(map),
                 );
                 ofImport = newName.toPascal;
               } else {
@@ -2164,9 +2115,7 @@ class OpenApiParser {
                   ofType = UniversalType(
                     type: unionName,
                     isRequired: isRequired,
-                    nullable:
-                        map[_nullableConst].toString().toBool() ??
-                        (root && !isRequired),
+                    nullable: _schemaAllowsNull(map),
                   );
                   ofImport = unionName;
                 } else {
@@ -2217,9 +2166,7 @@ class OpenApiParser {
                       ofType = UniversalType(
                         type: unionName,
                         isRequired: isRequired,
-                        nullable:
-                            map[_nullableConst].toString().toBool() ??
-                            (root && !isRequired),
+                        nullable: _schemaAllowsNull(map),
                       );
                       ofImport = unionName;
                     } else {
@@ -2252,9 +2199,7 @@ class OpenApiParser {
                       ofType = UniversalType(
                         type: unionName,
                         isRequired: isRequired,
-                        nullable:
-                            map[_nullableConst].toString().toBool() ??
-                            (root && !isRequired),
+                        nullable: _schemaAllowsNull(map),
                       );
                       ofImport = unionName;
                     }
@@ -2263,7 +2208,6 @@ class OpenApiParser {
                       otherItems,
                       map: map,
                       isRequired: isRequired,
-                      root: root,
                     );
                   }
                 }
@@ -2273,7 +2217,6 @@ class OpenApiParser {
                   otherItems,
                   map: map,
                   isRequired: isRequired,
-                  root: root,
                 );
               }
             }
@@ -2303,9 +2246,7 @@ class OpenApiParser {
           ofType ??= UniversalType(
             type: _objectConst,
             isRequired: isRequired,
-            nullable:
-                map[_nullableConst].toString().toBool() ??
-                (root && !isRequired),
+            nullable: _schemaAllowsNull(map),
             deprecated: map[_deprecatedConst].toString().toBool() ?? false,
           );
         }
@@ -2346,12 +2287,7 @@ class OpenApiParser {
             );
       final finalEnumType = ofType?.enumType;
       final finalWrappingCollections = ofType?.wrappingCollections ?? [];
-      // Nullability determined by ofType processing (which includes makeNullable)
-      // or fallback to map's nullable or root/isRequired logic.
-      final finalNullable =
-          ofType?.nullable ??
-          map[_nullableConst].toString().toBool() ??
-          (root && !isRequired);
+      final finalNullable = ofType?.nullable ?? _schemaAllowsNull(map);
 
       final (newNameForReturn, descriptionForReturn) = protectName(
         name, // Use original name for top-level naming
@@ -2517,11 +2453,7 @@ class OpenApiParser {
           defaultValue: refDefaultValue,
           enumType: enumType,
           isRequired: isRequired,
-          nullable: switch (map[_nullableConst].toString().toBool()) {
-            null => !isRequired,
-            true => true,
-            false => !isRequired,
-          },
+          nullable: _schemaAllowsNull(map),
           deprecated: deprecated,
           referencedNullable: referencedNullable,
         ),
@@ -3139,16 +3071,13 @@ class OpenApiParser {
     List<dynamic> items, {
     required Map<String, dynamic> map,
     required bool isRequired,
-    required bool root,
   }) {
     final scalarType = _scalarUnionOpenApiType(items);
     return UniversalType(
       type: scalarType ?? _objectConst,
       isRequired: isRequired,
       // object becomes dynamic, which has no nullability to preserve
-      nullable: scalarType == null
-          ? false
-          : map[_nullableConst].toString().toBool() ?? (root && !isRequired),
+      nullable: scalarType == null ? false : _schemaAllowsNull(map),
     );
   }
 
@@ -3256,8 +3185,15 @@ class OpenApiParser {
     return false;
   }
 
-  bool _schemaAllowsNull(Map<String, dynamic> schema, Set<String> seen) {
-    if (schema[_nullableConst].toString().toBool() ?? false) return true;
+  /// True when the schema allows JSON null. Being optional does not count.
+  bool _schemaAllowsNull(Map<String, dynamic> schema, [Set<String>? seenRefs]) {
+    final seen = seenRefs ?? <String>{};
+    final nullable = schema[_nullableConst].toString().toBool();
+    if (nullable != null) return nullable;
+    if (config.useXNullable &&
+        (schema[_xNullableConst].toString().toBool() ?? false)) {
+      return true;
+    }
     final rawType = schema[_typeConst];
     if (rawType is List) {
       if (rawType.any((entry) => entry.toString() == 'null')) return true;

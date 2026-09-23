@@ -184,7 +184,7 @@ String _toParameter(
   bool needFieldPrefix,
   String dartName,
 ) {
-  var parameterType = parameter.type.toSuitableType(multiPart: multiPart);
+  var parameterType = parameter.type.toRequestType(multiPart: multiPart);
   if (parameter.parameterType.isBody &&
       (parameterType == 'Object' || parameterType == 'Object?')) {
     parameterType = 'dynamic';

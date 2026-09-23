@@ -15,8 +15,8 @@ part 'pet.g.dart';
 @Freezed()
 abstract class Pet with _$Pet {
   const factory Pet({
-    required String name,
-    required List<String> photoUrls,
+    @JsonKey(includeIfNull: true) required String? name,
+    required List<String?> photoUrls,
     @JsonKey(includeIfNull: false) int? id,
     @JsonKey(includeIfNull: false) Category? category,
     @JsonKey(includeIfNull: false) List<Tag>? tags,

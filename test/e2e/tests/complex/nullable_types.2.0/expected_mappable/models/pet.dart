@@ -22,8 +22,8 @@ class Pet with PetMappable {
     this.status,
   });
 
-  final String name;
-  final List<String> photoUrls;
+  final String? name;
+  final List<String?> photoUrls;
   final int? id;
   final Category? category;
   final List<Tag>? tags;

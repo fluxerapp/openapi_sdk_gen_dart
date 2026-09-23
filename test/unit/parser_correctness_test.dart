@@ -201,4 +201,85 @@ void main() {
       'pet to add',
     );
   });
+
+  test('optional properties are nullable only when the schema allows null', () {
+    const spec = r'''
+{"openapi":"3.1.0","info":{"title":"t","version":"1"},"components":{"schemas":{
+  "ProfileUpdate":{"type":"object","properties":{
+    "content":{"type":"string"},
+    "bio":{"type":["string","null"]},
+    "avatar":{"anyOf":[{"type":"string"},{"type":"null"}]},
+    "flag":{"type":"boolean"},
+    "ids":{"type":"array","items":{"type":"string"}},
+    "tags":{"type":"array","nullable":true,"items":{"type":"string"}}
+  },"required":["flag"]}
+}}}
+''';
+    final patch = classesOf(spec).singleWhere((c) => c.name == 'ProfileUpdate');
+    UniversalType field(String name) =>
+        patch.parameters.singleWhere((p) => p.name == name);
+
+    expect(field('content').isRequired, isFalse);
+    expect(field('content').nullable, isFalse);
+    expect(field('bio').nullable, isTrue);
+    expect(field('avatar').nullable, isTrue);
+    expect(field('flag').isRequired, isTrue);
+    expect(field('flag').nullable, isFalse);
+    expect(field('ids').nullable, isFalse);
+    expect(field('ids').wrappingCollections.single, UniversalCollections.list);
+    expect(field('tags').nullable, isTrue);
+    expect(
+      field('tags').wrappingCollections.single,
+      UniversalCollections.nullableList,
+    );
+  });
+
+  test('x-nullable applies only when use_x_nullable is on', () {
+    const spec = r'''
+{"swagger":"2.0","info":{"title":"t","version":"1"},"paths":{
+  "/pet/{petId}":{"post":{"operationId":"updatePet","parameters":[
+    {"name":"petId","in":"path","required":true,"type":"integer","x-nullable":true}
+  ],"responses":{"204":{"description":"ok"}}}}
+},"definitions":{"Pet":{"type":"object","required":["name"],"properties":{
+  "name":{"type":"string","x-nullable":true},
+  "id":{"type":"integer"}
+}}}}
+''';
+
+    ({bool nameNullable, bool idNullable, bool petIdNullable}) parse(
+      bool useXNullable,
+    ) {
+      final parser = OpenApiParser(
+        ParserConfig(spec, isJson: true, useXNullable: useXNullable),
+      );
+      final pet = parser
+          .parseDataClasses()
+          .whereType<UniversalComponentClass>()
+          .singleWhere((c) => c.name == 'Pet');
+      final petId = parser
+          .parseRestClients()
+          .single
+          .requests
+          .single
+          .parameters
+          .single;
+      return (
+        nameNullable: pet.parameters
+            .singleWhere((p) => p.name == 'name')
+            .nullable,
+        idNullable: pet.parameters.singleWhere((p) => p.name == 'id').nullable,
+        petIdNullable: petId.type.nullable,
+      );
+    }
+
+    final ignored = parse(false);
+    expect(ignored.nameNullable, isFalse);
+    expect(ignored.idNullable, isFalse);
+    expect(ignored.petIdNullable, isFalse);
+
+    final honored = parse(true);
+    expect(honored.nameNullable, isTrue);
+    expect(honored.idNullable, isFalse);
+    expect(honored.petIdNullable, isTrue);
+  });
 }

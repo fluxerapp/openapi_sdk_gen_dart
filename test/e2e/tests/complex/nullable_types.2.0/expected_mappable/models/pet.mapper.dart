@@ -23,10 +23,10 @@ class PetMapper extends ClassMapperBase<Pet> {
   @override
   final String id = 'Pet';
 
-  static String _$name(Pet v) => v.name;
+  static String? _$name(Pet v) => v.name;
   static const Field<Pet, String> _f$name = Field('name', _$name);
-  static List<String> _$photoUrls(Pet v) => v.photoUrls;
-  static const Field<Pet, List<String>> _f$photoUrls = Field(
+  static List<String?> _$photoUrls(Pet v) => v.photoUrls;
+  static const Field<Pet, List<String?>> _f$photoUrls = Field(
     'photoUrls',
     _$photoUrls,
   );
@@ -118,12 +118,13 @@ extension PetValueCopy<$R, $Out> on ObjectCopyWith<$R, Pet, $Out> {
 
 abstract class PetCopyWith<$R, $In extends Pet, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get photoUrls;
+  ListCopyWith<$R, String?, ObjectCopyWith<$R, String?, String?>?>
+  get photoUrls;
   CategoryCopyWith<$R, Category, Category>? get category;
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get tags;
   $R call({
     String? name,
-    List<String>? photoUrls,
+    List<String?>? photoUrls,
     int? id,
     Category? category,
     List<String>? tags,
@@ -139,12 +140,12 @@ class _PetCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Pet, $Out>
   @override
   late final ClassMapperBase<Pet> $mapper = PetMapper.ensureInitialized();
   @override
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get photoUrls =>
-      ListCopyWith(
-        $value.photoUrls,
-        (v, t) => ObjectCopyWith(v, $identity, t),
-        (v) => call(photoUrls: v),
-      );
+  ListCopyWith<$R, String?, ObjectCopyWith<$R, String?, String?>?>
+  get photoUrls => ListCopyWith(
+    $value.photoUrls,
+    (v, t) => ObjectCopyWith(v, $identity, t),
+    (v) => call(photoUrls: v),
+  );
   @override
   CategoryCopyWith<$R, Category, Category>? get category =>
       $value.category?.copyWith.$chain((v) => call(category: v));
@@ -159,15 +160,15 @@ class _PetCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Pet, $Out>
       : null;
   @override
   $R call({
-    String? name,
-    List<String>? photoUrls,
+    Object? name = $none,
+    List<String?>? photoUrls,
     Object? id = $none,
     Object? category = $none,
     Object? tags = $none,
     Object? status = $none,
   }) => $apply(
     FieldCopyWithData({
-      if (name != null) #name: name,
+      if (name != $none) #name: name,
       if (photoUrls != null) #photoUrls: photoUrls,
       if (id != $none) #id: id,
       if (category != $none) #category: category,

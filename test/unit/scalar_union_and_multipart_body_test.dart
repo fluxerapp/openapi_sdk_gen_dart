@@ -100,7 +100,7 @@ void main() {
     final note = holder.parameters.firstWhere((p) => p.name == 'note');
     expect(note.type, 'string');
     expect(note.isRequired, isFalse);
-    expect(note.nullable, isTrue);
+    expect(note.nullable, isFalse);
 
     final count = holder.parameters.firstWhere((p) => p.name == 'count');
     expect(count.type, 'number');

@@ -28,8 +28,9 @@ class Pet {
   final int? id;
   @JsonKey(includeIfNull: false)
   final Category? category;
-  final String name;
-  final List<String> photoUrls;
+  @JsonKey(includeIfNull: true)
+  final String? name;
+  final List<String?> photoUrls;
   @JsonKey(includeIfNull: false)
   final List<Tag>? tags;
 

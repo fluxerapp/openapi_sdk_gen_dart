@@ -1655,8 +1655,8 @@ abstract class ClassNameClient {
     );
     final content = fillController.fillRestClientContent(restClient).content;
     expect(content, contains("@Path('id') required int id,"));
-    expect(content, contains("@Header('id') int idHeader,"));
-    expect(content, contains("@Query('id') int idQuery,"));
-    expect(content, contains("@Part(name: 'id') int idPart,"));
+    expect(content, contains("@Header('id') int? idHeader,"));
+    expect(content, contains("@Query('id') int? idQuery,"));
+    expect(content, contains("@Part(name: 'id') int? idPart,"));
   });
 }
