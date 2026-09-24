@@ -62,9 +62,12 @@ const Object _omit = Object();
 
 ${descriptionComment(dataClass.description)}@JsonSerializable(constructor: '_')
 class $className {
-  ${_constructor(className, dataClass.parameters, tracked)}
+  ${_publicConstructor(className, dataClass.parameters, tracked)}
+
+  ${_privateConstructor(className, dataClass.parameters, tracked)}
 
   ${_jsonConstructor(className, dataClass.parameters, tracked)}
+  ${_patchFactory(className)}
   ${_fromJson(className, dataClass.parameters, tracked)}
   ${_parametersInClass(dataClass.parameters, annotateNulls, tracked)}${_presentFields(tracked)}
 
@@ -550,7 +553,38 @@ String _valueFromOmit(UniversalType t) {
   return 'identical($name, _omit) ? null : $name as $type';
 }
 
-String _constructor(
+/// Public constructor: optional PATCH/nullable fields are omitted so `null`
+/// cannot be passed by mistake. Use [fromJson] or [patch] for those fields.
+String _publicConstructor(
+  String className,
+  Set<UniversalType> parameters,
+  List<UniversalType> tracked,
+) {
+  final trackedNames = {for (final t in tracked) t.name};
+  final publicParameters = parameters
+      .where((p) => !trackedNames.contains(p.name))
+      .toSet();
+  final params = _parametersInConstructor(publicParameters, const []);
+  final trackedDefaults = tracked
+      .map(
+        (t) =>
+            '\n    ${t.name} = null,'
+            '\n    ${_presentFieldName(t)} = false',
+      )
+      .join(',');
+  if (publicParameters.isEmpty) {
+    if (tracked.isEmpty) {
+      return 'const $className();';
+    }
+    return 'const $className() :$trackedDefaults;';
+  }
+  if (tracked.isEmpty) {
+    return 'const $className({$params\n  });';
+  }
+  return 'const $className({$params\n  }) :$trackedDefaults;';
+}
+
+String _privateConstructor(
   String className,
   Set<UniversalType> parameters,
   List<UniversalType> tracked,
@@ -563,8 +597,11 @@ String _constructor(
             '\n    ${_presentFieldName(t)} = !identical(${t.name}, _omit)',
       )
       .join(',');
-  return 'const $className({$params\n  }) :$initializers;';
+  return 'const $className._explicit({$params\n  }) :$initializers;';
 }
+
+String _patchFactory(String className) =>
+    'factory $className.patch(Map<String, Object?> json) => $className.fromJson(json);\n';
 
 /// json_serializable reads this constructor so nested fields are decoded.
 String _jsonConstructor(
@@ -606,7 +643,7 @@ String _fromJson(
   }).join();
   return '''factory $className.fromJson(Map<String, Object?> json) {
     final value = _\$${className}FromJson(json);
-    return $className($args
+    return $className._explicit($args
     );
   }''';
 }

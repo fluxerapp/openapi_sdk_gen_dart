@@ -1068,6 +1068,15 @@ const Object _omit = Object();
 class ClassName {
   const ClassName({
     required this.anotherList,
+    this.list,
+  }) :
+    intType = null,
+    _intTypePresent = false,
+    another = null,
+    _anotherPresent = false;
+
+  const ClassName._explicit({
+    required this.anotherList,
     Object? intType = _omit,
     this.list,
     Object? another = _omit,
@@ -1084,9 +1093,11 @@ class ClassName {
     this.another,
   }) : _intTypePresent = false,
     _anotherPresent = false;
+  factory ClassName.patch(Map<String, Object?> json) => ClassName.fromJson(json);
+
   factory ClassName.fromJson(Map<String, Object?> json) {
     final value = _$ClassNameFromJson(json);
-    return ClassName(
+    return ClassName._explicit(
       anotherList: value.anotherList,
       intType: json.containsKey('intType') ? value.intType : _omit,
       list: value.list,

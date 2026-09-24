@@ -1,3 +1,8 @@
+## 2.6.2
+
+- `explicit_nulls` DTOs no longer accept PATCH/nullable fields on the public constructor (passing `null` used to clear those fields). Set them via `fromJson` or `patch` instead.
+- Add generated `patch` factory alias for `explicit_nulls` json_serializable DTOs.
+
 ## 2.6.1
 
 - Stop treating optional properties as nullable. JSON null is recorded only when the schema allows it (`nullable`, `x-nullable` when `use_x_nullable` is on, or a `null` union member).
