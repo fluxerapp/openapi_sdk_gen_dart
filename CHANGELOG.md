@@ -1,3 +1,7 @@
+## 2.6.3
+
+- `explicit_nulls` applies only to schemas referenced from operation request bodies. Those optional nullable fields use `JsonNullable<T>` (`undefined`, `of(value)`, `of(null)`). `patch(Map)` remains for dynamic payloads. Generated `models/json_nullable.dart`.
+
 ## 2.6.2
 
 - `explicit_nulls` DTOs no longer accept PATCH/nullable fields on the public constructor (passing `null` used to clear those fields). Set them via `fromJson` or `patch` instead.

@@ -189,9 +189,8 @@ class GeneratorConfig {
   /// Default: false
   final bool includeIfNull;
 
-  /// Track optional fields the schema allows to be null, so `toJson()` can
-  /// emit JSON null without sending null for optional fields that are not
-  /// nullable.
+  /// On schemas used as request bodies, optional nullable fields are
+  /// [JsonNullable] so PATCH can omit a key, send null, or send a value.
   ///
   /// Default: false
   final bool explicitNulls;

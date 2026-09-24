@@ -31,10 +31,12 @@ String dartJsonSerializableDtoTemplate(
   }
 
   final dartCoreImports = _getDartCoreImports(dataClass.parameters);
-  final tracked = explicitNulls
+  final useExplicitNulls =
+      explicitNulls && dataClass.usedAsRequestBody;
+  final tracked = useExplicitNulls
       ? dataClass.parameters.where(_tracksExplicitNull).toList()
       : const <UniversalType>[];
-  final annotateNulls = includeIfNull || explicitNulls;
+  final annotateNulls = includeIfNull || useExplicitNulls;
 
   if (tracked.isEmpty) {
     return '''
@@ -55,21 +57,19 @@ class $className {
 
   return '''
 import 'package:json_annotation/json_annotation.dart';
-$dartCoreImports${dartImports(imports: _filterUnionImportsForNonUnion(dataClass))}
+$dartCoreImports
+import 'json_nullable.dart';
+${dartImports(imports: _filterUnionImportsForNonUnion(dataClass))}
 part '$classNameSnake.g.dart';
-
-const Object _omit = Object();
 
 ${descriptionComment(dataClass.description)}@JsonSerializable(constructor: '_')
 class $className {
   ${_publicConstructor(className, dataClass.parameters, tracked)}
 
-  ${_privateConstructor(className, dataClass.parameters, tracked)}
-
   ${_jsonConstructor(className, dataClass.parameters, tracked)}
   ${_patchFactory(className)}
   ${_fromJson(className, dataClass.parameters, tracked)}
-  ${_parametersInClass(dataClass.parameters, annotateNulls, tracked)}${_presentFields(tracked)}
+  ${_explicitNullFields(dataClass.parameters, annotateNulls, tracked)}
 
   ${_toJson(className, tracked)}
 }
@@ -491,6 +491,30 @@ String _parametersInClass(
       '${_jsonKey(e, includeIfNull, trackExplicitNull: trackedNames.contains(e.name))}  final ${e.toRequestType()} ${e.name};';
 }).join();
 
+String _explicitNullFields(
+  Set<UniversalType> parameters,
+  bool includeIfNull,
+  List<UniversalType> tracked,
+) {
+  final trackedNames = {for (final t in tracked) t.name};
+  final regular = parameters
+      .where((p) => !trackedNames.contains(p.name))
+      .toSet();
+  final regularFields = _parametersInClass(regular, includeIfNull);
+  final trackedFields = tracked.map((t) {
+    final nullableType = _jsonNullableTypeName(t);
+    final rawType = _jsonSerializableSuitableType(t);
+    final jsonName = ', name: ${_dartSingleQuoted(_jsonName(t))}';
+    return '''
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<$nullableType> ${t.name};
+  @JsonKey(includeIfNull: false$jsonName)
+  final $rawType ${_rawFieldName(t)};
+  final bool ${_presentFieldName(t)};''';
+  }).join('\n');
+  return '$regularFields\n$trackedFields';
+}
+
 String _jsonSerializableSuitableType(UniversalType type) =>
     type.toRequestType();
 
@@ -512,20 +536,13 @@ $params
   });''';
 }
 
-String _parametersInConstructor(
-  Set<UniversalType> parameters, [
-  List<UniversalType> tracked = const [],
-]) {
-  final trackedNames = {for (final t in tracked) t.name};
+String _parametersInConstructor(Set<UniversalType> parameters) {
   final sortedByRequired = Set<UniversalType>.from(
     parameters.sorted((a, b) => a.compareTo(b)),
   );
-  return sortedByRequired.map((e) {
-    if (trackedNames.contains(e.name)) {
-      return '\n    Object? ${e.name} = _omit,';
-    }
-    return '\n    ${_required(e)}this.${e.name}${_defaultValue(e)},';
-  }).join();
+  return sortedByRequired
+      .map((e) => '\n    ${_required(e)}this.${e.name}${_defaultValue(e)},')
+      .join();
 }
 
 bool _tracksExplicitNull(UniversalType t) =>
@@ -544,17 +561,20 @@ String _dartSingleQuoted(String value) {
 
 String _presentFieldName(UniversalType t) => '_${t.name}Present';
 
-String _valueFromOmit(UniversalType t) {
+String _rawFieldName(UniversalType t) => '_${t.name}Value';
+
+String _jsonNullableTypeName(UniversalType t) {
   final type = _jsonSerializableSuitableType(t);
-  final name = t.name!;
-  if (type == 'dynamic') {
-    return 'identical($name, _omit) ? null : $name';
+  if (type.endsWith('?')) {
+    return type.substring(0, type.length - 1);
   }
-  return 'identical($name, _omit) ? null : $name as $type';
+  return type;
 }
 
-/// Public constructor: optional PATCH/nullable fields are omitted so `null`
-/// cannot be passed by mistake. Use [fromJson] or [patch] for those fields.
+String _undefinedNullable(UniversalType t) =>
+    'const JsonNullable<${_jsonNullableTypeName(t)}>.undefined()';
+
+/// Public constructor takes [JsonNullable] for optional nullable fields.
 String _publicConstructor(
   String className,
   Set<UniversalType> parameters,
@@ -564,40 +584,25 @@ String _publicConstructor(
   final publicParameters = parameters
       .where((p) => !trackedNames.contains(p.name))
       .toSet();
-  final params = _parametersInConstructor(publicParameters, const []);
-  final trackedDefaults = tracked
+  final params = _parametersInConstructor(publicParameters);
+  final trackedParams = tracked
       .map(
         (t) =>
-            '\n    ${t.name} = null,'
-            '\n    ${_presentFieldName(t)} = false',
+            '\n    JsonNullable<${_jsonNullableTypeName(t)}> ${t.name} = ${_undefinedNullable(t)},',
       )
-      .join(',');
-  if (publicParameters.isEmpty) {
-    if (tracked.isEmpty) {
-      return 'const $className();';
-    }
-    return 'const $className() :$trackedDefaults;';
-  }
-  if (tracked.isEmpty) {
-    return 'const $className({$params\n  });';
-  }
-  return 'const $className({$params\n  }) :$trackedDefaults;';
-}
-
-String _privateConstructor(
-  String className,
-  Set<UniversalType> parameters,
-  List<UniversalType> tracked,
-) {
-  final params = _parametersInConstructor(parameters, tracked);
+      .join();
   final initializers = tracked
       .map(
         (t) =>
-            '\n    ${t.name} = ${_valueFromOmit(t)},'
-            '\n    ${_presentFieldName(t)} = !identical(${t.name}, _omit)',
+            '\n    ${t.name} = ${t.name},'
+            '\n    ${_rawFieldName(t)} = ${t.name}.value,'
+            '\n    ${_presentFieldName(t)} = ${t.name}.isPresent',
       )
       .join(',');
-  return 'const $className._explicit({$params\n  }) :$initializers;';
+  if (publicParameters.isEmpty && tracked.isEmpty) {
+    return 'const $className();';
+  }
+  return '$className({$params$trackedParams\n  }) :$initializers;';
 }
 
 String _patchFactory(String className) =>
@@ -615,14 +620,17 @@ String _jsonConstructor(
   );
   final params = sorted.map((e) {
     if (trackedNames.contains(e.name)) {
-      return '\n    this.${e.name},';
+      return '\n    this.${_rawFieldName(e)},';
     }
     return '\n    ${_required(e)}this.${e.name}${_defaultValue(e)},';
   }).join();
-  final flags = tracked
-      .map((t) => '${_presentFieldName(t)} = false')
+  final initializers = tracked
+      .map(
+        (t) =>
+            '${t.name} = ${_undefinedNullable(t)},\n    ${_presentFieldName(t)} = false',
+      )
       .join(',\n    ');
-  return 'const $className._({$params\n  }) : $flags;';
+  return 'const $className._({$params\n  }) : $initializers;';
 }
 
 String _fromJson(
@@ -637,26 +645,23 @@ String _fromJson(
   final args = sorted.map((e) {
     if (trackedNames.contains(e.name)) {
       final jsonName = _dartSingleQuoted(_jsonName(e));
-      return '\n      ${e.name}: json.containsKey($jsonName) ? value.${e.name} : _omit,';
+      final nullableType = _jsonNullableTypeName(e);
+      return '\n      ${e.name}: json.containsKey($jsonName) ? JsonNullable<$nullableType>.of(value.${_rawFieldName(e)}) : ${_undefinedNullable(e)},';
     }
     return '\n      ${e.name}: value.${e.name},';
   }).join();
   return '''factory $className.fromJson(Map<String, Object?> json) {
     final value = _\$${className}FromJson(json);
-    return $className._explicit($args
+    return $className($args
     );
   }''';
-}
-
-String _presentFields(List<UniversalType> tracked) {
-  return tracked.map((t) => '\n  final bool ${_presentFieldName(t)};').join();
 }
 
 String _toJson(String className, List<UniversalType> tracked) {
   final restores = tracked
       .map((t) {
         final jsonName = _dartSingleQuoted(_jsonName(t));
-        return "    if (${_presentFieldName(t)}) {\n      json.putIfAbsent($jsonName, () => ${t.name});\n    }";
+        return "    if (${_presentFieldName(t)}) {\n      json.putIfAbsent($jsonName, () => ${_rawFieldName(t)});\n    }";
       })
       .join('\n');
   return '''Map<String, Object?> toJson() {

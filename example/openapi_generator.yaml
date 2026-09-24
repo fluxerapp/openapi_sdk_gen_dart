@@ -59,9 +59,8 @@ openapi_generator:
   # Default: false
   include_if_null: false
 
-  # Track optional fields the schema allows to be null, so toJson() can emit
-  # JSON null on PATCH bodies. Optional fields that are not nullable omit null
-  # instead of sending it. Default: false
+  # Request-body schemas use JsonNullable for optional nullable fields so
+  # PATCH can omit a key, send null, or send a value. Default: false
   explicit_nulls: false
 
   # ============================================================================

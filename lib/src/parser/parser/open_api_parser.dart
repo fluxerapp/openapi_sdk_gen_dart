@@ -45,6 +45,7 @@ class OpenApiParser {
   final _usedNamesCount = <String, int>{};
   final _skipDataClasses = <String>[];
   final _usedSchemas = <String>{};
+  final _requestBodySchemas = <String>{};
   final _schemaDependencies = <String, Set<String>>{};
   final _anchorRegistry = AnchorRegistry();
   final _contextStack = ContextStack();
@@ -413,6 +414,7 @@ class OpenApiParser {
               contentType[_schemaConst] as Map<String, dynamic>;
 
           _extractSchemaRefs(schemaContent, null);
+          _extractRequestBodySchemaRefs(schemaContent);
 
           if (schemaContent.containsKey(_refConst)) {
             final isRequired =
@@ -467,13 +469,13 @@ class OpenApiParser {
               requestBody[_requiredConst]?.toString().toBool() ?? false;
 
           // Track schema references for filtering
-          _extractSchemaRefs(
-            contentType[_schemaConst] as Map<String, dynamic>,
-            null,
-          );
+          final requestSchema =
+              contentType[_schemaConst] as Map<String, dynamic>;
+          _extractSchemaRefs(requestSchema, null);
+          _extractRequestBodySchemaRefs(requestSchema);
 
           final typeWithImport = _findType(
-            contentType[_schemaConst] as Map<String, dynamic>,
+            requestSchema,
             additionalName: requestBodyAdditionalName,
             isRequired: isRequired,
           );
@@ -1275,10 +1277,50 @@ class OpenApiParser {
     }
 
     if (config.includeTags.isNotEmpty || config.excludeTags.isNotEmpty) {
-      return _filterUsedClasses(dataClasses);
+      return _markRequestBodySchemas(_filterUsedClasses(dataClasses));
     }
 
-    return dataClasses;
+    return _markRequestBodySchemas(dataClasses);
+  }
+
+  List<UniversalDataClass> _markRequestBodySchemas(
+    List<UniversalDataClass> dataClasses,
+  ) {
+    final requestBodyClosure = _resolveRequestBodyDependencies();
+    if (requestBodyClosure.isEmpty) {
+      return dataClasses;
+    }
+    return dataClasses
+        .map((dc) {
+          if (dc is UniversalComponentClass &&
+              requestBodyClosure.contains(dc.name)) {
+            return dc.copyWith(usedAsRequestBody: true);
+          }
+          return dc;
+        })
+        .toList();
+  }
+
+  Set<String> _resolveRequestBodyDependencies() {
+    final all = <String>{..._requestBodySchemas};
+    final visited = <String>{};
+    final toVisit = <String>[..._requestBodySchemas];
+
+    while (toVisit.isNotEmpty) {
+      final current = toVisit.removeAt(0);
+      if (visited.contains(current)) {
+        continue;
+      }
+      visited.add(current);
+      for (final dep in _schemaDependencies[current] ?? {}) {
+        all.add(dep);
+        if (!visited.contains(dep)) {
+          toVisit.add(dep);
+        }
+      }
+    }
+
+    return all;
   }
 
   /// Filter out unused schemas
@@ -1442,6 +1484,12 @@ class OpenApiParser {
       if (_contextStack.current case final context?) {
         _anchorRegistry.registerSchemaReference(refName, context);
       }
+    });
+  }
+
+  void _extractRequestBodySchemaRefs(Map<String, dynamic> map) {
+    _traverseSchemaRefs(map, null, (refName, parent) {
+      _requestBodySchemas.add(refName);
     });
   }
 

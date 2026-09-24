@@ -1016,6 +1016,7 @@ class ClassName {
       final dataClass = UniversalComponentClass(
         name: 'ClassName',
         imports: const {'Another'},
+        usedAsRequestBody: true,
         parameters: {
           const UniversalType(
             type: 'integer',
@@ -1055,79 +1056,40 @@ class ClassName {
         ),
       );
       final filledContent = fillController.fillDtoContent(dataClass);
-      const expectedContents = r'''
-import 'package:json_annotation/json_annotation.dart';
+      final content = filledContent.content;
+      expect(content, contains('JsonNullable<int> intType'));
+      expect(content, contains('JsonNullable<Another> another'));
+      expect(content, contains("json.containsKey('intType') ? JsonNullable<int>.of(value._intTypeValue)"));
+      expect(content, contains("json.putIfAbsent('another', () => _anotherValue)"));
+      expect(content, contains("@JsonKey(includeIfNull: false, name: 'intType')"));
+      expect(content, isNot(contains('_omit')));
+      expect(content, isNot(contains('PatchBuilder')));
+    });
 
-import 'another.dart';
-
-part 'class_name.g.dart';
-
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
-class ClassName {
-  const ClassName({
-    required this.anotherList,
-    this.list,
-  }) :
-    intType = null,
-    _intTypePresent = false,
-    another = null,
-    _anotherPresent = false;
-
-  const ClassName._explicit({
-    required this.anotherList,
-    Object? intType = _omit,
-    this.list,
-    Object? another = _omit,
-  }) :
-    intType = identical(intType, _omit) ? null : intType as int?,
-    _intTypePresent = !identical(intType, _omit),
-    another = identical(another, _omit) ? null : another as Another?,
-    _anotherPresent = !identical(another, _omit);
-
-  const ClassName._({
-    required this.anotherList,
-    this.intType,
-    this.list,
-    this.another,
-  }) : _intTypePresent = false,
-    _anotherPresent = false;
-  factory ClassName.patch(Map<String, Object?> json) => ClassName.fromJson(json);
-
-  factory ClassName.fromJson(Map<String, Object?> json) {
-    final value = _$ClassNameFromJson(json);
-    return ClassName._explicit(
-      anotherList: value.anotherList,
-      intType: json.containsKey('intType') ? value.intType : _omit,
-      list: value.list,
-      another: json.containsKey('another') ? value.another : _omit,
-    );
-  }
-  
-  @JsonKey(includeIfNull: false)
-  final int? intType;
-  @JsonKey(includeIfNull: false)
-  final List<String>? list;
-  @JsonKey(includeIfNull: false)
-  final Another? another;
-  final List<List<Another>> anotherList;
-  final bool _intTypePresent;
-  final bool _anotherPresent;
-
-  Map<String, Object?> toJson() {
-    final json = _$ClassNameToJson(this);
-    if (_intTypePresent) {
-      json.putIfAbsent('intType', () => intType);
-    }
-    if (_anotherPresent) {
-      json.putIfAbsent('another', () => another);
-    }
-    return json;
-  }
-}
-''';
-      expect(filledContent.content, expectedContents);
+    test('explicit nulls skip schemas not used as request bodies', () {
+      final dataClass = UniversalComponentClass(
+        name: 'GuildMemberResponse',
+        imports: const {},
+        parameters: {
+          const UniversalType(type: 'string', name: 'userId', isRequired: true),
+          const UniversalType(
+            type: 'string',
+            name: 'nick',
+            isRequired: false,
+            nullable: true,
+          ),
+        },
+      );
+      const fillController = FillController(
+        config: GeneratorConfig(
+          name: '',
+          outputDirectory: '.',
+          explicitNulls: true,
+        ),
+      );
+      final content = fillController.fillDtoContent(dataClass).content;
+      expect(content, isNot(contains('JsonNullable')));
+      expect(content, contains('this.nick'));
     });
 
     test('dart + freezed', () async {
@@ -2435,6 +2397,7 @@ class AnimalUnionDog {
       final dataClass = UniversalComponentClass(
         name: 'ClassName',
         imports: const {},
+        usedAsRequestBody: true,
         parameters: {
           const UniversalType(
             type: 'string',
@@ -2462,9 +2425,9 @@ class AnimalUnionDog {
       );
       final content = fillController.fillDtoContent(dataClass).content;
       expect(content, contains(r"containsKey('foo\$bar')"));
-      expect(content, contains(r"putIfAbsent('foo\$bar', () => fooBar)"));
+      expect(content, contains(r"putIfAbsent('foo\$bar', () => _fooBarValue)"));
       expect(content, contains(r"containsKey('o\'clock')"));
-      expect(content, contains(r"putIfAbsent('o\'clock', () => oclock)"));
+      expect(content, contains(r"putIfAbsent('o\'clock', () => _oclockValue)"));
       expect(content, contains('this.plain'));
       expect(content, isNot(contains('_plainPresent')));
     });

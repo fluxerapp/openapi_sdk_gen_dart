@@ -54,6 +54,14 @@ class Generator {
     final dataClassesFiles = dataClasses
         .map(fillController.fillDtoContent)
         .toList();
+    if (config.explicitNulls) {
+      dataClassesFiles.add(
+        const GeneratedFile(
+          name: 'models/json_nullable.dart',
+          content: _jsonNullableSource,
+        ),
+      );
+    }
     final restClientFiles = restClients
         .map(fillController.fillRestClientContent)
         .toList();
@@ -97,3 +105,17 @@ class Generator {
     return (totalFiles, totalLines);
   }
 }
+
+const String _jsonNullableSource = r'''
+/// Distinguishes an omitted JSON field from an explicit null.
+class JsonNullable<T> {
+  const JsonNullable.of(this.value) : isPresent = true;
+
+  const JsonNullable.undefined() : value = null, isPresent = false;
+
+  final T? value;
+
+  /// False when the key was not in the JSON payload.
+  final bool isPresent;
+}
+''';

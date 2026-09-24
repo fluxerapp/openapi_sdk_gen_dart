@@ -29,6 +29,7 @@ final class UniversalComponentClass extends UniversalDataClass {
     required this.parameters,
     this.allOf,
     this.typeDef = false,
+    this.usedAsRequestBody = false,
     this.discriminator,
     this.discriminatorValue,
     this.undiscriminatedUnionVariants,
@@ -59,6 +60,9 @@ final class UniversalComponentClass extends UniversalDataClass {
   /// this to create sealed unions with factories and defer deserialization.
   final Map<String, Set<UniversalType>>? undiscriminatedUnionVariants;
 
+  /// Schema is referenced (directly or nested) from an operation request body.
+  final bool usedAsRequestBody;
+
   /// Whether or not this schema is a basic type
   /// "Date": {
   ///   "type": "string",
@@ -74,6 +78,7 @@ final class UniversalComponentClass extends UniversalDataClass {
     Set<UniversalType>? parameters,
     ({Set<String> refs, Set<UniversalType> properties})? allOf,
     bool? typeDef,
+    bool? usedAsRequestBody,
     Discriminator? discriminator,
     DiscriminatorValue? discriminatorValue,
     Map<String, Set<UniversalType>>? undiscriminatedUnionVariants,
@@ -85,6 +90,7 @@ final class UniversalComponentClass extends UniversalDataClass {
       parameters: parameters ?? this.parameters,
       allOf: allOf ?? this.allOf,
       typeDef: typeDef ?? this.typeDef,
+      usedAsRequestBody: usedAsRequestBody ?? this.usedAsRequestBody,
       discriminator: discriminator ?? this.discriminator,
       discriminatorValue: discriminatorValue ?? this.discriminatorValue,
       undiscriminatedUnionVariants:
@@ -102,6 +108,7 @@ final class UniversalComponentClass extends UniversalDataClass {
           const DeepCollectionEquality().equals(parameters, other.parameters) &&
           allOf == other.allOf &&
           typeDef == other.typeDef &&
+          usedAsRequestBody == other.usedAsRequestBody &&
           const DeepCollectionEquality().equals(
             undiscriminatedUnionVariants,
             other.undiscriminatedUnionVariants,
@@ -113,6 +120,7 @@ final class UniversalComponentClass extends UniversalDataClass {
       parameters.hashCode ^
       allOf.hashCode ^
       typeDef.hashCode ^
+      usedAsRequestBody.hashCode ^
       undiscriminatedUnionVariants.hashCode;
 
   @override
