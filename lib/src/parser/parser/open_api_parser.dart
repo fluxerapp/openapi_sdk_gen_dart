@@ -1015,7 +1015,8 @@ class OpenApiParser {
             final hasInlineObjectItems =
                 items[_propertiesConst] is Map<String, dynamic> &&
                 (items[_propertiesConst] as Map<String, dynamic>).isNotEmpty;
-            if (hasInlineObjectItems) {
+            final hasInlineEnumItems = items.containsKey(_enumConst);
+            if (hasInlineObjectItems || hasInlineEnumItems) {
               elementAdditionalName = '$schemaName Item';
             }
           }
@@ -1676,7 +1677,19 @@ class OpenApiParser {
 
       var newName = variableName;
       if (additionalName != null) {
-        newName = '$additionalName $newName'.toPascal;
+        if (name != null && additionalName == '$name Item') {
+          final (itemName, _) = protectName(
+            additionalName,
+            isEnum: true,
+            uniqueIfNull: true,
+            description: map[_descriptionConst]?.toString(),
+          );
+          if (itemName != null) {
+            newName = itemName;
+          }
+        } else {
+          newName = '$additionalName $newName'.toPascal;
+        }
       }
 
       final Set<UniversalEnumItem> items;

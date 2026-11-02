@@ -1,3 +1,7 @@
+## 2.6.4
+
+- Name inline enum array items with a `Item` suffix so the list schema can keep the exported typedef name (fixes `$ref` fields resolving to a single enum instead of `List<enum>`).
+
 ## 2.6.3
 
 - `explicit_nulls` applies only to schemas referenced from operation request bodies. Those optional nullable fields use `JsonNullable<T>` (`undefined`, `of(value)`, `of(null)`). `patch(Map)` remains for dynamic payloads. Generated `models/json_nullable.dart`.

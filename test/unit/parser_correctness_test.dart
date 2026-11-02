@@ -1,4 +1,5 @@
 import 'package:openapi_sdk_gen/src/parser/openapi_parser_core.dart';
+import 'package:openapi_sdk_gen/src/utils/type_utils.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -281,5 +282,88 @@ void main() {
     expect(honored.nameNullable, isTrue);
     expect(honored.idNullable, isFalse);
     expect(honored.petIdNullable, isTrue);
+  });
+
+  test('named array of inline enum uses item enum and list typedef', () {
+    const spec = r'''
+{"openapi":"3.0.0","info":{"title":"t","version":"1"},"components":{"schemas":{
+  "InstanceHiddenBuiltInGuildBadgesSchema":{
+    "type":"array",
+    "items":{"type":"string","enum":["verified","partnered","discoverable"]}},
+  "WellKnownFluxerResponse":{"type":"object","properties":{
+    "hidden_built_in_guild_badges":{"$ref":"#/components/schemas/InstanceHiddenBuiltInGuildBadgesSchema"}}}}}}
+''';
+    final classes = OpenApiParser(
+      const ParserConfig(spec, isJson: true),
+    ).parseDataClasses();
+
+    final itemEnum = classes.whereType<UniversalEnumClass>().single;
+    expect(itemEnum.name, 'InstanceHiddenBuiltInGuildBadgesSchemaItem');
+
+    final listTypedef = classes
+        .whereType<UniversalComponentClass>()
+        .firstWhere(
+          (c) => c.typeDef && c.name == 'InstanceHiddenBuiltInGuildBadgesSchema',
+        );
+    expect(
+      listTypedef.parameters.single.toSuitableType(),
+      'List<InstanceHiddenBuiltInGuildBadgesSchemaItem>',
+    );
+
+    final wellKnown = classes
+        .whereType<UniversalComponentClass>()
+        .firstWhere((c) => c.name == 'WellKnownFluxerResponse');
+    final hidden = wellKnown.parameters.singleWhere(
+      (p) => p.name == 'hiddenBuiltInGuildBadges',
+    );
+    expect(hidden.type, 'InstanceHiddenBuiltInGuildBadgesSchema');
+    expect(hidden.wrappingCollections, isEmpty);
+    expect(hidden.toRequestType(), 'InstanceHiddenBuiltInGuildBadgesSchema?');
+  });
+
+  test('named array of inline object items is unchanged', () {
+    const spec = r'''
+{"openapi":"3.0.0","info":{"title":"t","version":"1"},"components":{"schemas":{
+  "GuildRolePositionsRequest":{"type":"array","items":{"type":"object","properties":{
+    "id":{"type":"string"}}}}}}}
+''';
+    final classes = OpenApiParser(
+      const ParserConfig(spec, isJson: true),
+    ).parseDataClasses();
+
+    final itemClass = classes
+        .whereType<UniversalComponentClass>()
+        .firstWhere((c) => c.name == 'GuildRolePositionsRequestItem');
+    expect(itemClass.typeDef, isFalse);
+
+    final listTypedef = classes
+        .whereType<UniversalComponentClass>()
+        .firstWhere(
+          (c) => c.typeDef && c.name == 'GuildRolePositionsRequest',
+        );
+    expect(
+      listTypedef.parameters.single.toSuitableType(),
+      'List<GuildRolePositionsRequestItem>',
+    );
+  });
+
+  test('inline property array enum keeps nested enum naming', () {
+    const spec = r'''
+{"openapi":"3.0.0","info":{"title":"t","version":"1"},"components":{"schemas":{
+  "Holder":{"type":"object","properties":{
+    "tags":{"type":"array","items":{"type":"string","enum":["a","b"]}}}}}}}
+''';
+    final classes = OpenApiParser(
+      const ParserConfig(spec, isJson: true),
+    ).parseDataClasses();
+
+    final itemEnum = classes.whereType<UniversalEnumClass>().single;
+    expect(itemEnum.name, 'HolderTagsTags');
+
+    final holder = classes
+        .whereType<UniversalComponentClass>()
+        .firstWhere((c) => c.name == 'Holder');
+    final tags = holder.parameters.singleWhere((p) => p.name == 'tags');
+    expect(tags.toSuitableType(), 'List<HolderTagsTags>');
   });
 }
